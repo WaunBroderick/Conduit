@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { EuiFieldPassword,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiFlexGrid, EuiSwitch, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
+import { EuiFieldPassword,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
 
 import '@elastic/eui/dist/eui_theme_light.css';
 
@@ -23,7 +23,9 @@ export default function Register(){
     }
 
     return(
-        <div>
+        <div style={{
+
+        }}>
             <EuiFlexGroup justifyContent="spaceAround" >
                 <EuiFlexItem grow={false}>
                             <EuiCard

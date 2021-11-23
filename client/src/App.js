@@ -6,12 +6,12 @@ import { EuiProgress } from '@elastic/eui';
 
 
 // Temp 
-import Register from './containers/Register';
+import Register from './containers/Authentication/Register';
 
 
 function App() {
   return (
-    <div className="App">
+    <div className="App flex">
       <Register />
     </div>
   );

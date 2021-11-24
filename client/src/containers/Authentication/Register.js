@@ -23,9 +23,11 @@ export default function Register(){
     }
 
     return(
-        <div style={{
-
-        }}>
+        <div 
+        style={{
+            justifyContent: 'center'
+          }}
+        >
             <EuiFlexGroup justifyContent="spaceAround" >
                 <EuiFlexItem grow={false}>
                             <EuiCard

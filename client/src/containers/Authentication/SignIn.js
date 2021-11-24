@@ -33,7 +33,7 @@ export default function SignIn(){
                             title="Sign In"
                             description="Example of a card's description. Stick to one or two sentences."
                             betaBadgeProps={{
-                                label: 'Sign Up',
+                                label: 'Sign In',
                                 tooltipContent:
                                   'Fill out the inforamtion below and click Sign Up to create your Conduit Account.',
                               }}
@@ -41,9 +41,6 @@ export default function SignIn(){
                             >
                                 
                                 <EuiForm>
-                                    <EuiFormRow label='Organization Name'>
-                                        <EuiFieldText name="organization"/>
-                                    </EuiFormRow>
 
                                     <EuiFormRow label='Email Address'>
                                         <EuiFieldText name="Email"/>
@@ -58,19 +55,10 @@ export default function SignIn(){
                                         />
                                     </EuiFormRow>
 
-                                    <EuiFormRow  label='Confirm Password'>
-                                    <EuiFieldPassword
-                                        placeholder="Placeholder text"
-                                        value={value}
-                                        onChange={onChange}
-                                        type="dual"
-                                        />
-                                    </EuiFormRow>
-
                                     <EuiSpacer />
 
                                     <EuiButton type="submit" fill>
-                                    Sign-Up
+                                    Sign-In
                                     </EuiButton>
 
                                 </EuiForm>

@@ -11,7 +11,7 @@ import Register from './containers/Authentication/Register';
 
 function App() {
   return (
-    <div className="App flex">
+    <div className="App" style={{ height: "100vh"}}>
       <Register />
     </div>
   );

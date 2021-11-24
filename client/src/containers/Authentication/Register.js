@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { Route, Link } from 'react-router-dom';
 
-import { EuiFieldPassword,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
+import { EuiFieldPassword, EuiText,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
+
+import { StyledSection }from './style'
 
 import '@elastic/eui/dist/eui_theme_light.css';
 
@@ -23,12 +26,9 @@ export default function Register(){
     }
 
     return(
-        <div 
-        style={{
-            justifyContent: 'center'
-          }}
-        >
-            <EuiFlexGroup justifyContent="spaceAround" >
+
+        <StyledSection>
+            <EuiFlexGroup justifyContent="spaceAround"  alignItems="center">
                 <EuiFlexItem grow={false}>
                             <EuiCard
                             icon={<EuiIcon size="s" type="dashboardApp" />}
@@ -77,9 +77,17 @@ export default function Register(){
 
                                 </EuiForm>
 
+                                <EuiSpacer />
+                                
+                                <EuiText>
+                                    <p>
+                                        If you already have an account please Sign-In.
+                                    </p>
+                                </EuiText>
+
                             </EuiCard>
                 </EuiFlexItem>
             </EuiFlexGroup>
-        </div>
+        </StyledSection>      
     )
 }

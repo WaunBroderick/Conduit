@@ -11,10 +11,21 @@ import '@elastic/eui/dist/eui_theme_light.css';
 
 export default function Register(){
     const [value, setValue] = useState('');
+    const [showErrors, setShowErrors] = useState(true);
 
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
+
+    const onChange = (e) => {
+        setValue(e.target.value);
+    };
+
+    let errors;
+
+    if (showErrors) {
+        errors = [
+        "Here's an example of an error",
+        'You might have more than one error, so pass an array.',
+        ];
+    }
 
 
     function renderForm(){
@@ -81,7 +92,7 @@ export default function Register(){
                                 
                                 <EuiText>
                                     <p>
-                                        If you already have an account please Sign-In.
+                                        If you already have an account please <Link to="/signin">Sign-In</Link>.
                                     </p>
                                 </EuiText>
 

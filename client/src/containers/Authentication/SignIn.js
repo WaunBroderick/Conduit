@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-import { EuiFieldPassword,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
+import { EuiFieldPassword,  EuiForm, EuiFormRow, EuiText, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
+
+import { Route, Link } from 'react-router-dom';
+
+
+import { StyledSection }from './style'
 
 import '@elastic/eui/dist/eui_theme_light.css';
 
@@ -23,9 +28,7 @@ export default function SignIn(){
     }
 
     return(
-        <div style={{
-
-        }}>
+            <StyledSection>
             <EuiFlexGroup justifyContent="spaceAround" >
                 <EuiFlexItem grow={false}>
                             <EuiCard
@@ -63,9 +66,17 @@ export default function SignIn(){
 
                                 </EuiForm>
 
+                                <EuiSpacer />
+                                
+                                <EuiText>
+                                    <p>
+                                        If you don't yet have an account please <Link to="/register">Sign Up</Link>.
+                                    </p>
+                                </EuiText>
+
                             </EuiCard>
                 </EuiFlexItem>
             </EuiFlexGroup>
-        </div>
+        </StyledSection>
     )
 }

@@ -1,19 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
-import { Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, Link, Switch } from "react-router-dom"
 
-import { EuiProgress } from '@elastic/eui';
-
+import { StyledSection } from './styles/globalStyles';
 
 // Temp 
 import Register from './containers/Authentication/Register';
+import SignIn from './containers/Authentication/SignIn';
+import Home from './containers/Home';
+import Narwhal from './containers/Narwhal';
 
+function App(){
 
-function App() {
   return (
-    <div className="App" style={{ height: "100vh"}}>
-      <Register />
-    </div>
+        <Router>
+          <div style = {{height:"100vh"}}>
+              <Switch>
+                <Route path="/" component={Register} exact/>
+                <Route path="/register" component={Register}/>
+                <Route path="/signin" component={SignIn}/>
+              </Switch>  
+          </div>
+        </Router>
   );
 }
 

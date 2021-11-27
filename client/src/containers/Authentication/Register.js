@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Route, Link } from 'react-router-dom';
+import React, { useState, SyntheticEvent } from "react";
+import { Route, Link, Redirect } from 'react-router-dom';
 
 import { EuiFieldPassword, EuiText,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
 
@@ -13,10 +13,42 @@ export default function Register(){
     const [value, setValue] = useState('');
     const [showErrors, setShowErrors] = useState(true);
 
+    //Registration Information
+    const [name, setName] = useState('');
+    const [organization, setOrganization] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
+
+
 
     const onChange = (e) => {
         setValue(e.target.value);
     };
+
+    const submit = async (e) => {
+        e.preventDefault();
+
+        const respone = await fetch(
+            'http://localhost:5000/users', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    name,
+                    email,
+                    organization,
+                    password,
+                })
+
+            });
+        setRedirect(true);
+    }
+
+    if (redirect){
+        return <Redirect to="signin"/>;
+    }
+    
+
 
     let errors;
 
@@ -53,20 +85,31 @@ export default function Register(){
                             onClick={() => {}}
                             >
                                 
-                                <EuiForm>
+                                <EuiForm onSubmit={submit}>
                                     <EuiFormRow label='Organization Name'>
-                                        <EuiFieldText name="organization"/>
+                                        <EuiFieldText name="organization"
+                                        onChange={(e) => setOrganization(e.target.value)}
+                                        />
                                     </EuiFormRow>
 
                                     <EuiFormRow label='Email Address'>
-                                        <EuiFieldText name="Email"/>
+                                        <EuiFieldText name="Email"
+                                         onChange={(e) => setEmail(e.target.value)}
+
+                                        />
+                                    </EuiFormRow>
+
+                                    <EuiFormRow label='Personal Name'>
+                                        <EuiFieldText name="Name"
+                                         onChange={(e) => setName(e.target.value)}
+
+                                        />
                                     </EuiFormRow>
 
                                     <EuiFormRow  label='Create Password'>
                                     <EuiFieldPassword
                                         placeholder="Placeholder text"
-                                        value={value}
-                                        onChange={onChange}
+                                        onChange={(e) => setPassword(e.target.value)}
                                         type="dual"
                                         />
                                     </EuiFormRow>
@@ -74,7 +117,6 @@ export default function Register(){
                                     <EuiFormRow  label='Confirm Password'>
                                     <EuiFieldPassword
                                         placeholder="Placeholder text"
-                                        value={value}
                                         onChange={onChange}
                                         type="dual"
                                         />
@@ -82,7 +124,7 @@ export default function Register(){
 
                                     <EuiSpacer />
 
-                                    <EuiButton type="submit" fill>
+                                    <EuiButton type="submit" fill onClick={submit}>
                                     Sign-Up
                                     </EuiButton>
 

@@ -1,11 +1,13 @@
 import React, { useState, SyntheticEvent } from "react";
 import { Route, Link, Redirect } from 'react-router-dom';
 
+
+//Elastic UI Imports
 import { EuiFieldPassword, EuiText,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
-
-import { StyledSection }from './style'
-
 import '@elastic/eui/dist/eui_theme_light.css';
+
+//Style Imports
+import { StyledSection }from './style'
 
 
 
@@ -21,11 +23,6 @@ export default function Register(){
     const [orgId, setOrgId] = useState('');
     const [redirect, setRedirect] = useState(false);
 
-
-
-    const onChange = (e) => {
-        setValue(e.target.value);
-    };
 
     const submit = async (e) => {
         e.preventDefault();
@@ -50,7 +47,7 @@ export default function Register(){
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    name,
+                    organization,
                     address: "",
                     logo: "",
                 })

@@ -18,6 +18,7 @@ export default function Register(){
     const [organization, setOrganization] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [orgId, setOrgId] = useState('');
     const [redirect, setRedirect] = useState(false);
 
 
@@ -29,7 +30,11 @@ export default function Register(){
     const submit = async (e) => {
         e.preventDefault();
 
-        const respone = await fetch(
+        var userData = {
+
+        }
+
+        const responeUser = await fetch(
             'http://localhost:5000/users', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -39,8 +44,21 @@ export default function Register(){
                     organization,
                     password,
                 })
-
             });
+        const responseOrg = await fetch(
+            'http://localhost:5000/organizations', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    name,
+                    address: "",
+                    logo: "",
+                })
+            }).then(response=>response.json())
+            .then(json=>{
+                console.log('pared json', json)
+            });
+            console.log(responseOrg)
         setRedirect(true);
     }
 
@@ -117,7 +135,6 @@ export default function Register(){
                                     <EuiFormRow  label='Confirm Password'>
                                     <EuiFieldPassword
                                         placeholder="Placeholder text"
-                                        onChange={onChange}
                                         type="dual"
                                         />
                                     </EuiFormRow>

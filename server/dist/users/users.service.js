@@ -16,24 +16,32 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+var bcrypt = require('bcryptjs');
 let UsersService = class UsersService {
     constructor(UserModel) {
         this.UserModel = UserModel;
         this.users = [];
     }
-    async createUser(name, organization, email, password) {
+    async findAll() {
+        return await this.UserModel.find().exec();
+    }
+    async findOne(email) {
+        return await this.UserModel.findById(email).exec();
+    }
+    async createUser(name, email, organization, password) {
         const newUser = new this.UserModel({
             name: name,
-            organization: organization,
             email: email,
+            organization: organization,
             password: password
         });
-        const result = await newUser.save();
-        console.log(result);
-        return 'heres a string';
-    }
-    async findOne(name) {
-        return this.users.find(user => user.name === name);
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(newUser.password, salt, function (err, hash) {
+                newUser.password = hash;
+                const result = newUser.save();
+            });
+        });
+        return;
     }
 };
 UsersService = __decorate([

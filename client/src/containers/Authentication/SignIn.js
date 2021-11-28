@@ -13,10 +13,29 @@ import '@elastic/eui/dist/eui_theme_light.css';
 
 export default function SignIn(){
     const [value, setValue] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
 
   const onChange = (e) => {
     setValue(e.target.value);
   };
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    const respone = await fetch(
+        'http://localhost:5000/users', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email,
+                password,
+            })
+
+        });
+    setRedirect(true);
+}
 
 
     function renderForm(){
@@ -46,21 +65,22 @@ export default function SignIn(){
                                 <EuiForm>
 
                                     <EuiFormRow label='Email Address'>
-                                        <EuiFieldText name="Email"/>
+                                        <EuiFieldText name="Email"
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        />
                                     </EuiFormRow>
 
                                     <EuiFormRow  label='Create Password'>
                                     <EuiFieldPassword
                                         placeholder="Placeholder text"
-                                        value={value}
-                                        onChange={onChange}
+                                        onChange={(e) => setPassword(e.target.value)}
                                         type="dual"
                                         />
                                     </EuiFormRow>
 
                                     <EuiSpacer />
 
-                                    <EuiButton type="submit" fill>
+                                    <EuiButton type="submit" fill onClick={submit}>
                                     Sign-In
                                     </EuiButton>
 

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersController = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
+const auth_service_1 = require("../auth/auth.service");
 let UsersController = class UsersController {
     constructor(UsersService) {
         this.UsersService = UsersService;
@@ -22,6 +23,12 @@ let UsersController = class UsersController {
     createUser(userName, userEmail, userOrganization, userPassword) {
         const generatedId = this.UsersService.createUser(userName, userEmail, userOrganization, userPassword);
         return { id: generatedId };
+    }
+    validateUser(userEmail, userPassword) {
+        return console.log("well it works");
+    }
+    async index() {
+        return await this.UsersService.findAll();
     }
 };
 __decorate([
@@ -34,6 +41,20 @@ __decorate([
     __metadata("design:paramtypes", [String, String, String, String]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "createUser", null);
+__decorate([
+    (0, common_1.Post)(':email'),
+    __param(0, (0, common_1.Body)('email')),
+    __param(1, (0, common_1.Body)('password')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "validateUser", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "index", null);
 UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

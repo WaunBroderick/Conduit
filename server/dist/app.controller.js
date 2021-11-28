@@ -15,21 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("./auth/jwt-auth.guard");
-const local_auth_guard_1 = require("./auth/local-auth.guard");
 const auth_service_1 = require("./auth/auth.service");
+const passport_1 = require("@nestjs/passport");
 let AppController = class AppController {
     constructor(authService) {
         this.authService = authService;
     }
     async login(req) {
-        return this.authService.login(req.user);
+        return req.user;
     }
     getProfile(req) {
         return req.user;
     }
 };
 __decorate([
-    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('local')),
     (0, common_1.Post)('auth/login'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),

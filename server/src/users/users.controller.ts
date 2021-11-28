@@ -1,12 +1,14 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Get, Body } from '@nestjs/common';
 
 
 import { User } from './user.model';
 import { UsersService } from './users.service';
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller('users')
 export class UsersController {
     constructor(private readonly UsersService: UsersService) {}
+    
     
     @Post()
     createUser(
@@ -23,4 +25,18 @@ export class UsersController {
             );
         return {id: generatedId};
     }
+
+    @Post(':email')
+    validateUser(
+        @Body('email') userEmail: string,
+        @Body('password') userPassword: string,
+        ){
+            return console.log("well it works")
+        }
+
+    @Get()
+    async index() {
+      return await this.UsersService.findAll();
+    }
+    
 }

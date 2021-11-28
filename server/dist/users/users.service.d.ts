@@ -4,6 +4,7 @@ export declare class UsersService {
     private readonly UserModel;
     private users;
     constructor(UserModel: Model<User>);
-    createUser(name: string, organization: string, email: string, password: string): Promise<string>;
-    findOne(name: string): Promise<User | undefined>;
+    findAll(): Promise<User[]>;
+    findOne(email: string): Promise<User>;
+    createUser(name: string, email: string, organization: string, password: string): Promise<void>;
 }

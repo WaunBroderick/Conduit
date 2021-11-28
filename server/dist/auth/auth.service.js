@@ -29,16 +29,16 @@ let AuthService = class AuthService {
         this.usersService = usersService;
         this.jwtService = jwtService;
     }
-    async validateUser(username, pass) {
-        const user = await this.usersService.findOne(username);
-        if (user && user.password === pass) {
+    async validateUser(email, password) {
+        const user = await this.usersService.findOne(email);
+        if (user && user.password === password) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;
         }
         return null;
     }
     async login(user) {
-        const payload = { username: user.username, sub: user.userId };
+        const payload = { email: user.email, sub: user.userId };
         return {
             access_token: this.jwtService.sign(payload),
         };

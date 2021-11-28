@@ -4,10 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { EuiThemeProvider } from '@elastic/eui'
+import * as LightTheme from "@elastic/eui/dist/eui_theme_light.json";
+import * as DarkTheme from "@elastic/eui/dist/eui_theme_dark.json";
+import "@elastic/eui/dist/eui_theme_light.css";
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <EuiThemeProvider theme={DarkTheme}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </EuiThemeProvider>
+,
   document.getElementById('root')
 );
 

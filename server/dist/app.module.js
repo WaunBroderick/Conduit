@@ -14,6 +14,8 @@ const app_service_1 = require("./app.service");
 const todo_module_1 = require("./todo/todo.module");
 const auth_module_1 = require("./auth/auth.module");
 const users_module_1 = require("./users/users.module");
+const organizations_controller_1 = require("./organizations/organizations.controller");
+const organizations_module_1 = require("./organizations/organizations.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -22,9 +24,10 @@ AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot('mongodb://localhost/conduit-STAGING'),
             todo_module_1.TodoModule,
             auth_module_1.AuthModule,
-            users_module_1.UsersModule
+            users_module_1.UsersModule,
+            organizations_module_1.OrganizationsModule
         ],
-        controllers: [app_controller_1.AppController],
+        controllers: [app_controller_1.AppController, organizations_controller_1.OrganizationsController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);

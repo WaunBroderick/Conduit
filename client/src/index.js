@@ -1,22 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
-import { EuiThemeProvider } from '@elastic/eui'
-import * as LightTheme from "@elastic/eui/dist/eui_theme_light.json";
+import { EuiThemeProvider } from "@elastic/eui";
 import * as DarkTheme from "@elastic/eui/dist/eui_theme_dark.json";
 import "@elastic/eui/dist/eui_theme_light.css";
 
+import reportWebVitals from "./reportWebVitals";
+import App from "./App";
+
 ReactDOM.render(
-  <EuiThemeProvider theme={DarkTheme}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </EuiThemeProvider>
-,
-  document.getElementById('root')
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

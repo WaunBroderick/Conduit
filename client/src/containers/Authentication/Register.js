@@ -1,160 +1,156 @@
 import React, { useState, SyntheticEvent } from "react";
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Route, Link, Redirect } from "react-router-dom";
 
+// Elastic UI Imports
+import {
+  EuiFieldPassword,
+  EuiText,
+  EuiForm,
+  EuiFormRow,
+  EuiFieldText,
+  EuiSpacer,
+  EuiButton,
+  EuiCard,
+  EuiIcon,
+  EuiFlexGroup,
+  EuiFlexItem,
+} from "@elastic/eui";
+import "@elastic/eui/dist/eui_theme_light.css";
 
-//Elastic UI Imports
-import { EuiFieldPassword, EuiText,  EuiForm, EuiFormRow, EuiFieldText, EuiSpacer, EuiButton, EuiCard, EuiIcon, EuiFlexGroup, EuiFlexItem } from '@elastic/eui';
-import '@elastic/eui/dist/eui_theme_light.css';
+// Style Imports
+import StyledSection from "./style";
 
-//Style Imports
-import { StyledSection }from './style'
+export default function Register() {
+  const [value, setValue] = useState("");
+  const [showErrors, setShowErrors] = useState(true);
 
+  // Registration Information
+  const [name, setName] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [orgId, setOrgId] = useState("");
+  const [redirect, setRedirect] = useState(false);
 
+  const submit = async (e) => {
+    const userData = {};
+    e.preventDefault();
 
-export default function Register(){
-    const [value, setValue] = useState('');
-    const [showErrors, setShowErrors] = useState(true);
+    const responeUser = await fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        organization,
+        password,
+      }),
+    });
+    const responseOrg = await fetch("http://localhost:5000/organizations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        organization,
+        address: "",
+        logo: "",
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("pared json", json);
+      });
+    console.log(responseOrg);
+    setRedirect(true);
+  };
 
-    //Registration Information
-    const [name, setName] = useState('');
-    const [organization, setOrganization] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [orgId, setOrgId] = useState('');
-    const [redirect, setRedirect] = useState(false);
+  if (redirect) {
+    return <Redirect to="signin" />;
+  }
 
+  let errors;
 
-    const submit = async (e) => {
-        e.preventDefault();
+  if (showErrors) {
+    errors = [
+      "Here's an example of an error",
+      "You might have more than one error, so pass an array.",
+    ];
+  }
 
-        var userData = {
+  function renderForm() {
+    return (
+      <div>
+        <h1>Helllo</h1>
+      </div>
+    );
+  }
 
-        }
+  return (
+    <StyledSection>
+      <EuiFlexGroup justifyContent="spaceAround" alignItems="center">
+        <EuiFlexItem grow={false}>
+          <EuiCard
+            icon={<EuiIcon size="s" type="dashboardApp" />}
+            title="Register Your Organization"
+            description="Example of a card's description. Stick to one or two sentences."
+            betaBadgeProps={{
+              label: "Sign Up",
+              tooltipContent:
+                "Fill out the inforamtion below and click Sign Up to create your Conduit Account.",
+            }}
+            onClick={() => {}}
+          >
+            <EuiForm onSubmit={submit}>
+              <EuiFormRow label="Organization Name">
+                <EuiFieldText
+                  name="organization"
+                  onChange={(e) => setOrganization(e.target.value)}
+                />
+              </EuiFormRow>
 
-        const responeUser = await fetch(
-            'http://localhost:5000/users', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    name,
-                    email,
-                    organization,
-                    password,
-                })
-            });
-        const responseOrg = await fetch(
-            'http://localhost:5000/organizations', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    organization,
-                    address: "",
-                    logo: "",
-                })
-            }).then(response=>response.json())
-            .then(json=>{
-                console.log('pared json', json)
-            });
-            console.log(responseOrg)
-        setRedirect(true);
-    }
+              <EuiFormRow label="Email Address">
+                <EuiFieldText
+                  name="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </EuiFormRow>
 
-    if (redirect){
-        return <Redirect to="signin"/>;
-    }
-    
+              <EuiFormRow label="Personal Name">
+                <EuiFieldText
+                  name="Name"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </EuiFormRow>
 
+              <EuiFormRow label="Create Password">
+                <EuiFieldPassword
+                  placeholder="Placeholder text"
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="dual"
+                />
+              </EuiFormRow>
 
-    let errors;
+              <EuiFormRow label="Confirm Password">
+                <EuiFieldPassword placeholder="Placeholder text" type="dual" />
+              </EuiFormRow>
 
-    if (showErrors) {
-        errors = [
-        "Here's an example of an error",
-        'You might have more than one error, so pass an array.',
-        ];
-    }
+              <EuiSpacer />
 
+              <EuiButton type="submit" fill onClick={submit}>
+                Sign-Up
+              </EuiButton>
+            </EuiForm>
 
-    function renderForm(){
-        return(
-            <div>
-                <h1>Helllo</h1>
-            </div>
-        )
-    }
+            <EuiSpacer />
 
-    return(
-
-        <StyledSection>
-            <EuiFlexGroup justifyContent="spaceAround"  alignItems="center">
-                <EuiFlexItem grow={false}>
-                            <EuiCard
-                            icon={<EuiIcon size="s" type="dashboardApp" />}
-                            title="Register Your Organization"
-                            description="Example of a card's description. Stick to one or two sentences."
-                            betaBadgeProps={{
-                                label: 'Sign Up',
-                                tooltipContent:
-                                  'Fill out the inforamtion below and click Sign Up to create your Conduit Account.',
-                              }}
-                            onClick={() => {}}
-                            >
-                                
-                                <EuiForm onSubmit={submit}>
-                                    <EuiFormRow label='Organization Name'>
-                                        <EuiFieldText name="organization"
-                                        onChange={(e) => setOrganization(e.target.value)}
-                                        />
-                                    </EuiFormRow>
-
-                                    <EuiFormRow label='Email Address'>
-                                        <EuiFieldText name="Email"
-                                         onChange={(e) => setEmail(e.target.value)}
-
-                                        />
-                                    </EuiFormRow>
-
-                                    <EuiFormRow label='Personal Name'>
-                                        <EuiFieldText name="Name"
-                                         onChange={(e) => setName(e.target.value)}
-
-                                        />
-                                    </EuiFormRow>
-
-                                    <EuiFormRow  label='Create Password'>
-                                    <EuiFieldPassword
-                                        placeholder="Placeholder text"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        type="dual"
-                                        />
-                                    </EuiFormRow>
-
-                                    <EuiFormRow  label='Confirm Password'>
-                                    <EuiFieldPassword
-                                        placeholder="Placeholder text"
-                                        type="dual"
-                                        />
-                                    </EuiFormRow>
-
-                                    <EuiSpacer />
-
-                                    <EuiButton type="submit" fill onClick={submit}>
-                                    Sign-Up
-                                    </EuiButton>
-
-                                </EuiForm>
-
-                                <EuiSpacer />
-                                
-                                <EuiText>
-                                    <p>
-                                        If you already have an account please <Link to="/signin">Sign-In</Link>.
-                                    </p>
-                                </EuiText>
-
-                            </EuiCard>
-                </EuiFlexItem>
-            </EuiFlexGroup>
-        </StyledSection>      
-    )
+            <EuiText>
+              <p>
+                If you already have an account please{" "}
+                <Link to="/signin">Sign-In</Link>.
+              </p>
+            </EuiText>
+          </EuiCard>
+        </EuiFlexItem>
+      </EuiFlexGroup>
+    </StyledSection>
+  );
 }

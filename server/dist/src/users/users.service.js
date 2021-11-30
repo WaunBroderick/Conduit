@@ -34,6 +34,7 @@ let UsersService = class UsersService {
             organization: organization,
             password: password,
         });
+        const result = newUser.save();
         return;
     }
 };

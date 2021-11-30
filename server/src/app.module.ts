@@ -14,7 +14,7 @@ import { DepartmentsModule } from './departments/departments.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot('mongodb://mongodb:27017/DB'),
+    MongooseModule.forRoot('mongodb://localhost:27017/conduit-STAGING'),
     AuthModule,
     UsersModule,
     OrganizationsModule,

@@ -21,14 +21,15 @@ let OrganizationsService = class OrganizationsService {
         this.OrganizationModel = OrganizationModel;
         this.organizations = [];
     }
-    async createOrganization(name, address, logo) {
+    async createOrganization(id, name, address, logo) {
         const newOrganization = new this.OrganizationModel({
+            id: id,
             name: name,
             address: address,
             logo: logo,
         });
-        const result = newOrganization.save();
-        return;
+        const result = newOrganization.save(function (err, newOrganization) { });
+        return newOrganization._id;
     }
 };
 OrganizationsService = __decorate([

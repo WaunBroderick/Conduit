@@ -17,6 +17,10 @@ import {
 } from "@elastic/eui";
 import "@elastic/eui/dist/eui_theme_light.css";
 
+import createOrganization from "../../services/Authentication/OrganizationAPI";
+
+import createUser from "../../services/Authentication/UserAPI";
+
 // Style Imports
 import StyledSection from "./style";
 
@@ -36,30 +40,6 @@ export default function Register() {
     const userData = {};
     e.preventDefault();
 
-    const responeUser = await fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        email,
-        organization,
-        password,
-      }),
-    });
-    const responseOrg = await fetch("http://localhost:5000/organizations", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        organization,
-        address: "",
-        logo: "",
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("pared json", json);
-      });
-    console.log(responseOrg);
     setRedirect(true);
   };
 
@@ -135,7 +115,11 @@ export default function Register() {
 
               <EuiSpacer />
 
-              <EuiButton type="submit" fill onClick={submit}>
+              <EuiButton
+                type="submit"
+                fill
+                onClick={(e) => createOrganization(organization)}
+              >
                 Sign-Up
               </EuiButton>
             </EuiForm>

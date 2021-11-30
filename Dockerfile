@@ -7,7 +7,7 @@ COPY . .
 
 RUN cd ./client && npm ci  && npm run build && cd ..
 
-RUN cd ./server && npm ci  && cd ..
+RUN cd ./server && npm ci  && npm run start:dev && cd ..
 
 RUN mkdir -p /usr/Conduit/app/server/
 
@@ -21,5 +21,6 @@ RUN npm run build
 
 EXPOSE 5000
 
+EXPOSE 3000
 
 CMD [ "npm", "run", "start:dev" ]

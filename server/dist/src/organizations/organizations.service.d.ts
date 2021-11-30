@@ -4,5 +4,5 @@ export declare class OrganizationsService {
     private readonly OrganizationModel;
     private organizations;
     constructor(OrganizationModel: Model<Organization>);
-    createOrganization(name: string, address: string, logo: string): Promise<void>;
+    createOrganization(id: string, name: string, address: string, logo: string): Promise<any>;
 }

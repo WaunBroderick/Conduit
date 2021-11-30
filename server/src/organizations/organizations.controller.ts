@@ -10,15 +10,17 @@ export class OrganizationsController {
 
   @Post()
   createOrganization(
+    @Body('id') id: string,
     @Body('name') orgName: string,
     @Body('address') orgAddress: string,
     @Body('logo') orgLogo: string,
   ) {
     const generatedId = this.OrganizationsService.createOrganization(
+      id,
       orgName,
       orgAddress,
       orgLogo,
     );
-    return { id: generatedId };
+    return generatedId;
   }
 }

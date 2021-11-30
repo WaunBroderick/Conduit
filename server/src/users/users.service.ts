@@ -35,6 +35,8 @@ export class UsersService {
       password: password,
     });
 
+    const result = newUser.save();
+
     /*bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(newUser.password, salt, function (err, hash) {
         newUser.password = hash;

@@ -21,18 +21,20 @@ let OrganizationsController = class OrganizationsController {
     constructor(OrganizationsService) {
         this.OrganizationsService = OrganizationsService;
     }
-    createOrganization(orgName, orgAddress, orgLogo) {
-        const generatedId = this.OrganizationsService.createOrganization(orgName, orgAddress, orgLogo);
-        return { id: generatedId };
+    createOrganization(id, orgName, orgAddress, orgLogo) {
+        const generatedId = this.OrganizationsService.createOrganization(id, orgName, orgAddress, orgLogo);
+        return generatedId;
     }
 };
 __decorate([
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)('name')),
-    __param(1, (0, common_1.Body)('address')),
-    __param(2, (0, common_1.Body)('logo')),
+    openapi.ApiResponse({ status: 201, type: Object }),
+    __param(0, (0, common_1.Body)('id')),
+    __param(1, (0, common_1.Body)('name')),
+    __param(2, (0, common_1.Body)('address')),
+    __param(3, (0, common_1.Body)('logo')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String]),
+    __metadata("design:paramtypes", [String, String, String, String]),
     __metadata("design:returntype", void 0)
 ], OrganizationsController.prototype, "createOrganization", null);
 OrganizationsController = __decorate([

@@ -25,7 +25,7 @@ AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
             }),
-            mongoose_1.MongooseModule.forRoot('mongodb://mongodb:27017/DB'),
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/conduit-STAGING'),
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
             organizations_module_1.OrganizationsModule,

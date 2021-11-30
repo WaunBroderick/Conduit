@@ -5,4 +5,4 @@ export declare class Department {
     organization: string;
     subSection: String;
 }
-export declare const DepartmentSchema: import("mongoose").Schema<Document<Department, any, any>, import("mongoose").Model<Document<Department, any, any>, any, any, any>, {}>;
+export declare const DepartmentSchema: import("mongoose").Schema<Document<Department, any, any>, import("mongoose").Model<Document<Department, any, any>, any, any, any>, any>;

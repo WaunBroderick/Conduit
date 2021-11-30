@@ -13,7 +13,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganizationsController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const organizations_service_1 = require("./organizations.service");
 let OrganizationsController = class OrganizationsController {
     constructor(OrganizationsService) {
@@ -34,6 +36,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], OrganizationsController.prototype, "createOrganization", null);
 OrganizationsController = __decorate([
+    (0, swagger_1.ApiTags)('Organizational'),
     (0, common_1.Controller)('organizations'),
     __metadata("design:paramtypes", [organizations_service_1.OrganizationsService])
 ], OrganizationsController);

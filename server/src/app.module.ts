@@ -9,19 +9,17 @@ import { OrganizationsModule } from './organizations/organizations.module';
 import { ConfigModule } from '@nestjs/config';
 import { DepartmentsModule } from './departments/departments.module';
 
-
-
 @Module({
   imports: [
-  ConfigModule.forRoot({
-    isGlobal: true,
-  }),
-  MongooseModule.forRoot(process.env.DATABASE_STRING),
-  AuthModule,
-  UsersModule,
-  OrganizationsModule,
-  DepartmentsModule,
-],
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRoot('mongodb://mongodb:27017/DB'),
+    AuthModule,
+    UsersModule,
+    OrganizationsModule,
+    DepartmentsModule,
+  ],
   controllers: [AppController, OrganizationsController],
   providers: [AppService],
 })

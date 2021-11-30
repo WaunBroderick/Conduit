@@ -16,7 +16,6 @@ exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
-var bcrypt = require('bcryptjs');
 let UsersService = class UsersService {
     constructor(UserModel) {
         this.UserModel = UserModel;
@@ -33,13 +32,7 @@ let UsersService = class UsersService {
             name: name,
             email: email,
             organization: organization,
-            password: password
-        });
-        bcrypt.genSalt(10, function (err, salt) {
-            bcrypt.hash(newUser.password, salt, function (err, hash) {
-                newUser.password = hash;
-                const result = newUser.save();
-            });
+            password: password,
         });
         return;
     }

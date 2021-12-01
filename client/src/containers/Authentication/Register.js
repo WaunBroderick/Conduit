@@ -1,5 +1,7 @@
-import React, { useState, SyntheticEvent } from "react";
-import { Route, Link, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 
 // Elastic UI Imports
 import {
@@ -25,6 +27,7 @@ import createUser from "../../services/Authentication/UserAPI";
 import StyledSection from "./style";
 
 export default function Register() {
+  const user = useSelector((state) => state.user.value);
   const [value, setValue] = useState("");
   const [showErrors, setShowErrors] = useState(true);
 

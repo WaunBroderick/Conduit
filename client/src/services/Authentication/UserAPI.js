@@ -1,7 +1,8 @@
 const axios = require("axios");
 
-export default async function createUser(name, email, organization, password) {
-  const post = await axios
+export default function createUserAccount(name, email, organization, password) {
+  console.log("Made it to creat user function");
+  const post = axios
     .post(
       "http://localhost:5000/users",
       {
@@ -17,6 +18,4 @@ export default async function createUser(name, email, organization, password) {
     .then((response) => {
       console.log(response.data);
     });
-
-  console.log("Made it to the end");
 }

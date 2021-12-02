@@ -1,27 +1,36 @@
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../reducers/user";
+import createUserAccount from "./UserAPI";
 
 const axios = require("axios");
 
-export default async function createOragnization(organization) {
-  const post = await axios
-    .post(
-      "http://localhost:5000/organizations",
-      {
-        name: organization,
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    )
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    });
+export default function createOragnization(
+  organization,
+  name,
+  email,
+  password
+) {
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+
+  return function () {
+    return axios
+      .post(
+        "http://localhost:5000/organizations",
+        {
+          name: organization,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        dispatch(createUser({ organization: response.data }));
+        createUserAccount(name, email, user.organization, password);
+      });
+  };
 }
 
 export async function findOrganizaton(organization) {
-  const query = useQuery("organizations", ({ signal }) =>
-    axios.get("http://localhost:5000/organizations", {
-      signal,
-    })
-  );
+  console.log("made it here too");
 }

@@ -4,18 +4,18 @@ const initialStateValue = { name: "", email: "", organization: "" };
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: { value: initialStateValue },
+  initialState: { value: { name: "", email: "", organization: "" } },
   reducers: {
-    registerOrg: (state, action) => {
+    login: (state, action) => {
       state.value = action.payload;
     },
 
-    createUser: (state) => {
-      state.value = initialState.value;
+    createUser: (state, action) => {
+      state.value = action.payload;
     },
   },
 });
 
-export const { registerOrg, createUser } = userSlice.actions;
+export const { login, createUser } = userSlice.actions;
 
 export default userSlice.reducer;

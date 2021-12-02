@@ -40,8 +40,8 @@ export default function Register() {
   const [redirect, setRedirect] = useState(false);
 
   const submit = async (e) => {
-    const userData = {};
     e.preventDefault();
+    createOrganization(organization);
 
     setRedirect(true);
   };
@@ -121,7 +121,12 @@ export default function Register() {
               <EuiButton
                 type="submit"
                 fill
-                onClick={(e) => createOrganization(organization)}
+                onClick={createOrganization(
+                  organization,
+                  name,
+                  email,
+                  password
+                )}
               >
                 Sign-Up
               </EuiButton>

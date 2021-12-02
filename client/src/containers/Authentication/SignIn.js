@@ -16,6 +16,8 @@ import {
 
 import { Route, Link } from "react-router-dom";
 
+import loginUser from "../../services/Authentication/AuthenticateAPI";
+
 import StyledSection from "./style";
 
 import "@elastic/eui/dist/eui_theme_light.css";
@@ -85,7 +87,11 @@ export default function SignIn() {
 
               <EuiSpacer />
 
-              <EuiButton type="submit" fill onClick={submit}>
+              <EuiButton
+                type="submit"
+                fill
+                onClick={(e) => loginUser(email, password)}
+              >
                 Sign-In
               </EuiButton>
             </EuiForm>

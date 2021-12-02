@@ -23,6 +23,7 @@ let AppController = class AppController {
         this.authService = authService;
     }
     async login(req) {
+        console.log('at least i triggered');
         return req.user;
     }
     getProfile(req) {

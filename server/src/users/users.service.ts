@@ -4,9 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './user.model';
 import { Model } from 'mongoose';
 
-//var bcrypt = require('bcryptjs');
-
-// This should be a real class/interface representing a user entity
+var bcrypt = require('bcryptjs');
 
 @Injectable()
 export class UsersService {
@@ -35,14 +33,13 @@ export class UsersService {
       password: password,
     });
 
-    const result = newUser.save();
-
-    /*bcrypt.genSalt(10, function (err, salt) {
+    bcrypt.genSalt(10, function (err, salt) {
       bcrypt.hash(newUser.password, salt, function (err, hash) {
         newUser.password = hash;
         const result = newUser.save();
       });
-    );}*/
+    });
+
     return;
   }
 }

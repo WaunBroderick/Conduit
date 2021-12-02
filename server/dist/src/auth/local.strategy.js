@@ -24,6 +24,7 @@ let LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)
         if (!user) {
             throw new common_1.UnauthorizedException();
         }
+        console.log('found it');
         return user;
     }
 };

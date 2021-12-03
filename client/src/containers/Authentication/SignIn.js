@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import {
   EuiFieldPassword,
@@ -14,7 +15,7 @@ import {
   EuiFlexItem,
 } from "@elastic/eui";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import loginUser from "../../services/Authentication/AuthenticateAPI";
 
@@ -26,6 +27,14 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const user = useSelector((state) => state.user.value);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    loginUser(email, password);
+
+    setRedirect(true);
+  };
 
   return (
     <StyledSection>
@@ -44,11 +53,17 @@ export default function SignIn() {
           >
             <EuiForm>
               <EuiFormRow label="Email Address">
-                <EuiFieldText name="Email" />
+                <EuiFieldText
+                  name="Email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </EuiFormRow>
 
               <EuiFormRow label="Create Password">
-                <EuiFieldPassword placeholder="Placeholder text" />
+                <EuiFieldPassword
+                  placeholder="Placeholder text"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </EuiFormRow>
 
               <EuiSpacer />
@@ -66,7 +81,7 @@ export default function SignIn() {
 
             <EuiText>
               <p>
-                If you don`&apos;`t yet have an account please{" "}
+                If you don&apos;t yet have an account please{" "}
                 <Link to="/register">Sign Up</Link>.
               </p>
             </EuiText>

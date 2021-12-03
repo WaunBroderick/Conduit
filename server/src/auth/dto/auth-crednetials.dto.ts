@@ -13,4 +13,7 @@ export class AuthCredentialsDto {
 
   @IsString()
   organization: string;
+
+  @IsString()
+  name: string;
 }

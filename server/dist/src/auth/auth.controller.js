@@ -52,7 +52,7 @@ __decorate([
 ], AuthController.prototype, "signIn", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('me'),
+    (0, common_1.Get)('/me'),
     openapi.ApiResponse({ status: 200, type: Object }),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),

@@ -7,6 +7,7 @@ import { AuthCredentialsDto } from './dto/auth-crednetials.dto';
 import { User } from './interfaces/user.interface';
 
 var bcrypt = require('bcryptjs');
+var mongoose = require('mongoose');
 
 @Injectable()
 export class AuthService {
@@ -16,14 +17,15 @@ export class AuthService {
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { email, password, organization } = authCredentialsDto;
+    const { email, password, organization, name } = authCredentialsDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new this.userModel({
       email,
       password: hashedPassword,
-      organization,
+      name,
+      organization: mongoose.Types.ObjectId(organization),
     });
 
     try {
@@ -37,8 +39,12 @@ export class AuthService {
   }
 
   async signIn(user: User) {
-    const payload = { email: user.email, sub: user._id };
-    console.log('hello');
+    const payload = {
+      email: user.email,
+      sub: user._id,
+      organization: user.organization,
+      name: user.name,
+    };
     return {
       accessToken: this.jwtService.sign(payload),
     };

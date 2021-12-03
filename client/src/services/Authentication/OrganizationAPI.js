@@ -26,7 +26,7 @@ export default function createOragnization(
       )
       .then((response) => {
         dispatch(createUser({ organization: response.data }));
-        createUserAccount(name, email, user.organization, password);
+        createUserAccount(name, email, organization, password);
       });
   };
 }

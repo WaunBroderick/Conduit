@@ -18,18 +18,20 @@ const jwt_1 = require("@nestjs/jwt");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 var bcrypt = require('bcryptjs');
+var mongoose = require('mongoose');
 let AuthService = class AuthService {
     constructor(userModel, jwtService) {
         this.userModel = userModel;
         this.jwtService = jwtService;
     }
     async signUp(authCredentialsDto) {
-        const { email, password, organization } = authCredentialsDto;
+        const { email, password, organization, name } = authCredentialsDto;
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new this.userModel({
             email,
             password: hashedPassword,
-            organization,
+            name,
+            organization: mongoose.Types.ObjectId(organization),
         });
         try {
             await user.save();
@@ -42,8 +44,12 @@ let AuthService = class AuthService {
         }
     }
     async signIn(user) {
-        const payload = { email: user.email, sub: user._id };
-        console.log('hello');
+        const payload = {
+            email: user.email,
+            sub: user._id,
+            organization: user.organization,
+            name: user.name,
+        };
         return {
             accessToken: this.jwtService.sign(payload),
         };

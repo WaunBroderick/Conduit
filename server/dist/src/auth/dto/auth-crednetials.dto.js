@@ -14,7 +14,7 @@ const openapi = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class AuthCredentialsDto {
     static _OPENAPI_METADATA_FACTORY() {
-        return { email: { required: true, type: () => String, minLength: 4, maxLength: 20 }, password: { required: true, type: () => String, minLength: 8, maxLength: 20 }, organization: { required: true, type: () => String } };
+        return { email: { required: true, type: () => String, minLength: 4, maxLength: 20 }, password: { required: true, type: () => String, minLength: 8, maxLength: 20 }, organization: { required: true, type: () => String }, name: { required: true, type: () => String } };
     }
 }
 __decorate([
@@ -33,5 +33,9 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AuthCredentialsDto.prototype, "organization", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AuthCredentialsDto.prototype, "name", void 0);
 exports.AuthCredentialsDto = AuthCredentialsDto;
 //# sourceMappingURL=auth-crednetials.dto.js.map

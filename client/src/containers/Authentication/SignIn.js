@@ -14,7 +14,7 @@ import {
   EuiFlexItem,
 } from "@elastic/eui";
 
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import loginUser from "../../services/Authentication/AuthenticateAPI";
 
@@ -23,40 +23,13 @@ import StyledSection from "./style";
 import "@elastic/eui/dist/eui_theme_light.css";
 
 export default function SignIn() {
-  const [value, setValue] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
 
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  const submit = async (e) => {
-    e.preventDefault();
-
-    const respone = await fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    setRedirect(true);
-  };
-
-  function renderForm() {
-    return (
-      <div>
-        <h1>Helllo</h1>
-      </div>
-    );
-  }
-
   return (
     <StyledSection>
-      <EuiFlexGroup justifyContent="spaceAround">
+      <EuiFlexGroup justifyContent="spaceAround" alignItems="center">
         <EuiFlexItem grow={false}>
           <EuiCard
             icon={<EuiIcon size="s" type="dashboardApp" />}
@@ -71,18 +44,11 @@ export default function SignIn() {
           >
             <EuiForm>
               <EuiFormRow label="Email Address">
-                <EuiFieldText
-                  name="Email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <EuiFieldText name="Email" />
               </EuiFormRow>
 
               <EuiFormRow label="Create Password">
-                <EuiFieldPassword
-                  placeholder="Placeholder text"
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="dual"
-                />
+                <EuiFieldPassword placeholder="Placeholder text" />
               </EuiFormRow>
 
               <EuiSpacer />
@@ -90,7 +56,7 @@ export default function SignIn() {
               <EuiButton
                 type="submit"
                 fill
-                onClick={(e) => loginUser(email, password)}
+                onClick={loginUser(email, password)}
               >
                 Sign-In
               </EuiButton>

@@ -9,13 +9,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
+const config_1 = require("@nestjs/config");
 const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
 const auth_module_1 = require("./auth/auth.module");
+const app_service_1 = require("./app.service");
 const users_module_1 = require("./users/users.module");
 const organizations_controller_1 = require("./organizations/organizations.controller");
 const organizations_module_1 = require("./organizations/organizations.module");
-const config_1 = require("@nestjs/config");
 const departments_module_1 = require("./departments/departments.module");
 let AppModule = class AppModule {
 };
@@ -26,10 +26,10 @@ AppModule = __decorate([
                 isGlobal: true,
             }),
             mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/conduit-STAGING'),
-            auth_module_1.AuthModule,
             users_module_1.UsersModule,
             organizations_module_1.OrganizationsModule,
             departments_module_1.DepartmentsModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [app_controller_1.AppController, organizations_controller_1.OrganizationsController],
         providers: [app_service_1.AppService],

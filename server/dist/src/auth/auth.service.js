@@ -8,55 +8,52 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
-const user_model_1 = require("../users/user.model");
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
 var bcrypt = require('bcryptjs');
 let AuthService = class AuthService {
-    constructor(usersService, jwtService) {
-        this.usersService = usersService;
+    constructor(userModel, jwtService) {
+        this.userModel = userModel;
         this.jwtService = jwtService;
     }
-    async validateUserBACKUP(email, password) {
-        const user = await this.usersService.findOne(email);
-        if (user && user.password === password) {
-            const { password } = user, result = __rest(user, ["password"]);
-            return result;
+    async signUp(authCredentialsDto) {
+        const { email, password, organization } = authCredentialsDto;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = new this.userModel({
+            email,
+            password: hashedPassword,
+            organization,
+        });
+        try {
+            await user.save();
         }
-        return null;
-    }
-    async login(user) {
-        const payload = { email: user.email, sub: user.userId };
-        return {
-            access_token: this.jwtService.sign(payload),
-        };
+        catch (error) {
+            if (error.code === 11000) {
+                throw new common_1.ConflictException('User already exists');
+            }
+            throw error;
+        }
     }
     async signIn(user) {
-        const payload = { username: user.email, sub: user.userId };
+        const payload = { email: user.email, sub: user._id };
+        console.log('hello');
         return {
             accessToken: this.jwtService.sign(payload),
         };
     }
-    async validateUser(email, password) {
-        const user = await this.usersService.findOne(email);
+    async validateUser(email, pass) {
+        const user = await this.userModel.findOne({ email });
         if (!user) {
             return null;
         }
-        const valid = await bcrypt.compare(password, user.password);
+        const valid = await bcrypt.compare(pass, user.password);
         if (valid) {
             return user;
         }
@@ -65,7 +62,8 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService,
+    __param(0, (0, mongoose_1.InjectModel)('User')),
+    __metadata("design:paramtypes", [mongoose_2.Model,
         jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;

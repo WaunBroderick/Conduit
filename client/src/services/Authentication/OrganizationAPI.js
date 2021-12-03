@@ -30,7 +30,3 @@ export default function createOragnization(
       });
   };
 }
-
-export async function findOrganizaton(organization) {
-  console.log("made it here too");
-}

@@ -27,8 +27,6 @@ import createUser from "../../services/Authentication/UserAPI";
 import StyledSection from "./style";
 
 export default function Register() {
-  const user = useSelector((state) => state.user.value);
-  const [value, setValue] = useState("");
   const [showErrors, setShowErrors] = useState(true);
 
   // Registration Information
@@ -36,12 +34,10 @@ export default function Register() {
   const [organization, setOrganization] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [orgId, setOrgId] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
-    createOrganization(organization);
 
     setRedirect(true);
   };
@@ -57,14 +53,6 @@ export default function Register() {
       "Here's an example of an error",
       "You might have more than one error, so pass an array.",
     ];
-  }
-
-  function renderForm() {
-    return (
-      <div>
-        <h1>Helllo</h1>
-      </div>
-    );
   }
 
   return (

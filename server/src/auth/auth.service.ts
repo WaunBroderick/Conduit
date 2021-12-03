@@ -1,50 +1,57 @@
-import { Injectable } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-
+import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { resourceLimits } from 'worker_threads';
-import { User } from 'src/users/user.model';
+
+import { AuthCredentialsDto } from './dto/auth-crednetials.dto';
+import { User } from './interfaces/user.interface';
 
 var bcrypt = require('bcryptjs');
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    @InjectModel('User') private userModel: Model<User>,
     private jwtService: JwtService,
   ) {}
 
-  async validateUserBACKUP(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findOne(email);
-    if (user && user.password === password) {
-      const { password, ...result } = user;
-      return result;
+  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+    const { email, password, organization } = authCredentialsDto;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new this.userModel({
+      email,
+      password: hashedPassword,
+      organization,
+    });
+
+    try {
+      await user.save();
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new ConflictException('User already exists');
+      }
+      throw error;
     }
-    return null;
   }
 
-  async login(user: any) {
-    const payload = { email: user.email, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
-
-  async signIn(user: any) {
-    const payload = { username: user.email, sub: user.userId };
+  async signIn(user: User) {
+    const payload = { email: user.email, sub: user._id };
+    console.log('hello');
     return {
       accessToken: this.jwtService.sign(payload),
     };
   }
 
-  async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findOne(email);
+  async validateUser(email: string, pass: string): Promise<User> {
+    const user = await this.userModel.findOne({ email });
+
     if (!user) {
       return null;
     }
 
-    const valid = await bcrypt.compare(password, user.password);
+    const valid = await bcrypt.compare(pass, user.password);
 
     if (valid) {
       return user;

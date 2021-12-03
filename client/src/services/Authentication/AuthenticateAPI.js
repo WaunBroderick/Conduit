@@ -1,21 +1,35 @@
 const axios = require("axios");
 
 export default function loginUser(email, password) {
-  console.log("sure");
+  const user = {
+    username: email,
+    password: password,
+  };
+
+  console.log(user);
+  console.log("hello");
+
   return function () {
+    console.log("entered");
     return axios
       .post(
-        "http://localhost:5000/auth/login",
+        "http://localhost:5000/auth/signin",
         {
-          email,
-          password,
+          username: email,
+          password: password,
         },
         {
           headers: { "Content-Type": "application/json" },
         }
       )
       .then((response) => {
-        console.log("made it to the validation portion");
+        console.log(response.data);
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
       });
   };
 }

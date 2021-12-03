@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { User } from './user.model';
@@ -26,19 +26,23 @@ export class UsersService {
     organization: string,
     password: string,
   ) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = new this.UserModel({
       name: name,
       email: email,
       organization: organization,
-      password: password,
+      password: hashedPassword,
     });
 
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(newUser.password, salt, function (err, hash) {
-        newUser.password = hash;
-        const result = newUser.save();
-      });
-    });
+    try {
+      await newUser.save();
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new ConflictException('User already exists');
+      }
+      throw error;
+    }
 
     return;
   }

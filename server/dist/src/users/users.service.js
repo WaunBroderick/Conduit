@@ -29,18 +29,22 @@ let UsersService = class UsersService {
         return await this.UserModel.findById(email).exec();
     }
     async createUser(name, email, organization, password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new this.UserModel({
             name: name,
             email: email,
             organization: organization,
-            password: password,
+            password: hashedPassword,
         });
-        bcrypt.genSalt(10, function (err, salt) {
-            bcrypt.hash(newUser.password, salt, function (err, hash) {
-                newUser.password = hash;
-                const result = newUser.save();
-            });
-        });
+        try {
+            await newUser.save();
+        }
+        catch (error) {
+            if (error.code === 11000) {
+                throw new common_1.ConflictException('User already exists');
+            }
+            throw error;
+        }
         return;
     }
 };

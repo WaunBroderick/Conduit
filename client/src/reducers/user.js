@@ -3,9 +3,9 @@ import jwtDecode from "jwt-decode";
 
 const initialStateValue = {
   token: localStorage.getItem("token"),
-  name: null,
-  email: null,
-  organization: null,
+  name: "",
+  email: "",
+  organization: "",
 };
 
 export const userSlice = createSlice({

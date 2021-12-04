@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
-import { useSelector } from "react-redux";
-
 // Elastic UI Imports
 import {
   EuiFieldPassword,
@@ -19,12 +17,9 @@ import {
 } from "@elastic/eui";
 import "@elastic/eui/dist/eui_theme_light.css";
 
-import createOrganization from "../../services/Authentication/OrganizationAPI";
-
-import createUser from "../../services/Authentication/UserAPI";
-
 // Style Imports
 import StyledSection from "./style";
+import axios from "../../services/api-interceptor";
 
 export default function Register() {
   const [showErrors, setShowErrors] = useState(true);
@@ -39,20 +34,42 @@ export default function Register() {
   const submit = async (e) => {
     e.preventDefault();
 
+    const regUser = axios
+      .post(
+        "http://localhost:5000/organizations",
+        {
+          name: organization,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        axios
+          .post(
+            "http://localhost:5000/users",
+            {
+              name: name,
+              email: email,
+              organization: response.data,
+              password: password,
+            },
+            {
+              headers: { "Content-Type": "application/json" },
+            }
+          )
+          .then((res) => {
+            console.log(res.data);
+          });
+      })
+      .then((data) => {})
+      .catch((error) => {});
     setRedirect(true);
   };
 
   if (redirect) {
-    return <Redirect to="signin" />;
-  }
-
-  let errors;
-
-  if (showErrors) {
-    errors = [
-      "Here's an example of an error",
-      "You might have more than one error, so pass an array.",
-    ];
+    return <Redirect to="home" />;
   }
 
   return (
@@ -106,16 +123,7 @@ export default function Register() {
 
               <EuiSpacer />
 
-              <EuiButton
-                type="submit"
-                fill
-                onClick={createOrganization(
-                  organization,
-                  name,
-                  email,
-                  password
-                )}
-              >
+              <EuiButton type="submit" fill onClick={(e) => submit(e)}>
                 Sign-Up
               </EuiButton>
             </EuiForm>

@@ -4,22 +4,21 @@ import {
   EuiHeaderSectionItemButton,
   EuiHeaderLogo,
 } from "@elastic/eui";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import React, { useState } from "react";
 
 export default function NavBar() {
-  const [isFixed, setIsFixed] = useState(true);
   const user = useSelector((state) => state.user.value);
 
   return (
     <>
       <EuiHeader
-        position={isFixed ? "fixed" : "static"}
+        position="fixed"
         sections={[
           {
             items: [
               <EuiHeaderLogo key="first" iconType="logoElastic">
-                {user.email}
+                Conduit
               </EuiHeaderLogo>,
             ],
             borders: "none",
@@ -39,7 +38,7 @@ export default function NavBar() {
       />
       <EuiHeader
         theme="default"
-        position={isFixed ? "fixed" : "static"}
+        position="fixed"
         size="xs"
         sections={[
           {

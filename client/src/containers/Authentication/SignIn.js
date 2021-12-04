@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import {
   EuiFieldPassword,
   EuiForm,
@@ -14,27 +13,64 @@ import {
   EuiFlexGroup,
   EuiFlexItem,
 } from "@elastic/eui";
-
 import { Link, Redirect } from "react-router-dom";
-
-import loginUser from "../../services/Authentication/AuthenticateAPI";
-
+import { login } from "../../reducers/user";
 import StyledSection from "./style";
-
 import "@elastic/eui/dist/eui_theme_light.css";
+
+import axios from "../../services/api-interceptor";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
 
   const submit = async (e) => {
     e.preventDefault();
-    loginUser(email, password);
 
+    const fetchAuth = axios
+      .post(
+        "http://localhost:5000/auth/signin",
+        {
+          username: email,
+          password: password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((response) => {
+        console.log(response.data.accessToken);
+
+        axios
+          .get("http://localhost:5000/auth/me", {
+            headers: { Authorization: `Bearer ${response.data.accessToken}` },
+          })
+          .then((res) => {
+            console.log(res.data);
+            dispatch(
+              login({
+                email: res.data.email,
+                organization: res.data.organization,
+                name: res.data.name,
+              })
+            );
+          })
+          .then((data) => {})
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .then((data) => {})
+      .catch((error) => {});
     setRedirect(true);
   };
+
+  if (redirect) {
+    return <Redirect to="home" />;
+  }
 
   return (
     <StyledSection>
@@ -51,7 +87,7 @@ export default function SignIn() {
             }}
             onClick={() => {}}
           >
-            <EuiForm>
+            <EuiForm onSubmit={(e) => submit(e)}>
               <EuiFormRow label="Email Address">
                 <EuiFieldText
                   name="Email"
@@ -68,11 +104,7 @@ export default function SignIn() {
 
               <EuiSpacer />
 
-              <EuiButton
-                type="submit"
-                fill
-                onClick={loginUser(email, password)}
-              >
+              <EuiButton type="submit" fill onClick={(e) => submit(e)}>
                 Sign-In
               </EuiButton>
             </EuiForm>
@@ -83,6 +115,9 @@ export default function SignIn() {
               <p>
                 If you don&apos;t yet have an account please{" "}
                 <Link to="/register">Sign Up</Link>.
+              </p>
+              <p>
+                go home <Link to="/home">HERE</Link>.
               </p>
             </EuiText>
           </EuiCard>

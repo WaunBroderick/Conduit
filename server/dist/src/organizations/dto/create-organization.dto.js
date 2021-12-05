@@ -9,10 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateDepartmentDto = void 0;
+exports.CreateOrganizationDto = void 0;
 const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
-class CreateDepartmentDto {
+class CreateOrganizationDto {
     static _OPENAPI_METADATA_FACTORY() {
         return { name: { required: true, type: () => String }, organization: { required: true, type: () => String }, subSection: { required: true, type: () => String } };
     }
@@ -23,19 +23,19 @@ __decorate([
         type: String,
     }),
     __metadata("design:type", String)
-], CreateDepartmentDto.prototype, "name", void 0);
+], CreateOrganizationDto.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'The name of the department within the organization',
         type: String,
     }),
     __metadata("design:type", String)
-], CreateDepartmentDto.prototype, "organization", void 0);
+], CreateOrganizationDto.prototype, "organization", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'The group of departments under the Organization that this department belongs to',
     }),
     __metadata("design:type", String)
-], CreateDepartmentDto.prototype, "subSection", void 0);
-exports.CreateDepartmentDto = CreateDepartmentDto;
-//# sourceMappingURL=create-department.dto.js.map
+], CreateOrganizationDto.prototype, "subSection", void 0);
+exports.CreateOrganizationDto = CreateOrganizationDto;
+//# sourceMappingURL=create-organization.dto.js.map

@@ -10,12 +10,21 @@ exports.DepartmentsModule = void 0;
 const common_1 = require("@nestjs/common");
 const departments_service_1 = require("./departments.service");
 const departments_controller_1 = require("./departments.controller");
+const config_1 = require("@nestjs/config");
+const mongoose_1 = require("@nestjs/mongoose");
+const departments_schema_1 = require("./schemas/departments.schema");
 let DepartmentsModule = class DepartmentsModule {
 };
 DepartmentsModule = __decorate([
     (0, common_1.Module)({
+        imports: [
+            config_1.ConfigModule.forRoot(),
+            mongoose_1.MongooseModule.forFeature([
+                { name: 'Department', schema: departments_schema_1.DepartmentsSchema },
+            ]),
+        ],
         controllers: [departments_controller_1.DepartmentsController],
-        providers: [departments_service_1.DepartmentsService]
+        providers: [departments_service_1.DepartmentsService],
     })
 ], DepartmentsModule);
 exports.DepartmentsModule = DepartmentsModule;

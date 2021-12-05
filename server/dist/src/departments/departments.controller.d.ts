@@ -4,7 +4,7 @@ import { UpdateDepartmentDto } from './dto/update-department.dto';
 export declare class DepartmentsController {
     private readonly departmentsService;
     constructor(departmentsService: DepartmentsService);
-    create(createDepartmentDto: CreateDepartmentDto): string;
+    create(createDepartmentDto: CreateDepartmentDto): Promise<void>;
     findAll(): string;
     findOne(id: string): string;
     update(id: string, updateDepartmentDto: UpdateDepartmentDto): string;

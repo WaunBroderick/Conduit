@@ -41,7 +41,7 @@ let DepartmentsController = class DepartmentsController {
 };
 __decorate([
     (0, common_1.Post)(),
-    openapi.ApiResponse({ status: 201, type: String }),
+    openapi.ApiResponse({ status: 201 }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_department_dto_1.CreateDepartmentDto]),

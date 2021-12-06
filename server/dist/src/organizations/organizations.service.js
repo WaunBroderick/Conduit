@@ -45,21 +45,15 @@ let OrganizationsService = class OrganizationsService {
         return `This action returns a #${id} department`;
     }
     async update(id, updateOrganizationDto) {
-        const Organization = await this.organizationModel
-            .findByIdAndUpdate(id, updateOrganizationDto)
-            .setOptions({ new: true })
-            .populate('name')
-            .populate('address')
-            .populate('logo');
-        if (!Organization) {
-            throw new common_1.NotFoundException();
+        const existingOrganization = await this.organizationModel.findByIdAndUpdate({ _id: id }, updateOrganizationDto);
+        if (!existingOrganization) {
+            throw new common_1.NotFoundException(`Organization #${id} not found`);
         }
-        console.log(Organization);
-        await Organization.save();
-        return Organization;
+        return null;
     }
-    remove(id) {
-        return `This action removes a #${id} department`;
+    async remove(id) {
+        const deletedOrganization = await this.organizationModel.findByIdAndRemove(id);
+        return deletedOrganization;
     }
 };
 OrganizationsService = __decorate([

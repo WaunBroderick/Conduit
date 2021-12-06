@@ -10,8 +10,6 @@ export declare class OrganizationsService {
         _id: any;
     })[]>;
     findOne(id: number): string;
-    update(id: string, updateOrganizationDto: UpdateOrganizationDto): Promise<Organization & {
-        _id: any;
-    }>;
-    remove(id: number): string;
+    update(id: string, updateOrganizationDto: UpdateOrganizationDto): Promise<void>;
+    remove(id: string): Promise<any>;
 }

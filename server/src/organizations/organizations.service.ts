@@ -47,10 +47,9 @@ export class OrganizationsService {
     return `This action returns a #${id} department`;
   }
 
-  async update(id: string, updateOrganizationDto: UpdateOrganizationDto) {
+  /*async update(id: string, updateOrganizationDto: UpdateOrganizationDto) {
     const Organization = await this.organizationModel
-      .findByIdAndUpdate(id, updateOrganizationDto)
-      .setOptions({ new: true })
+      .findByIdAndUpdate(id, updateOrganizationDto, { new: true })
       .populate('name')
       .populate('address')
       .populate('logo');
@@ -62,9 +61,27 @@ export class OrganizationsService {
     await Organization.save();
     return Organization;
     // return`This action updates a #${id} department`;
+  }*/
+
+  async update(
+    id: string,
+    updateOrganizationDto: UpdateOrganizationDto,
+  ): Promise<void> {
+    const existingOrganization = await this.organizationModel.findByIdAndUpdate(
+      { _id: id },
+      updateOrganizationDto,
+    );
+
+    if (!existingOrganization) {
+      throw new NotFoundException(`Organization #${id} not found`);
+    }
+    return null;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} department`;
+  async remove(id: string): Promise<any> {
+    const deletedOrganization = await this.organizationModel.findByIdAndRemove(
+      id,
+    );
+    return deletedOrganization;
   }
 }

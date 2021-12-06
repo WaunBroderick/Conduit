@@ -6,6 +6,9 @@ import {
   Patch,
   Delete,
   Param,
+  Res,
+  NotFoundException,
+  HttpStatus,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
@@ -36,15 +39,30 @@ export class OrganizationsController {
   }
 
   @Patch(':id')
-  async update(
+  public async update(
     @Param('id') id: string,
     @Body() updateOrganizationsDto: UpdateOrganizationDto,
   ) {
     return this.organizationsService.update(id, updateOrganizationsDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.organizationsService.remove(+id);
+  @Delete('/:id')
+  public async remove(@Res() Res, @Param('id') id: string) {
+    if (!id) {
+      throw new NotFoundException('Organization ID does not exist');
+    }
+
+    const organization = await this.organizationsService.remove(id);
+
+    if (!organization) {
+      throw new NotFoundException('Organization does not exist');
+    }
+
+    return Res.status(HttpStatus.OK).json({
+      message: 'Organization has been deleted',
+      organization,
+    });
+
+    // return this.organizationsService.remove(+id);
   }
 }

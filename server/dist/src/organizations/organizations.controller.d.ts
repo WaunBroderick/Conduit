@@ -9,8 +9,6 @@ export declare class OrganizationsController {
         _id: any;
     })[]>;
     findOne(id: string): string;
-    update(id: string, updateOrganizationsDto: UpdateOrganizationDto): Promise<import("./interfaces/organization.interface").Organization & {
-        _id: any;
-    }>;
-    remove(id: string): string;
+    update(id: string, updateOrganizationsDto: UpdateOrganizationDto): Promise<void>;
+    remove(Res: any, id: string): Promise<any>;
 }

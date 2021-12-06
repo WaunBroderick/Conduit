@@ -35,8 +35,18 @@ let OrganizationsController = class OrganizationsController {
     async update(id, updateOrganizationsDto) {
         return this.organizationsService.update(id, updateOrganizationsDto);
     }
-    remove(id) {
-        return this.organizationsService.remove(+id);
+    async remove(Res, id) {
+        if (!id) {
+            throw new common_1.NotFoundException('Organization ID does not exist');
+        }
+        const organization = await this.organizationsService.remove(id);
+        if (!organization) {
+            throw new common_1.NotFoundException('Organization does not exist');
+        }
+        return Res.status(common_1.HttpStatus.OK).json({
+            message: 'Organization has been deleted',
+            organization,
+        });
     }
 };
 __decorate([
@@ -64,7 +74,7 @@ __decorate([
 ], OrganizationsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    openapi.ApiResponse({ status: 200, type: Object }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -72,12 +82,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], OrganizationsController.prototype, "update", null);
 __decorate([
-    (0, common_1.Delete)(':id'),
-    openapi.ApiResponse({ status: 200, type: String }),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.Delete)('/:id'),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
 ], OrganizationsController.prototype, "remove", null);
 OrganizationsController = __decorate([
     (0, swagger_1.ApiTags)('Organizational'),

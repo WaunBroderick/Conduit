@@ -3,20 +3,25 @@ import * as mongoose from 'mongoose';
 
 export class CreateOrganizationDto {
   @ApiProperty({
-    description: 'The name of the department within the organization',
+    description: 'The name of the organization',
     type: String,
   })
   name: string;
 
-  @ApiProperty({
-    description: 'The name of the department within the organization',
+  @ApiPropertyOptional({
+    description: 'The address of the Organzation',
     type: String,
   })
-  organization: string;
+  address: string;
+
+  @ApiPropertyOptional({
+    description: 'The logo of the organization',
+  })
+  logo: string;
 
   @ApiPropertyOptional({
     description:
-      'The group of departments under the Organization that this department belongs to',
+      'The group of departments under the Organization that this organization owns',
   })
-  subSection: string;
+  departments: string;
 }

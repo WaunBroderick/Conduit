@@ -1,5 +1,6 @@
 export declare class CreateOrganizationDto {
     name: string;
-    organization: string;
-    subSection: string;
+    address: string;
+    logo: string;
+    departments: string;
 }

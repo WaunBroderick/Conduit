@@ -5,4 +5,5 @@ export declare class Organization {
     name: string;
     address: string;
     logo: string;
+    departments: string;
 }

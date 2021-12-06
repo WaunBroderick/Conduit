@@ -14,28 +14,34 @@ const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 class CreateOrganizationDto {
     static _OPENAPI_METADATA_FACTORY() {
-        return { name: { required: true, type: () => String }, organization: { required: true, type: () => String }, subSection: { required: true, type: () => String } };
+        return { name: { required: true, type: () => String }, address: { required: true, type: () => String }, logo: { required: true, type: () => String }, departments: { required: true, type: () => String } };
     }
 }
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'The name of the department within the organization',
+        description: 'The name of the organization',
         type: String,
     }),
     __metadata("design:type", String)
 ], CreateOrganizationDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'The name of the department within the organization',
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'The address of the Organzation',
         type: String,
     }),
     __metadata("design:type", String)
-], CreateOrganizationDto.prototype, "organization", void 0);
+], CreateOrganizationDto.prototype, "address", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'The group of departments under the Organization that this department belongs to',
+        description: 'The logo of the organization',
     }),
     __metadata("design:type", String)
-], CreateOrganizationDto.prototype, "subSection", void 0);
+], CreateOrganizationDto.prototype, "logo", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'The group of departments under the Organization that this organization owns',
+    }),
+    __metadata("design:type", String)
+], CreateOrganizationDto.prototype, "departments", void 0);
 exports.CreateOrganizationDto = CreateOrganizationDto;
 //# sourceMappingURL=create-organization.dto.js.map

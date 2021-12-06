@@ -17,26 +17,68 @@ const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const organizations_service_1 = require("./organizations.service");
+const create_organization_dto_1 = require("./dto/create-organization.dto");
+const update_organization_dto_1 = require("./dto/update-organization.dto");
 let OrganizationsController = class OrganizationsController {
-    constructor(OrganizationsService) {
-        this.OrganizationsService = OrganizationsService;
+    constructor(organizationsService) {
+        this.organizationsService = organizationsService;
     }
-    createOrganization(id, orgName, orgAddress, orgLogo) {
-        const generatedId = this.OrganizationsService.createOrganization(id, orgName, orgAddress, orgLogo);
-        return generatedId;
+    create(createOrganizationDto) {
+        return this.organizationsService.create(createOrganizationDto);
+    }
+    findAll() {
+        return this.organizationsService.findAll();
+    }
+    findOne(id) {
+        return this.organizationsService.findOne(+id);
+    }
+    async update(id, updateOrganizationsDto) {
+        return this.organizationsService.update(id, updateOrganizationsDto);
+    }
+    remove(id) {
+        return this.organizationsService.remove(+id);
     }
 };
 __decorate([
     (0, common_1.Post)(),
-    openapi.ApiResponse({ status: 201, type: Object }),
-    __param(0, (0, common_1.Body)('id')),
-    __param(1, (0, common_1.Body)('name')),
-    __param(2, (0, common_1.Body)('address')),
-    __param(3, (0, common_1.Body)('logo')),
+    openapi.ApiResponse({ status: 201 }),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String, String]),
+    __metadata("design:paramtypes", [create_organization_dto_1.CreateOrganizationDto]),
     __metadata("design:returntype", void 0)
-], OrganizationsController.prototype, "createOrganization", null);
+], OrganizationsController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(),
+    openapi.ApiResponse({ status: 200, type: [Object] }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], OrganizationsController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    openapi.ApiResponse({ status: 200, type: String }),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], OrganizationsController.prototype, "findOne", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, update_organization_dto_1.UpdateOrganizationDto]),
+    __metadata("design:returntype", Promise)
+], OrganizationsController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    openapi.ApiResponse({ status: 200, type: String }),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], OrganizationsController.prototype, "remove", null);
 OrganizationsController = __decorate([
     (0, swagger_1.ApiTags)('Organizational'),
     (0, common_1.Controller)('organizations'),

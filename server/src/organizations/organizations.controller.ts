@@ -1,26 +1,50 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Patch,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { OrganizationsService } from './organizations.service';
+import { CreateOrganizationDto } from './dto/create-organization.dto';
+import { UpdateOrganizationDto } from './dto/update-organization.dto';
 
 @ApiTags('Organizational')
 @Controller('organizations')
 export class OrganizationsController {
-  constructor(private readonly OrganizationsService: OrganizationsService) {}
+  constructor(private readonly organizationsService: OrganizationsService) {}
 
   @Post()
-  createOrganization(
-    @Body('id') id: string,
-    @Body('name') orgName: string,
-    @Body('address') orgAddress: string,
-    @Body('logo') orgLogo: string,
+  create(@Body() createOrganizationDto: CreateOrganizationDto) {
+    return this.organizationsService.create(createOrganizationDto);
+    //return this.OrganizationsService.createOrganization();
+    // return generatedId;
+  }
+
+  @Get()
+  findAll() {
+    return this.organizationsService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.organizationsService.findOne(+id);
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateOrganizationsDto: UpdateOrganizationDto,
   ) {
-    const generatedId = this.OrganizationsService.createOrganization(
-      id,
-      orgName,
-      orgAddress,
-      orgLogo,
-    );
-    return generatedId;
+    return this.organizationsService.update(id, updateOrganizationsDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.organizationsService.remove(+id);
   }
 }

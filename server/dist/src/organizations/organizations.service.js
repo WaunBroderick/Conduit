@@ -17,19 +17,49 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let OrganizationsService = class OrganizationsService {
-    constructor(OrganizationModel) {
-        this.OrganizationModel = OrganizationModel;
-        this.organizations = [];
+    constructor(organizationModel) {
+        this.organizationModel = organizationModel;
     }
-    async createOrganization(id, name, address, logo) {
-        const newOrganization = new this.OrganizationModel({
-            id: id,
-            name: name,
-            address: address,
-            logo: logo,
+    async create(createOrganizationDto) {
+        const { name, address, logo, departments } = createOrganizationDto;
+        const Organization = new this.organizationModel({
+            name,
+            address,
+            logo,
+            departments,
         });
-        const result = newOrganization.save(function (err, newOrganization) { });
-        return newOrganization._id;
+        try {
+            await Organization.save();
+        }
+        catch (error) {
+            if (error.code === 11000) {
+                throw new common_1.ConflictException('Organization already exists');
+            }
+            throw error;
+        }
+    }
+    findAll() {
+        return this.organizationModel.find().exec();
+    }
+    findOne(id) {
+        return `This action returns a #${id} department`;
+    }
+    async update(id, updateOrganizationDto) {
+        const Organization = await this.organizationModel
+            .findByIdAndUpdate(id, updateOrganizationDto)
+            .setOptions({ new: true })
+            .populate('name')
+            .populate('address')
+            .populate('logo');
+        if (!Organization) {
+            throw new common_1.NotFoundException();
+        }
+        console.log(Organization);
+        await Organization.save();
+        return Organization;
+    }
+    remove(id) {
+        return `This action removes a #${id} department`;
     }
 };
 OrganizationsService = __decorate([

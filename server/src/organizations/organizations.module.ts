@@ -1,15 +1,19 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { OrganizationsService } from './organizations.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { OrganizationSchema } from './organization.model'
+import { OrganizationSchema } from './organization.model';
 import { OrganizationsController } from './organizations.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{name: 'Organization', schema: OrganizationSchema}])
+    ConfigModule.forRoot(),
+    MongooseModule.forFeature([
+      { name: 'Organization', schema: OrganizationSchema },
+    ]),
   ],
   providers: [OrganizationsService],
   exports: [OrganizationsService],
-  controllers: [OrganizationsController]
+  controllers: [OrganizationsController],
 })
 export class OrganizationsModule {}

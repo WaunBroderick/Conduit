@@ -1,8 +1,17 @@
-import { Organization } from './organization.model';
+import { Organization } from './interfaces/organization.interface';
 import { Model } from 'mongoose';
+import { CreateOrganizationDto } from './dto/create-organization.dto';
+import { UpdateOrganizationDto } from './dto/update-organization.dto';
 export declare class OrganizationsService {
-    private readonly OrganizationModel;
-    private organizations;
-    constructor(OrganizationModel: Model<Organization>);
-    createOrganization(id: string, name: string, address: string, logo: string): Promise<any>;
+    private organizationModel;
+    constructor(organizationModel: Model<Organization>);
+    create(createOrganizationDto: CreateOrganizationDto): Promise<void>;
+    findAll(): Promise<(Organization & {
+        _id: any;
+    })[]>;
+    findOne(id: number): string;
+    update(id: string, updateOrganizationDto: UpdateOrganizationDto): Promise<Organization & {
+        _id: any;
+    }>;
+    remove(id: number): string;
 }

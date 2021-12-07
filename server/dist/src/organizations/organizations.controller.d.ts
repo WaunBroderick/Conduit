@@ -1,14 +1,12 @@
 import { OrganizationsService } from './organizations.service';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
+import { PaginationQueryDto } from './dto/pagination-query.dto';
 export declare class OrganizationsController {
-    private readonly organizationsService;
+    private organizationsService;
     constructor(organizationsService: OrganizationsService);
     create(createOrganizationDto: CreateOrganizationDto): Promise<void>;
-    findAll(): Promise<(import("./interfaces/organization.interface").Organization & {
-        _id: any;
-    })[]>;
-    findOne(id: string): string;
-    update(id: string, updateOrganizationsDto: UpdateOrganizationDto): Promise<void>;
-    remove(Res: any, id: string): Promise<any>;
+    getAllOrganizations(res: any, paginationQuery: PaginationQueryDto): Promise<any>;
+    getOrganization(Res: any, id: string): Promise<any>;
+    update(res: any, id: string, updateOrganizationDto: UpdateOrganizationDto): Promise<any>;
 }

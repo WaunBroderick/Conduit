@@ -19,6 +19,7 @@ const swagger_1 = require("@nestjs/swagger");
 const organizations_service_1 = require("./organizations.service");
 const create_organization_dto_1 = require("./dto/create-organization.dto");
 const update_organization_dto_1 = require("./dto/update-organization.dto");
+const pagination_query_dto_1 = require("./dto/pagination-query.dto");
 let OrganizationsController = class OrganizationsController {
     constructor(organizationsService) {
         this.organizationsService = organizationsService;
@@ -26,27 +27,34 @@ let OrganizationsController = class OrganizationsController {
     create(createOrganizationDto) {
         return this.organizationsService.create(createOrganizationDto);
     }
-    findAll() {
-        return this.organizationsService.findAll();
+    async getAllOrganizations(res, paginationQuery) {
+        const organization = await this.organizationsService.findAll(paginationQuery);
+        return res.status(common_1.HttpStatus.OK).json(organization);
     }
-    findOne(id) {
-        return this.organizationsService.findOne(+id);
-    }
-    async update(id, updateOrganizationsDto) {
-        return this.organizationsService.update(id, updateOrganizationsDto);
-    }
-    async remove(Res, id) {
-        if (!id) {
-            throw new common_1.NotFoundException('Organization ID does not exist');
-        }
-        const organization = await this.organizationsService.remove(id);
+    async getOrganization(Res, id) {
+        const organization = await this.organizationsService.findOne(id);
         if (!organization) {
-            throw new common_1.NotFoundException('Organization does not exist');
+            throw new common_1.NotFoundException('Organization does not exist!');
         }
-        return Res.status(common_1.HttpStatus.OK).json({
-            message: 'Organization has been deleted',
-            organization,
-        });
+        return Res.status(common_1.HttpStatus.OK).json(organization);
+    }
+    async update(res, id, updateOrganizationDto) {
+        try {
+            const organization = await this.organizationsService.update(id, updateOrganizationDto);
+            if (!organization) {
+                throw new common_1.NotFoundException('Organization does not exist');
+            }
+            return res.status(common_1.HttpStatus.OK).json({
+                message: 'Customer has been successfully updated',
+                organization,
+            });
+        }
+        catch (err) {
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                message: 'Error: Organization not updated!',
+                status: 400,
+            });
+        }
     }
 };
 __decorate([
@@ -59,37 +67,32 @@ __decorate([
 ], OrganizationsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    openapi.ApiResponse({ status: 200, type: [Object] }),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], OrganizationsController.prototype, "findAll", null);
+    __metadata("design:paramtypes", [Object, pagination_query_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], OrganizationsController.prototype, "getAllOrganizations", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    openapi.ApiResponse({ status: 200, type: String }),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], OrganizationsController.prototype, "findOne", null);
-__decorate([
-    (0, common_1.Patch)(':id'),
-    openapi.ApiResponse({ status: 200 }),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_organization_dto_1.UpdateOrganizationDto]),
-    __metadata("design:returntype", Promise)
-], OrganizationsController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)('/:id'),
     openapi.ApiResponse({ status: 200, type: Object }),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
-], OrganizationsController.prototype, "remove", null);
+], OrganizationsController.prototype, "getOrganization", null);
+__decorate([
+    (0, common_1.Put)('/:id'),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String, update_organization_dto_1.UpdateOrganizationDto]),
+    __metadata("design:returntype", Promise)
+], OrganizationsController.prototype, "update", null);
 OrganizationsController = __decorate([
     (0, swagger_1.ApiTags)('Organizational'),
     (0, common_1.Controller)('organizations'),

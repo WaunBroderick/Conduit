@@ -16,9 +16,14 @@ exports.OrganizationsService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const department_interface_1 = require("../departments/interfaces/department.interface");
 let OrganizationsService = class OrganizationsService {
     constructor(organizationModel) {
         this.organizationModel = organizationModel;
+    }
+    async findAll(paginationQuery) {
+        const { limit, offset } = paginationQuery;
+        return await this.organizationModel.find().skip(offset).limit(limit).exec();
     }
     async create(createOrganizationDto) {
         const { name, address, logo, departments } = createOrganizationDto;
@@ -38,11 +43,14 @@ let OrganizationsService = class OrganizationsService {
             throw error;
         }
     }
-    findAll() {
-        return this.organizationModel.find().exec();
-    }
-    findOne(id) {
-        return `This action returns a #${id} department`;
+    async findOne(id) {
+        const organization = await this.organizationModel
+            .findById({ _id: id })
+            .exec();
+        if (!organization) {
+            throw new common_1.NotFoundException(`Customer #${id} not found`);
+        }
+        return organization;
     }
     async update(id, updateOrganizationDto) {
         const existingOrganization = await this.organizationModel.findByIdAndUpdate({ _id: id }, updateOrganizationDto);

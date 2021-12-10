@@ -26,22 +26,8 @@ let OrganizationsService = class OrganizationsService {
         return await this.organizationModel.find().skip(offset).limit(limit).exec();
     }
     async create(createOrganizationDto) {
-        const { name, address, logo, departments } = createOrganizationDto;
-        const Organization = new this.organizationModel({
-            name,
-            address,
-            logo,
-            departments,
-        });
-        try {
-            await Organization.save();
-        }
-        catch (error) {
-            if (error.code === 11000) {
-                throw new common_1.ConflictException('Organization already exists');
-            }
-            throw error;
-        }
+        const newOrganization = await new this.organizationModel(createOrganizationDto);
+        return newOrganization.save();
     }
     async findOne(id) {
         const organization = await this.organizationModel

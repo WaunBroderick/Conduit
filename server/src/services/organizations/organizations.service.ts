@@ -28,23 +28,13 @@ export class OrganizationsService {
     return await this.organizationModel.find().skip(offset).limit(limit).exec();
   }
 
-  async create(createOrganizationDto: CreateOrganizationDto): Promise<void> {
-    const { name, address, logo, departments } = createOrganizationDto;
-    const Organization = new this.organizationModel({
-      name,
-      address,
-      logo,
-      departments,
-    });
-
-    try {
-      await Organization.save();
-    } catch (error) {
-      if (error.code === 11000) {
-        throw new ConflictException('Organization already exists');
-      }
-      throw error;
-    }
+  public async create(
+    createOrganizationDto: CreateOrganizationDto,
+  ): Promise<Organization> {
+    const newOrganization = await new this.organizationModel(
+      createOrganizationDto,
+    );
+    return newOrganization.save();
   }
 
   public async findOne(id: string): Promise<Organization> {
@@ -58,7 +48,7 @@ export class OrganizationsService {
     return organization;
   }
 
-  async update(
+  public async update(
     id: string,
     updateOrganizationDto: UpdateOrganizationDto,
   ): Promise<UpdateDepartmentDto> {

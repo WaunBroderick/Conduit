@@ -24,8 +24,20 @@ let OrganizationsController = class OrganizationsController {
     constructor(organizationsService) {
         this.organizationsService = organizationsService;
     }
-    create(createOrganizationDto) {
-        return this.organizationsService.create(createOrganizationDto);
+    async createOrganization(res, createOrganizationDto) {
+        try {
+            const organization = await this.organizationsService.create(createOrganizationDto);
+            return res.status(common_1.HttpStatus.OK).json({
+                message: 'Organization has been created successfully',
+                organization,
+            });
+        }
+        catch (err) {
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                message: 'Error: Customer not created!',
+                status: 400,
+            });
+        }
     }
     async getAllOrganizations(res, paginationQuery) {
         const organization = await this.organizationsService.findAll(paginationQuery);
@@ -51,7 +63,7 @@ let OrganizationsController = class OrganizationsController {
         }
         catch (err) {
             return res.status(common_1.HttpStatus.BAD_REQUEST).json({
-                message: 'Error: Organization not updated!',
+                message: 'Error: Organization not updated!' + res.data,
                 status: 400,
             });
         }
@@ -59,12 +71,13 @@ let OrganizationsController = class OrganizationsController {
 };
 __decorate([
     (0, common_1.Post)(),
-    openapi.ApiResponse({ status: 201 }),
-    __param(0, (0, common_1.Body)()),
+    openapi.ApiResponse({ status: 201, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_organization_dto_1.CreateOrganizationDto]),
-    __metadata("design:returntype", void 0)
-], OrganizationsController.prototype, "create", null);
+    __metadata("design:paramtypes", [Object, create_organization_dto_1.CreateOrganizationDto]),
+    __metadata("design:returntype", Promise)
+], OrganizationsController.prototype, "createOrganization", null);
 __decorate([
     (0, common_1.Get)(),
     openapi.ApiResponse({ status: 200, type: Object }),

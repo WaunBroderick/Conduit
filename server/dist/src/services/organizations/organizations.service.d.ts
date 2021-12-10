@@ -8,7 +8,7 @@ export declare class OrganizationsService {
     private readonly organizationModel;
     constructor(organizationModel: Model<Organization>);
     findAll(paginationQuery: PaginationQueryDto): Promise<Organization[]>;
-    create(createOrganizationDto: CreateOrganizationDto): Promise<void>;
+    create(createOrganizationDto: CreateOrganizationDto): Promise<Organization>;
     findOne(id: string): Promise<Organization>;
     update(id: string, updateOrganizationDto: UpdateOrganizationDto): Promise<UpdateDepartmentDto>;
     remove(id: string): Promise<any>;

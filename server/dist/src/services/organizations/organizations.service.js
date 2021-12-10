@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrganizationsService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
+const organization_model_1 = require("./organization.model");
 const mongoose_2 = require("mongoose");
-const department_interface_1 = require("../departments/interfaces/department.interface");
 let OrganizationsService = class OrganizationsService {
     constructor(organizationModel) {
         this.organizationModel = organizationModel;
@@ -38,12 +38,12 @@ let OrganizationsService = class OrganizationsService {
         }
         return organization;
     }
-    async update(id, updateOrganizationDto) {
-        const existingOrganization = await this.organizationModel.findByIdAndUpdate({ _id: id }, updateOrganizationDto);
+    async updateOrganization(organizationId, updateOrganizationDto) {
+        const existingOrganization = await this.organizationModel.findByIdAndUpdate({ _id: organizationId }, updateOrganizationDto);
         if (!existingOrganization) {
-            throw new common_1.NotFoundException(`Organization #${id} not found`);
+            throw new common_1.NotFoundException(`Organization #${organizationId} not found`);
         }
-        return null;
+        return existingOrganization;
     }
     async remove(id) {
         const deletedOrganization = await this.organizationModel.findByIdAndRemove(id);
@@ -52,7 +52,7 @@ let OrganizationsService = class OrganizationsService {
 };
 OrganizationsService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('Organization')),
+    __param(0, (0, mongoose_1.InjectModel)(organization_model_1.Organization.name)),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], OrganizationsService);
 exports.OrganizationsService = OrganizationsService;

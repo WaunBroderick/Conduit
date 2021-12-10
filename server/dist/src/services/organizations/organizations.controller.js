@@ -50,9 +50,9 @@ let OrganizationsController = class OrganizationsController {
         }
         return Res.status(common_1.HttpStatus.OK).json(organization);
     }
-    async update(res, id, updateOrganizationDto) {
+    async updateOrganization(res, organizationId, updateOrganizationDto) {
         try {
-            const organization = await this.organizationsService.update(id, updateOrganizationDto);
+            const organization = await this.organizationsService.updateOrganization(organizationId, updateOrganizationDto);
             if (!organization) {
                 throw new common_1.NotFoundException('Organization does not exist');
             }
@@ -105,7 +105,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String, update_organization_dto_1.UpdateOrganizationDto]),
     __metadata("design:returntype", Promise)
-], OrganizationsController.prototype, "update", null);
+], OrganizationsController.prototype, "updateOrganization", null);
 OrganizationsController = __decorate([
     (0, swagger_1.ApiTags)('Organizational'),
     (0, common_1.Controller)('organizations'),

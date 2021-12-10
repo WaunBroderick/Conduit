@@ -13,6 +13,7 @@ const departments_controller_1 = require("./departments.controller");
 const config_1 = require("@nestjs/config");
 const mongoose_1 = require("@nestjs/mongoose");
 const departments_schema_1 = require("./schemas/departments.schema");
+const organizations_module_1 = require("../organizations/organizations.module");
 let DepartmentsModule = class DepartmentsModule {
 };
 DepartmentsModule = __decorate([
@@ -22,6 +23,7 @@ DepartmentsModule = __decorate([
             mongoose_1.MongooseModule.forFeature([
                 { name: 'Department', schema: departments_schema_1.DepartmentsSchema },
             ]),
+            organizations_module_1.OrganizationsModule,
         ],
         controllers: [departments_controller_1.DepartmentsController],
         providers: [departments_service_1.DepartmentsService],

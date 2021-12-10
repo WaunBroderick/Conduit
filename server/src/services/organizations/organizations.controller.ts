@@ -66,14 +66,14 @@ export class OrganizationsController {
   }
 
   @Put('/:id')
-  public async update(
+  public async updateOrganization(
     @Res() res,
-    @Param('id') id: string,
+    @Param('id') organizationId: string,
     @Body() updateOrganizationDto: UpdateOrganizationDto,
   ) {
     try {
-      const organization = await this.organizationsService.update(
-        id,
+      const organization = await this.organizationsService.updateOrganization(
+        organizationId,
         updateOrganizationDto,
       );
       if (!organization) {

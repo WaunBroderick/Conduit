@@ -5,18 +5,17 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Organization } from './interfaces/organization.interface';
+import { Organization } from './organization.model';
+import { IOrganization } from './interfaces/organization.interface';
 import { Model } from 'mongoose';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
-import { UpdateDepartmentDto } from '../departments/dto/update-department.dto';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
-import { Department } from 'src/services/departments/interfaces/department.interface';
 
 @Injectable()
 export class OrganizationsService {
   constructor(
-    @InjectModel('Organization')
+    @InjectModel(Organization.name)
     private readonly organizationModel: Model<Organization>,
   ) {}
 
@@ -30,7 +29,7 @@ export class OrganizationsService {
 
   public async create(
     createOrganizationDto: CreateOrganizationDto,
-  ): Promise<Organization> {
+  ): Promise<IOrganization> {
     const newOrganization = await new this.organizationModel(
       createOrganizationDto,
     );
@@ -48,19 +47,19 @@ export class OrganizationsService {
     return organization;
   }
 
-  public async update(
-    id: string,
+  public async updateOrganization(
+    organizationId: string,
     updateOrganizationDto: UpdateOrganizationDto,
-  ): Promise<UpdateDepartmentDto> {
+  ): Promise<IOrganization> {
     const existingOrganization = await this.organizationModel.findByIdAndUpdate(
-      { _id: id },
+      { _id: organizationId },
       updateOrganizationDto,
     );
 
     if (!existingOrganization) {
-      throw new NotFoundException(`Organization #${id} not found`);
+      throw new NotFoundException(`Organization #${organizationId} not found`);
     }
-    return null;
+    return existingOrganization;
   }
 
   async remove(id: string): Promise<any> {

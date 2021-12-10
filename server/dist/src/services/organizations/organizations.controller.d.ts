@@ -8,5 +8,5 @@ export declare class OrganizationsController {
     createOrganization(res: any, createOrganizationDto: CreateOrganizationDto): Promise<any>;
     getAllOrganizations(res: any, paginationQuery: PaginationQueryDto): Promise<any>;
     getOrganization(Res: any, id: string): Promise<any>;
-    update(res: any, id: string, updateOrganizationDto: UpdateOrganizationDto): Promise<any>;
+    updateOrganization(res: any, organizationId: string, updateOrganizationDto: UpdateOrganizationDto): Promise<any>;
 }

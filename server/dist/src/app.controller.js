@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
-const auth_service_1 = require("./auth/auth.service");
+const auth_service_1 = require("./services/auth/auth.service");
 let AppController = class AppController {
     constructor(authService) {
         this.authService = authService;

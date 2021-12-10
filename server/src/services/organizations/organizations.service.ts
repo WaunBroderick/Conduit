@@ -11,7 +11,7 @@ import { CreateOrganizationDto } from './dto/create-organization.dto';
 import { UpdateOrganizationDto } from './dto/update-organization.dto';
 import { UpdateDepartmentDto } from '../departments/dto/update-department.dto';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
-import { Department } from 'src/departments/interfaces/department.interface';
+import { Department } from 'src/services/departments/interfaces/department.interface';
 
 @Injectable()
 export class OrganizationsService {

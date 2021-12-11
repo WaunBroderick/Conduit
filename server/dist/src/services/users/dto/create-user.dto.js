@@ -9,29 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCatDto = void 0;
+exports.CreateUserDto = void 0;
 const openapi = require("@nestjs/swagger");
-const swagger_1 = require("@nestjs/swagger");
-class CreateCatDto {
+const class_validator_1 = require("class-validator");
+class CreateUserDto {
     static _OPENAPI_METADATA_FACTORY() {
-        return { name: { required: true, type: () => String }, email: { required: true, type: () => Number }, organization: { required: true, type: () => String }, password: { required: true, type: () => String } };
+        return { email: { required: true, type: () => String, minLength: 4, maxLength: 20 }, password: { required: true, type: () => String, minLength: 8, maxLength: 20 }, organization: { required: true, type: () => String }, name: { required: true, type: () => String } };
     }
 }
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(4),
+    (0, class_validator_1.MaxLength)(20),
     __metadata("design:type", String)
-], CreateCatDto.prototype, "name", void 0);
+], CreateUserDto.prototype, "email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", Number)
-], CreateCatDto.prototype, "email", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(8, { message: 'Password is too short (8 characters min)' }),
+    (0, class_validator_1.MaxLength)(20, { message: 'Password is too long (20 characters max)' }),
     __metadata("design:type", String)
-], CreateCatDto.prototype, "organization", void 0);
+], CreateUserDto.prototype, "password", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateCatDto.prototype, "password", void 0);
-exports.CreateCatDto = CreateCatDto;
+], CreateUserDto.prototype, "organization", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateUserDto.prototype, "name", void 0);
+exports.CreateUserDto = CreateUserDto;
 //# sourceMappingURL=create-user.dto.js.map

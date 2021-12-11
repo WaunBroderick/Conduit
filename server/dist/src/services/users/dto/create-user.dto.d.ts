@@ -1,6 +1,6 @@
-export declare class CreateCatDto {
-    name: string;
-    email: number;
-    organization: string;
+export declare class CreateUserDto {
+    email: string;
     password: string;
+    organization: string;
+    name: string;
 }

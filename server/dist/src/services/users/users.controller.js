@@ -18,47 +18,40 @@ const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const auth_service_1 = require("../auth/auth.service");
 const swagger_1 = require("@nestjs/swagger");
+const assign_user_department_1 = require("./dto/assign-user-department");
 let UsersController = class UsersController {
-    constructor(UsersService) {
-        this.UsersService = UsersService;
+    constructor(usersService) {
+        this.usersService = usersService;
     }
-    createUser(userName, userEmail, userOrganization, userPassword) {
-        const generatedId = this.UsersService.createUser(userName, userEmail, userOrganization, userPassword);
-        return { id: generatedId };
-    }
-    validateUser(userEmail, userPassword) {
-        return console.log('well it works');
-    }
-    async index() {
-        return await this.UsersService.findAll();
+    async assignUserDepartment(res, userId, assignUserDepartmentDto) {
+        try {
+            const user = await this.usersService.updateUserDepartments(userId, assignUserDepartmentDto);
+            if (!user) {
+                throw new common_1.NotFoundException('User does not exist');
+            }
+            return res.status(common_1.HttpStatus.OK).json({
+                message: 'Customer has been successfully updated',
+                user,
+            });
+        }
+        catch (err) {
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({
+                message: 'Error: User not updated!' + res.data,
+                status: 400,
+            });
+        }
     }
 };
 __decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)('name')),
-    __param(1, (0, common_1.Body)('email')),
-    __param(2, (0, common_1.Body)('organization')),
-    __param(3, (0, common_1.Body)('password')),
+    (0, common_1.Put)('/:id'),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String, String]),
-    __metadata("design:returntype", void 0)
-], UsersController.prototype, "createUser", null);
-__decorate([
-    (0, common_1.Post)(':email'),
-    openapi.ApiResponse({ status: 201 }),
-    __param(0, (0, common_1.Body)('email')),
-    __param(1, (0, common_1.Body)('password')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
-    __metadata("design:returntype", void 0)
-], UsersController.prototype, "validateUser", null);
-__decorate([
-    (0, common_1.Get)(),
-    openapi.ApiResponse({ status: 200, type: [require("./user.model").User] }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object, String, assign_user_department_1.AssignUserDepartmentDto]),
     __metadata("design:returntype", Promise)
-], UsersController.prototype, "index", null);
+], UsersController.prototype, "assignUserDepartment", null);
 UsersController = __decorate([
     (0, swagger_1.ApiTags)('Users'),
     (0, common_1.Controller)('users'),

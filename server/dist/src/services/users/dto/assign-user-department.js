@@ -9,34 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserSchema = exports.User = void 0;
-const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
-let User = class User extends mongoose_2.Document {
-};
+exports.AssignUserDepartmentDto = void 0;
+const class_validator_1 = require("class-validator");
+const swagger_1 = require("@nestjs/swagger");
+class AssignUserDepartmentDto {
+}
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'The name of the organization',
+        type: String,
+    }),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], AssignUserDepartmentDto.prototype, "name", void 0);
 __decorate([
-    (0, mongoose_1.Prop)({ unique: true }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'The address of the Organzation',
+        type: String,
+    }),
     __metadata("design:type", String)
-], User.prototype, "email", void 0);
+], AssignUserDepartmentDto.prototype, "address", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'The logo of the organization',
+    }),
     __metadata("design:type", String)
-], User.prototype, "organization", void 0);
+], AssignUserDepartmentDto.prototype, "logo", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-__decorate([
-    (0, mongoose_1.Prop)(),
+    (0, swagger_1.ApiPropertyOptional)({
+        isArray: true,
+    }),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsOptional)(),
     __metadata("design:type", Array)
-], User.prototype, "departments", void 0);
-User = __decorate([
-    (0, mongoose_1.Schema)()
-], User);
-exports.User = User;
-exports.UserSchema = mongoose_1.SchemaFactory.createForClass(User);
-//# sourceMappingURL=user.model.js.map
+], AssignUserDepartmentDto.prototype, "departments", void 0);
+exports.AssignUserDepartmentDto = AssignUserDepartmentDto;
+//# sourceMappingURL=assign-user-department.js.map

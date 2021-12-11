@@ -15,42 +15,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
+const user_model_1 = require("./user.model");
 const mongoose_2 = require("mongoose");
 var bcrypt = require('bcryptjs');
 let UsersService = class UsersService {
-    constructor(UserModel) {
-        this.UserModel = UserModel;
-        this.users = [];
+    constructor(userModel) {
+        this.userModel = userModel;
     }
-    async findAll() {
-        return await this.UserModel.find().exec();
-    }
-    async findOne(email) {
-        return await this.UserModel.findById(email).exec();
-    }
-    async createUser(name, email, organization, password) {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new this.UserModel({
-            name: name,
-            email: email,
-            organization: organization,
-            password: hashedPassword,
-        });
-        try {
-            await newUser.save();
+    async updateUserDepartments(userId, assignUserDepartmentDto) {
+        const existingUser = await this.userModel.findByIdAndUpdate({ _id: userId }, assignUserDepartmentDto);
+        if (!existingUser) {
+            throw new common_1.NotFoundException(`Organization #${userId} not found`);
         }
-        catch (error) {
-            if (error.code === 11000) {
-                throw new common_1.ConflictException('User already exists');
-            }
-            throw error;
-        }
-        return;
+        return existingUser;
     }
 };
 UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)('User')),
+    __param(0, (0, mongoose_1.InjectModel)(user_model_1.User.name)),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], UsersService);
 exports.UsersService = UsersService;

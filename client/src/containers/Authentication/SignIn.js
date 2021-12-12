@@ -14,7 +14,7 @@ import {
   EuiFlexItem,
 } from "@elastic/eui";
 import { Link, Redirect } from "react-router-dom";
-import { login } from "../../reducers/user";
+import { login } from "../../redux/reducers/user";
 import StyledSection from "./style";
 import "@elastic/eui/dist/eui_theme_light.css";
 
@@ -24,7 +24,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const user = useSelector((state) => state.user.value);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const submit = async (e) => {

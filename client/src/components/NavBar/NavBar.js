@@ -8,8 +8,6 @@ import { useSelector } from "react-redux";
 import React, { useState } from "react";
 
 export default function NavBar() {
-  const user = useSelector((state) => state.user.value);
-
   return (
     <>
       <EuiHeader
@@ -29,7 +27,7 @@ export default function NavBar() {
                 key="second"
                 aria-label="Account menu"
               >
-                <EuiAvatar name={user.name} size="s" />
+                <EuiAvatar name="" size="s" />
               </EuiHeaderSectionItemButton>,
             ],
             borders: "none",

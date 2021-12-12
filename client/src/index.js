@@ -4,17 +4,18 @@ import "./index.css";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 import "@elastic/eui/dist/eui_theme_light.css";
 
-import userReducer from "./reducers/user";
+import { userSlice } from "./redux/reducers/user";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 
 const store = configureStore({
   reducer: {
-    user: userReducer,
+    user: userSlice,
   },
 });
 

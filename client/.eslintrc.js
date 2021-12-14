@@ -29,5 +29,11 @@ module.exports = {
     ],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
   },
-  ignorePatterns: ["src/redux/*", "src/utils/*", "src/components/NavBar/*"],
+  ignorePatterns: [
+    "src/redux/*",
+    "src/utils/*",
+    "src/components/NavBar/*",
+    "src/styles/themes/*",
+    "src/styles/themes/LightTheme.js",
+  ],
 };

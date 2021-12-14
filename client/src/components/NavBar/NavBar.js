@@ -9,6 +9,7 @@ import {
   EuiSpacer,
   EuiLink,
   EuiContextMenu,
+  EuiHeaderLink,
   EuiText,
   EuiButton,
   EuiPopover,
@@ -17,6 +18,10 @@ import { useSelector } from "react-redux";
 import React, { useState } from "react";
 
 import logo from "../../assets/img/logo/logoWithName.png";
+
+import SubHeaderStyled from "./style";
+import { ThemeProvider } from "styled-components";
+import theme from "../../styles/themes/LightTheme";
 
 export default function NavBar() {
   const HeaderUserMenu = () => {
@@ -93,33 +98,37 @@ export default function NavBar() {
 
   return (
     <>
-      <EuiHeader
-        position="fixed"
-        sections={[
-          {
-            items: [
-              <EuiHeaderLogo key="first" iconType="logoElastic">
-                Conduit
-              </EuiHeaderLogo>,
-            ],
-            borders: "none",
-          },
-          {
-            items: [<HeaderUserMenu />],
-            borders: "none",
-          },
-        ]}
-      />
-      <EuiHeader
-        theme="default"
-        position="fixed"
-        size="xs"
-        sections={[
-          {
-            items: [],
-          },
-        ]}
-      />
+      <ThemeProvider theme={theme}>
+        <EuiHeader
+          position="fixed"
+          sections={[
+            {
+              items: [
+                <EuiHeaderLogo key="first" iconType="logoElastic">
+                  Conduit
+                </EuiHeaderLogo>,
+                <EuiHeaderLink>Users</EuiHeaderLink>,
+                <EuiHeaderLink>Courses</EuiHeaderLink>,
+              ],
+              borders: "none",
+            },
+            {
+              items: [<HeaderUserMenu />],
+              borders: "none",
+            },
+          ]}
+        />
+        <SubHeaderStyled
+          theme="default"
+          position="fixed"
+          size="xs"
+          sections={[
+            {
+              items: [],
+            },
+          ]}
+        />
+      </ThemeProvider>
     </>
   );
 }

@@ -7,19 +7,17 @@ import {
   EuiFlexGroup,
   EuiFlexItem,
   EuiSpacer,
-  EuiLink,
-  EuiContextMenu,
   EuiHeaderLink,
   EuiText,
-  EuiButton,
   EuiPopover,
 } from "@elastic/eui";
 import { useSelector } from "react-redux";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import logo from "../../assets/img/logo/logoWithName.png";
 
-import SubHeaderStyled from "./style";
+import { SubHeaderStyled, LinkStyled } from "./style";
 import { ThemeProvider } from "styled-components";
 import theme from "../../styles/themes/LightTheme";
 
@@ -79,13 +77,9 @@ export default function NavBar() {
               <EuiFlexGroup>
                 <EuiFlexItem>
                   <EuiFlexGroup justifyContent="spaceBetween">
-                    <EuiFlexItem grow={false}>
-                      <EuiLink>Edit profile</EuiLink>
-                    </EuiFlexItem>
+                    <EuiFlexItem grow={false}>Edit profile</EuiFlexItem>
 
-                    <EuiFlexItem grow={false}>
-                      <EuiLink>Log out</EuiLink>
-                    </EuiFlexItem>
+                    <EuiFlexItem grow={false}>Log out</EuiFlexItem>
                   </EuiFlexGroup>
                 </EuiFlexItem>
               </EuiFlexGroup>
@@ -105,10 +99,13 @@ export default function NavBar() {
             {
               items: [
                 <EuiHeaderLogo key="first" iconType="logoElastic">
-                  Conduit
+                  <Link to="/Home">Conduit</Link>
                 </EuiHeaderLogo>,
-                <EuiHeaderLink>Users</EuiHeaderLink>,
-                <EuiHeaderLink>Courses</EuiHeaderLink>,
+
+                <LinkStyled to="/Users">Users</LinkStyled>,
+                <LinkStyled to="/Users">Courses</LinkStyled>,
+                <LinkStyled to="/Organization">Organization</LinkStyled>,
+                <LinkStyled to="/Marketplace">Marketplace</LinkStyled>,
               ],
               borders: "none",
             },

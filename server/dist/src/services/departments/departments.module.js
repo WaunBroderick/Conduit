@@ -27,6 +27,7 @@ DepartmentsModule = __decorate([
         ],
         controllers: [departments_controller_1.DepartmentsController],
         providers: [departments_service_1.DepartmentsService],
+        exports: [departments_service_1.DepartmentsService],
     })
 ], DepartmentsModule);
 exports.DepartmentsModule = DepartmentsModule;

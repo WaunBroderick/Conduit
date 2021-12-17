@@ -16,5 +16,6 @@ import { OrganizationsModule } from '../organizations/organizations.module';
   ],
   controllers: [DepartmentsController],
   providers: [DepartmentsService],
+  exports: [DepartmentsService],
 })
 export class DepartmentsModule {}

@@ -4,7 +4,6 @@ import { UpdateDepartmentDto } from './dto/update-department.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Department } from './interfaces/department.interface';
-import { OrganizationsService } from '../organizations/organizations.service';
 
 @Injectable()
 export class DepartmentsService {

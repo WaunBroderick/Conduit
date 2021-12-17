@@ -10,6 +10,7 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const config_1 = require("@nestjs/config");
+const nestjs_command_1 = require("nestjs-command");
 const app_controller_1 = require("./app.controller");
 const auth_module_1 = require("./services/auth/auth.module");
 const app_service_1 = require("./app.service");
@@ -30,6 +31,7 @@ AppModule = __decorate([
             organizations_module_1.OrganizationsModule,
             departments_module_1.DepartmentsModule,
             auth_module_1.AuthModule,
+            nestjs_command_1.CommandModule,
         ],
         controllers: [app_controller_1.AppController, organizations_controller_1.OrganizationsController],
         providers: [app_service_1.AppService],

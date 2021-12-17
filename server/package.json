@@ -31,14 +31,17 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.5",
     "bcryptjs": "^2.4.3",
+    "faker": "^5.5.3",
     "js-yaml": "^4.1.0",
     "mongoose": "^6.0.13",
+    "nestjs-command": "^3.1.0",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.1.6",
+    "yargs": "^17.3.0"
   },
   "devDependencies": {
     "@nestjs/schematics": "^8.0.0",
@@ -50,6 +53,7 @@
     "@types/passport-jwt": "^3.0.6",
     "@types/passport-local": "^1.0.34",
     "@types/supertest": "^2.0.11",
+    "@types/yargs": "^17.0.7",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { CommandModule } from 'nestjs-command';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './services/auth/auth.module';
@@ -16,11 +17,11 @@ import { DepartmentsModule } from './services/departments/departments.module';
       isGlobal: true,
     }),
     MongooseModule.forRoot('mongodb://localhost:27017/conduit-STAGING'),
-
     UsersModule,
     OrganizationsModule,
     DepartmentsModule,
     AuthModule,
+    CommandModule,
   ],
   controllers: [AppController, OrganizationsController],
   providers: [AppService],

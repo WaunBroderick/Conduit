@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { CommandModule } from 'nestjs-command';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './services/auth/auth.module';
@@ -21,7 +20,6 @@ import { DepartmentsModule } from './services/departments/departments.module';
     OrganizationsModule,
     DepartmentsModule,
     AuthModule,
-    CommandModule,
   ],
   controllers: [AppController, OrganizationsController],
   providers: [AppService],

@@ -16,12 +16,23 @@ exports.UsersController = void 0;
 const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
-const auth_service_1 = require("../auth/auth.service");
 const swagger_1 = require("@nestjs/swagger");
 const assign_user_department_1 = require("./dto/assign-user-department");
+const pagination_query_dto_1 = require("../shared/dto/pagination-query.dto");
 let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
+    }
+    async getAllUsers(res, paginationQuery) {
+        const users = await this.usersService.findAll(paginationQuery);
+        return res.status(common_1.HttpStatus.OK).json(users);
+    }
+    async getUser(Res, id) {
+        const user = await this.usersService.findOne(id);
+        if (!user) {
+            throw new common_1.NotFoundException('User does not exist!');
+        }
+        return Res.status(common_1.HttpStatus.OK).json(user);
     }
     async assignUserDepartment(res, userId, assignUserDepartmentDto) {
         try {
@@ -42,6 +53,24 @@ let UsersController = class UsersController {
         }
     }
 };
+__decorate([
+    (0, common_1.Get)(),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, pagination_query_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getAllUsers", null);
+__decorate([
+    (0, common_1.Get)('/:id'),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUser", null);
 __decorate([
     (0, common_1.Put)('/:id'),
     openapi.ApiResponse({ status: 200, type: Object }),

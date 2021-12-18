@@ -13,16 +13,33 @@ import {
   Query,
 } from '@nestjs/common';
 
-import { User } from './user.model';
 import { UsersService } from './users.service';
-import { AuthService } from 'src/services/auth/auth.service';
 import { ApiTags } from '@nestjs/swagger';
 import { AssignUserDepartmentDto } from './dto/assign-user-department';
+import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  public async getAllUsers(
+    @Res() res,
+    @Query() paginationQuery: PaginationQueryDto,
+  ) {
+    const users = await this.usersService.findAll(paginationQuery);
+    return res.status(HttpStatus.OK).json(users);
+  }
+
+  @Get('/:id')
+  public async getUser(@Res() Res, @Param('id') id: string) {
+    const user = await this.usersService.findOne(id);
+    if (!user) {
+      throw new NotFoundException('User does not exist!');
+    }
+    return Res.status(HttpStatus.OK).json(user);
+  }
 
   @Put('/:id')
   public async assignUserDepartment(

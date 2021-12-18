@@ -17,10 +17,22 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_model_1 = require("./user.model");
 const mongoose_2 = require("mongoose");
+var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 let UsersService = class UsersService {
     constructor(userModel) {
         this.userModel = userModel;
+    }
+    async findAll(paginationQuery) {
+        const { limit, offset } = paginationQuery;
+        return await this.userModel.find().skip(offset).limit(limit).exec();
+    }
+    async findOne(id) {
+        const user = await this.userModel.findById({ _id: id }).exec();
+        if (!user) {
+            throw new common_1.NotFoundException(`User #${id} not found`);
+        }
+        return user;
     }
     async updateUserDepartments(userId, assignUserDepartmentDto) {
         const existingUser = await this.userModel.findByIdAndUpdate({ _id: userId }, assignUserDepartmentDto);

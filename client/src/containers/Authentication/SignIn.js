@@ -55,8 +55,10 @@ export default function SignIn() {
                 email: res.data.email,
                 organization: res.data.organization,
                 name: res.data.name,
+                jwt: response.data.accessToken,
               })
             );
+            setRedirect(true);
           })
           .then((data) => {})
           .catch((error) => {
@@ -65,7 +67,6 @@ export default function SignIn() {
       })
       .then((data) => {})
       .catch((error) => {});
-    setRedirect(true);
   };
 
   if (redirect) {

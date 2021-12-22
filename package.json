@@ -1,0 +1,22 @@
+{
+  "name": "conduit",
+  "version": "1.0.0",
+  "description": "<html> <img src=\"/client/src/assets/img/logo/Untitled-2-04.png\" title=\"Conduit Logo\"> </html>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:server": "cd ./client && npm start",
+    "dev:client": "cd ./server && npm run start:dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WaunBroderick/Conduit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WaunBroderick/Conduit/issues"
+  },
+  "homepage": "https://github.com/WaunBroderick/Conduit#readme"
+}

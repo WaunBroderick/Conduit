@@ -36,14 +36,20 @@ export class UsersService {
     return user;
   }
 
-  public async findByOrg(orgId: string): Promise<User[]> {
-    const orgUsers = await this.userModel.find({
-      organization: orgId,
-    });
-    if (!orgUsers) {
-      throw new NotFoundException(`Organization #${orgId} not found`);
+  public async findByOrg(orgId: string): Promise<IUser[]> {
+    const query = { organization: mongoose.Types.ObjectId(orgId) };
+
+    if (!query) {
+      throw new NotFoundException(
+        `No users belonging to organization #${orgId} were found`,
+      );
     }
-    return orgUsers;
+    return await this.userModel
+      .find(query)
+      .select('name')
+      .select('email')
+      .select('organization')
+      .exec();
   }
 
   public async updateUserDepartments(

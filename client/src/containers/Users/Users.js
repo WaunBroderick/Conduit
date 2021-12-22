@@ -1,14 +1,34 @@
 import React from "react";
 
-import { EuiPageTemplate, EuiEmptyPrompt } from "@elastic/eui";
+import { connect } from "react-redux";
 
-export default function User() {
+import { EuiPageTemplate, EuiEmptyPrompt } from "@elastic/eui";
+import UserTable from "../../components/UserTable/UserTable";
+
+import fetchUsers from "../../redux/actions/orgUsers";
+
+const mapStateToProps = (state) => ({
+  data: state,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUsers: () => {
+    dispatch(fetchUsers());
+  },
+});
+
+const User = connect(mapStateToProps, mapDispatchToProps)(UserTable);
+
+function Userxx() {
   return (
     <EuiPageTemplate
       template="centeredContent"
       pageContentProps={{ paddingSize: "none" }}
     >
+      <UserTable />
       <EuiEmptyPrompt title={<span>User Screen</span>} />
     </EuiPageTemplate>
   );
 }
+
+export default User;

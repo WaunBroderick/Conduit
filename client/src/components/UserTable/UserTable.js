@@ -1,135 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
 
-import {
-  EuiBasicTable,
-  EuiLink,
-  EuiHealth,
-  EuiSpacer,
-  EuiCode,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiSwitch,
-} from "@elastic/eui";
+import { EuiThemeProvider } from "@elastic/eui";
 
-export default function UserTable() {
-  const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
-  const [showPerPageOptions, setShowPerPageOptions] = useState(true);
-
-  const onTableChange = ({ page = {} }) => {
-    const { index: pageIndex, size: pageSize } = page;
-
-    setPageIndex(pageIndex);
-    setPageSize(pageSize);
-  };
-
-  const renderStatus = (online) => {
-    const color = online ? "success" : "danger";
-    const label = online ? "Online" : "Offline";
-    return <EuiHealth color={color}>{label}</EuiHealth>;
-  };
-
-  const togglePerPageOptions = () => setShowPerPageOptions(!showPerPageOptions);
-
-  const { pageOfItems, totalItemCount } = store.findUsers(pageIndex, pageSize);
-
-  const columns = [
-    {
-      field: "firstName",
-      name: "First Name",
-      truncateText: true,
-      mobileOptions: {
-        show: false,
-      },
-    },
-    {
-      field: "lastName",
-      name: "Last Name",
-      truncateText: true,
-      mobileOptions: {
-        show: false,
-      },
-    },
-    {
-      field: "firstName",
-      name: "Full Name",
-      mobileOptions: {
-        header: false,
-        only: true,
-        enlarge: true,
-        width: "100%",
-      },
-      render: (name, item) => (
-        <EuiFlexGroup responsive={false} alignItems="center">
-          <EuiFlexItem>
-            {item.firstName} {item.lastName}
-          </EuiFlexItem>
-          <EuiFlexItem grow={false}>{renderStatus(item.online)}</EuiFlexItem>
-        </EuiFlexGroup>
-      ),
-    },
-    {
-      field: "github",
-      name: "Github",
-      render: (username) => (
-        <EuiLink href={`https://github.com/${username}`} target="_blank">
-          {username}
-        </EuiLink>
-      ),
-    },
-    {
-      field: "dateOfBirth",
-      name: "Date of Birth",
-      dataType: "date",
-      render: (date) => formatDate(date, "dobLong"),
-    },
-    {
-      field: "nationality",
-      name: "Nationality",
-      render: (countryCode) => {
-        const country = store.getCountry(countryCode);
-        return `${country.flag} ${country.name}`;
-      },
-    },
-    {
-      field: "online",
-      name: "Online",
-      dataType: "boolean",
-      render: (online) => renderStatus(online),
-      mobileOptions: {
-        show: false,
-      },
-    },
-  ];
-
-  const pagination = {
-    pageIndex,
-    pageSize,
-    totalItemCount,
-    pageSizeOptions: [3, 5, 8],
-    hidePerPageOptions: !showPerPageOptions,
-  };
+export default function UserTable(props) {
+  const { data, fetchUsers } = props;
+  const HeaderUserMenu = () => {};
+  console.log({ data });
+  const test = axios.get("http://localhost:5000/users").then((res) => {
+    // console.log(res);
+  });
 
   return (
-    <div>
-      <EuiSwitch
-        checked={!showPerPageOptions}
-        label={
-          <span>
-            Hide per page options with{" "}
-            <EuiCode>pagination.hidePerPageOptions = true</EuiCode>
-          </span>
-        }
-        onChange={togglePerPageOptions}
-      />
-      <EuiSpacer size="xl" />
-      <EuiBasicTable
-        tableCaption="Demo for EuiBasicTable with pagination"
-        items={pageOfItems}
-        columns={columns}
-        pagination={pagination}
-        onChange={onTableChange}
-      />
-    </div>
+    <>
+      <EuiThemeProvider />
+      <EuiThemeProvider />
+      <div>
+        <h1>hello</h1>
+      </div>
+    </>
   );
 }

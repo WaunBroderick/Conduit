@@ -20,6 +20,7 @@ module.exports = {
     "no-process-exit": "off",
     "object-shorthand": "off",
     "class-methods-use-this": "off",
+    "react/prop-types": "off",
     "react/function-component-definition": [
       "error",
       {

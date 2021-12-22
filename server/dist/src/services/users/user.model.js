@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserSchema = exports.User = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const mongoose = require("mongoose");
 let User = class User extends mongoose_2.Document {
 };
 __decorate([
@@ -24,7 +25,7 @@ __decorate([
 ], User.prototype, "email", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
+    __metadata("design:type", mongoose.Types.ObjectId)
 ], User.prototype, "organization", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),

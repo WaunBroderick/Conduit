@@ -35,13 +35,16 @@ let UsersService = class UsersService {
         return user;
     }
     async findByOrg(orgId) {
-        const orgUsers = await this.userModel.find({
-            organization: orgId,
-        });
-        if (!orgUsers) {
-            throw new common_1.NotFoundException(`Organization #${orgId} not found`);
+        const query = { organization: mongoose.Types.ObjectId(orgId) };
+        if (!query) {
+            throw new common_1.NotFoundException(`No users belonging to organization #${orgId} were found`);
         }
-        return orgUsers;
+        return await this.userModel
+            .find(query)
+            .select('name')
+            .select('email')
+            .select('organization')
+            .exec();
     }
     async updateUserDepartments(userId, assignUserDepartmentDto) {
         const existingUser = await this.userModel.findByIdAndUpdate({ _id: userId }, assignUserDepartmentDto);

@@ -34,6 +34,13 @@ let UsersController = class UsersController {
         }
         return Res.status(common_1.HttpStatus.OK).json(user);
     }
+    async findByOrg(Res, organization) {
+        const user = await this.usersService.findByOrg(organization);
+        if (!user) {
+            throw new common_1.NotFoundException('User does not exist!');
+        }
+        return Res.status(common_1.HttpStatus.OK).json(user);
+    }
     async assignUserDepartment(res, userId, assignUserDepartmentDto) {
         try {
             const user = await this.usersService.updateUserDepartments(userId, assignUserDepartmentDto);
@@ -71,6 +78,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getUser", null);
+__decorate([
+    (0, common_1.Get)('/org/:organization'),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('organization')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "findByOrg", null);
 __decorate([
     (0, common_1.Put)('/:id'),
     openapi.ApiResponse({ status: 200, type: Object }),

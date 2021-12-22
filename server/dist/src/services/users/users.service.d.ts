@@ -8,5 +8,6 @@ export declare class UsersService {
     constructor(userModel: Model<User>);
     findAll(paginationQuery: PaginationQueryDto): Promise<User[]>;
     findOne(id: string): Promise<User>;
+    findByOrg(orgId: string): Promise<User[]>;
     updateUserDepartments(userId: string, assignUserDepartmentDto: AssignUserDepartmentDto): Promise<IUser>;
 }

@@ -41,6 +41,18 @@ export class UsersController {
     return Res.status(HttpStatus.OK).json(user);
   }
 
+  @Get('/org/:organization')
+  public async findByOrg(
+    @Res() Res,
+    @Param('organization') organization: string,
+  ) {
+    const user = await this.usersService.findByOrg(organization);
+    if (!user) {
+      throw new NotFoundException('User does not exist!');
+    }
+    return Res.status(HttpStatus.OK).json(user);
+  }
+
   @Put('/:id')
   public async assignUserDepartment(
     @Res() res,

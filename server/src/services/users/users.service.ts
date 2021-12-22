@@ -36,6 +36,16 @@ export class UsersService {
     return user;
   }
 
+  public async findByOrg(orgId: string): Promise<User[]> {
+    const orgUsers = await this.userModel.find({
+      organization: orgId,
+    });
+    if (!orgUsers) {
+      throw new NotFoundException(`Organization #${orgId} not found`);
+    }
+    return orgUsers;
+  }
+
   public async updateUserDepartments(
     userId: string,
     assignUserDepartmentDto: AssignUserDepartmentDto,

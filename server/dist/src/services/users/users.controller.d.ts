@@ -6,5 +6,6 @@ export declare class UsersController {
     constructor(usersService: UsersService);
     getAllUsers(res: any, paginationQuery: PaginationQueryDto): Promise<any>;
     getUser(Res: any, id: string): Promise<any>;
+    findByOrg(Res: any, organization: string): Promise<any>;
     assignUserDepartment(res: any, userId: string, assignUserDepartmentDto: AssignUserDepartmentDto): Promise<any>;
 }

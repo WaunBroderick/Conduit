@@ -8,7 +8,10 @@ import "@elastic/eui/dist/eui_theme_light.css";
 
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
-import { store } from "./redux/store";
+import configureStore from "./redux/store/configureStore";
+import Users from "./containers/Users/Users";
+
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>

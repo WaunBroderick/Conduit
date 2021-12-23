@@ -27,32 +27,26 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={themeLight}>
-        <Router>
-          <NavBar />
-          <div style={{ height: "100vh" }}>
-            <Switch>
-              <Route path="/" component={Register} exact />
-              <Route path="/register" component={Register} />
-              <Route path="/signin" component={SignIn} />
-              <ProtectedRoute exact path="/home" component={Home} />
-              <ProtectedRoute exact path="/users" component={Users} />
-              <ProtectedRoute
-                exact
-                path="/organization"
-                component={Organization}
-              />
-              <ProtectedRoute
-                exact
-                path="/marketplace"
-                component={Marketplace}
-              />
-            </Switch>
-          </div>
-        </Router>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider theme={themeLight}>
+      <Router>
+        <NavBar />
+        <div style={{ height: "100vh" }}>
+          <Switch>
+            <Route path="/" component={Register} exact />
+            <Route path="/register" component={Register} />
+            <Route path="/signin" component={SignIn} />
+            <ProtectedRoute exact path="/home" component={Home} />
+            <ProtectedRoute exact path="/users" component={Users} />
+            <ProtectedRoute
+              exact
+              path="/organization"
+              component={Organization}
+            />
+            <ProtectedRoute exact path="/marketplace" component={Marketplace} />
+          </Switch>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

@@ -20,6 +20,7 @@ module.exports = {
     "no-process-exit": "off",
     "object-shorthand": "off",
     "class-methods-use-this": "off",
+    "lines-between-class-members": "off",
     "react/prop-types": "off",
     "react/function-component-definition": [
       "error",
@@ -32,9 +33,13 @@ module.exports = {
   },
   ignorePatterns: [
     "src/redux/*",
+    "src/*",
     "src/utils/*",
     "src/components/NavBar/*",
     "src/styles/themes/*",
     "src/styles/themes/LightTheme.js",
+    "src/containers/Users/*",
+    "src/containers/Users/Users.js",
+    "src/components/UserTable/*",
   ],
 };

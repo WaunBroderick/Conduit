@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadUsersAsync } from "../../redux/reducers/users/users.thunk";
+import UserTable from "../../components/UserTable/UserTable";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,8 @@ const Users = () => {
       <h1>User Listing</h1>
       <h1>{errorMessage}</h1>
       <h1>{isLoading}</h1>
-      {users ? users.map((user) => <li>{user.email}</li>) : "empty"}
+
+      {users ? <UserTable users={users} /> : "empty"}
       <button onClick={handleClick}>SUPS</button>
     </div>
   );

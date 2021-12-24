@@ -1,4 +1,4 @@
-import usersService from "../../../services/users/users.service";
+import usersService from "./users.service";
 import usersAction from "./users.action";
 import { useDispatch } from "react-redux";
 

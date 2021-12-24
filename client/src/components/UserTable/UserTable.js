@@ -84,7 +84,7 @@ const UserTable = ({ users = [] }) => {
       isSelected: selectedOptionId === "eu",
       onClick: () => {
         setSelectedOptionId("eu");
-        setQuery("departments: HR");
+        setQuery("departments: (HR)");
       },
     },
     {
@@ -116,11 +116,11 @@ const UserTable = ({ users = [] }) => {
         field: "departments",
         name: "Departments",
         multiSelect: "or",
-        options: {
-          value: "HR",
-          name: "HR",
-          view: `HR`,
-        },
+        options: users.map((department) => ({
+          value: department,
+          name: department,
+          view: `${department}`,
+        })),
       },
     ],
   };

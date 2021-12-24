@@ -1,4 +1,4 @@
-import apiClient from "../../redux/actions/apiClient";
+import apiClient from "../../Clients/apiClient";
 
 class UsersService {
   getAllUsers = () => apiClient().get("users");

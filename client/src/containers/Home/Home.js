@@ -11,8 +11,6 @@ export default function Home() {
       template="centeredContent"
       pageContentProps={{ paddingSize: "none" }}
     >
-      <h1>Hello end</h1>
-
       <EuiEmptyPrompt title={<span>Home Screen</span>} />
     </EuiPageTemplate>
   );

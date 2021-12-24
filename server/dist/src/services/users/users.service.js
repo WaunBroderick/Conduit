@@ -24,8 +24,7 @@ let UsersService = class UsersService {
         this.userModel = userModel;
     }
     async findAll(paginationQuery) {
-        const limit = 20;
-        const offset = 20;
+        const { limit, offset } = paginationQuery;
         return await this.userModel.find().skip(offset).limit(limit).exec();
     }
     async findOne(id) {

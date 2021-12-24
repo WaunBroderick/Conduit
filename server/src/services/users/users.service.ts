@@ -22,9 +22,7 @@ export class UsersService {
   ) {}
 
   public async findAll(paginationQuery: PaginationQueryDto): Promise<User[]> {
-    // const { limit, offset } = paginationQuery;
-    const limit = 20;
-    const offset = 20;
+    const { limit, offset } = paginationQuery;
 
     return await this.userModel.find().skip(offset).limit(limit).exec();
   }

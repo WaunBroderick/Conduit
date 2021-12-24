@@ -1,43 +1,20 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import {
   EuiBasicTable,
-  EuiHealth,
-  EuiIcon,
-  EuiLink,
-  EuiToolTip,
   EuiFlexGroup,
   EuiFlexItem,
-  EuiSwitch,
-  EuiSpacer,
-  EuiCode,
+  EuiPanel,
+  EuiInMemoryTable,
+  EuiFacetGroup,
+  EuiFacetButton,
 } from "@elastic/eui";
 
 const UserTable = ({ users = [] }) => {
-  const [enableAll, setEnableAll] = useState(false);
-  const [readonly, setReadonly] = useState(false);
-
-  const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
-  const [showPerPageOptions, setShowPerPageOptions] = useState(true);
-
-  const [sortField, setSortField] = useState("name");
-  const [sortDirection, setSortDirection] = useState("asc");
-
-  const onTableChange = ({ page = {}, sort = {} }) => {
-    const { index: pageIndex, size: pageSize } = page;
-
-    const { field: sortField, direction: sortDirection } = sort;
-
-    setPageIndex(pageIndex);
-    setPageSize(pageSize);
-    setSortField(sortField);
-    setSortDirection(sortDirection);
-  };
-
-  const togglePerPageOptions = () => setShowPerPageOptions(!showPerPageOptions);
-
-  const { pageOfItems, totalItemCount } = 20;
+  const [items, setItems] = useState(users);
+  const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [selectedOptionId, setSelectedOptionId] = useState(undefined);
 
   const columns = [
     {
@@ -56,83 +33,132 @@ const UserTable = ({ users = [] }) => {
     },
   ];
 
-  const items = users.filter((user, index) => index > 10);
-
-  const getRowProps = (item) => {
-    const { id } = item;
-    return {
-      "data-test-subj": `row-${id}`,
-      className: "customRowClass",
-      onClick: () => {},
-    };
-  };
-
-  const getCellProps = (item, column) => {
-    const { id } = item;
-    const { field } = column;
-    return {
-      className: "customCellClass",
-      "data-test-subj": `cell-${id}-${field}`,
-      textOnly: true,
-    };
-  };
-
-  const pagination = {
-    pageIndex,
-    pageSize,
-    totalItemCount,
-    pageSizeOptions: [3, 5, 8],
-    hidePerPageOptions: !showPerPageOptions,
-  };
-
   const sorting = {
     sort: {
-      field: sortField,
-      direction: sortDirection,
+      field: "name",
+      direction: "desc",
     },
-    enableAllColumns: enableAll,
-    readOnly: readonly,
   };
 
+  const onQueryChange = ({ query }) => {
+    clearTimeout(debounceTimeoutId);
+    clearTimeout(requestTimeoutId);
+
+    debounceTimeoutId = setTimeout(() => {
+      setIsLoading(true);
+
+      requestTimeoutId = setTimeout(() => {
+        const items = users.filter((user) => {
+          const normalizedName =
+            `${user.firstName} ${user.lastName}`.toLowerCase();
+          const normalizedQuery = query.text.toLowerCase();
+          return normalizedName.indexOf(normalizedQuery) !== -1;
+        });
+
+        setIsLoading(false);
+        setItems(items);
+      }, 1000);
+    }, 300);
+  };
+
+  const handleOnChange = ({ queryText, error }) => {
+    setSelectedOptionId(undefined);
+    if (!error) {
+      setQuery(queryText);
+    }
+  };
+
+  const facets = [
+    {
+      id: "All",
+      label: "All",
+      isSelected: selectedOptionId === "eu",
+      onClick: () => {
+        setSelectedOptionId("eu");
+        setQuery("");
+      },
+    },
+    {
+      id: "HR",
+      label: "HR",
+      isSelected: selectedOptionId === "eu",
+      onClick: () => {
+        setSelectedOptionId("eu");
+        setQuery("departments: HR");
+      },
+    },
+    {
+      id: "Technology",
+      label: "Technology",
+      isSelected: selectedOptionId === "na",
+      onClick: () => {
+        setSelectedOptionId("na");
+        setQuery("departments:(Technology)");
+      },
+    },
+  ];
+
+  const search = {
+    query,
+    onChange: handleOnChange,
+    box: {
+      schema: true,
+    },
+    filters: [
+      {
+        type: "is",
+        field: "online",
+        name: "Online",
+        negatedName: "Offline",
+      },
+      {
+        type: "field_value_selection",
+        field: "departments",
+        name: "Departments",
+        multiSelect: "or",
+        options: {
+          value: "HR",
+          name: "HR",
+          view: `HR`,
+        },
+      },
+    ],
+  };
+
+  let debounceTimeoutId;
+  let requestTimeoutId;
+
   return (
-    <div>
-      <h1>hello</h1>
+    <Fragment>
       <EuiFlexGroup>
-        <EuiFlexItem grow={false}>
-          <EuiSwitch
-            label={<EuiCode>enableAllColumns</EuiCode>}
-            checked={enableAll}
-            onChange={() => setEnableAll((enabled) => !enabled)}
-          />
+        <EuiFlexItem grow={1}>
+          <EuiFacetGroup>
+            {facets.map((facet) => {
+              return (
+                <EuiFacetButton
+                  key={facet.id}
+                  id={facet.id}
+                  isSelected={facet.isSelected}
+                  onClick={facet.onClick}
+                >
+                  {facet.label}
+                </EuiFacetButton>
+              );
+            })}
+          </EuiFacetGroup>
         </EuiFlexItem>
-        <EuiFlexItem grow={false}>
-          <EuiSwitch
-            label={<EuiCode>readOnly</EuiCode>}
-            checked={readonly}
-            onChange={() => setReadonly((readonly) => !readonly)}
+        <EuiFlexItem grow={3}>
+          <EuiInMemoryTable
+            tableCaption="Demo of EuiInMemoryTable"
+            items={items}
+            search={search}
+            columns={columns}
+            pagination={true}
+            sorting={sorting}
           />
         </EuiFlexItem>
       </EuiFlexGroup>
-      <EuiBasicTable
-        tableCaption="Employee Table"
-        items={items}
-        rowHeader="firstName"
-        columns={columns}
-        sorting={sorting}
-        pagination={pagination}
-        onChange={onTableChange}
-      />
-    </div>
-  );
-};
-
-const UserTable2 = ({ users = [] }) => {
-  return (
-    <div>
-      {users.map((user) => (
-        <p key={user.name}>{user.email}</p>
-      ))}
-    </div>
+    </Fragment>
   );
 };
 

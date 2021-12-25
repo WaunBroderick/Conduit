@@ -1,11 +1,9 @@
-<html>
-  <img
-    src="/client/src/assets/img/logo/Untitled-2-04.png"
-    title="Conduit Logo"
-  />
-</html>
+# Setup
 
-<hr />
+## 1. Download and Install the required applications
 
-<h1>Setup</h1>
-<hr />
+## 2. Setup The Application
+
+## 3. Setup Environment Variables
+
+## 4. Build and Initialize the Application

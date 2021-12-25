@@ -6,10 +6,14 @@ import {
   Patch,
   Param,
   Delete,
+  HttpStatus,
+  Query,
+  Res,
 } from '@nestjs/common';
 import { DepartmentsService } from './departments.service';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
+import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Organizational')
@@ -23,8 +27,12 @@ export class DepartmentsController {
   }
 
   @Get()
-  findAll() {
-    return this.departmentsService.findAll();
+  public async findAll(
+    @Res() res,
+    @Query() paginationQuery: PaginationQueryDto,
+  ) {
+    const users = await this.departmentsService.findAll(paginationQuery);
+    return res.status(HttpStatus.OK).json(users);
   }
 
   @Get(':id')

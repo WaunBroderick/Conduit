@@ -37,8 +37,9 @@ let DepartmentsService = class DepartmentsService {
             throw error;
         }
     }
-    findAll() {
-        return `This action returns all departments`;
+    async findAll(paginationQuery) {
+        const { limit, offset } = paginationQuery;
+        return await this.departmentModel.find().skip(offset).limit(limit).exec();
     }
     findOne(id) {
         return `This action returns a #${id} department`;

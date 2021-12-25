@@ -10,7 +10,7 @@ import {
   EuiFacetButton,
 } from "@elastic/eui";
 
-const UserTable = ({ users = [] }) => {
+const UserTable = ({ users = [], departments = [] }) => {
   const [items, setItems] = useState(users);
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
@@ -30,6 +30,7 @@ const UserTable = ({ users = [] }) => {
     {
       field: "departments",
       name: "Departments",
+      sortable: true,
     },
   ];
 
@@ -68,36 +69,16 @@ const UserTable = ({ users = [] }) => {
     }
   };
 
-  const facets = [
-    {
-      id: "All",
-      label: "All",
-      isSelected: selectedOptionId === "eu",
-      onClick: () => {
-        setSelectedOptionId("eu");
-        setQuery("");
-      },
+  // TODO: Currently does not handle Departments containing Whitespaces in them
+  const facets = departments.map((department) => ({
+    id: department.name,
+    label: department.name,
+    isSelected: selectedOptionId === department.name,
+    onClick: () => {
+      setSelectedOptionId(department.name);
+      setQuery(`departments:(${department.name})`);
     },
-    {
-      id: "HR",
-      label: "HR",
-      isSelected: selectedOptionId === "eu",
-      onClick: () => {
-        setSelectedOptionId("eu");
-        setQuery("departments: (HR)");
-      },
-    },
-    {
-      id: "Technology",
-      label: "Technology",
-      isSelected: selectedOptionId === "na",
-      onClick: () => {
-        setSelectedOptionId("na");
-        setQuery("departments:(Technology)");
-      },
-    },
-  ];
-
+  }));
   const search = {
     query,
     onChange: handleOnChange,
@@ -116,10 +97,10 @@ const UserTable = ({ users = [] }) => {
         field: "departments",
         name: "Departments",
         multiSelect: "or",
-        options: users.map((department) => ({
-          value: department,
-          name: department,
-          view: `${department}`,
+        options: departments.map((department) => ({
+          value: department.name,
+          name: department.name,
+          view: `${department.name}`,
         })),
       },
     ],

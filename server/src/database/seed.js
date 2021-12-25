@@ -11,6 +11,16 @@ const seedUsers = async () => {
     useUnifiedTopology: true,
   });
 
+  const DepartmentArray = [
+    'HumanResources',
+    'Technology',
+    'Sales',
+    'Marketing',
+    'Finance',
+    'Operations',
+    'Research',
+  ];
+
   // Database Name
   const db = client.db('conduit-STAGING');
 
@@ -36,6 +46,9 @@ const seedUsers = async () => {
       email: faker.internet.email(name),
       organization: organizationId,
       password: 'password123',
+      departments: [
+        DepartmentArray[Math.floor(Math.random() * DepartmentArray.length)],
+      ],
     };
     users.push(newUser);
 
@@ -45,7 +58,7 @@ const seedUsers = async () => {
 
   const usersWipe = await usersCollection.deleteMany({});
   const usersInsert = await usersCollection.insertMany(users);
-  console.log(items);
+
   client.close();
 };
 

@@ -18,6 +18,7 @@ const common_1 = require("@nestjs/common");
 const departments_service_1 = require("./departments.service");
 const create_department_dto_1 = require("./dto/create-department.dto");
 const update_department_dto_1 = require("./dto/update-department.dto");
+const pagination_query_dto_1 = require("../shared/dto/pagination-query.dto");
 const swagger_1 = require("@nestjs/swagger");
 let DepartmentsController = class DepartmentsController {
     constructor(departmentsService) {
@@ -26,8 +27,9 @@ let DepartmentsController = class DepartmentsController {
     create(createDepartmentDto) {
         return this.departmentsService.create(createDepartmentDto);
     }
-    findAll() {
-        return this.departmentsService.findAll();
+    async findAll(res, paginationQuery) {
+        const users = await this.departmentsService.findAll(paginationQuery);
+        return res.status(common_1.HttpStatus.OK).json(users);
     }
     findOne(id) {
         return this.departmentsService.findOne(+id);
@@ -49,10 +51,12 @@ __decorate([
 ], DepartmentsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    openapi.ApiResponse({ status: 200, type: String }),
+    openapi.ApiResponse({ status: 200, type: Object }),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, pagination_query_dto_1.PaginationQueryDto]),
+    __metadata("design:returntype", Promise)
 ], DepartmentsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),

@@ -4,6 +4,7 @@ import { UpdateDepartmentDto } from './dto/update-department.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Department } from './interfaces/department.interface';
+import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
 
 @Injectable()
 export class DepartmentsService {
@@ -29,8 +30,12 @@ export class DepartmentsService {
     }
   }
 
-  findAll() {
-    return `This action returns all departments`;
+  public async findAll(
+    paginationQuery: PaginationQueryDto,
+  ): Promise<Department[]> {
+    const { limit, offset } = paginationQuery;
+
+    return await this.departmentModel.find().skip(offset).limit(limit).exec();
   }
 
   findOne(id: number) {

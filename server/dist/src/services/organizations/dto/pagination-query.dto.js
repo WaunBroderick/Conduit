@@ -11,18 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaginationQueryDto = void 0;
 const openapi = require("@nestjs/swagger");
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
+const yargs_1 = require("yargs");
 class PaginationQueryDto {
     static _OPENAPI_METADATA_FACTORY() {
         return { limit: { required: true, type: () => Number }, offset: { required: true, type: () => Number } };
     }
 }
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: yargs_1.number,
+        default: null,
+        required: false,
+        nullable: true,
+        description: 'To limit the number of results pulled',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsPositive)(),
     __metadata("design:type", Number)
 ], PaginationQueryDto.prototype, "limit", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: yargs_1.number,
+        default: null,
+        required: false,
+        nullable: true,
+        description: 'State how many rows you want to ski',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsPositive)(),
     __metadata("design:type", Number)

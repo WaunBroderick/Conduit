@@ -111,34 +111,36 @@ const UserTable = ({ users = [], departments = [] }) => {
 
   return (
     <Fragment>
-      <EuiFlexGroup>
-        <EuiFlexItem grow={1}>
-          <EuiFacetGroup>
-            {facets.map((facet) => {
-              return (
-                <EuiFacetButton
-                  key={facet.id}
-                  id={facet.id}
-                  isSelected={facet.isSelected}
-                  onClick={facet.onClick}
-                >
-                  {facet.label}
-                </EuiFacetButton>
-              );
-            })}
-          </EuiFacetGroup>
-        </EuiFlexItem>
-        <EuiFlexItem grow={3}>
-          <EuiInMemoryTable
-            tableCaption="Demo of EuiInMemoryTable"
-            items={items}
-            search={search}
-            columns={columns}
-            pagination={true}
-            sorting={sorting}
-          />
-        </EuiFlexItem>
-      </EuiFlexGroup>
+      <EuiPanel>
+        <EuiFlexGroup>
+          <EuiFlexItem grow={1}>
+            <EuiFacetGroup>
+              {facets.map((facet) => {
+                return (
+                  <EuiFacetButton
+                    key={facet.id}
+                    id={facet.id}
+                    isSelected={facet.isSelected}
+                    onClick={facet.onClick}
+                  >
+                    {facet.label}
+                  </EuiFacetButton>
+                );
+              })}
+            </EuiFacetGroup>
+          </EuiFlexItem>
+          <EuiFlexItem grow={3}>
+            <EuiInMemoryTable
+              tableCaption="Demo of EuiInMemoryTable"
+              items={items}
+              search={search}
+              columns={columns}
+              pagination={true}
+              sorting={sorting}
+            />
+          </EuiFlexItem>
+        </EuiFlexGroup>
+      </EuiPanel>
     </Fragment>
   );
 };

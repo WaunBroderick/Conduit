@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://waunbroderick.me/" target="blank"><img src="https://github.com/WaunBroderick/Conduit/blob/main/client/src/assets/img/logo/logoWithName.png" width="320" alt="Conduit Logo" /></a>
+  <a href="http://waunbroderick.me/" target="blank"><img src="https://github.com/WaunBroderick/Conduit/blob/main/client/src/assets/img/logo/Untitled-2-05.png" width="320" alt="Conduit Logo" /></a>
 </p>
 
   <p align="center">An open source LMS, onboarding, and employee compliance application for small to enterprise size companies or teams.</p>

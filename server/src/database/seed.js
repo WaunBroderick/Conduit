@@ -1,4 +1,5 @@
 /* mySeedScript.js */
+// run with: sudo npx run seed.js
 // require the necessary libraries
 const faker = require('faker');
 const MongoClient = require('mongodb').MongoClient;
@@ -6,10 +7,13 @@ const mongoose = require('mongoose');
 
 const seedUsers = async () => {
   // Connection URL
-  const client = await MongoClient.connect('mongodb://localhost:27017/', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  const client = await MongoClient.connect(
+    'mongodb+srv://wbroderick:gnrkTanyMKLN43aa@conduitdb.afr7o.mongodb.net/',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+  );
 
   const DepartmentArray = [
     'HumanResources',
@@ -22,7 +26,7 @@ const seedUsers = async () => {
   ];
 
   // Database Name
-  const db = client.db('conduit-STAGING');
+  const db = client.db('Conduit');
 
   // Collection Name
   const usersCollection = db.collection('users');
@@ -64,13 +68,16 @@ const seedUsers = async () => {
 
 const seedDepartments = async () => {
   // Connection URL
-  const client = await MongoClient.connect('mongodb://localhost:27017/', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  const client = await MongoClient.connect(
+    'mongodb+srv://wbroderick:gnrkTanyMKLN43aa@conduitdb.afr7o.mongodb.net/',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+  );
 
   // Database Name
-  const db = client.db('conduit-STAGING');
+  const db = client.db('Conduit');
 
   // Collection Name
   const departmentsCollection = db.collection('departments');
@@ -117,4 +124,4 @@ const seedDepartments = async () => {
 };
 
 seedUsers();
-//seedDepartments();
+seedDepartments();

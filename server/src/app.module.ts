@@ -14,8 +14,11 @@ import { DepartmentsModule } from './services/departments/departments.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: ['.env'],
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/conduit-STAGING'),
+    MongooseModule.forRoot(
+      `mongodb+srv://wbroderick:gnrkTanyMKLN43aa@conduitdb.afr7o.mongodb.net/Conduit`,
+    ),
     UsersModule,
     OrganizationsModule,
     DepartmentsModule,

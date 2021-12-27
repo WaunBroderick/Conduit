@@ -10,13 +10,13 @@ services:
       - "3000:3000"
     volumes:
       - ./client:/app
-  backend:
-    container_name: backend
+  nestapp:
+    container_name: nestapp
+    image: nestapp:0.0.1
     build:
       context: ./server
       dockerfile: Dockerfile
-    image: server
     ports:
       - "5000:5000"
-    volumes:
-      - ./server:/app
+    env_file:
+      - .env

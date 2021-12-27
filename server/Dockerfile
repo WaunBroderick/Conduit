@@ -1,14 +1,13 @@
-FROM node:12.13-alpine
+FROM node:14
 
-WORKDIR /usr/src/Conduit
+RUN npm i -g @nestjs/cli
 
-COPY package.json ./
+COPY package.json .
 
-RUN npm install 
+RUN npm install
 
-COPY . .
+COPY  . .
 
 EXPOSE 5000
 
-CMD ["npm", "start:dev"]`
-
+CMD ["nest", "start"]

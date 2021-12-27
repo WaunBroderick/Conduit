@@ -29,11 +29,7 @@ const Users = () => {
 
   return (
     <ConduitPage>
-      {users ? (
-        <UserTable users={users} departments={departments} />
-      ) : (
-        <Lottie />
-      )}
+      {users ? <UserTable users={users} departments={departments} /> : "empty"}
     </ConduitPage>
   );
 };

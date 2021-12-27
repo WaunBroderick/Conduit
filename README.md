@@ -18,10 +18,39 @@
 
 ## 3. Setup Environment Variables
 
+```bash
+#Set DB Connection Strings
+
+#create .env file
+cd server && cp .env.example .env
+
+```
+
 ## 4. Build and Initialize the Application
 
+<br/>
+
+#### Dev Environment
+
 ```bash
-#Docker Setup
+###NPM Dev Setup
+
+#Install dependencies
+cd server && npm i
+cd client && npm i
+
+#Build the Docker Image
+$ docker compose build
+#Run the Docker Image
+$ docker compose up
+```
+
+<br/>
+
+#### Docker Images
+
+```bash
+###Docker Setup
 
 #Build the Docker Image
 $ docker compose build
@@ -31,6 +60,6 @@ $ docker compose up
 
 # Contributing
 
-#### Notes for editing
+Notes for editing
 
 1. cmd-shift-v to open the markdown previewer in VSCode

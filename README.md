@@ -21,17 +21,12 @@
 ## 4. Build and Initialize the Application
 
 ```bash
-#NPM DEV Setup
+#Docker Setup
 
-#Server Setup
-$ cd server && npm i && npm run start:dev
-#Client Setup
-$ cd client && npm i && npm start
-```
-
-```bash
-# Docker Setup
-$ WIP
+#Build the Docker Image
+$ docker compose build
+#Run the Docker Image
+$ docker compose up
 ```
 
 # Contributing

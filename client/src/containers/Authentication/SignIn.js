@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, StrictMode } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 import {
@@ -15,7 +15,8 @@ import {
   EuiFlexItem,
 } from "@elastic/eui";
 import { Link, Redirect } from "react-router-dom";
-import { login } from "../../redux/reducers/user";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 import StyledSection from "./style";
 import "@elastic/eui/dist/eui_theme_light.css";
 
@@ -49,7 +50,8 @@ export default function SignIn() {
       .then((response) => {
         setJWT(response.data.accessToken);
         dispatch(loadProfileAsync(response.data.accessToken));
-        setRedirect(true);
+        createCookie();
+        //setRedirect(true);
       })
       .then((data) => {})
       .catch((error) => {});
@@ -58,6 +60,8 @@ export default function SignIn() {
   if (redirect) {
     return <Redirect to="home" />;
   }
+
+  const createCookie = () => {};
 
   return (
     <StyledSection>

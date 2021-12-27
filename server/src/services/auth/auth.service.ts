@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthCredentialsDto } from './dto/auth-crednetials.dto';
 import { User } from './interfaces/user.interface';
+const cookieParser = require('cookie-parser');
 
 var bcrypt = require('bcryptjs');
 var mongoose = require('mongoose');
@@ -44,6 +45,7 @@ export class AuthService {
       organization: user.organization,
       name: user.name,
     };
+
     return {
       accessToken: this.jwtService.sign(payload),
     };

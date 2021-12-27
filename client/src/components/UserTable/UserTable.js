@@ -69,14 +69,13 @@ const UserTable = ({ users = [], departments = [] }) => {
     }
   };
 
-  // TODO: Currently does not handle Departments containing Whitespaces in them
   const facets = departments.map((department) => ({
     id: department.name,
     label: department.name,
     isSelected: selectedOptionId === department.name,
     onClick: () => {
       setSelectedOptionId(department.name);
-      setQuery(`departments:(${department.name})`);
+      setQuery(`departments:("${department.name}")`);
     },
   }));
   const search = {

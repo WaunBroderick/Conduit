@@ -14,6 +14,7 @@ import Home from "./containers/Home/Home";
 import Users from "./containers/Users/Users";
 import Marketplace from "./containers/Marketplace/Marketplace";
 import Organization from "./containers/Organization/Organization";
+import Profile from "./containers/Profile/Profile";
 
 const themeDark = {
   colorPrimary: "purple",
@@ -43,6 +44,7 @@ function App() {
               component={Organization}
             />
             <ProtectedRoute exact path="/marketplace" component={Marketplace} />
+            <ProtectedRoute exact path="/profile" component={Profile} />
           </Switch>
         </div>
       </Router>

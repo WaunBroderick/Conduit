@@ -128,7 +128,7 @@ const UserTable = ({ users = [], departments = [] }) => {
               })}
             </EuiFacetGroup>
           </EuiFlexItem>
-          <EuiFlexItem grow={3}>
+          <EuiFlexItem grow={6}>
             <EuiInMemoryTable
               tableCaption="Demo of EuiInMemoryTable"
               items={items}

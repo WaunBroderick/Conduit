@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 import {
   EuiFieldPassword,
   EuiForm,
@@ -24,13 +25,17 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [JWT, setJWT] = useState("");
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { isLoading, profile, errorMessage } = useSelector(
+    (state) => state.profile
+  );
 
   const submit = async (e) => {
     e.preventDefault();
 
-    const fetchAuth = axios
+    const verifyUser = axios
       .post(
         "http://localhost:5000/auth/signin",
         {
@@ -42,28 +47,9 @@ export default function SignIn() {
         }
       )
       .then((response) => {
-        console.log(response.data.accessToken);
-
-        axios
-          .get("http://localhost:5000/auth/me", {
-            headers: { Authorization: `Bearer ${response.data.accessToken}` },
-          })
-          .then((res) => {
-            console.log(res.data);
-            dispatch(
-              login({
-                email: res.data.email,
-                organization: res.data.organization,
-                name: res.data.name,
-                jwt: response.data.accessToken,
-              })
-            );
-            setRedirect(true);
-          })
-          .then((data) => {})
-          .catch((error) => {
-            console.log(error);
-          });
+        setJWT(response.data.accessToken);
+        dispatch(loadProfileAsync(response.data.accessToken));
+        setRedirect(true);
       })
       .then((data) => {})
       .catch((error) => {});

@@ -6,9 +6,9 @@ import {
 import jwtDecode from "jwt-decode";
 import { ActionCreators } from "redux-devtools";
 
-const initialState = {
+const state = {
   token: localStorage.getItem("token"),
-  users: [],
+  user: [],
   email: "",
   name: "",
   organization: "",
@@ -22,10 +22,10 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
 
 export const userSlice = createSlice({
   name: "users",
-  initialState,
+  state,
   reducers: {
     login(state, action) {
-      state.email = action.payload.email;
+      state = action.payload;
     },
 
     addUser(state, action) {

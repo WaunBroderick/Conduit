@@ -77,7 +77,9 @@ export default function NavBar() {
               <EuiFlexGroup>
                 <EuiFlexItem>
                   <EuiFlexGroup justifyContent="spaceBetween">
-                    <EuiFlexItem grow={false}>Edit profile</EuiFlexItem>
+                    <EuiFlexItem to="/Profile" grow={false}>
+                      <Link to="/Profile">Edit Profile</Link>
+                    </EuiFlexItem>
 
                     <EuiFlexItem grow={false}>Log out</EuiFlexItem>
                   </EuiFlexGroup>

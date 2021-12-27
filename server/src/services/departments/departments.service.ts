@@ -39,7 +39,7 @@ export class DepartmentsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} department`;
+    return `This action returns a #${id} of a department`;
   }
 
   update(id: number, updateDepartmentDto: UpdateDepartmentDto) {

@@ -5,6 +5,9 @@ import { loadDepartmentsAsync } from "../../redux/reducers/departments/departmen
 
 import UserTable from "../../components/UserTable/UserTable";
 
+import Lottie from "react-lottie";
+import * as Loading from "../../assets/animations/loading.json";
+
 import { ConduitPage } from "../../styles/globalStyles";
 
 const Users = () => {
@@ -26,7 +29,11 @@ const Users = () => {
 
   return (
     <ConduitPage>
-      {users ? <UserTable users={users} departments={departments} /> : "empty"}
+      {users ? (
+        <UserTable users={users} departments={departments} />
+      ) : (
+        <Lottie />
+      )}
     </ConduitPage>
   );
 };

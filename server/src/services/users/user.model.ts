@@ -19,6 +19,9 @@ export class User extends Document {
 
   @Prop()
   departments: [];
+
+  @Prop()
+  online: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

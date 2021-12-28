@@ -6,4 +6,5 @@ export interface IUser extends Document {
   readonly email: string;
   readonly organization: mongoose.Types.ObjectId;
   readonly departments: [];
+  readonly online: boolean;
 }

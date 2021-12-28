@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 
 import {
-  EuiBasicTable,
+  EuiHealth,
   EuiFlexGroup,
   EuiFlexItem,
   EuiPanel,
@@ -59,6 +59,17 @@ const UserTable = ({ users = [], departments = [] }) => {
     {
       field: "departments",
       name: "Departments",
+      sortable: true,
+    },
+    {
+      field: "online",
+      name: "Online",
+      dataType: "boolean",
+      render: (online) => {
+        const color = online ? "success" : "danger";
+        const label = online ? "Online" : "Offline";
+        return <EuiHealth color={color}>{label}</EuiHealth>;
+      },
       sortable: true,
     },
     {

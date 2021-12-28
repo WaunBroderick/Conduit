@@ -1,6 +1,7 @@
-import { IsArray, IsOptional } from 'class-validator';
+import { IsArray, IsBoolean, IsOptional } from 'class-validator';
 import { ApiProperty, PartialType, ApiPropertyOptional } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
+import { boolean } from 'yargs';
 
 export class AssignUserDepartmentDto {
   @ApiProperty({
@@ -26,4 +27,15 @@ export class AssignUserDepartmentDto {
   @IsArray()
   @IsOptional()
   departments?: [];
+
+  @ApiProperty({
+    type: boolean,
+    default: false,
+    required: false,
+    nullable: true,
+    description: 'A flag to track if the user is online or not',
+  })
+  @IsBoolean()
+  @IsOptional()
+  online?: boolean;
 }

@@ -49,6 +49,7 @@ export class UsersService {
       .select('name')
       .select('email')
       .select('organization')
+      .select('online')
       .exec();
   }
 

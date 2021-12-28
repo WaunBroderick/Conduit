@@ -25,6 +25,8 @@ const seedUsers = async () => {
     'Research',
   ];
 
+  const OnlineOptions = [true, false];
+
   // Database Name
   const db = client.db('Conduit');
 
@@ -53,6 +55,7 @@ const seedUsers = async () => {
       departments: [
         DepartmentArray[Math.floor(Math.random() * DepartmentArray.length)],
       ],
+      online: OnlineOptions[Math.floor(Math.random() * OnlineOptions.length)],
     };
     users.push(newUser);
 

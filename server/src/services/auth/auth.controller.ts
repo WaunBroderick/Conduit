@@ -31,20 +31,20 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
-  async signIn2(@Request() req) {
+  async signIn2(@Request() req, @Res({ passthrough: true }) res): Promise<any> {
     const token = this.authService.signIn(req.user);
 
     const secretData = {
       token,
       refreshToken: '',
     };
-    //res.cookie('auth-cookie', secretData, { httpOnly: true });
+    res.cookie('auth-cookie', secretData, { httpOnly: true });
     return this.authService.signIn(req.user);
   }
 
   @UseGuards(LocalAuthGuard)
-  @Post('/signin')
-  async signIn(@Request() req, @Res({ passthrough: true }) res) {
+  @Post('/signin2')
+  async signIn(@Request() req, @Res() res) {
     try {
       const token = await this.authService.signIn(req.user);
 
@@ -53,12 +53,13 @@ export class AuthController {
         refreshToken: '',
       };
 
-      res.cookie('auth-cookie', secretData, { httpOnly: true });
       if (!token) {
         throw new NotFoundException('Sign In Failed');
       }
       return res.status(HttpStatus.OK).json({
         res,
+        token,
+        secretData,
       });
     } catch (err) {
       return res.status(HttpStatus.BAD_REQUEST).json({

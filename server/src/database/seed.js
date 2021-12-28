@@ -16,7 +16,7 @@ const seedUsers = async () => {
   );
 
   const DepartmentArray = [
-    'HumanResources',
+    'Human Resources',
     'Technology',
     'Sales',
     'Marketing',

@@ -43,7 +43,7 @@ const seedUsers = async () => {
       password: '$2a$10$oYVVKBUec46Ww5Rl3Vl/G.y4SiNd76YLH8wRmxkasMvddDdxDTOcS',
     },
   ];
-  for (let i = 0; i < 5000; i += 1) {
+  for (let i = 0; i < 100; i += 1) {
     const name = faker.name.firstName() + ' ' + faker.name.lastName();
     let newUser = {
       name,

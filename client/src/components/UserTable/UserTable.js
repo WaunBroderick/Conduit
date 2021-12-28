@@ -14,7 +14,36 @@ const UserTable = ({ users = [], departments = [] }) => {
   const [items, setItems] = useState(users);
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
+  const [, setSelectedItems] = useState([]);
   const [selectedOptionId, setSelectedOptionId] = useState(undefined);
+
+  const deleteUser = (user) => {
+    console.log(user);
+    setSelectedItems([]);
+  };
+
+  const editUser = (user) => {
+    console.log(user);
+    setSelectedItems([]);
+  };
+
+  const actions = [
+    {
+      name: "Edit",
+      description: "Edit this person",
+      icon: "pencil",
+      type: "icon",
+      onClick: editUser,
+    },
+    {
+      name: "Delete",
+      description: "Delete this person",
+      icon: "trash",
+      type: "icon",
+      color: "danger",
+      onClick: deleteUser,
+    },
+  ];
 
   const columns = [
     {
@@ -31,6 +60,10 @@ const UserTable = ({ users = [], departments = [] }) => {
       field: "departments",
       name: "Departments",
       sortable: true,
+    },
+    {
+      name: "Actions",
+      actions,
     },
   ];
 
@@ -78,6 +111,7 @@ const UserTable = ({ users = [], departments = [] }) => {
       setQuery(`departments:("${department.name}")`);
     },
   }));
+
   const search = {
     query,
     onChange: handleOnChange,
@@ -136,6 +170,7 @@ const UserTable = ({ users = [], departments = [] }) => {
               columns={columns}
               pagination={true}
               sorting={sorting}
+              hasActions={true}
             />
           </EuiFlexItem>
         </EuiFlexGroup>

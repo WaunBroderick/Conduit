@@ -14,10 +14,9 @@ import { DepartmentsModule } from './services/departments/departments.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env'],
     }),
     MongooseModule.forRoot(
-      `mongodb+srv://wbroderick:gnrkTanyMKLN43aa@conduitdb.afr7o.mongodb.net/Conduit`,
+      `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
     ),
     UsersModule,
     OrganizationsModule,

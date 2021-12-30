@@ -4,11 +4,14 @@
 const faker = require('faker');
 const MongoClient = require('mongodb').MongoClient;
 const mongoose = require('mongoose');
+require('dotenv').config({ path: '../../.env' });
+
+console.log(process.env.MONGO_ATLAS_USER);
 
 const seedUsers = async () => {
   // Connection URL
   const client = await MongoClient.connect(
-    'mongodb+srv://wbroderick:gnrkTanyMKLN43aa@conduitdb.afr7o.mongodb.net/',
+    `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

@@ -9,6 +9,7 @@ import { UsersModule } from './services/users/users.module';
 import { OrganizationsController } from './services/organizations/organizations.controller';
 import { OrganizationsModule } from './services/organizations/organizations.module';
 import { DepartmentsModule } from './services/departments/departments.module';
+import { AssignmentModule } from './assignment/assignment.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { DepartmentsModule } from './services/departments/departments.module';
     OrganizationsModule,
     DepartmentsModule,
     AuthModule,
+    AssignmentModule,
   ],
   controllers: [AppController, OrganizationsController],
   providers: [AppService],

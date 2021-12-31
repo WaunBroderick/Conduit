@@ -9,7 +9,7 @@ import { UsersModule } from './services/users/users.module';
 import { OrganizationsController } from './services/organizations/organizations.controller';
 import { OrganizationsModule } from './services/organizations/organizations.module';
 import { DepartmentsModule } from './services/departments/departments.module';
-import { AssignmentModule } from './assignment/assignment.module';
+import { AssignmentModule } from './services/assignment/assignment.module';
 
 @Module({
   imports: [

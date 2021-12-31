@@ -1,11 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 
+import { IAssignment } from '../assignment/interfaces/assignment.interface';
+import { Assignment } from './assignment.model';
+import { Model } from 'mongoose';
+
 @Injectable()
 export class AssignmentService {
-  create(createAssignmentDto: CreateAssignmentDto) {
-    return 'This action adds a new assignment';
+  constructor(
+    @InjectModel(Assignment.name)
+    private readonly assignmentModel: Model<Assignment>,
+  ) {}
+
+  public async create(
+    createAssignmentDto: CreateAssignmentDto,
+  ): Promise<IAssignment> {
+    const newAssignment = await new this.assignmentModel(createAssignmentDto);
+    return newAssignment.save();
   }
 
   findAll() {

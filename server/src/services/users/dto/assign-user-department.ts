@@ -1,7 +1,6 @@
 import { IsArray, IsBoolean, IsOptional } from 'class-validator';
 import { ApiProperty, PartialType, ApiPropertyOptional } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
-import { boolean } from 'yargs';
 
 export class AssignUserDepartmentDto {
   @ApiProperty({
@@ -29,7 +28,7 @@ export class AssignUserDepartmentDto {
   departments?: [];
 
   @ApiProperty({
-    type: boolean,
+    type: Boolean,
     default: false,
     required: false,
     nullable: true,

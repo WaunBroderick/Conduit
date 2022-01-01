@@ -9,8 +9,18 @@ export class CreateAssignmentDto {
     default: null,
     required: true,
     nullable: false,
-    description: '',
+    description: 'The employee the assignment belongs to',
   })
   @Prop()
   employeeId: string;
+
+  @ApiProperty({
+    type: mongoose.Types.ObjectId,
+    default: null,
+    required: true,
+    nullable: false,
+    description: 'The organization the assignment belongs to',
+  })
+  @Prop()
+  organizationId: string;
 }

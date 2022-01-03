@@ -18,11 +18,10 @@ RUN --mount=type=secret,id=JWT_SECRET \
 
 RUN echo ${JWT_SECRET}
 
-RUN echo {JWT_SECRET}
+RUN echo ${MONGO_ATLAS_USER}
 
-RUN echo JWT_SECRET
+RUN echo ${MONGO_ATLAS_PASSWORD}
 
-RUN echo ${/run/secrets/JWT_SECRET}
 
 WORKDIR /usr/src/Conduit
 

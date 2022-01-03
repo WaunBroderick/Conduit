@@ -34,11 +34,6 @@ jobs:
           context: .
           push: true
           tags: user/app:latest
-          options: --e MONGO_ATLAS_USER=${{ secrets.MONGO_ATLAS_USER }}
-            --e MONGO_ATLAS_PASSWORD=${{ secrets.MONGO_ATLAS_PASSWORD }}
-            --e MONGO_ATLAS_DB_ADDRESS=${{ secrets.MONGO_ATLAS_DB_ADDRESS }}
-            --e MONGO_ATLAS_DB=${{ secrets.MONGO_ATLAS_DB }}
-            --e JWT_SECRET=${{ secrets.JWT_SECRET }}
           secrets: |
             "MONGO_ATLAS_USER=${{ secrets.MONGO_ATLAS_USER }}"
             "MONGO_ATLAS_PASSWORD=${{ secrets.MONGO_ATLAS_PASSWORD }}"

@@ -33,7 +33,7 @@ WORKDIR /usr/src/Conduit
 
 COPY . .
 
-RUN cd ./client && npm ci  && npm run
+RUN cd ./client && npm ci  && npm start
 
 RUN cd ./server && npm ci  && npm run start
 

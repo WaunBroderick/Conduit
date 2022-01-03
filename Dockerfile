@@ -33,6 +33,9 @@ WORKDIR /usr/src/Conduit
 
 COPY . .
 
+RUN cd ./client && npm ci  && npm run
+
+RUN cd ./server && npm ci  && npm run start
 
 RUN mkdir -p /usr/Conduit/app/server/
 

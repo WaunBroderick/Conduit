@@ -14,6 +14,8 @@ RUN npm install
 # Add app
 COPY . ./
 
+
+# Expose Port
 EXPOSE 3000
 
 # Start App

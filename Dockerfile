@@ -2,19 +2,24 @@ FROM node:14.16.1
 RUN mkdir -p /usr/src/Conduit
 
 RUN --mount=type=secret,id=MONGO_ATLAS_USER \
-  cat /run/secrets/MONGO_ATLAS_USER
+  cat /run/secrets/MONGO_ATLAS_USER\
+  && echo ${MONGO_ATLAS_USER}
 
 RUN --mount=type=secret,id=MONGO_ATLAS_PASSWORD \
-  cat /run/secrets/MONGO_ATLAS_PASSWORD
+  cat /run/secrets/MONGO_ATLAS_PASSWORD \
+  && echo ${MONGO_ATLAS_PASSWORD}
 
 RUN --mount=type=secret,id=MONGO_ATLAS_DB_ADDRESS \
-  cat /run/secrets/MONGO_ATLAS_DB_ADDRESS
+  cat /run/secrets/MONGO_ATLAS_DB_ADDRESS\
+  && echo ${MONGO_ATLAS_DB_ADDRESS}
 
 RUN --mount=type=secret,id=MONGO_ATLAS_DB \
-  cat /run/secrets/MONGO_ATLAS_DB
+  cat /run/secrets/MONGO_ATLAS_DB\
+  && echo ${MONGO_ATLAS_DB}
 
 RUN --mount=type=secret,id=JWT_SECRET \
-  cat /run/secrets/JWT_SECRET
+  cat /run/secrets/JWT_SECRET\
+  && echo ${JWT_SECRET}
 
 RUN echo ${JWT_SECRET}
 

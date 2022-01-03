@@ -15,13 +15,11 @@ RUN --mount=type=secret,id=MONGO_ATLAS_DB \
 RUN --mount=type=secret,id=JWT_SECRET \
   cat /run/secrets/JWT_SECRET
 
-RUN echo ${JWT_SECRET}
-
-RUN echo {JWT_SECRET}
-
-RUN echo JWT_SECRET
-
-RUN echo ${/run/secrets/JWT_SECRET}
+ENV MONGO_ATLAS_USER=wbroderick
+ENV MONGO_ATLAS_PASSWORD=gnrkTanyMKLN43aa
+ENV MONGO_ATLAS_DB_ADDRESS=conduitdb.afr7o.mongodb.net
+ENV MONGO_ATLAS_DB=Conduit
+ENV JWT_SECRET=AE2E4EC8E42548D56DD076B48CB585EF5ED48A2D3B729B24E8D8CBE2342C6486
 
 RUN npm i -g @nestjs/cli
 

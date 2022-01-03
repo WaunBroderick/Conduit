@@ -27,7 +27,7 @@ jobs:
           context: .
           push: true
           tags: user/app:latest
-          env:
+          with:
             MONGO_ATLAS_USER: ${{ secrets.MONGO_ATLAS_USER }}
             MONGO_ATLAS_PASSWORD: ${{ secrets.MONGO_ATLAS_PASSWORD }}
             MONGO_ATLAS_DB_ADDRESS: ${{ secrets.MONGO_ATLAS_DB_ADDRESS }}

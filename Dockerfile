@@ -33,7 +33,7 @@ WORKDIR /usr/src/Conduit
 
 COPY . .
 
-RUN cd ./client && npm ci  && npm start
+RUN cd ./client && npm ci  && npm run start
 
 RUN cd ./server && npm ci  && npm run start
 
@@ -46,5 +46,3 @@ WORKDIR  /usr/src/Conduit/server
 EXPOSE 5000
 
 EXPOSE 3000
-
-CMD [ "npm", "run", "start:dev" ]

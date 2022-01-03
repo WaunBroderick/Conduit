@@ -23,6 +23,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
       - name: Build and push
         env:
+          CI: true
           MONGO_ATLAS_USER: ${{ secrets.MONGO_ATLAS_USER }}
           MONGO_ATLAS_PASSWORD: ${{ secrets.MONGO_ATLAS_PASSWORD }}
           MONGO_ATLAS_DB_ADDRESS: ${{ secrets.MONGO_ATLAS_DB_ADDRESS }}
@@ -33,11 +34,11 @@ jobs:
           context: .
           push: true
           tags: user/app:latest
-          MONGO_ATLAS_USER: ${{ secrets.MONGO_ATLAS_USER }}
-          MONGO_ATLAS_PASSWORD: ${{ secrets.MONGO_ATLAS_PASSWORD }}
-          MONGO_ATLAS_DB_ADDRESS: ${{ secrets.MONGO_ATLAS_DB_ADDRESS }}
-          MONGO_ATLAS_DB: ${{ secrets.MONGO_ATLAS_DB }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          options: --e MONGO_ATLAS_USER=${{ secrets.MONGO_ATLAS_USER }}
+            --e MONGO_ATLAS_PASSWORD=${{ secrets.MONGO_ATLAS_PASSWORD }}
+            --e MONGO_ATLAS_DB_ADDRESS=${{ secrets.MONGO_ATLAS_DB_ADDRESS }}
+            --e MONGO_ATLAS_DB=${{ secrets.MONGO_ATLAS_DB }}
+            --e JWT_SECRET=${{ secrets.JWT_SECRET }}
           secrets: |
             "MONGO_ATLAS_USER=${{ secrets.MONGO_ATLAS_USER }}"
             "MONGO_ATLAS_PASSWORD=${{ secrets.MONGO_ATLAS_PASSWORD }}"

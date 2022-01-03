@@ -35,17 +35,13 @@ COPY . .
 
 RUN cd ./client && npm ci  && npm run build && cd ..
 
-RUN cd ./server && npm ci  && npm run start:dev && cd ..
+RUN cd ./server && npm ci  && npm run start && cd ..
 
 RUN mkdir -p /usr/Conduit/app/server/
 
 RUN cp -r ./client/build/* ./server/
 
 WORKDIR  /usr/src/Conduit/server
-
-RUN npm run prebuild
-
-RUN npm run build
 
 EXPOSE 5000
 

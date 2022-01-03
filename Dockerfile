@@ -16,6 +16,14 @@ RUN --mount=type=secret,id=MONGO_ATLAS_DB \
 RUN --mount=type=secret,id=JWT_SECRET \
   cat /run/secrets/JWT_SECRET
 
+RUN echo ${JWT_SECRET}
+
+RUN echo {JWT_SECRET}
+
+RUN echo JWT_SECRET
+
+RUN echo ${/run/secrets/JWT_SECRET}
+
 WORKDIR /usr/src/Conduit
 
 COPY . .

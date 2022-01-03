@@ -5,4 +5,5 @@ export interface User extends Document {
   readonly password: string;
   readonly organization: string;
   readonly name: string;
+  readonly online: boolean;
 }

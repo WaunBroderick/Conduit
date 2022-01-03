@@ -3,24 +3,28 @@ import { Document, Types } from 'mongoose';
 
 import * as mongoose from 'mongoose';
 
+export type UserDocument = User & Document;
 @Schema()
-export class User extends Document {
+export class User {
   @Prop()
+  userId: string;
+
+  @Prop({ required: true })
   name: string;
 
-  @Prop({ unique: true })
+  @Prop({ unique: true, required: true })
   email: string;
 
-  @Prop()
+  @Prop({ required: false })
   organization: mongoose.Types.ObjectId;
 
-  @Prop()
+  @Prop({ required: true })
   password: string;
 
-  @Prop()
+  @Prop({ required: false })
   departments: [];
 
-  @Prop()
+  @Prop({ required: true })
   online: boolean;
 }
 

@@ -16,8 +16,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    const { email, password, organization, name } = authCredentialsDto;
+  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<User> {
+    const { email, password, organization, name, online } = authCredentialsDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -26,10 +26,12 @@ export class AuthService {
       password: hashedPassword,
       name,
       organization: mongoose.Types.ObjectId(organization),
+      online,
     });
 
     try {
       await user.save();
+      return user;
     } catch (error) {
       if (error.code === 11000) {
         throw new ConflictException('User already exists');

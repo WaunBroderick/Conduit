@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-
+import { JwtService } from '@nestjs/jwt';
 import { User } from './user.model';
 import { Model } from 'mongoose';
 import { IUser } from './interfaces/user.interface';
@@ -17,8 +17,8 @@ var bcrypt = require('bcryptjs');
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User.name)
-    private readonly userModel: Model<User>,
+    @InjectModel('User')
+    private userModel: Model<User>,
   ) {}
 
   public async findAll(paginationQuery: PaginationQueryDto): Promise<User[]> {

@@ -1,4 +1,4 @@
-import { IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class AuthCredentialsDto {
   @IsString()
@@ -16,4 +16,7 @@ export class AuthCredentialsDto {
 
   @IsString()
   name: string;
+
+  @IsBoolean()
+  online: boolean;
 }

@@ -2,13 +2,16 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { AssignmentModule } from '../src/services/assignment/assignment.module';
+
+import { AssignmentController } from '../src/services/assignment/assignment.controller';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule, AssignmentModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -20,5 +23,26 @@ describe('AppController (e2e)', () => {
       .get('/')
       .expect(200)
       .expect('Hello World!');
+  });
+});
+
+describe('AssignmentController', () => {
+  let controller: AssignmentController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [AssignmentController],
+    }).compile();
+
+    controller = module.get<AssignmentController>(AssignmentController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+
+  it('should return assignment', async () => {
+    const tcase = await controller.findAll();
+    expect(tcase).toHaveProperty('firstName');
   });
 });

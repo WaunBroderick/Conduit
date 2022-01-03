@@ -16,6 +16,8 @@ import { AuthCredentialsDto } from './dto/auth-crednetials.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
+import { User } from './schmeas/user.schema';
+
 const cookieParser = require('cookie-parser');
 
 @Controller('auth')
@@ -25,7 +27,7 @@ export class AuthController {
   @Post('/signup')
   async signUp(
     @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<void> {
+  ): Promise<User> {
     return await this.authService.signUp(authCredentialsDto);
   }
 

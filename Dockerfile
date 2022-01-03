@@ -22,7 +22,7 @@ RUN --mount=type=secret,id=JWT_SECRET \
   && echo ${JWT_SECRET}
 
 
-ENV MONGO_ATLAS_USER=wbroderick
+ENV MONGO_ATLAS_USER=${MONGO_ATLAS_USER}
 ENV MONGO_ATLAS_PASSWORD=gnrkTanyMKLN43aa
 ENV MONGO_ATLAS_DB_ADDRESS=conduitdb.afr7o.mongodb.net
 ENV MONGO_ATLAS_DB=Conduit

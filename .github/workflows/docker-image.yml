@@ -27,18 +27,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-      - name: Build and push
-        env:
-          CI: true
-          MONGO_ATLAS_USER: ${{ secrets.MONGO_ATLAS_USER }}
-          MONGO_ATLAS_PASSWORD: ${{ secrets.MONGO_ATLAS_PASSWORD }}
-          MONGO_ATLAS_DB_ADDRESS: ${{ secrets.MONGO_ATLAS_DB_ADDRESS }}
-          MONGO_ATLAS_DB: ${{ secrets.MONGO_ATLAS_DB }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        name: Build
         uses: docker/build-push-action@v2
         with:
           context: .
-          push: true
+          platforms: linux/amd64,linux/arm64
           tags: user/app:latest
           secrets: |
             "MONGO_ATLAS_USER=${{ secrets.MONGO_ATLAS_USER }}"
@@ -46,9 +39,3 @@ jobs:
             "MONGO_ATLAS_DB_ADDRESS=${{ secrets.MONGO_ATLAS_DB_ADDRESS }}"
             "MONGO_ATLAS_DB=${{ secrets.MONGO_ATLAS_DB }}"
             "JWT_SECRET=${{ secrets.JWT_SECRET }}"
-      - name: Update repo description
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-          repository: user/app

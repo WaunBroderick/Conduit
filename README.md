@@ -6,9 +6,10 @@
     <p align="center">
     <a target="_blank"><img src="https://img.shields.io/badge/license-MIT-green" alt="Package License" /></a>
     <a href="https://ko-fi.com/waunbroderick" target="_blank"><img src="https://img.shields.io/badge/Donate-kofi-ff3f59.svg"/></a>
+    <a href="https://github.com/WaunBroderick/Conduit/actions/workflows/docker-image.yml" target="_blank"><img src="https://github.com/WaunBroderick/Conduit/actions/workflows/docker-image.yml/badge.svg"/></a>
 </p>
 
-# Setup
+# 
 
 ## 1. Download and Install the required applications
 
@@ -63,3 +64,6 @@ $ docker compose up
 Notes for editing
 
 1. cmd-shift-v to open the markdown previewer in VSCode
+
+[![.github/workflows/docker-image.yml](https://github.com/WaunBroderick/Conduit/actions/workflows/docker-image.yml/badge.svg)](https://github.com/WaunBroderick/Conduit/actions/workflows/docker-image.yml)
+

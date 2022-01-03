@@ -16,7 +16,7 @@ RUN --mount=type=secret,id=MONGO_ATLAS_USER \
    export MONGO_ATLAS_DB_ADDRESS=$(cat /run/secrets/MONGO_ATLAS_DB_ADDRESS) && \
    export MONGO_ATLAS_DB=$(cat /run/secrets/MONGO_ATLAS_DB) && \
    export JWT_SECRET=$(cat /run/secrets/JWT_SECRET) && \
-   yarn gen
+   npm gen
 
 COPY  . .
 

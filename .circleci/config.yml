@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Run tests with JUnit as reporter
           environment:
-            JEST_JUNIT_OUTPUT: /root/project/junit
+            JEST_JUNIT_OUTPUT: /root/project/junit/js-test-results.xml
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
       - store_test_results:
           path: /root/project/junit

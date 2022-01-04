@@ -37,7 +37,7 @@ jobs:
       - store_test_results:
           path: /root/project/server/reports
       - store_artifacts:
-          path: /root/project/server/reports/junit.xml
+          path: /root/project/server/reports/
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

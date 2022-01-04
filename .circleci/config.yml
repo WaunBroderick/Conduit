@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/node:12.16
         user: root
     parallelism: 5
     steps:

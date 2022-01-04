@@ -28,7 +28,7 @@ jobs:
           command: npm add --dev jest-junit
       - run:
           name: Create artifact directory
-          command: mkdir /root/project/reports/junit
+          command: mkdir /root/project/junit
       - run:
           name: Run tests with JUnit as reporter
           environment:

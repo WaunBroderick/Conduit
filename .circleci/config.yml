@@ -8,21 +8,21 @@ jobs:
     parallelism: 5
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: yarn
-      - run: mkdir ~/junit
       - run:
-          name: Test application
-          command: |
-            TEST=$(circleci tests glob **/__tests__/*.js | circleci tests split --split-by=timings)
-            yarn test $TEST
+          name: Update NPM
+          command: "sudo npm install -g npm@5"
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          command: cp junit.xml ~/junit/
-          when: always
-      - store_test_results:
-          path: ~/junit
-      - store_artifacts:
-          path: ~/junit
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Run tests
+          command: npm run test
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

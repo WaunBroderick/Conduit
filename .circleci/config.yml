@@ -1,6 +1,7 @@
 version: 2
+
 workflows:
-  build:
+  my-workflow:
     jobs:
       - build:
           context:

@@ -12,15 +12,14 @@ jobs:
           name: Update NPM
           command: "sudo npm install -g npm"
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: v1-npm-deps-{{ checksum "package.json" }}
       - run:
           name: Install server Dependencies
           command: cd server && npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: v1-npm-deps-{{ checksum "package.json" }}
           paths:
             - .server/node_modules
-            - .client/node_modules
       - run:
           name: Install Jest-cli globally
           command: npm install -g jest-cli
@@ -28,17 +27,14 @@ jobs:
           name: Install JUnit coverage reporter
           command: npm add --dev jest-junit
       - run:
-          name: create reports dir
-          command: mkdir ./reports/junit/
-      - run:
           name: Run tests with JUnit as reporter
-          command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit || true
           environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+            JEST_JUNIT_OUTPUT: reports/junit/js-test-results.xml
+          command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
       - store_test_results:
-          path: ./reports/junit/
+          path: reports/junit
       - store_artifacts:
-          path: ./reports/junit
+          path: reports/junit
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

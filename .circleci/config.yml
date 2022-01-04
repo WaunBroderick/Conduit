@@ -1,5 +1,5 @@
 version: 2
-worflows:
+workflows:
   build:
     jobs:
       - build:

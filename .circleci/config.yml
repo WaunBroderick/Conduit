@@ -32,14 +32,9 @@ jobs:
             docker build -t circleci/cci-demo-docker:$TAG .
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
             docker push circleci/cci-demo-docker:$TAG
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: raw-test-output
-
-      - store_test_results:
-          path: /tmp/test-results
 
 workflows: # a single workflow with a single job called build
+  version: 2
   build:
     jobs:
       - build:

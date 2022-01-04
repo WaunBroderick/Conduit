@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test-and-build:
+  build:
     docker:
       - image: cimg/base:2021.04
         user: root

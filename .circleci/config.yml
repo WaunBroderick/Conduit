@@ -2,8 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      # using custom image, see .circleci/images/primary/Dockerfile
-      - image: circleci/node:4.8.2-jessie
+      - image: cimg/base:2021.04
 
     environment:
       TEST_RESULTS: /tmp/test-results

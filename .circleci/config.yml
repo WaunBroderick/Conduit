@@ -19,13 +19,17 @@ jobs:
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
-            - ./node_modules
+            - .server/node_modules
+            - .client/node_modules
       - run:
           name: Install Jest-cli globally
           command: npm install -g jest-cli
       - run:
           name: Install JUnit coverage reporter
           command: npm add --dev jest-junit
+      - run:
+          name: create reports dir
+          command: mkdir ./reports/junit/
       - run:
           name: Run tests with JUnit as reporter
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit || true

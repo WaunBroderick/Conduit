@@ -28,16 +28,16 @@ jobs:
           command: npm add --dev jest-junit
       - run:
           name: Create artifact directory
-          command: mkdir /root/project/junit
+          command: mkdir /root/project/reports && mkdir /root/project/reports/junit
       - run:
           name: Run tests with JUnit as reporter
           environment:
-            JEST_JUNIT_OUTPUT: /root/project/junit
+            JEST_JUNIT_OUTPUT: /root/project/reports/junit/js-test-results.xml
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
       - store_test_results:
-          path: /root/project/junit
+          path: /root/project/reports/junit
       - store_artifacts:
-          path: /root/project/junit
+          path: /root/project/reports/junit
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

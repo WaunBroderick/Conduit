@@ -31,11 +31,11 @@ jobs:
           command: mkdir /root/project/reports && mkdir /root/project/reports/junit
       - run:
           name: Run tests with JUnit as reporter
-          environment:
-            JEST_JUNIT_OUTPUT: /root/project/
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: /root/project/server
       - store_test_results:
-          path: /root/project/
+          path: /root/project/server
       - store_artifacts:
           path: /root/project/server/junit.xml
       - setup_remote_docker:

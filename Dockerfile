@@ -12,7 +12,7 @@ WORKDIR /usr/src/Conduit
 
 COPY . .
 
-RUN cd ./client && npm ci  && npm run build && cd ..
+RUN cd ./client && npm ci  && npm run start && cd ..
 
 RUN cd ./server && npm ci  && npm run start:dev && cd ..
 

@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
+        user: root
 
     environment:
       TEST_RESULTS: /tmp/test-results

@@ -1,4 +1,10 @@
 version: 2
+worflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - development
 jobs:
   build:
     docker:

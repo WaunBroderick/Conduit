@@ -5,7 +5,6 @@ jobs:
     docker:
       # using custom image, see .circleci/images/primary/Dockerfile
       - image: docker:17.05.0-ce-git
-    working_directory: 
 
     environment:
       TEST_RESULTS: /tmp/test-results

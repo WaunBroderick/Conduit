@@ -22,7 +22,7 @@ jobs:
             - ./node_modules
       - run:
           name: Run tests
-          command: npm run test
+          command: cd server && npm run test
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

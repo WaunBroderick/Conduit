@@ -1,12 +1,28 @@
 version: 2
 
 jobs:
-  build:
+  test-and-build:
     docker:
       - image: cimg/base:2021.04
         user: root
+    parallelism: 5
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: mkdir ~/junit
+      - run:
+          name: Test application
+          command: |
+            TEST=$(circleci tests glob **/__tests__/*.js | circleci tests split --split-by=timings)
+            yarn test $TEST
+      - run:
+          command: cp junit.xml ~/junit/
+          when: always
+      - store_test_results:
+          path: ~/junit
+      - store_artifacts:
+          path: ~/junit
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

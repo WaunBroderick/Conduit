@@ -27,6 +27,9 @@ jobs:
           name: Install JUnit coverage reporter
           command: npm add --dev jest-junit
       - run:
+          name: Create artifact directory
+          command: mkdir /root/project/reports/junit
+      - run:
           name: Run tests with JUnit as reporter
           environment:
             JEST_JUNIT_OUTPUT: /root/project/reports/junit/js-test-results.xml

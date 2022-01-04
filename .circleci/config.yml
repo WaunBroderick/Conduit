@@ -32,12 +32,12 @@ jobs:
       - run:
           name: Run tests with JUnit as reporter
           environment:
-            JEST_JUNIT_OUTPUT: /root/project/reports/junit/js-test-results.xml
+            JEST_JUNIT_OUTPUT: /root/project/
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
       - store_test_results:
-          path: /root/project/reports/junit
+          path: /root/project/
       - store_artifacts:
-          path: /root/project/reports/junit
+          path: /root/project/server/junit.xml
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

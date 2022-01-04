@@ -14,7 +14,7 @@ COPY . .
 
 RUN cd ./client && npm ci  && npm run build && cd ..
 
-RUN cd ./server && npm ci  && npm run start:dev && cd ..
+RUN cd ./server && npm ci  && nest build && cd ..
 
 RUN mkdir -p /usr/Conduit/app/server/
 

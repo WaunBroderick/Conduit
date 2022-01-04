@@ -11,8 +11,4 @@ describe('OrganizationsService', () => {
 
     service = module.get<OrganizationsService>(OrganizationsService);
   });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
 });

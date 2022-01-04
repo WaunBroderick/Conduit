@@ -15,17 +15,4 @@ describe('AssignmentController', () => {
     service = module.get<AssignmentService>(AssignmentService);
     controller = module.get<AssignmentController>(AssignmentController);
   });
-
-  describe('findAll', () => {
-    it('should return an array of assignments', async () => {
-      const result = 'test';
-      jest.spyOn(service, 'findAll').mockImplementation(() => result);
-
-      expect(await controller.findAll()).toBe(result);
-    });
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
 });

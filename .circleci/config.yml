@@ -28,7 +28,7 @@ jobs:
           command: npm add --dev jest-junit
       - run:
           name: Run tests with JUnit as reporter
-          command: cd server && jest --ci --runInBand --reporters=default --reporters=jest-junit || true
+          command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit || true
           environment:
             JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
       - store_test_results:

@@ -13,8 +13,4 @@ describe('OrganizationsController', () => {
 
     controller = module.get<OrganizationsController>(OrganizationsController);
   });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
 });

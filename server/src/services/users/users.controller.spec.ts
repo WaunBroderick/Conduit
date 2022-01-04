@@ -19,22 +19,4 @@ describe('UsersController', () => {
     service = module.get<UsersService>(UsersService);
     jest.clearAllMocks();
   });
-
-  describe('getUser', () => {
-    describe('when getUser is called', () => {
-      let user: User;
-
-      beforeEach(async () => {
-        user = await controller.getUser(userStub().userId, userStub().userId);
-      });
-
-      test('then it should call userService', () => {
-        expect(service.findOne).toBeCalledWith(userStub().userId);
-      });
-    });
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
 });

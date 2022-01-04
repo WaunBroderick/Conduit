@@ -4,7 +4,7 @@ jobs:
     docker:
       # using custom image, see .circleci/images/primary/Dockerfile
       - image: circleci/cci-demo-docker-primary:0.0.2
-    working_directory: /go/src/github.com/circleci/cci-demo-docker
+    working_directory: ../
 
     environment:
       TEST_RESULTS: /tmp/test-results

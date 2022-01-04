@@ -1,11 +1,5 @@
 version: 2
 
-workflows:
-  my-workflow:
-    jobs:
-      - build:
-          context:
-            - development
 jobs:
   build:
     docker:
@@ -44,3 +38,9 @@ jobs:
 
       - store_test_results:
           path: /tmp/test-results
+
+workflows: # a single workflow with a single job called build
+  build:
+    jobs:
+      - build:
+          context: development

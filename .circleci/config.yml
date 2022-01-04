@@ -6,7 +6,7 @@ jobs:
         user: root
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation
       - run:

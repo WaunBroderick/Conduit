@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # using custom image, see .circleci/images/primary/Dockerfile
-      - image: docker:17.05.0-ce-git
+      - image: circleci/node:4.8.2-jessie
 
     environment:
       TEST_RESULTS: /tmp/test-results

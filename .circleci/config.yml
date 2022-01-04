@@ -32,10 +32,10 @@ jobs:
       - run:
           name: Run tests with JUnit as reporter
           environment:
-            JEST_JUNIT_OUTPUT: /root/project/server
+            JEST_JUNIT_OUTPUT: /root/project/
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
       - store_test_results:
-          path: /root/project/server/junit.xml
+          path: /root/project/
       - store_artifacts:
           path: /root/project/server/junit.xml
       - setup_remote_docker:

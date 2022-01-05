@@ -40,7 +40,7 @@ jobs:
       - store_artifacts:
           path: /root/project/server/reports/
       - codecov/upload:
-          file: "/root/project/server/reports/junit.xml"
+          file: "/root/project/server/coverage/clover.xml"
           token: $CODECOV_TOKEN
       - setup_remote_docker:
           version: 19.03.13

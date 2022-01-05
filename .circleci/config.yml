@@ -22,7 +22,7 @@ jobs:
             - .server/node_modules
       - run:
           name: Install Jest-cli globally
-          command: npm install -g babel-jest @babel/core @babel/preset-env
+          command: npm install -g jest-cli
       - run:
           name: Install JUnit coverage reporter
           command: npm add --dev jest-junit
@@ -31,7 +31,7 @@ jobs:
           command: mkdir /root/project/reports && mkdir /root/project/reports/junit
       - run:
           name: "Collect Coverage Reports"
-          command: cd server && jest --collectCoverage=true
+          command: cd server && npm add --dev babel-jest @babel/core @babel/preset-typescript  @types/jest && jest --collectCoverage=true
       - store_artifacts:
           path: coverage
       - run:

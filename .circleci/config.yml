@@ -39,12 +39,8 @@ jobs:
           path: /root/project/server/reports
       - store_artifacts:
           path: /root/project/server/reports/
-      - run:
-          name: install and run tests
-          command: |
-            cd server && yarn install && yarn test
       - codecov/upload:
-          file: "./coverage/clover.xml"
+          file: "./root/project/server/reports/junit.xml"
           token: $CODECOV_TOKEN
       - setup_remote_docker:
           version: 19.03.13

@@ -1,5 +1,6 @@
 version: 2
-
+orbs:
+  coveralls: coveralls/coveralls@1.0.6 // coveralls orb
 jobs:
   build:
     docker:
@@ -30,11 +31,6 @@ jobs:
           name: Create artifact directory
           command: mkdir /root/project/reports && mkdir /root/project/reports/junit
       - run:
-          name: "Collect Coverage Reports"
-          command: cd server && npm add --dev babel-jest @babel/core @babel/preset-typescript  @types/jest && jest --collectCoverage=true
-      - store_artifacts:
-          path: coverage
-      - run:
           name: Run tests with JUnit as reporter
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
           environment:
@@ -43,6 +39,10 @@ jobs:
           path: /root/project/server/reports
       - store_artifacts:
           path: /root/project/server/reports/
+      - run: # run code coverage report
+          name: code-coverage
+          command: npm run coveralls
+      # - coveralls/upload
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

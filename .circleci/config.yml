@@ -22,7 +22,7 @@ jobs:
             - .server/node_modules
       - run:
           name: Install Jest-cli globally
-          command: npm install -g jest-cli
+          command: npm install -g babel-jest @babel/core @babel/preset-env
       - run:
           name: Install JUnit coverage reporter
           command: npm add --dev jest-junit

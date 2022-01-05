@@ -74,7 +74,7 @@ workflows: # a single workflow with a single job called build
     jobs:
       - build:
           context: development
-          filter:
+          filters:
             branches:
               only:
                 - main

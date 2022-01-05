@@ -31,7 +31,7 @@ jobs:
           command: mkdir /root/project/reports && mkdir /root/project/reports/junit
       - run:
           name: "Collect Coverage Reports"
-          command: jest --collectCoverage=true
+          command: cd server && jest --collectCoverage=true
       - store_artifacts:
           path: coverage
       - run:

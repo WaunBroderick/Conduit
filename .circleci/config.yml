@@ -1,6 +1,6 @@
 version: 2
 orbs:
-  coveralls: coveralls/coveralls@1.0.6 // coveralls orb
+  coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:
     docker:
@@ -43,7 +43,6 @@ jobs:
           name: Install and Make
           command: npm install && make test-coverage
       - coveralls/upload
-      # - coveralls/upload
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

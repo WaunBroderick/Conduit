@@ -30,6 +30,11 @@ jobs:
           name: Create artifact directory
           command: mkdir /root/project/reports && mkdir /root/project/reports/junit
       - run:
+          name: "Collect Coverage Reports"
+          command: jest --collectCoverage=true
+      - store_artifacts:
+          path: coverage
+      - run:
           name: Run tests with JUnit as reporter
           command: cd server && jest auth.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit"
           environment:

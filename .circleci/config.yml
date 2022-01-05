@@ -39,9 +39,10 @@ jobs:
           path: /root/project/server/reports
       - store_artifacts:
           path: /root/project/server/reports/
-      - run: # run code coverage report
-          name: code-coverage
-          command: npm run coveralls
+      - run:
+          name: Install and Make
+          command: npm install && make test-coverage
+      - coveralls/upload
       # - coveralls/upload
       - setup_remote_docker:
           version: 19.03.13

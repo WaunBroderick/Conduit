@@ -3,9 +3,6 @@ orbs:
   codecov: codecov/codecov@1.0.2
 jobs:
   build:
-    branches:
-      only:
-        - main
     docker:
       - image: cimg/node:12.16
         user: root
@@ -77,3 +74,7 @@ workflows: # a single workflow with a single job called build
     jobs:
       - build:
           context: development
+          filter:
+            branches:
+              only:
+                - main

@@ -1,6 +1,6 @@
 version: 2
 orbs:
-  coveralls: coveralls/coveralls@1.0.6
+  codecov: codecov/codecov@3.2.2
 jobs:
   build:
     docker:
@@ -40,9 +40,12 @@ jobs:
       - store_artifacts:
           path: /root/project/server/reports/
       - run:
-          name: Install and Make
-          command: npm install && make test-coverage
-      - coveralls/upload
+          name: install and run tests
+          command: |
+            cd server && yarn install && yarn test
+      - codecov/upload:
+          file: "./coverage/clover.xml"
+          token: $CODECOV_TOKEN
       - setup_remote_docker:
           version: 19.03.13
       # This should go into custom primary image, here's only for the sake of explanation

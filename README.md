@@ -3,11 +3,16 @@
 </p>
 
   <p align="center">An open source LMS, onboarding, and employee compliance application for small to enterprise size companies or teams.</p>
-    <p align="center">
+    <div align="center">
     <a target="_blank"><img src="https://img.shields.io/badge/license-MIT-green" alt="Package License" /></a>
     <a href="https://ko-fi.com/waunbroderick" target="_blank"><img src="https://img.shields.io/badge/Donate-kofi-ff3f59.svg"/></a>
+</div>
+<div align="center">
+    <a href="https://codecov.io/gh/WaunBroderick/Conduit">
+        <img src="https://codecov.io/gh/WaunBroderick/Conduit/branch/main/graph/badge.svg?token=KNX2L25Z6F"/>
+    </a>
     <a href="https://circleci.com/gh/WaunBroderick/Conduit/tree/main" target="_blank"><img src="https://circleci.com/gh/WaunBroderick/Conduit/tree/main.svg?style=svg"/></a>
-</p>
+</div>
 
 #
 

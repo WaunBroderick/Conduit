@@ -67,6 +67,7 @@ export class OrganizationsController {
     return Res.status(HttpStatus.OK).json(organization);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   public async updateOrganization(
     @Res() res,

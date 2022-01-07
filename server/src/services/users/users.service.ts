@@ -58,7 +58,7 @@ export class UsersService {
     assignUserDepartmentDto: AssignUserDepartmentDto,
   ): Promise<IUser> {
     const existingUser = await this.userModel.findByIdAndUpdate(
-      { _id: userId },
+      userId,
       assignUserDepartmentDto,
     );
 

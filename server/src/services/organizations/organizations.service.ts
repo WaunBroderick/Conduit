@@ -48,7 +48,7 @@ export class OrganizationsService {
     updateOrganizationDto: UpdateOrganizationDto,
   ): Promise<IOrganization> {
     const existingOrganization = await this.organizationModel.findByIdAndUpdate(
-      { _id: organizationId },
+      organizationId,
       updateOrganizationDto,
     );
 

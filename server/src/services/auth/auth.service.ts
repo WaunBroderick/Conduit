@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthCredentialsDto } from './dto/auth-crednetials.dto';
 import { User } from './interfaces/user.interface';
+import { ConfigService } from '@nestjs/config';
 const cookieParser = require('cookie-parser');
 
 var bcrypt = require('bcryptjs');
@@ -12,8 +13,10 @@ var mongoose = require('mongoose');
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel('User') private userModel: Model<User>,
-    private jwtService: JwtService,
+    @InjectModel('User')
+    private readonly userModel: Model<User>,
+    private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<User> {
@@ -47,6 +50,8 @@ export class AuthService {
       organization: user.organization,
       name: user.name,
     };
+
+    const token = this.jwtService.sign(payload);
 
     return {
       accessToken: this.jwtService.sign(payload),

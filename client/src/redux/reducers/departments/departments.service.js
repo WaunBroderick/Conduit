@@ -1,7 +1,7 @@
 import apiClient from "../../Clients/apiClient";
 
 class DepartmentsService {
-  getAllDepartments = () => apiClient().get("departments");
+  getAllDepartments = (JWT) => apiClient(JWT).get("departments");
 }
 
 export default new DepartmentsService();

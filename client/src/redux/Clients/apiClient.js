@@ -6,7 +6,9 @@ const apiClient = (JWT) => {
   const axiosInstance = axios.create({
     baseURL: "http://localhost:5000/",
     responseType: "json",
-    headers: { Authorization: `Bearer ${JWT}` },
+    headers: {
+      Authorization: `Bearer ${JWT}`,
+    },
   });
 
   return axiosInstance;

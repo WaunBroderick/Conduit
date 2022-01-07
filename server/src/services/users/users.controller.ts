@@ -3,8 +3,7 @@ import {
   Post,
   Body,
   Get,
-  Patch,
-  Delete,
+  UseGuards,
   Param,
   Res,
   NotFoundException,
@@ -12,6 +11,8 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { UsersService } from './users.service';
 import { ApiTags } from '@nestjs/swagger';
@@ -23,6 +24,7 @@ import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   public async getAllUsers(
     @Res() res,

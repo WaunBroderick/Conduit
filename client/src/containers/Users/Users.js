@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadUsersAsync } from "../../redux/reducers/users/users.thunk";
 import { loadDepartmentsAsync } from "../../redux/reducers/departments/departments.thunk";
+import { useCookies } from "react-cookie";
 
 import UserTable from "../../components/UserTable/UserTable";
 
@@ -15,12 +16,13 @@ const Users = () => {
   const { isLoading, users, errorMessage } = useSelector(
     (state) => state.users
   );
+  const [cookies, setCookie] = useCookies();
 
   const { departments } = useSelector((state) => state.departments);
 
   useEffect(() => {
-    dispatch(loadUsersAsync());
-    dispatch(loadDepartmentsAsync());
+    dispatch(loadUsersAsync(Object.values(cookies)));
+    dispatch(loadDepartmentsAsync(Object.values(cookies)));
   }, []);
 
   const handleClick = () => {

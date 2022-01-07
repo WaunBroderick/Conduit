@@ -1,10 +1,10 @@
 import departmentsService from "./departments.service";
 import departmentsAction from "./departments.action";
 
-export const loadDepartmentsAsync = () => (dispatch) => {
+export const loadDepartmentsAsync = (JWT) => (dispatch) => {
   dispatch(departmentsAction.departmentsLoadStart());
   departmentsService
-    .getAllDepartments()
+    .getAllDepartments(JWT)
     .then((response) =>
       dispatch(departmentsAction.departmentsLoadSuccess(response.data))
     )

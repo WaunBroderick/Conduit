@@ -15,8 +15,7 @@ import {
   EuiFlexItem,
 } from "@elastic/eui";
 import { Link, Redirect } from "react-router-dom";
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
+import { useCookies } from "react-cookie";
 import StyledSection from "./style";
 import "@elastic/eui/dist/eui_theme_light.css";
 
@@ -27,6 +26,7 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [JWT, setJWT] = useState("");
+  const [cookies, setCookie] = useCookies("auth-cookie");
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { isLoading, profile, errorMessage } = useSelector(
@@ -49,9 +49,10 @@ export default function SignIn() {
       )
       .then((response) => {
         setJWT(response.data.accessToken);
+        console.log(response.data);
+        setCookie("auth-cookie", response.data.accessToken, { path: "/" });
         dispatch(loadProfileAsync(response.data.accessToken));
-        createCookie();
-        //setRedirect(true);
+        setRedirect(true);
       })
       .then((data) => {})
       .catch((error) => {});

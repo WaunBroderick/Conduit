@@ -3,8 +3,7 @@ import {
   Post,
   Body,
   Get,
-  Patch,
-  Delete,
+  UseGuards,
   Param,
   Res,
   NotFoundException,
@@ -13,6 +12,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
+
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 import { OrganizationsService } from './organizations.service';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
@@ -56,6 +57,7 @@ export class OrganizationsController {
     return res.status(HttpStatus.OK).json(organization);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   public async getOrganization(@Res() Res, @Param('id') id: string) {
     const organization = await this.organizationsService.findOne(id);

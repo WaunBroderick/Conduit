@@ -9,26 +9,29 @@ import "@elastic/eui/dist/eui_theme_light.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import configureStore from "./redux/store/configureStore";
+import { CookiesProvider } from "react-cookie";
 import Users from "./containers/Users/Users";
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <App />
-    </Provider>
+    <CookiesProvider>
+      <Provider store={store}>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <App />
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -6,8 +6,6 @@ import {
   Request,
   UseGuards,
   ValidationPipe,
-  NotFoundException,
-  HttpStatus,
   Res,
 } from '@nestjs/common';
 
@@ -17,8 +15,10 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
 import { User } from './schmeas/user.schema';
+import { signedCookies } from 'cookie-parser';
 
 const cookieParser = require('cookie-parser');
+var cookie = require('cookie');
 
 @Controller('auth')
 export class AuthController {
@@ -33,42 +33,15 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
-  async signIn2(@Request() req, @Res({ passthrough: true }) res): Promise<any> {
+  async signIn(@Request() req, @Res({ passthrough: true }) res): Promise<any> {
     const token = this.authService.signIn(req.user);
 
-    const secretData = {
-      token,
-      refreshToken: '',
-    };
-    res.cookie('auth-cookie', secretData, { httpOnly: true });
-    return this.authService.signIn(req.user);
-  }
+    res.cookie('secureCookie', token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    });
 
-  @UseGuards(LocalAuthGuard)
-  @Post('/signin2')
-  async signIn(@Request() req, @Res() res) {
-    try {
-      const token = await this.authService.signIn(req.user);
-
-      const secretData = {
-        token,
-        refreshToken: '',
-      };
-
-      if (!token) {
-        throw new NotFoundException('Sign In Failed');
-      }
-      return res.status(HttpStatus.OK).json({
-        res,
-        token,
-        secretData,
-      });
-    } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Error: login failed' + res.data,
-        status: 400,
-      });
-    }
+    return token;
   }
 
   @UseGuards(JwtAuthGuard)

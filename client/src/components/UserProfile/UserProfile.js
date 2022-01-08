@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 
 import {
   EuiCard,
@@ -13,7 +13,7 @@ import Avatar, { genConfig } from "react-nice-avatar";
 import { ProfileCardDivStyled } from "./style";
 import { LightSubTitle } from "../../styles/globalStyles";
 
-const UserProfile = () => {
+const UserProfile = ({ profile = [] }) => {
   const config = genConfig({ sex: "woman" });
 
   return (

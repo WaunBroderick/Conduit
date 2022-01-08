@@ -1,10 +1,9 @@
 import "./App.css";
 import React from "react";
-import { useCookies } from "react-cookie";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient } from "react-query";
 import { ThemeProvider } from "styled-components";
-import theme from "./styles/themes/LightTheme";
+import { Redirect } from "react-router-dom";
 import { ProtectedRoute } from "./utils/protected.route";
 import NavBar from "./components/NavBar/NavBar";
 
@@ -27,27 +26,35 @@ const themeLight = {
 
 const queryClient = new QueryClient();
 
+const LoginContainer = () => (
+  <div style={{ height: "100vh" }}>
+    <Route exact path="/" component={SignIn} />
+    <Route path="/register" component={Register} />
+    <Route path="/signin" component={SignIn} />
+  </div>
+);
+
+const AppContainer = () => (
+  <div style={{ height: "100vh" }}>
+    <NavBar />
+    <Route exact path="/home" component={Home} />
+    <Route exact path="/users" component={Users} />
+    <Route exact path="/organization" component={Organization} />
+    <Route exact path="/marketplace" component={Marketplace} />
+    <Route exact path="/profile" component={Profile} />
+  </div>
+);
+
 function App() {
   return (
     <ThemeProvider theme={themeLight}>
       <Router>
-        <NavBar />
-        <div style={{ height: "100vh" }}>
-          <Switch>
-            <Route path="/" component={Register} exact />
-            <Route path="/register" component={Register} />
-            <Route path="/signin" component={SignIn} />
-            <ProtectedRoute exact path="/home" component={Home} />
-            <ProtectedRoute exact path="/users" component={Users} />
-            <ProtectedRoute
-              exact
-              path="/organization"
-              component={Organization}
-            />
-            <ProtectedRoute exact path="/marketplace" component={Marketplace} />
-            <ProtectedRoute exact path="/profile" component={Profile} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/signin" />} />
+          <Route path="/(signin)" component={LoginContainer} />
+          <Route path="/(register)" component={LoginContainer} />
+          <ProtectedRoute component={AppContainer} />
+        </Switch>
       </Router>
     </ThemeProvider>
   );

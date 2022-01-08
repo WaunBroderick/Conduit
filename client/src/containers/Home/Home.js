@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
-import { EuiPageTemplate, EuiEmptyPrompt } from "@elastic/eui";
+import { EuiEmptyPrompt } from "@elastic/eui";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
+
+import { ConduitPage } from "../../styles/globalStyles";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -15,11 +16,8 @@ export default function Home() {
   }, []);
 
   return (
-    <EuiPageTemplate
-      template="centeredContent"
-      pageContentProps={{ paddingSize: "none" }}
-    >
+    <ConduitPage>
       <EuiEmptyPrompt title={<span>Home Screen</span>} />
-    </EuiPageTemplate>
+    </ConduitPage>
   );
 }

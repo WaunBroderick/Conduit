@@ -10,6 +10,7 @@ import Lottie from "lottie-react";
 import loadingLargeAnimation from "../../assets/animations/loadingLarge.json";
 
 import { ConduitPage } from "../../styles/globalStyles";
+import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,11 @@ const Users = () => {
   return (
     <ConduitPage>
       {users ? (
-        <UserTable users={users} departments={departments} />
+        <EuiFlexGroup alignItems="center" gutterSize="s">
+          <EuiFlexItem>
+            <UserTable users={users} departments={departments} />
+          </EuiFlexItem>
+        </EuiFlexGroup>
       ) : (
         <div>
           <Lottie animationData={loadingLargeAnimation} />

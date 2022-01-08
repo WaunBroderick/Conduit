@@ -1,14 +1,12 @@
 import React from "react";
 
-import { EuiPageTemplate, EuiEmptyPrompt } from "@elastic/eui";
+import { EuiEmptyPrompt } from "@elastic/eui";
+import { ConduitPage } from "../../styles/globalStyles";
 
 export default function Marketplace() {
   return (
-    <EuiPageTemplate
-      template="centeredContent"
-      pageContentProps={{ paddingSize: "none" }}
-    >
+    <ConduitPage>
       <EuiEmptyPrompt title={<span>Marketplace Screen</span>} />
-    </EuiPageTemplate>
+    </ConduitPage>
   );
 }

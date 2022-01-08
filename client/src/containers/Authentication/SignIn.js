@@ -1,4 +1,4 @@
-import React, { useState, useEffect, StrictMode } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 import {
@@ -59,7 +59,7 @@ export default function SignIn() {
   };
 
   if (redirect) {
-    return <Redirect to="home" />;
+    return <Redirect to="/home" />;
   }
 
   const createCookie = () => {};
@@ -107,9 +107,6 @@ export default function SignIn() {
               <p>
                 If you don&apos;t yet have an account please{" "}
                 <Link to="/register">Sign Up</Link>.
-              </p>
-              <p>
-                go home <Link to="/home">HERE</Link>.
               </p>
             </EuiText>
           </EuiCard>

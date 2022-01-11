@@ -10,8 +10,14 @@ import {
   HttpStatus,
   Put,
   Query,
+  Next,
+  UsePipes,
+  ValidationPipe,
+  HttpCode,
+  UseFilters,
+  HttpException,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
@@ -26,51 +32,57 @@ export class OrganizationsController {
   constructor(private organizationsService: OrganizationsService) {}
 
   @Post()
+  @ApiOperation({ description: 'Create an Organization' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   public async createOrganization(
-    @Res() res,
     @Body() createOrganizationDto: CreateOrganizationDto,
   ) {
     try {
       const organization = await this.organizationsService.create(
         createOrganizationDto,
       );
-      return res.status(HttpStatus.OK).json({
-        message: 'Organization has been created successfully',
-        organization,
-      });
-    } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Error: Customer not created!',
-        status: 400,
-      });
+      return organization;
+    } catch (e) {
+      throw e;
     }
   }
 
   @Get()
+  @ApiOperation({ description: 'Get all Organizations' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   public async getAllOrganizations(
-    @Res() res,
     @Query() paginationQuery: PaginationQueryDto,
   ) {
     const organization = await this.organizationsService.findAll(
       paginationQuery,
     );
-    return res.status(HttpStatus.OK).json(organization);
+    return organization;
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  public async getOrganization(@Res() Res, @Param('id') id: string) {
-    const organization = await this.organizationsService.findOne(id);
-    if (!organization) {
-      throw new NotFoundException('Organization does not exist!');
+  @ApiOperation({ description: 'Get one Organization by id' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
+  public async getOrganization(@Param('id') id: string) {
+    try {
+      const organization = await this.organizationsService.findOne(id);
+      if (!organization) {
+        throw new NotFoundException('Organization does not exist!');
+      }
+    } catch (e) {
+      return e;
     }
-    return Res.status(HttpStatus.OK).json(organization);
   }
 
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
+  @ApiOperation({ description: 'Update an Organization by id' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   public async updateOrganization(
-    @Res() res,
     @Param('id') organizationId: string,
     @Body() updateOrganizationDto: UpdateOrganizationDto,
   ) {
@@ -79,18 +91,29 @@ export class OrganizationsController {
         organizationId,
         updateOrganizationDto,
       );
+      return organization;
       if (!organization) {
         throw new NotFoundException('Organization does not exist');
       }
-      return res.status(HttpStatus.OK).json({
-        message: 'Customer has been successfully updated',
-        organization,
-      });
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Error: Organization not updated!' + res.data,
-        status: 400,
-      });
+      throw err;
+    }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get(':id')
+  @ApiOperation({ description: 'Remove one Organization by id' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
+  public async removeOrganization(@Param('id') id: string) {
+    try {
+      const organization = await this.organizationsService.remove(id);
+      return organization;
+      if (!organization) {
+        throw new NotFoundException('Organization does not exist!');
+      }
+    } catch (e) {
+      return e;
     }
   }
 }

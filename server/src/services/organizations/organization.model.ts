@@ -1,8 +1,22 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
+import * as mongoose from 'mongoose';
+import { ObjectUnsubscribedError } from 'rxjs';
+
+export type OrganizationDocument = Organization & Document;
 @Schema()
-export class Organization extends Document {
+export class Organization {
+  @Prop({
+    type: mongoose.Types.ObjectId,
+    auto: true,
+    required: false,
+    default: function () {
+      return new mongoose.Types.ObjectId();
+    },
+  })
+  _id: mongoose.Types.ObjectId;
+
   @Prop({ unique: true })
   name: string;
 

@@ -1,3 +1,4 @@
+import { Prop } from '@nestjs/mongoose';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import * as mongoose from 'mongoose';
 
@@ -9,9 +10,13 @@ export class CreateDepartmentDto {
   name: string;
 
   @ApiProperty({
-    description: 'The name of the department within the organization',
-    type: String,
+    type: mongoose.Types.ObjectId,
+    default: null,
+    required: true,
+    nullable: false,
+    description: 'The organization the department belongs to',
   })
+  @Prop()
   organization: string;
 
   @ApiPropertyOptional({

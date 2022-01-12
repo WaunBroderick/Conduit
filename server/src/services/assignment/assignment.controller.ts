@@ -8,7 +8,11 @@ import {
   Delete,
   HttpStatus,
   Res,
+  UsePipes,
+  ValidationPipe,
+  HttpCode,
 } from '@nestjs/common';
+import { ApiOperation } from '@nestjs/swagger';
 import { AssignmentService } from './assignment.service';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
@@ -18,39 +22,42 @@ export class AssignmentController {
   constructor(private readonly assignmentService: AssignmentService) {}
 
   @Post()
+  @ApiOperation({ description: 'Create an Assignment' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   public async createAssignment(
-    @Res() res,
     @Body() createAssignmentDto: CreateAssignmentDto,
   ) {
     try {
       const newAssignment = await this.assignmentService.create(
         createAssignmentDto,
       );
-      return (
-        res.status(HttpStatus.OK).json({
-          message: 'Assignment has been created successfully',
-        }),
-        newAssignment.save()
-      );
+      return newAssignment;
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).json({
-        message: 'Error: Assignment not created!',
-        status: 400,
-      });
+      throw err;
     }
   }
 
   @Get()
+  @ApiOperation({ description: 'Get all Assignments ' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   findAll() {
     return this.assignmentService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ description: 'Create a single Assignment by Id' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   findOne(@Param('id') id: string) {
     return this.assignmentService.findOne(+id);
   }
 
   @Patch(':id')
+  @ApiOperation({ description: 'Update a single Assignment by Id' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   update(
     @Param('id') id: string,
     @Body() updateAssignmentDto: UpdateAssignmentDto,
@@ -59,6 +66,9 @@ export class AssignmentController {
   }
 
   @Delete(':id')
+  @ApiOperation({ description: 'Remove a single Assignment by Id' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
   remove(@Param('id') id: string) {
     return this.assignmentService.remove(+id);
   }

@@ -72,8 +72,8 @@ export class OrganizationsController {
       if (!organization) {
         throw new NotFoundException('Organization does not exist!');
       }
-    } catch (e) {
-      return e;
+    } catch (err) {
+      throw err;
     }
   }
 
@@ -112,8 +112,8 @@ export class OrganizationsController {
       if (!organization) {
         throw new NotFoundException('Organization does not exist!');
       }
-    } catch (e) {
-      return e;
+    } catch (err) {
+      throw err;
     }
   }
 }

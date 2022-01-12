@@ -2,7 +2,6 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
 import * as mongoose from 'mongoose';
-import { ObjectUnsubscribedError } from 'rxjs';
 
 export type OrganizationDocument = Organization & Document;
 @Schema()

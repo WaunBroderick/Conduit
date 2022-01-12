@@ -1,7 +1,8 @@
-import { User } from 'src/services/users/user.model';
+import { User } from '../../user.model';
 import * as mongoose from 'mongoose';
+import { ObjectUnsubscribedError } from 'rxjs';
 
-export const userStub = (): User => {
+export const UserStub = (): User => {
   return {
     userId: '123',
     name: 'Jeff Bezos',

@@ -73,7 +73,7 @@ export class OrganizationsController {
         throw new NotFoundException('Organization does not exist!');
       }
     } catch (err) {
-      throw err;
+      return err;
     }
   }
 
@@ -113,7 +113,7 @@ export class OrganizationsController {
         throw new NotFoundException('Organization does not exist!');
       }
     } catch (err) {
-      throw err;
+      return err;
     }
   }
 }

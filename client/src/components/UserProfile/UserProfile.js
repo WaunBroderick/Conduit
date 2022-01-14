@@ -11,7 +11,7 @@ import {
 import Avatar, { genConfig } from "react-nice-avatar";
 
 import { ProfileCardDivStyled } from "./style";
-import { LightSubTitle } from "../../styles/globalStyles";
+import { LightSubTitle } from "../../styles/themes/GlobalComponents";
 
 const UserProfile = ({ profile = [] }) => {
   const config = genConfig({ sex: "woman" });

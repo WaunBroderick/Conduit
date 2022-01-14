@@ -9,7 +9,7 @@ import UserTable from "../../components/UserTable/UserTable";
 import Lottie from "lottie-react";
 import loadingLargeAnimation from "../../assets/animations/loadingLarge.json";
 
-import { ConduitPage } from "../../styles/globalStyles";
+import { ConduitPage } from "../../styles/themes/GlobalComponents";
 import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 
 const Users = () => {

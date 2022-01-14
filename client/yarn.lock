@@ -12775,6 +12775,11 @@
   "resolved" "https://registry.npmjs.org/web-vitals/-/web-vitals-1.1.2.tgz"
   "version" "1.1.2"
 
+"webfontloader@^1.6.28":
+  "integrity" "sha1-23hhKSU8tujq5UwvsF+HCvZnW64="
+  "resolved" "https://registry.npmjs.org/webfontloader/-/webfontloader-1.6.28.tgz"
+  "version" "1.6.28"
+
 "webidl-conversions@^5.0.0":
   "integrity" "sha512-VlZwKPCkYKxQgeSbH5EyngOmRp7Ww7I9rQLERETtf5ofd9pGeswWiOtogpEO850jziPRarreGxn5QIiTqpb2wA=="
   "resolved" "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-5.0.0.tgz"

@@ -12,7 +12,16 @@ import configureStore from "./redux/store/configureStore";
 import { CookiesProvider } from "react-cookie";
 import Users from "./containers/Users/Users";
 
+import * as themes from "./styles/themes/schema.json";
+import { setToLS } from "./utils/storage";
+
 const store = configureStore();
+
+// Set Application Theme
+const Index = () => {
+  setToLS("all-themes", themes.default);
+  return <App />;
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -29,7 +38,7 @@ ReactDOM.render(
           draggable
           pauseOnHover
         />
-        <App />
+        <Index />
       </Provider>
     </CookiesProvider>
   </React.StrictMode>,

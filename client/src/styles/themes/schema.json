@@ -1,0 +1,87 @@
+{
+  "data": {
+    "light": {
+      "id": "T_001",
+      "name": "Light",
+      "colors": {
+        "primary": {},
+        "secondary": {},
+        "tertiary": {},
+        "status": {
+          "success": "#56C596",
+          "warning": "#FFCF5C",
+          "error": "#D63131"
+        },
+        "text": {
+          "title": "#2D3436",
+          "subTitle": "#636E72"
+        },
+        "cards": {
+          "background": "#FFFFFF",
+          "border": "red"
+        },
+        "background": "#FFFFFF",
+
+        "button": {
+          "text": "#FFFFFF",
+          "background": "#000000"
+        },
+        "link": {
+          "text": "teal",
+          "opacity": 1
+        }
+      },
+      "font": "Tinos"
+    },
+    "dark": {
+      "id": "T_001",
+      "name": "dark",
+      "colors": {
+        "body": "#FFFFFF",
+        "text": "#000000",
+        "button": {
+          "text": "#FFFFFF",
+          "background": "#000000"
+        },
+        "link": {
+          "text": "teal",
+          "opacity": 1
+        }
+      },
+      "font": "Tinos"
+    },
+    "seaWave": {
+      "id": "T_007",
+      "name": "SeaWave",
+      "colors": {
+        "primary": {},
+        "secondary": {},
+        "tertiary": {},
+        "status": {
+          "success": "#56C596",
+          "warning": "#FFCF5C",
+          "error": "#D63131"
+        },
+        "text": {
+          "title": "#56C596",
+          "subTitle": "#636E72"
+        },
+        "cards": {
+          "background": "#56C596",
+          "border": "red"
+        },
+        "background": "#D63131",
+
+        "button": {
+          "text": "#FFFFFF",
+          "background": "#000000"
+        },
+        "link": {
+          "text": "teal",
+          "opacity": 1
+        }
+      },
+      "font": "Ubuntu"
+    }
+  }
+}

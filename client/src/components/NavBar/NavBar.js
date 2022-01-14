@@ -9,8 +9,11 @@ import {
   EuiSpacer,
   EuiText,
   EuiPopover,
+  EuiButtonIcon,
+  EuiIcon,
+  EuiButton,
 } from "@elastic/eui";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { SubHeaderStyled, LinkStyled } from "./style";
@@ -18,9 +21,28 @@ import { ThemeProvider } from "styled-components";
 import theme from "../../styles/themes/LightTheme";
 import profileAction from "../../redux/reducers/profile/profile.action";
 
-export default function NavBar() {
+// Themeing
+import _ from "lodash";
+import { useTheme } from "../../styles/themes/useTheme";
+import { getFromLS } from "../../utils/storage";
+
+export default function NavBar(props) {
   const [cookies, setCookie, removeCookie] = useCookies("auth-cookie");
   const [redirect, setRedirect] = useState(false);
+
+  const themesFromStore = getFromLS("all-themes");
+  const [themeData, setThemeData] = useState(themesFromStore.data);
+  const [toggleThemeOn, setToggleThemeOn] = useState(false);
+  const [themes, setThemes] = useState([]);
+  const [DarkMode, setDarkMode] = useState(false);
+  const { setMode } = useTheme();
+
+  const themeSwitcher = (selectedTheme) => {
+    console.log(selectedTheme);
+    setMode(selectedTheme);
+    //props.setter(selectedTheme);
+    console.log("should be changed");
+  };
 
   const HeaderUserMenu = () => {
     const headerUserPopoverId = useGeneratedHtmlId({
@@ -122,11 +144,35 @@ export default function NavBar() {
                 <LinkStyled to="/Users">Courses</LinkStyled>,
                 <LinkStyled to="/Organization">Organization</LinkStyled>,
                 <LinkStyled to="/Marketplace">Marketplace</LinkStyled>,
+                <themeToggle />,
               ],
               borders: "none",
             },
+
             {
-              items: [<HeaderUserMenu />],
+              items: [
+                <EuiButton
+                  iconType={toggleThemeOn ? "moon" : "starFilledSpace"}
+                  onClick={(theme) => {
+                    if (DarkMode === false) {
+                      setToggleThemeOn((isOn) => !isOn);
+                      setDarkMode((prevDarkMode) => !prevDarkMode);
+                      console.log("THAT");
+                      themeSwitcher(themeData.light);
+                      window.location.reload();
+                    } else {
+                      setToggleThemeOn((isOn) => !isOn);
+                      setDarkMode((prevDarkMode) => !prevDarkMode);
+                      console.log("THIS");
+                      themeSwitcher(themeData.seaWave);
+                      window.location.reload();
+                    }
+                  }}
+                >
+                  {toggleThemeOn ? "Dark Mode" : "Light Mode"}
+                </EuiButton>,
+                <HeaderUserMenu />,
+              ],
               borders: "none",
             },
           ]}

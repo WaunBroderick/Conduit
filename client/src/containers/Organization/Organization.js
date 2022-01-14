@@ -8,7 +8,7 @@ import {
   EuiFlexGrid,
   EuiCard,
 } from "@elastic/eui";
-import { ConduitPage, ConduitCard } from "../../styles/globalStyles";
+import { ConduitPage, ConduitCard } from "../../styles/themes/GlobalComponents";
 
 import OrganizationCard from "../../components/OrganizationCard/OrganizationCard";
 

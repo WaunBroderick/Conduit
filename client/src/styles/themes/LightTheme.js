@@ -2,7 +2,10 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import PropTypes from "prop-types";
 
-const theme = {
+const lightTheme = {
+  background: "#fff",
+  color: "#1d1f28",
+  buttonBg: "#c5718d",
   colors: {
     primary: {},
     secondary: {},
@@ -22,6 +25,11 @@ const theme = {
     text: "#2D3436",
     subText: "#636E72",
     error: "#D63131",
+    plum: "#52314b",
+    rose: "#c3537d",
+    dryrose: "#dd7f9a",
+    primrose: "#e8babf",
+    white: "#fff",
   },
   fonts: ["sans-serif", "Roboto"],
   fontSizes: {
@@ -41,4 +49,4 @@ Theme.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default theme;
+export default lightTheme;

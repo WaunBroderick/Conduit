@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
     "lottie-react": "^2.1.0",
     "lottie-web": "^5.8.1",
     "moment": "^2.29.1",
@@ -32,7 +33,8 @@
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.3",
     "universal-cookie": "^4.0.4",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",

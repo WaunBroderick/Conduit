@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { EuiEmptyPrompt } from "@elastic/eui";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 
-import { ConduitPage } from "../../styles/globalStyles";
+import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 export default function Home() {
   const dispatch = useDispatch();

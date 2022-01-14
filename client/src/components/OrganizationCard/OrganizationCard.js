@@ -15,13 +15,15 @@ import {
   LightSubTitle,
   FullScreenConduitCard,
   AddItemButton,
-} from "../../styles/globalStyles";
+} from "../../styles/themes/GlobalComponents";
+
+import { GlobalStyles } from "../../styles/themes/GlobalStyles";
 
 const OrganizationCard = ({ Organization = [] }) => {
   return (
     <Fragment>
-      <EuiFlexGroup gutterSize="l">
-        <FullScreenConduitCard>
+      <EuiFlexGroup>
+        <FullScreenConduitCard className="euiCard" id="euiCard">
           <MainTitle>Organization Title</MainTitle>
           <LightSubTitle>Departments</LightSubTitle>
           <LightSubTitle>Courses</LightSubTitle>

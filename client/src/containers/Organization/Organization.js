@@ -1,12 +1,41 @@
 import React from "react";
 
-import { EuiEmptyPrompt } from "@elastic/eui";
-import { ConduitPage } from "../../styles/globalStyles";
+import {
+  EuiEmptyPrompt,
+  EuiFlexGroup,
+  EuiFlexItem,
+  EuiSpacer,
+  EuiFlexGrid,
+  EuiCard,
+} from "@elastic/eui";
+import { ConduitPage, ConduitCard } from "../../styles/globalStyles";
+
+import OrganizationCard from "../../components/OrganizationCard/OrganizationCard";
 
 export default function Organization() {
   return (
     <ConduitPage>
-      <EuiEmptyPrompt title={<span>Organization Screen</span>} />
+      <EuiFlexGroup>
+        <EuiFlexItem grow={false}>
+          <EuiSpacer />
+
+          <OrganizationCard />
+        </EuiFlexItem>
+
+        <EuiFlexItem>
+          <EuiSpacer />
+          <EuiFlexGroup gutterSize="l">
+            <ConduitCard>
+              <EuiFlexGrid columns={3}>
+                <EuiFlexItem>Nested Grid One</EuiFlexItem>
+                <EuiFlexItem>Nested Grid Two</EuiFlexItem>
+                <EuiFlexItem>Nested Grid Three</EuiFlexItem>
+                <EuiFlexItem>Nested Grid Four</EuiFlexItem>
+              </EuiFlexGrid>
+            </ConduitCard>
+          </EuiFlexGroup>
+        </EuiFlexItem>
+      </EuiFlexGroup>
     </ConduitPage>
   );
 }

@@ -7,11 +7,24 @@ import { OrganizationsController } from '../organizations.controller';
 import { OrganizationsService } from '../organizations.service';
 import { organizationStub } from './stubs/organizations.stub';
 
+import * as request from 'supertest';
 import * as mongoose from 'mongoose';
 import { UpdateOrganizationDto } from '../dto/update-organization.dto';
 import { PaginationQueryDto } from '../dto/pagination-query.dto';
 
 jest.mock('../organizations.service.ts');
+
+const mockRequest = (sessionData, body) => ({
+  session: { data: sessionData },
+  body,
+});
+
+const mockResponse = () => {
+  let res: any = {};
+  res.status = jest.fn().mockReturnValue(res);
+  res.json = jest.fn().mockReturnValue(res);
+  return res;
+};
 
 describe('OrganizationsController', () => {
   let organizationsController: OrganizationsController;

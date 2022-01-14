@@ -56,7 +56,7 @@ export default function NavBar() {
         aria-label="Account menu"
         onClick={onMenuButtonClick}
       >
-        <EuiAvatar name={profile.name} size="s" />
+        <EuiAvatar name="Waun Broderick" size="s" />
       </EuiHeaderSectionItemButton>
     );
 

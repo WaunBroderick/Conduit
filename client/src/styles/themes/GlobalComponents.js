@@ -9,6 +9,12 @@ const MainTitle = styled.h1`
   margin: 0.5em;
 `;
 
+const ActionTitle = styled.h1`
+  color: ${({ theme }) => theme.colors.primary.main};
+  font-size: ${theme.fontSizes.medium};
+  margin: 0.5em;
+`;
+
 const DarkSubTitle = styled.h2`
   color: ${({ theme }) => theme.colors.text.title};
   font-size: ${theme.fontSizes.small};
@@ -41,19 +47,56 @@ const ConduitCard = styled(EuiCard)`
 `;
 
 //Buttons
+/*const AddItemButton = styled.button`
+  border-radius: 100px;
+  color: white;
+  background: ${(props) => props.theme.colors.primary.main};
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+`;*/
+
 const AddItemButton = styled(EuiButtonIcon)`
-  border-radius: 50px;
-  background-color: red;
+  background-color: ${({ theme }) => theme.colors.primary.main};
+  border-radius: 100;
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: 100;
 `;
 
 const BasicThemedButton = styled.button`
-  background-color: ${(props) => props.theme.colors.primrose};
-  color: ${(props) => props.theme.colors.white};
   font-size: 1.25rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 10px;
+  align
 `;
+
+// Conduit Modals
+const ConduitModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba($color: #000000, $alpha: 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ConduitModal = styled.div`
+  background: #fff;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+  z-index: 999;
+  max-width: 420px;
+  margin: auto;
+  padding: 1em 2em 2em;
+  position: relative;
+`;
+
+const closeModal = styled.button``;
 
 export {
   ConduitPage,
@@ -64,4 +107,8 @@ export {
   FullScreenConduitCard,
   AddItemButton,
   BasicThemedButton,
+  closeModal,
+  ActionTitle,
+  ConduitModal,
+  ConduitModalContainer,
 };

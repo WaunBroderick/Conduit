@@ -4,7 +4,11 @@
       "id": "T_001",
       "name": "Light",
       "colors": {
-        "primary": {},
+        "white": "#FFFFFF",
+        "primary": {
+          "main": "#406882",
+          "mainActive": "#1A374D"
+        },
         "secondary": {},
         "tertiary": {},
         "status": {
@@ -37,8 +41,26 @@
       "id": "T_001",
       "name": "dark",
       "colors": {
-        "body": "#FFFFFF",
-        "text": "#000000",
+        "primary": {
+          "main": "#305F72"
+        },
+        "secondary": {},
+        "tertiary": {},
+        "status": {
+          "success": "#56C596",
+          "warning": "#FFCF5C",
+          "error": "#D63131"
+        },
+        "text": {
+          "title": "#2D3436",
+          "subTitle": "#636E72"
+        },
+        "cards": {
+          "background": "#FFFFFF",
+          "border": "red"
+        },
+        "background": "#FFFFFF",
+
         "button": {
           "text": "#FFFFFF",
           "background": "#000000"
@@ -54,7 +76,9 @@
       "id": "T_007",
       "name": "SeaWave",
       "colors": {
-        "primary": {},
+        "primary": {
+          "main": "#305F72"
+        },
         "secondary": {},
         "tertiary": {},
         "status": {
@@ -63,14 +87,14 @@
           "error": "#D63131"
         },
         "text": {
-          "title": "#56C596",
+          "title": "#2D3436",
           "subTitle": "#636E72"
         },
         "cards": {
-          "background": "#56C596",
+          "background": "#FFFFFF",
           "border": "red"
         },
-        "background": "#D63131",
+        "background": "#FFFFFF",
 
         "button": {
           "text": "#FFFFFF",

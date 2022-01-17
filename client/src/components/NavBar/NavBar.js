@@ -141,7 +141,7 @@ export default function NavBar(props) {
                 </EuiHeaderLogo>,
 
                 <LinkStyled to="/Users">Users</LinkStyled>,
-                <LinkStyled to="/Users">Courses</LinkStyled>,
+                <LinkStyled to="/Courses">Courses</LinkStyled>,
                 <LinkStyled to="/Organization">Organization</LinkStyled>,
                 <LinkStyled to="/Marketplace">Marketplace</LinkStyled>,
                 <themeToggle />,

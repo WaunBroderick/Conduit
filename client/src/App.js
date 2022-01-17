@@ -21,6 +21,7 @@ import WebFont from "webfontloader";
 import { useTheme } from "./styles/themes/useTheme";
 import { GlobalStyles } from "./styles/themes/GlobalStyles";
 import { getFromLS } from "./utils/storage";
+import Courses from "./containers/courses/Courses";
 
 const themeDark = {
   colorPrimary: "purple",
@@ -43,6 +44,7 @@ const AppContainer = () => (
     <NavBar />
     <Route exact path="/home" component={Home} />
     <Route exact path="/users" component={Users} />
+    <Route exact path="/courses" component={Courses} />
     <Route exact path="/organization" component={Organization} />
     <Route exact path="/marketplace" component={Marketplace} />
     <Route exact path="/profile" component={Profile} />

@@ -61,7 +61,6 @@ const AddItemButton = styled(EuiButtonIcon)`
   background-color: ${({ theme }) => theme.colors.primary.main};
   border-radius: 100;
   color: ${({ theme }) => theme.colors.white};
-  border-radius: 100;
 `;
 
 const BasicThemedButton = styled.button`
@@ -69,7 +68,22 @@ const BasicThemedButton = styled.button`
   border: none;
   border-radius: 0px;
   padding: 10px;
-  align
+`;
+
+const ExitButton = styled(EuiButtonIcon)`
+  background-color: ${({ theme }) => theme.colors.primary.main};
+  border-radius: 100;
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const ExitButton2 = styled.button`
+  background-color: ${({ theme }) => theme.colors.primary.main};
+  font-size: 1.25rem;
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: 100;
+  padding: 1px;
+  margin: 1px;
+  border-radius: 100%;
 `;
 
 // Conduit Modals
@@ -99,6 +113,7 @@ const ConduitModal = styled.div`
 const closeModal = styled.button``;
 
 export {
+  ExitButton,
   ConduitPage,
   LightSubTitle,
   ConduitCard,

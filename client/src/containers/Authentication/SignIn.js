@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+
+// Load all of state storage
 import { useSelector, useDispatch } from "react-redux";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
+import { loadUsersAsync } from "../../redux/reducers/users/users.thunk";
+import { loadDepartmentsAsync } from "../../redux/reducers/departments/departments.thunk";
+
 import {
   EuiFieldPassword,
   EuiForm,
@@ -51,7 +56,12 @@ export default function SignIn() {
         setJWT(response.data.accessToken);
         console.log(response.data);
         setCookie("auth-cookie", response.data.accessToken, { path: "/" });
+        //loadProfileinformation
         dispatch(loadProfileAsync(response.data.accessToken));
+        //loadEmployeesInformation
+        dispatch(loadUsersAsync(response.data.accessToken));
+        //loadDepartmentsInformation
+        dispatch(loadDepartmentsAsync(response.data.accessToken));
         setRedirect(true);
       })
       .then((data) => {})

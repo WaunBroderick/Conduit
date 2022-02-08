@@ -15,7 +15,9 @@ import Users from "./containers/Users/Users";
 import * as themes from "./styles/themes/schema.json";
 import { setToLS } from "./utils/storage";
 
-const store = configureStore();
+import { PersistGate } from "redux-persist/integration/react";
+
+const { store, persistor } = configureStore();
 
 // Set Application Theme
 const Index = () => {
@@ -27,18 +29,20 @@ ReactDOM.render(
   <React.StrictMode>
     <CookiesProvider>
       <Provider store={store}>
-        <ToastContainer
-          position="top-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <Index />
+        <PersistGate loading={null} persistor={persistor}>
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <Index />
+        </PersistGate>
       </Provider>
     </CookiesProvider>
   </React.StrictMode>,

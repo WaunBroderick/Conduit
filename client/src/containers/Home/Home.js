@@ -6,13 +6,13 @@ import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 export default function Home() {
-  const dispatch = useDispatch();
-  const { isLoading, profile, errorMessage } = useSelector(
-    (state) => state.profile
-  );
+  //const dispatch = useDispatch();
+  //const { isLoading, profile, errorMessage } = useSelector(
+  //  (state) => state.profile
+  //);
 
   useEffect(() => {
-    dispatch(loadProfileAsync());
+    //dispatch(loadProfileAsync());
   }, []);
 
   return (

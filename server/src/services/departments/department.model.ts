@@ -3,6 +3,7 @@ import { Document, Types } from 'mongoose';
 
 import * as mongoose from 'mongoose';
 import { Organization } from '../organizations/organization.model';
+import { Role } from '../roles/role.model';
 
 export type DepartmentDocument = Department & Document;
 @Schema()

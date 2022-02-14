@@ -10,6 +10,7 @@ import { OrganizationsController } from './services/organizations/organizations.
 import { OrganizationsModule } from './services/organizations/organizations.module';
 import { DepartmentsModule } from './services/departments/departments.module';
 import { AssignmentModule } from './services/assignment/assignment.module';
+import { RolesModule } from './services/roles/roles.module';
 
 @Module({
   imports: [
@@ -17,13 +18,17 @@ import { AssignmentModule } from './services/assignment/assignment.module';
       isGlobal: true,
     }),
     MongooseModule.forRoot(
-      `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
+      // For STAGING MongoDB server
+      //`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
+      // For local development
+      `mongodb://localhost:27017/conduit-STAGING`,
     ),
     UsersModule,
     OrganizationsModule,
     DepartmentsModule,
     AuthModule,
     AssignmentModule,
+    RolesModule,
   ],
   controllers: [AppController, OrganizationsController],
   providers: [AppService],

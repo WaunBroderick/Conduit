@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "@nestjs/mapped-types": "*"
+  },
   "name": "conduit",
   "version": "1.0.0",
   "description": "<html> <img src=\"/client/src/assets/img/logo/Untitled-2-04.png\" title=\"Conduit Logo\"> </html>",

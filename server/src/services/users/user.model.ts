@@ -2,6 +2,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
 import * as mongoose from 'mongoose';
+import { Role } from '../roles/role.model';
 
 export type UserDocument = User & Document;
 @Schema()
@@ -23,6 +24,9 @@ export class User {
 
   @Prop({ required: false })
   departments: [];
+
+  @Prop({ required: false })
+  userRoles: [mongoose.Types.ObjectId];
 
   @Prop({ required: true })
   online: boolean;

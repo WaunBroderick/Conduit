@@ -13,11 +13,12 @@ export class DepartmentsService {
   ) {}
 
   async create(createDepartmentDto: CreateDepartmentDto): Promise<void> {
-    const { name, organization, subSection } = createDepartmentDto;
+    const { name, organization, subSection, admins } = createDepartmentDto;
     const Department = new this.departmentModel({
       name,
       organization,
       subSection,
+      admins,
     });
 
     try {

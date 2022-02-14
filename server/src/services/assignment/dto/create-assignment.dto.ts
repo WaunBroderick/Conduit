@@ -23,4 +23,13 @@ export class CreateAssignmentDto {
   })
   @Prop()
   organizationId: string;
+
+  @ApiProperty({
+    type: Date,
+    default: null,
+    required: false,
+    nullable: true,
+    description: 'The due date or deadline for the assignment given',
+  })
+  dueDate: Date;
 }

@@ -19,7 +19,7 @@ import {
 
 import { GlobalStyles } from "../../styles/themes/GlobalStyles";
 
-const OrganizationCard = ({ Organization = [] }) => {
+const OrganizationCard = () => {
   return (
     <Fragment>
       <EuiFlexGroup>

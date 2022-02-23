@@ -28,9 +28,9 @@ const LightSubTitle = styled.h2`
 `;
 
 const ConduitPage = styled.div`
-  margin-top: 6em;
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 5em;
+  margin-right: 5em;
+  padding-top: 8em;
 `;
 
 const FullScreenConduitCard = styled(EuiCard)`

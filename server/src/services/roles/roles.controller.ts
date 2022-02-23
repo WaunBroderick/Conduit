@@ -24,6 +24,12 @@ export class RolesController {
 
   @Post()
   @ApiOperation({ description: 'Create an organization Role' })
+  @ApiParam({
+    name: 'testing',
+    required: true,
+    description: 'its a description?...',
+    schema: { oneOf: [{ type: 'string' }] },
+  })
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createRoleDto: CreateRoleDto) {

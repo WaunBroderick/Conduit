@@ -23,6 +23,9 @@ import { GlobalStyles } from "./styles/themes/GlobalStyles";
 import { getFromLS } from "./utils/storage";
 import Courses from "./containers/courses/Courses";
 
+// SWR Experiment
+import useSWR, { SWRConfig } from "swr";
+
 const themeDark = {
   colorPrimary: "purple",
 };
@@ -40,15 +43,23 @@ const LoginContainer = () => (
 );
 
 const AppContainer = () => (
-  <div style={{ height: "100vh" }}>
-    <NavBar />
-    <Route exact path="/home" component={Home} />
-    <Route exact path="/users" component={Users} />
-    <Route exact path="/courses" component={Courses} />
-    <Route exact path="/organization" component={Organization} />
-    <Route exact path="/marketplace" component={Marketplace} />
-    <Route exact path="/profile" component={Profile} />
-  </div>
+  <SWRConfig
+    value={{
+      refreshInterval: 3000,
+      fetcher: (resource, init) =>
+        fetch(resource, init).then((Res) => res.json()),
+    }}
+  >
+    <div style={{ height: "100vh" }}>
+      <NavBar />
+      <Route exact path="/home" component={Home} />
+      <Route exact path="/users" component={Users} />
+      <Route exact path="/courses" component={Courses} />
+      <Route exact path="/organization" component={Organization} />
+      <Route exact path="/marketplace" component={Marketplace} />
+      <Route exact path="/profile" component={Profile} />
+    </div>
+  </SWRConfig>
 );
 
 function App() {

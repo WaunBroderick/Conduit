@@ -23,14 +23,6 @@ import Calendar from "react-calendar";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function Home() {
-  const { data, error } = useSWR(
-    "http://localhost:5000/organizations/",
-    fetcher
-  );
-
-  if (!data) return "I am loading....";
-  if (error) return "there is an error";
-
   const [value, onChange] = useState(new Date());
 
   return (

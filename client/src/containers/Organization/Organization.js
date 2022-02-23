@@ -5,6 +5,10 @@ import {
   EuiFlexItem,
   EuiSpacer,
   EuiFlexGrid,
+  EuiCard,
+  EuiPanel,
+  EuiStat,
+  EuiIcon,
 } from "@elastic/eui";
 
 import {
@@ -23,41 +27,65 @@ export default function Organization() {
 
   return (
     <ConduitPage>
-      <Modal visible={visible} toggle={toggle} />
-
-      <EuiFlexGroup>
-        <EuiFlexItem grow={false}>
-          <EuiSpacer />
-
-          <OrganizationCard />
-        </EuiFlexItem>
-
-        <EuiFlexItem>
-          <EuiSpacer />
-          <EuiFlexGroup gutterSize="l">
-            <ConduitCard>
-              <EuiFlexGrid columns={3}>
-                <EuiFlexItem>
-                  {" "}
-                  <AddItemButton
-                    className="ConduitAddButtton"
-                    display="base"
-                    iconType="plus"
-                    iconSize="l"
-                    size="m"
-                    aria-label="plus"
-                    onClick={toggle}
-                  />
-                </EuiFlexItem>
-                <Modal visible={visible} toggle={toggle} />
-
-                <EuiFlexItem>Nested Grid Two</EuiFlexItem>
-                <EuiFlexItem>Nested Grid Three</EuiFlexItem>
-                <EuiFlexItem>Nested Grid Four</EuiFlexItem>
-              </EuiFlexGrid>
-            </ConduitCard>
-          </EuiFlexGroup>
-        </EuiFlexItem>
+      <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>
+        <EuiFlexGroup style={{ padding: "12px", maxWidth: "400px" }}>
+          <EuiFlexItem>
+            <EuiCard style={{ height: 900 }}></EuiCard>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+        <EuiSpacer />
+        <EuiFlexGroup
+          gutterSize="l"
+          style={{ padding: "12px", maxHeight: 100 }}
+        >
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="11"
+                description="Courses to Complete"
+                textAlign="right"
+              >
+                <EuiIcon type="empty" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="19"
+                description="Reviews Awaiting"
+                titleColor="accent"
+                textAlign="right"
+              >
+                <EuiIcon type="clock" color="accent" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="11"
+                description="Collected Cerificates"
+                titleColor="success"
+                textAlign="right"
+              >
+                <EuiIcon type="check" color="success" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="3"
+                description="Overdue Courses"
+                titleColor="danger"
+                textAlign="right"
+              >
+                <EuiIcon type="alert" color="danger" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+        </EuiFlexGroup>
       </EuiFlexGroup>
     </ConduitPage>
   );

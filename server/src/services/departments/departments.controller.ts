@@ -29,7 +29,7 @@ export class DepartmentsController {
     return this.departmentsService.create(createDepartmentDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Get()
   public async findAll(
     @Res() res,

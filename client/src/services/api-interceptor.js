@@ -29,7 +29,7 @@ const errorHandler = (error) => {
 };
 
 // axios instance for making requests
-const axiosInstance = axios.create();
+const axiosInstance = axios.create({ baseURL: "http://localhost:5000/" });
 
 // response interceptor for handling common errors (e.g. HTTP 500)
 axiosInstance.interceptors.response.use(

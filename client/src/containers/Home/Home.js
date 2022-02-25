@@ -16,7 +16,6 @@ import {
 import theme from "../../styles/themes/LightTheme";
 
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
-import useSWR, { mutate } from "swr";
 
 import Calendar from "react-calendar";
 

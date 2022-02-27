@@ -11,6 +11,7 @@ import {
   EuiIcon,
   EuiTitle,
   EuiText,
+  EuiButton,
 } from "@elastic/eui";
 
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
@@ -29,6 +30,7 @@ export default function Organization() {
 
   return (
     <ConduitPage>
+      <Modal visible={visible} toggle={toggle} />
       <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>
         <EuiFlexGroup
           style={{
@@ -52,25 +54,52 @@ export default function Organization() {
         </EuiFlexGroup>
         <EuiSpacer />
 
-        <div style={{ maxWidth: "80%", overflow: "auto" }}>
-          <EuiFlexGroup
-            gutterSize="l"
-            style={{ padding: "12px", maxHeight: 100 }}
-          >
-            {data?.map((department) => (
-              <EuiFlexItem grow={1} style={{ minWidth: "300px" }}>
-                <EuiPanel>
-                  <EuiStat
-                    title="11"
-                    description={department.name}
-                    textAlign="right"
-                  >
-                    <EuiIcon type="clock" color="accent" />
-                  </EuiStat>
-                </EuiPanel>
-              </EuiFlexItem>
-            ))}
-          </EuiFlexGroup>
+        <div style={{ maxWidth: "80%" }}>
+          <div style={{ display: "flex" }}>
+            <EuiFlexItem style={{ float: "left", display: "inline-block" }}>
+              <EuiTitle>
+                <h2>Departments</h2>
+              </EuiTitle>
+
+              <EuiButton
+                iconSide="right"
+                fill
+                size="s"
+                onClick={toggle}
+                iconType="plus"
+                style={{
+                  maxWidth: "300px",
+                  float: "right",
+                  display: "inline-block",
+                  padding: 20,
+                }}
+              >
+                Create Department
+              </EuiButton>
+            </EuiFlexItem>
+          </div>
+          <div style={{ overflowY: "hidden" }}>
+            <EuiFlexGroup
+              gutterSize="l"
+              style={{
+                padding: "12px",
+              }}
+            >
+              {data?.map((department) => (
+                <EuiFlexItem grow={1} style={{ minWidth: "300px" }}>
+                  <EuiPanel>
+                    <EuiStat
+                      title="11"
+                      description={department.name}
+                      textAlign="right"
+                    >
+                      <EuiIcon type="clock" color="accent" />
+                    </EuiStat>
+                  </EuiPanel>
+                </EuiFlexItem>
+              ))}
+            </EuiFlexGroup>
+          </div>
         </div>
       </EuiFlexGroup>
     </ConduitPage>

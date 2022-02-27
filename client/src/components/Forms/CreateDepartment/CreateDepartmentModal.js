@@ -4,46 +4,31 @@ import {
   EuiFormRow,
   EuiFieldText,
   EuiButton,
+  EuiTitle,
+  EuiFlexItem,
+  EuiButtonIcon,
 } from "@elastic/eui";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+import { useForm } from "react-hook-form";
+
 import {
-  BasicThemedButton,
-  ExitButton,
-} from "../../../styles/themes/GlobalComponents";
-import {
-  ActionTitle,
   ConduitModal,
   ConduitModalContainer,
 } from "../../../styles/themes/GlobalComponents";
 
-import axios from "../../../services/api-interceptor";
+const schema = z.object({
+  name: z.string({
+    required_error: "Name is required",
+    invalid_type_error: "Name must be a string",
+  }),
+});
 
 export default function Modal({ visible, toggle }) {
-  const [value, setValue] = useState("");
-
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-
-  const onFormSubmit = async (e) => {
-    e.preventDefault();
-    console.log(value);
-    cons;
-
-    const createDepartment = axios.post(
-      "http://localhost:5000/deparments",
-      {
-        name: value,
-        organization: "",
-      },
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-  };
-
   return visible
     ? ReactDOM.createPortal(
         <ConduitModalContainer>
@@ -54,36 +39,21 @@ export default function Modal({ visible, toggle }) {
                 justifyContent: "flex-end",
               }}
             >
-              <ExitButton
-                className="ConduitAddButtton"
-                display="base"
-                iconType="exit"
-                iconSize="s"
-                size="xs"
-                aria-label="plus"
-                onClick={toggle}
-              />
+              <EuiFlexItem grow={false}>
+                <EuiButtonIcon
+                  display="base"
+                  iconType="arrowRight"
+                  aria-label="Next"
+                  onClick={toggle}
+                />
+              </EuiFlexItem>
             </div>
             <center>
-              <ActionTitle>Create A New Department</ActionTitle>
+              <EuiTitle>
+                <h1>New Department</h1>
+              </EuiTitle>
             </center>
             <EuiSpacer />
-            <EuiForm>
-              <EuiFormRow
-                label="Department Name"
-                helpText="What is the name of your new department?"
-              >
-                <EuiFieldText
-                  placeholder="Department Name"
-                  value={value}
-                  onChange={(e) => onChange(e)}
-                  aria-label="What is the name of your new department?"
-                />
-              </EuiFormRow>
-              <EuiButton type="submit" onClick={onFormSubmit} fill>
-                Submit
-              </EuiButton>
-            </EuiForm>
           </ConduitModal>
           <div className="modal-overlay"></div>
         </ConduitModalContainer>,

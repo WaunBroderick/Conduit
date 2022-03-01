@@ -10,3 +10,6 @@ export const updateDepartment = ({ id, ...updatedDepartment }) =>
   axiosInstance
     .put(`/departments/${id}`, updatedDepartment)
     .then((res) => res.data);
+
+export const createDepartment = ({ ...createdDepartment }) =>
+  axiosInstance.post(`/departments`, createdDepartment).then((res) => res.data);

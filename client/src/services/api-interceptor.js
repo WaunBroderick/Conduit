@@ -9,6 +9,17 @@ const axiosInstance = axios.create({ baseURL: "http://localhost:5000/" });
 // Custom toasts for success and rejects
 axiosInstance.interceptors.response.use(
   function (response) {
+    if (response.status === 200) {
+      toast.success(`Request Successful`, {
+        position: "top-center",
+        autoClose: true,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+      });
+    }
     if (response.status === 201) {
       toast.success(`Resource Created`, {
         position: "top-center",

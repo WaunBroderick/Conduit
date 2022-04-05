@@ -1,10 +1,27 @@
 // api-interceptor.js
 import axios from "axios";
 import { toast } from "react-toastify";
-import { promise } from "zod";
+import { useCookies } from "react-cookie";
+
+// AuthCookie
+//const [cookies] = useCookies(["authCookie"]);
+//const token = cookies.authCookie;
+
+const authCookie = () => {
+  const [cookies] = useCookies(["authCookie"]);
+  const token = cookies.authCookie;
+  return token;
+};
 
 // axios instance for making requests
-const axiosInstance = axios.create({ baseURL: "http://localhost:5000/" });
+export const axiosInstanceNoJWT = axios.create({
+  baseURL: "http://localhost:5000/",
+});
+
+// axios instance for making requests
+export const axiosInstance = axios.create({
+  baseURL: "http://localhost:5000/",
+});
 
 // Custom toasts for success and rejects
 axiosInstance.interceptors.response.use(

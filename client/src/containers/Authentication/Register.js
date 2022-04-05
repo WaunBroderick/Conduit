@@ -19,7 +19,7 @@ import "@elastic/eui/dist/eui_theme_light.css";
 
 // Style Imports
 import StyledSection from "./style";
-import axios from "../../services/api-interceptor";
+import { axiosInstanceNoJWT } from "../../services/api-interceptor";
 
 export default function Register() {
   const [showErrors, setShowErrors] = useState(true);
@@ -34,7 +34,7 @@ export default function Register() {
   const submit = async (e) => {
     e.preventDefault();
 
-    const regUser = axios
+    const regUser = axiosInstanceNoJWT
       .post(
         "http://localhost:5000/organizations",
         {
@@ -46,7 +46,7 @@ export default function Register() {
       )
       .then((response) => {
         console.log(response);
-        axios
+        axiosInstanceNoJWT
           .post(
             "http://localhost:5000/users",
             {

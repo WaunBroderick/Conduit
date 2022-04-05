@@ -19,14 +19,19 @@ import { ConduitPage } from "../../styles/themes/GlobalComponents";
 import Modal from "../../components/Forms/CreateDepartment/CreateDepartmentModal";
 import useModal from "../../components/Forms/CreateDepartment/useModal";
 
-import * as api from "../../services/departmentsApi";
+import * as departmentApi from "../../services/departmentsApi";
 import { useQuery } from "react-query";
+import { useCookies } from "react-cookie";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
+console.log("hello world");
+
 export default function Organization() {
-  const { data } = useQuery("departments", api.getDepartments);
+  const { data } = useQuery("departments", departmentApi.getDepartments);
+  //const { organizationData } = useQuery("organizations", api.getDepartments);
   const { toggle, visible } = useModal();
+  const [cookies] = useCookies(["atuhCookie"]);
 
   return (
     <ConduitPage>

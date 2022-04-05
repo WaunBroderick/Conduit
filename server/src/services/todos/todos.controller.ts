@@ -10,11 +10,15 @@ import {
   HttpCode,
   ValidationPipe,
   HttpStatus,
+  Res,
+  Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { ApiOperation, ApiParam } from '@nestjs/swagger';
+import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -35,8 +39,8 @@ export class TodosController {
   }
 
   @Get()
-  findAll() {
-    return this.todosService.findAll();
+  public async findAll(@Query() { offset, limit }: PaginationQueryDto) {
+    return this.todosService.findAll(offset, limit);
   }
 
   @Get(':id')
@@ -50,7 +54,8 @@ export class TodosController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.todosService.remove(+id);
+  remove(@Param('id') id: any) {
+    //return id;
+    return this.todosService.remove(id);
   }
 }

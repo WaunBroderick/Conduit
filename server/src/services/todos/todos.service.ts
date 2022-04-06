@@ -5,7 +5,7 @@ import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 
 import { ToDos } from './todos.model';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { IToDos } from './interfaces/todos.interface';
 
 import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
@@ -36,12 +36,19 @@ export class TodosService {
     return { results, count };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
+  public async findOne(id: string): Promise<ToDos> {
+    const ID = mongoose.Types.ObjectId(id);
+    const ToDo = await this.todosModel.findById(ID).exec();
+
+    return ToDo;
   }
 
-  update(id: number, updateTodoDto: UpdateTodoDto) {
-    return `This action updates a #${id} todo`;
+  async update(id: number, updateTodoDto: UpdateTodoDto) {
+    const ID = mongoose.Types.ObjectId(id);
+    const ToDo = await this.todosModel.findByIdAndUpdate(ID, updateTodoDto, {
+      new: true,
+    });
+    return ToDo;
   }
 
   async remove(id: string): Promise<any> {

@@ -12,6 +12,7 @@ import {
   EuiButtonIcon,
   EuiIcon,
   EuiButton,
+  EuiBreadcrumbs,
 } from "@elastic/eui";
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
@@ -36,6 +37,34 @@ export default function NavBar(props) {
   const [themes, setThemes] = useState([]);
   const [DarkMode, setDarkMode] = useState(false);
   const { setMode } = useTheme();
+
+  const breadcrumbs = [
+    {
+      text: "Animals",
+      href: "#",
+      onClick: (e) => {
+        e.preventDefault();
+      },
+      "data-test-subj": "breadcrumbsAnimals",
+    },
+    {
+      text: "Reptiles",
+    },
+    {
+      text: "Boa constrictor",
+      href: "#",
+      onClick: (e) => {
+        e.preventDefault();
+      },
+    },
+    {
+      text: "Edit",
+      href: "#",
+      onClick: (e) => {
+        e.preventDefault();
+      },
+    },
+  ];
 
   const themeSwitcher = (selectedTheme) => {
     console.log(selectedTheme);
@@ -183,7 +212,13 @@ export default function NavBar(props) {
           size="xs"
           sections={[
             {
-              items: [],
+              items: [
+                <EuiBreadcrumbs
+                  breadcrumbs={breadcrumbs}
+                  truncate={false}
+                  aria-label="An example of EuiBreadcrumbs"
+                />,
+              ],
             },
           ]}
         />

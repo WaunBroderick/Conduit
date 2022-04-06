@@ -24,14 +24,14 @@ import { useCookies } from "react-cookie";
 import StyledSection from "./style";
 import "@elastic/eui/dist/eui_theme_light.css";
 
-import axios from "../../services/api-interceptor";
+import { axiosInstanceNoJWT } from "../../services/api-interceptor";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const [JWT, setJWT] = useState("");
-  const [cookies, setCookie] = useCookies("auth-cookie");
+  const [cookies, setCookie] = useCookies("authCookie");
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { isLoading, profile, errorMessage } = useSelector(
@@ -41,7 +41,7 @@ export default function SignIn() {
   const submit = async (e) => {
     e.preventDefault();
 
-    const verifyUser = axios
+    const verifyUser = axiosInstanceNoJWT
       .post(
         "http://localhost:5000/auth/signin",
         {
@@ -55,7 +55,7 @@ export default function SignIn() {
       .then((response) => {
         setJWT(response.data.accessToken);
         console.log(response.data);
-        setCookie("auth-cookie", response.data.accessToken, { path: "/" });
+        setCookie("authCookie", response.data.accessToken, { path: "/" });
         //loadProfileinformation
         dispatch(loadProfileAsync(response.data.accessToken));
         //loadEmployeesInformation

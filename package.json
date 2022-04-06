@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/WaunBroderick/Conduit/issues"
   },
-  "homepage": "https://github.com/WaunBroderick/Conduit#readme"
+  "homepage": "https://github.com/WaunBroderick/Conduit#readme",
+  "devDependencies": {}
 }

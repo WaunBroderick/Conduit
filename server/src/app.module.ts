@@ -11,6 +11,7 @@ import { OrganizationsModule } from './services/organizations/organizations.modu
 import { DepartmentsModule } from './services/departments/departments.module';
 import { AssignmentModule } from './services/assignment/assignment.module';
 import { RolesModule } from './services/roles/roles.module';
+import { TodosModule } from './services/todos/todos.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { RolesModule } from './services/roles/roles.module';
     AuthModule,
     AssignmentModule,
     RolesModule,
+    TodosModule,
   ],
   controllers: [AppController, OrganizationsController],
   providers: [AppService],

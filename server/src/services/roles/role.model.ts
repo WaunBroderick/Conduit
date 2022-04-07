@@ -25,7 +25,7 @@ export class Role {
   roleName: string;
 
   @Prop({ type: mongoose.Types.ObjectId, ref: Department.name })
-  departmentsWithin: [Department];
+  departmentsWithin: [mongoose.Types.ObjectId];
 
   @Prop({
     type: Array,

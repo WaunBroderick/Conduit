@@ -19,7 +19,7 @@ export class CreateRoleDto {
     nullable: false,
     description: 'All the departments this role is associated with',
   })
-  departmentsWithin: [string];
+  departmentsWithin: [mongoose.Types.ObjectId];
 
   @ApiProperty({
     type: Array,

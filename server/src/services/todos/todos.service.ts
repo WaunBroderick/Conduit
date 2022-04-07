@@ -36,7 +36,7 @@ export class TodosService {
     return { results, count };
   }
 
-  public async findOne(id: string): Promise<ToDos> {
+  public async findOne(id: string): Promise<IToDos> {
     const ID = mongoose.Types.ObjectId(id);
     const ToDo = await this.todosModel.findById(ID).exec();
 

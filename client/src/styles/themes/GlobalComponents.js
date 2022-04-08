@@ -108,6 +108,8 @@ const ConduitModal = styled.div`
   margin: auto;
   padding: 1em 2em 2em;
   position: relative;
+  min-width: 65%;
+  min-height: 65%;
 `;
 
 const closeModal = styled.button``;

@@ -1,4 +1,4 @@
-FROM node:14.16.1
+FROM node:14.19.1
 RUN mkdir -p /usr/src/Conduit
 
 ENV MONGO_ATLAS_USER=wbroderick

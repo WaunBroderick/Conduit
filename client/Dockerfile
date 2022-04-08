@@ -1,5 +1,5 @@
 # Pull official base image
-FROM node:14.16.1
+FROM node:14.19.1
 
 # Set up working Dir
 WORKDIR /client

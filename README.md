@@ -68,4 +68,4 @@ $ docker compose up
 
 Notes for editing
 
-1. cmd-shift-v to open the markdown previewer in VSCode
+1. cmd-shift-v to open the markdown previewer in VSCode for Quality Assurance

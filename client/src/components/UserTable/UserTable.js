@@ -10,8 +10,13 @@ import {
   EuiFacetButton,
 } from "@elastic/eui";
 
+import useModal from "../shared/useModal";
+import Modal from "../UserDetails/UserDetails";
+
 const UserTable = ({ users = [], departments = [] }) => {
+  const { toggle, visible } = useModal();
   const [items, setItems] = useState(users);
+  const [userDetails, setuserDetails] = useState({ name: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [, setSelectedItems] = useState([]);
@@ -20,6 +25,12 @@ const UserTable = ({ users = [], departments = [] }) => {
   const deleteUser = (user) => {
     console.log(user);
     setSelectedItems([]);
+  };
+
+  const modalTrigger = (user) => {
+    setuserDetails(user);
+    visible;
+    toggle();
   };
 
   const editUser = (user) => {
@@ -33,7 +44,7 @@ const UserTable = ({ users = [], departments = [] }) => {
       description: "Edit this person",
       icon: "pencil",
       type: "icon",
-      onClick: editUser,
+      onClick: modalTrigger,
     },
     {
       name: "Delete",
@@ -155,9 +166,10 @@ const UserTable = ({ users = [], departments = [] }) => {
 
   return (
     <Fragment>
+      <Modal visible={visible} toggle={toggle} userDetails={userDetails} />
       <EuiPanel>
         <EuiFlexGroup>
-          <EuiFlexItem grow={1}>
+          <EuiFlexItem>
             <EuiFacetGroup>
               {facets.map((facet) => {
                 return (

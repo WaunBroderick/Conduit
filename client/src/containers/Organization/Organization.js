@@ -16,8 +16,7 @@ import {
 
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
-import Modal from "../../components/Forms/CreateDepartment/CreateDepartmentModal";
-import useModal from "../../components/Forms/CreateDepartment/useModal";
+import GenericFormModal from "../../components/Forms/CreateDepartment/genericFormModal";
 
 import * as departmentApi from "../../services/departmentsApi";
 import { useQuery } from "react-query";
@@ -29,13 +28,34 @@ console.log("hello world");
 
 export default function Organization() {
   const { data } = useQuery("departments", departmentApi.getDepartments);
-  //const { organizationData } = useQuery("organizations", api.getDepartments);
-  const { toggle, visible } = useModal();
+  //Generic form modal
+  const [isOpen, setIsOpen] = useState(false);
   const [cookies] = useCookies(["atuhCookie"]);
+
+  //Department creation interface
+  const [GFMzObject, setGFMzObject] = useState({});
+  const [GFMtitle, setGFMtitle] = useState("");
+  const [GFMdata, setGFMdata] = useState("");
+  const [GFMform, setGFMform] = useState({
+    name: "test",
+    test: "name",
+    thing: "sure",
+  });
+
+  function createDepartment(e) {
+    setGFMtitle("Create a Department");
+    setIsOpen(true);
+  }
 
   return (
     <ConduitPage>
-      <Modal visible={visible} toggle={toggle} />
+      {isOpen && (
+        <GenericFormModal
+          setIsOpen={setIsOpen}
+          title={GFMtitle}
+          formData={GFMform}
+        />
+      )}
       <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>
         <EuiFlexGroup
           style={{
@@ -70,7 +90,7 @@ export default function Organization() {
                 iconSide="right"
                 fill
                 size="s"
-                onClick={toggle}
+                onClick={createDepartment}
                 iconType="plus"
                 style={{
                   maxWidth: "300px",

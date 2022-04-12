@@ -11,11 +11,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 
+import { useMutation } from "react-query";
+
+//Apis
+import * as api from "../../../services/departmentsApi";
+
 const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
-  console.log(formData);
-  const schema = z.object({
-    name: z.string().min(10, { message: "Required" }),
-  });
+  const schema = z.object(zObject);
 
   const {
     register,
@@ -23,10 +25,25 @@ const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(schema),
+    organization: "61ac2c65dbccc6e0226de8db",
   });
 
-  const onSubmit = console.log("hello");
+  //ReactQuery
+  const { isLoading, mutate, isSuccess } = useMutation(api.createDepartment);
 
+  const organization = "61ac2c65dbccc6e0226de8db";
+
+  //const onSubmit = (data) => mutate(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    //console.log("cat");
+    mutate(data);
+  };
+  //const onSubmit = (e) => console.log("made it here");
+
+  if (isSuccess) {
+    //window.location.reload();
+  }
   return (
     <>
       <ConduitModalContainer>
@@ -55,15 +72,19 @@ const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
               {Object.keys(formData).map(function (key, index) {
                 return (
-                  <div>
-                    <p>
-                      {key}
-                      {index}
-                    </p>
+                  <div key={index}>
+                    <p>{key}</p>
+                    {errors.name?.message && <p>{errors.name?.message}</p>}
                     <input name={key} {...register(key)} />
                   </div>
                 );
               })}
+              <input
+                name="organization"
+                value="61ac2c65dbccc6e0226de8db"
+                type="hidden"
+                {...register("organization")}
+              />
               <input type="submit" />
             </form>
           </center>

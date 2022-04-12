@@ -17,6 +17,7 @@ import {
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 import GenericFormModal from "../../components/Forms/CreateDepartment/genericFormModal";
+import * as z from "zod";
 
 import * as departmentApi from "../../services/departmentsApi";
 import { useQuery } from "react-query";
@@ -43,7 +44,12 @@ export default function Organization() {
   });
 
   function createDepartment(e) {
+    setGFMzObject({
+      name: z.string().min(10, { message: "Required" }),
+      organization: z.string().min(10, { message: "Required" }),
+    });
     setGFMtitle("Create a Department");
+    setGFMform({ name: "name" });
     setIsOpen(true);
   }
 
@@ -54,6 +60,7 @@ export default function Organization() {
           setIsOpen={setIsOpen}
           title={GFMtitle}
           formData={GFMform}
+          zObject={GFMzObject}
         />
       )}
       <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>

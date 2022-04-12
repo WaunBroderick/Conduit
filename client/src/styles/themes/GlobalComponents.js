@@ -46,17 +46,6 @@ const ConduitCard = styled(EuiCard)`
   margin: 1em;
 `;
 
-//Buttons
-/*const AddItemButton = styled.button`
-  border-radius: 100px;
-  color: white;
-  background: ${(props) => props.theme.colors.primary.main};
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 100px;
-`;*/
-
 const AddItemButton = styled(EuiButtonIcon)`
   background-color: ${({ theme }) => theme.colors.primary.main};
   border-radius: 100;
@@ -103,13 +92,25 @@ const ConduitModal = styled.div`
   background: #fff;
   border: 2px solid #aaa;
   border-radius: 5px;
-  z-index: 999;
+  z-index: 500;
   max-width: 420px;
   margin: auto;
   padding: 1em 2em 2em;
   position: relative;
   min-width: 65%;
   min-height: 65%;
+`;
+
+const ConduitGenericFormModal = styled.div`
+  background: #fff;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+  z-index: 999;
+  max-height: 50%;
+  max-width: 100%;
+  padding: 1em 2em 2em;
+  min-width: 900px;
+  min-height: 500px;
 `;
 
 const closeModal = styled.button``;
@@ -128,4 +129,5 @@ export {
   ActionTitle,
   ConduitModal,
   ConduitModalContainer,
+  ConduitGenericFormModal,
 };

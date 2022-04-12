@@ -47,7 +47,8 @@ export default function Modal({ visible, toggle }) {
   const name = "WaunLandian";
   const organization = "61c36c42ad95a9d99a9ea844";
   const admins = ["TOM", "JERRY"];
-  const onSubmit = (data) => mutate({ name, organization, admins });
+  //const onSubmit = (data) => mutate({ name, organization, admins });
+  const onSubmit = (data) => console.log(data);
 
   return visible
     ? ReactDOM.createPortal(

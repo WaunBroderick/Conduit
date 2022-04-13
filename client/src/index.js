@@ -33,21 +33,21 @@ const Index = () => {
 
 ReactDOM.render(
   <React.StrictMode>
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+    />
     <QueryClientProvider client={queryClient}>
       <CookiesProvider>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <ToastContainer
-              position="top-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
             <Index />
             <ReactQueryDevtools />
           </PersistGate>

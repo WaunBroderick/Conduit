@@ -27,15 +27,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   function (response) {
     if (response.status === 200) {
-      toast.success(`Request Successful`, {
-        position: "top-center",
-        autoClose: true,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-      });
+      return response;
     }
     if (response.status === 201) {
       toast.success(`Resource Created`, {

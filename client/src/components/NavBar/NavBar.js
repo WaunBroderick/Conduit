@@ -166,7 +166,9 @@ export default function NavBar(props) {
             {
               items: [
                 <EuiHeaderLogo key="first" iconType="logoElastic">
-                  <Link to="/Home">Conduit</Link>
+                  <Link to="/Home">
+                    <p style={{ fontSize: "20px" }}>Conduit</p>
+                  </Link>
                 </EuiHeaderLogo>,
 
                 <LinkStyled to="/Users">

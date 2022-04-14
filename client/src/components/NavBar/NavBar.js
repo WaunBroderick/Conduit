@@ -20,6 +20,8 @@ import { useCookies } from "react-cookie";
 import { SubHeaderStyled, LinkStyled } from "./style";
 import { ThemeProvider } from "styled-components";
 import theme from "../../styles/themes/LightTheme";
+import { useLocation } from "react-router-dom";
+
 import profileAction from "../../redux/reducers/profile/profile.action";
 
 // Themeing
@@ -38,27 +40,25 @@ export default function NavBar(props) {
   const [DarkMode, setDarkMode] = useState(false);
   const { setMode } = useTheme();
 
+  //Breadcrumbs
+  const location = useLocation();
+
+  console.log("FRIGGGGG");
+  console.log(location.pathname);
+
+  const nameHighlighting = (name) => {
+    if (location.pathname == name) {
+      return (
+        <p style={{ color: "#016AB4", fontSize: "20px" }}>
+          {name.replace(/^\/|\/$/g, "")}
+        </p>
+      );
+    } else return <p>{name.replace(/^\/|\/$/g, "")}</p>;
+  };
+
   const breadcrumbs = [
     {
-      text: "Animals",
-      href: "#",
-      onClick: (e) => {
-        e.preventDefault();
-      },
-      "data-test-subj": "breadcrumbsAnimals",
-    },
-    {
-      text: "Reptiles",
-    },
-    {
-      text: "Boa constrictor",
-      href: "#",
-      onClick: (e) => {
-        e.preventDefault();
-      },
-    },
-    {
-      text: "Edit",
+      text: location.pathname.replace(/^\/|\/$/g, ""),
       href: "#",
       onClick: (e) => {
         e.preventDefault();
@@ -169,10 +169,18 @@ export default function NavBar(props) {
                   <Link to="/Home">Conduit</Link>
                 </EuiHeaderLogo>,
 
-                <LinkStyled to="/Users">Users</LinkStyled>,
-                <LinkStyled to="/Courses">Courses</LinkStyled>,
-                <LinkStyled to="/Organization">Organization</LinkStyled>,
-                <LinkStyled to="/Marketplace">Marketplace</LinkStyled>,
+                <LinkStyled to="/Users">
+                  {nameHighlighting("/Users")}
+                </LinkStyled>,
+                <LinkStyled to="/Courses">
+                  {nameHighlighting("/Courses")}
+                </LinkStyled>,
+                <LinkStyled to="/Organization">
+                  {nameHighlighting("/Organization")}
+                </LinkStyled>,
+                <LinkStyled to="/Marketplace">
+                  {nameHighlighting("/Marketplace")}
+                </LinkStyled>,
                 <themeToggle />,
               ],
               borders: "none",
@@ -214,6 +222,7 @@ export default function NavBar(props) {
             {
               items: [
                 <EuiBreadcrumbs
+                  style={{ paddingLeft: 30 }}
                   breadcrumbs={breadcrumbs}
                   truncate={false}
                   aria-label="An example of EuiBreadcrumbs"

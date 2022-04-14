@@ -24,7 +24,7 @@ import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Get()
   public async getAllUsers(
     @Res() res,

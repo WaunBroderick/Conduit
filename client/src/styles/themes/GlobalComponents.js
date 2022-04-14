@@ -27,6 +27,32 @@ const LightSubTitle = styled.h2`
   margin: 0.2em;
 `;
 
+const ConduitInput = styled.input`
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.text.subTitle};
+  border-left: 0;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  width: 70%;
+  font-size: 1rem;
+  line-height: 1.25;
+  background-image: none;
+  background-clip: padding-box;
+`;
+
+const ConduitInputLabel = styled.label`
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  touch-action: manipulation;
+`;
+
+const ConduitErrorMessage = styled.p`
+  color: ${({ theme }) => theme.colors.status.error};
+`;
+
 const ConduitPage = styled.div`
   margin-left: 5em;
   margin-right: 5em;
@@ -102,23 +128,27 @@ const ConduitModal = styled.div`
 `;
 
 const ConduitGenericFormModal = styled.div`
+  display: "flex";
   background: #fff;
   border: 2px solid #aaa;
   border-radius: 5px;
   z-index: 999;
   max-height: 50%;
   max-width: 100%;
-  padding: 1em 2em 2em;
-  min-width: 900px;
-  min-height: 500px;
+  padding: 2em 7em 3em;
 `;
 
 const closeModal = styled.button``;
 
+const ConduitForm = styled.form``;
+
 export {
   ExitButton,
+  ConduitErrorMessage,
   ConduitPage,
   LightSubTitle,
+  ConduitInput,
+  ConduitInputLabel,
   ConduitCard,
   MainTitle,
   DarkSubTitle,
@@ -128,6 +158,7 @@ export {
   closeModal,
   ActionTitle,
   ConduitModal,
+  ConduitForm,
   ConduitModalContainer,
   ConduitGenericFormModal,
 };

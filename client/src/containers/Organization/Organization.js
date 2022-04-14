@@ -124,9 +124,7 @@ export default function Organization() {
                       title="11"
                       description={department.name}
                       textAlign="right"
-                    >
-                      <EuiIcon type="clock" color="accent" />
-                    </EuiStat>
+                    ></EuiStat>
                   </EuiPanel>
                 </EuiFlexItem>
               ))}

@@ -1,10 +1,20 @@
-import { EuiFlexItem, EuiButtonIcon, EuiTitle, EuiSpacer } from "@elastic/eui";
+import {
+  EuiFlexItem,
+  EuiButtonIcon,
+  EuiTitle,
+  EuiSpacer,
+  EuiButton,
+} from "@elastic/eui";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 import {
   ConduitGenericFormModal,
   ConduitModalContainer,
+  ConduitForm,
+  ConduitInput,
+  ConduitInputLabel,
+  ConduitErrorMessage,
 } from "../../../styles/themes/GlobalComponents";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,6 +53,7 @@ const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
 
   if (isSuccess) {
     //window.location.reload();
+    setIsOpen(false);
   }
   return (
     <>
@@ -54,7 +65,10 @@ const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
               justifyContent: "flex-end",
             }}
           >
-            <EuiFlexItem grow={false}>
+            <EuiFlexItem
+              grow={false}
+              style={{ marginRight: "-90px", marginTop: "-15px" }}
+            >
               <EuiButtonIcon
                 display="base"
                 iconType="arrowRight"
@@ -69,24 +83,40 @@ const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
             </EuiTitle>
             <EuiSpacer />
             <EuiSpacer />
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <ConduitForm onSubmit={handleSubmit(onSubmit)}>
               {Object.keys(formData).map(function (key, index) {
                 return (
                   <div key={index}>
-                    <p>{key}</p>
-                    {errors.name?.message && <p>{errors.name?.message}</p>}
-                    <input name={key} {...register(key)} />
+                    <ConduitInputLabel>
+                      {key}
+                      <ConduitInput name={key} {...register(key)} />
+                      {errors.name?.message && (
+                        <ConduitErrorMessage>
+                          {errors.name?.message}
+                        </ConduitErrorMessage>
+                      )}
+                    </ConduitInputLabel>
                   </div>
                 );
               })}
               <input
+                key={1}
                 name="organization"
                 value="61ac2c65dbccc6e0226de8db"
                 type="hidden"
                 {...register("organization")}
               />
-              <input type="submit" />
-            </form>
+              <EuiButton
+                fill
+                type="submit"
+                style={{
+                  maxWidth: "300px",
+                  padding: 20,
+                }}
+              >
+                submit
+              </EuiButton>
+            </ConduitForm>
           </center>
         </ConduitGenericFormModal>
         <div className="modal-overlay"></div>

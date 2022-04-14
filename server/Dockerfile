@@ -1,5 +1,5 @@
 # Pull official base image
-FROM node:14
+FROM node:17
 
 
 # Install nestjs cli to run build

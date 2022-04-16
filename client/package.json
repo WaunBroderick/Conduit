@@ -41,7 +41,7 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^1.1.2",
     "webfontloader": "^1.6.28",
-    "zod": "^3.12.0"
+    "zod": "3.14.4"
   },
   "scripts": {
     "start": "react-scripts start",

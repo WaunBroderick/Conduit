@@ -1,10 +1,10 @@
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
-name: Node Project `my-app` CI on ECR
+name: Push to AWS ECR
 
 jobs:
   deploy:

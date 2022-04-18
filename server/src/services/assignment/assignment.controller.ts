@@ -17,7 +17,7 @@ import { AssignmentService } from './assignment.service';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 import { IAssignment } from './interfaces/assignment.interface';
-@Controller('assignment')
+@Controller('assignments')
 export class AssignmentController {
   constructor(private readonly assignmentService: AssignmentService) {}
 
@@ -46,12 +46,20 @@ export class AssignmentController {
     return this.assignmentService.findAll();
   }
 
+  @Get(`user=:id`)
+  @ApiOperation({ description: 'Get all Assignments ' })
+  @UsePipes(ValidationPipe)
+  @HttpCode(HttpStatus.CREATED)
+  findByUserId(@Param('id') id: string) {
+    return this.assignmentService.findAllByUserId(id);
+  }
+
   @Get(':id')
-  @ApiOperation({ description: 'Create a single Assignment by Id' })
+  @ApiOperation({ description: 'Get a single Assignment by Id' })
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
   findOne(@Param('id') id: string) {
-    return this.assignmentService.findOne(+id);
+    return this.assignmentService.findOne(id);
   }
 
   @Patch(':id')
@@ -62,7 +70,7 @@ export class AssignmentController {
     @Param('id') id: string,
     @Body() updateAssignmentDto: UpdateAssignmentDto,
   ) {
-    return this.assignmentService.update(+id, updateAssignmentDto);
+    return this.assignmentService.update(id, updateAssignmentDto);
   }
 
   @Delete(':id')
@@ -70,6 +78,6 @@ export class AssignmentController {
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
   remove(@Param('id') id: string) {
-    return this.assignmentService.remove(+id);
+    return this.assignmentService.remove(id);
   }
 }

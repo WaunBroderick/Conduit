@@ -7,6 +7,8 @@ import { IAssignment } from '../assignment/interfaces/assignment.interface';
 import { Assignment } from './assignment.model';
 import { Model } from 'mongoose';
 
+var mongoose = require('mongoose');
+
 @Injectable()
 export class AssignmentService {
   constructor(
@@ -21,19 +23,52 @@ export class AssignmentService {
     return newAssignment.save();
   }
 
-  findAll() {
-    return `This action returns all assignment`;
+  async findAll(documentsToSkip = 0, limitOfDocuments?: number) {
+    const query = this.assignmentModel
+      .find()
+      .skip(documentsToSkip)
+      .limit(Number(limitOfDocuments));
+
+    const results = await query;
+    const count = await this.assignmentModel.count();
+
+    return { results, count };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} assignment`;
+  public async findOne(id: string): Promise<IAssignment> {
+    const ID = mongoose.Types.ObjectId(id);
+    const Assignment = await this.assignmentModel.findById(ID).exec();
+
+    return Assignment;
   }
 
-  update(id: number, updateAssignmentDto: UpdateAssignmentDto) {
-    return `This action updates a #${id} assignment`;
+  public async findAllByUserId(id: string): Promise<any> {
+    const ID = mongoose.Types.ObjectId(id);
+    const Assignment = await this.assignmentModel
+      .find({
+        employeeId: ID,
+      })
+      .exec();
+
+    return Assignment;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} assignment`;
+  async update(id: string, updateAssignmentDto: UpdateAssignmentDto) {
+    const ID = mongoose.Types.ObjectId(id);
+    const Assignment = await this.assignmentModel.findByIdAndUpdate(
+      ID,
+      updateAssignmentDto,
+      {
+        new: true,
+      },
+    );
+    return Assignment;
+  }
+
+  async remove(id: string): Promise<any> {
+    const ID = mongoose.Types.ObjectId(id);
+    const deletedAssignment = await this.assignmentModel.findByIdAndRemove(ID);
+
+    return deletedAssignment;
   }
 }

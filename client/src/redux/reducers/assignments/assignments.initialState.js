@@ -1,5 +1,5 @@
 export default {
   isLoading: false,
-  courses: [],
+  assignments: [],
   errorMessage: null,
 };

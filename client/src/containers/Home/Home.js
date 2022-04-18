@@ -14,15 +14,27 @@ import {
 } from "@elastic/eui";
 
 import theme from "../../styles/themes/LightTheme";
-
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 import Calendar from "react-calendar";
 
+import * as departmentApi from "../../services/departmentsApi";
+import { useQuery } from "react-query";
+
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-export default function Home() {
+export const Home = () => {
   const [value, onChange] = useState(new Date());
+
+  const { data } = useQuery("departments", departmentApi.getDepartments);
+
+  const renderCourses = () => {
+    return (
+      <div>
+        <h1>Test</h1>
+      </div>
+    );
+  };
 
   return (
     <ConduitPage>
@@ -88,6 +100,7 @@ export default function Home() {
               <EuiTitle>
                 <h2>Courses</h2>
               </EuiTitle>
+              {renderCourses()}
             </EuiCard>
           </EuiFlexGroup>
         </EuiFlexItem>
@@ -110,4 +123,6 @@ export default function Home() {
       </EuiFlexGroup>
     </ConduitPage>
   );
-}
+};
+
+export default Home;

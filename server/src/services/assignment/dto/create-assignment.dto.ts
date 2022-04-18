@@ -25,6 +25,16 @@ export class CreateAssignmentDto {
   organizationId: string;
 
   @ApiProperty({
+    type: mongoose.Types.ObjectId,
+    default: null,
+    required: true,
+    nullable: false,
+    description: 'The course the assignment is related to',
+  })
+  @Prop()
+  courseId: string;
+
+  @ApiProperty({
     type: Date,
     default: null,
     required: false,

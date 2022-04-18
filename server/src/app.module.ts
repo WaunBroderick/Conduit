@@ -20,9 +20,9 @@ import { TodosModule } from './services/todos/todos.module';
     }),
     MongooseModule.forRoot(
       // For STAGING MongoDB server
-      `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
+      //`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
       // For local development
-      //`mongodb://localhost:27017/conduit-STAGING`,
+      `mongodb://localhost:27017/conduit-STAGING`,
     ),
     UsersModule,
     OrganizationsModule,

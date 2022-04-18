@@ -75,7 +75,7 @@ const seedUsers = async () => {
 const seedDepartments = async () => {
   // Connection URL
   const client = await MongoClient.connect(
-    'mongodb+srv://wbroderick:gnrkTanyMKLN43aa@conduitdb.afr7o.mongodb.net/',
+    `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

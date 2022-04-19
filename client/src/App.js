@@ -21,7 +21,7 @@ import WebFont from "webfontloader";
 import { useTheme } from "./styles/themes/useTheme";
 import { GlobalStyles } from "./styles/themes/GlobalStyles";
 import { getFromLS } from "./utils/storage";
-import Courses from "./containers/courses/Courses";
+import Courses from "./containers/Courses/Courses";
 
 // SWR Experiment
 import useSWR, { SWRConfig } from "swr";

@@ -20,13 +20,19 @@ import Calendar from "react-calendar";
 
 import * as departmentApi from "../../services/departmentsApi";
 import { useQuery } from "react-query";
+import { useSelector, useDispatch } from "react-redux";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export const Home = () => {
   const [value, onChange] = useState(new Date());
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const { data } = useQuery("departments", departmentApi.getDepartments);
+
+  console.log("hellllloo");
+  console.log(localStorage.getItem("persist:root"));
 
   const renderCourses = () => {
     return (

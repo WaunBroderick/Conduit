@@ -47,7 +47,7 @@ export class AssignmentController {
   }
 
   @Get(`user=:id`)
-  @ApiOperation({ description: 'Get all Assignments ' })
+  @ApiOperation({ description: 'Get all Assignments by id ' })
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
   findByUserId(@Param('id') id: string) {

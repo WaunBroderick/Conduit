@@ -43,24 +43,16 @@ const LoginContainer = () => (
 );
 
 const AppContainer = () => (
-  <SWRConfig
-    value={{
-      refreshInterval: 3000,
-      fetcher: (resource, init) =>
-        fetch(resource, init).then((Res) => res.json()),
-    }}
-  >
-    <div style={{ height: "100vh" }}>
-      <NavBar />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/users" component={Users} />
-      <Route exact path="/courses" component={Courses} />
-      <Route exact path="/courses/:assignment" component={Courses} />
-      <Route exact path="/organization" component={Organization} />
-      <Route exact path="/marketplace" component={Marketplace} />
-      <Route exact path="/profile" component={Profile} />
-    </div>
-  </SWRConfig>
+  <div style={{ height: "100vh" }}>
+    <NavBar />
+    <Route exact path="/home" component={Home} />
+    <Route exact path="/users" component={Users} />
+    <Route exact path="/courses" component={Courses} />
+    <Route exact path="/courses/:assignment" component={Courses} />
+    <Route exact path="/organization" component={Organization} />
+    <Route exact path="/marketplace" component={Marketplace} />
+    <Route exact path="/profile" component={Profile} />
+  </div>
 );
 
 function App() {

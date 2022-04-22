@@ -1,10 +1,10 @@
 import { Test } from '@nestjs/testing';
-import { AuthCredentialsDto } from '../dto/auth-crednetials.dto';
-import { User } from '../schmeas/user.schema';
+import { AuthCredentialsDto } from './dto/auth-crednetials.dto';
+import { User } from './schmeas/user.schema';
 
-import { AuthController } from '../auth.controller';
-import { AuthService } from '../auth.service';
-import { userStub } from './auth.stub';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { userStub } from './test/auth.stub';
 
 jest.mock('./auth.service.ts');
 

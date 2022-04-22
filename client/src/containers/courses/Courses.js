@@ -1,21 +1,12 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  EuiCard,
-  EuiEmptyPrompt,
-  EuiFlexGroup,
-  EuiFlexItem,
-  EuiSpacer,
-  EuiButtonIcon,
-} from "@elastic/eui";
-import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
+import React from "react";
+import { EuiCard, EuiFlexGroup, EuiFlexItem, EuiSpacer } from "@elastic/eui";
 
 import {
   ConduitPage,
   AddItemButton,
 } from "../../styles/themes/GlobalComponents";
 
-export default function Courses(props) {
+export default function Courses() {
   return (
     <ConduitPage>
       <EuiFlexGroup>

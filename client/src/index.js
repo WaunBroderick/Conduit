@@ -10,7 +10,6 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import configureStore from "./redux/store/configureStore";
 import { CookiesProvider } from "react-cookie";
-import Users from "./containers/Users/Users";
 
 import * as themes from "./styles/themes/schema.json";
 import { setToLS } from "./utils/storage";

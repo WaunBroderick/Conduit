@@ -20,7 +20,7 @@ import Profile from "./containers/Profile/Profile";
 import WebFont from "webfontloader";
 import { useTheme } from "./styles/themes/useTheme";
 import { GlobalStyles } from "./styles/themes/GlobalStyles";
-import Courses from "./containers/Courses/Courses";
+import Courses from "./containers/courses/Courses";
 
 const themeDark = {
   colorPrimary: "purple",

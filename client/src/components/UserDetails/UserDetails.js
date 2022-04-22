@@ -15,7 +15,7 @@ import {
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-import GenericFormModal from "../Forms/CreateDepartment/genericFormModal";
+import GenericFormModal from "../Forms/genericFormModal";
 
 import {
   ConduitModal,

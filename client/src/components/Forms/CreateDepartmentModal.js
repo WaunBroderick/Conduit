@@ -15,12 +15,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 
-import * as api from "../../../services/departmentsApi";
+import * as api from "../../services/departmentsApi";
 
 import {
   ConduitModal,
   ConduitModalContainer,
-} from "../../../styles/themes/GlobalComponents";
+} from "../../styles/themes/GlobalComponents";
 import { QueryClient, useMutation } from "react-query";
 
 const schema = z.object({

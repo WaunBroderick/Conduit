@@ -17,7 +17,7 @@ import {
 import { Layout } from "../../layout";
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
-import GenericFormModal from "../../components/Forms/CreateDepartment/genericFormModal";
+import GenericFormModal from "../../components/Forms/genericFormModal";
 import * as z from "zod";
 
 import * as departmentApi from "../../services/departmentsApi";

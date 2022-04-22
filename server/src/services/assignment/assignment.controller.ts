@@ -17,9 +17,13 @@ import { AssignmentService } from './assignment.service';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 import { IAssignment } from './interfaces/assignment.interface';
+import { CoursesService } from '../courses/courses.service';
 @Controller('assignments')
 export class AssignmentController {
-  constructor(private readonly assignmentService: AssignmentService) {}
+  constructor(
+    private readonly assignmentService: AssignmentService,
+    private readonly coursesService: CoursesService,
+  ) {}
 
   @Post()
   @ApiOperation({ description: 'Create an Assignment' })
@@ -46,12 +50,18 @@ export class AssignmentController {
     return this.assignmentService.findAll();
   }
 
-  @Get(`user=:id`)
-  @ApiOperation({ description: 'Get all Assignments by id ' })
+  @Get(`/:orgId/:userId`)
+  @ApiOperation({ description: 'Get all Assignments by uer id ' })
   @UsePipes(ValidationPipe)
   @HttpCode(HttpStatus.CREATED)
-  findByUserId(@Param('id') id: string) {
-    return this.assignmentService.findAllByUserId(id);
+  findByUserId(@Param('orgId') orgId: string, @Param('userId') userId: string) {
+    const allOrgCourses = this.coursesService.findAllByOrgId(orgId);
+    const courseMap = this.assignmentService.createCourseMap(
+      userId,
+      allOrgCourses,
+    );
+
+    return courseMap;
   }
 
   @Get(':id')

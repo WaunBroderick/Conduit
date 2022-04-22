@@ -31,7 +31,14 @@ export const Home = () => {
   const renderCourses = (id) => {
     const { isLoading, isError, data, error } = useQuery(
       ["assignments", id],
-      () => assignmentApi.getUserAssignments(id)
+      () => assignmentApi.getUserAssignments(id),
+      {
+        refetchOnWindowFocus: false,
+        refetchOnmount: false,
+        refetchOnReconnect: false,
+        retry: false,
+        staleTime: 999999999,
+      }
     );
     return (
       <div>

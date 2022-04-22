@@ -62,8 +62,6 @@ export default function SignIn() {
         dispatch(loadUsersAsync(response.data.accessToken));
         //loadDepartmentsInformation
         dispatch(loadDepartmentsAsync(response.data.accessToken));
-        //Setlocal storage TESTTT
-        localStorage.setItem("test", "HELLLLO");
         setRedirect(true);
       })
       .then((data) => {})

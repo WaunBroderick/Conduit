@@ -15,7 +15,7 @@ import {
   ConduitInput,
   ConduitInputLabel,
   ConduitErrorMessage,
-} from "../../../styles/themes/GlobalComponents";
+} from "../../styles/themes/GlobalComponents";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -24,7 +24,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
 //Apis
-import * as api from "../../../services/departmentsApi";
+import * as api from "../../services/departmentsApi";
 
 const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
   const schema = z.object(zObject);

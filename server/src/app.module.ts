@@ -12,6 +12,7 @@ import { DepartmentsModule } from './services/departments/departments.module';
 import { AssignmentModule } from './services/assignment/assignment.module';
 import { RolesModule } from './services/roles/roles.module';
 import { TodosModule } from './services/todos/todos.module';
+import { CoursesModule } from './services/courses/courses.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { TodosModule } from './services/todos/todos.module';
     AssignmentModule,
     RolesModule,
     TodosModule,
+    CoursesModule,
   ],
   controllers: [AppController, OrganizationsController],
   providers: [AppService],

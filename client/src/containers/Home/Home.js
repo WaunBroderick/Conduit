@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  EuiEmptyPrompt,
   EuiFlexGroup,
   EuiFlexItem,
   EuiCard,
   EuiSpacer,
-  EuiAvatar,
   EuiTitle,
   EuiPanel,
   EuiStat,
@@ -18,116 +16,132 @@ import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 import Calendar from "react-calendar";
 
-import * as departmentApi from "../../services/departmentsApi";
-import { useQuery } from "react-query";
-import { useSelector, useDispatch } from "react-redux";
+import { Layout } from "../../layout";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
+import * as departmentApi from "../../services/departmentsApi";
+import * as assignmentApi from "../../services/assignmentsAPI";
+import { useQueries, useQuery } from "react-query";
+import { useSelector, useDispatch } from "react-redux";
 
 export const Home = () => {
   const [value, onChange] = useState(new Date());
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
-  const { data } = useQuery("departments", departmentApi.getDepartments);
-
-  console.log("hellllloo");
-  console.log(localStorage.getItem("persist:root"));
-
-  const renderCourses = () => {
+  const renderCourses = (id) => {
+    const { isLoading, isError, data, error } = useQuery(
+      ["assignments", id],
+      () => assignmentApi.getUserAssignments(id),
+      {
+        refetchOnWindowFocus: false,
+        refetchOnmount: false,
+        refetchOnReconnect: false,
+        retry: false,
+        staleTime: 999999999,
+      }
+    );
     return (
       <div>
-        <h1>Test</h1>
+        <h1>{id}</h1>
+        <div>
+          <ul>
+            {data?.map((assignment) => (
+              <li key={assignment._id}>{assignment.courseId} </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   };
 
   return (
-    <ConduitPage>
-      <EuiFlexGroup>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="11"
-              description="Courses to Complete"
-              textAlign="right"
-            >
-              <EuiIcon type="empty" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="19"
-              description="Reviews Awaiting"
-              titleColor="accent"
-              textAlign="right"
-            >
-              <EuiIcon type="clock" color="accent" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="11"
-              description="Collected Cerificates"
-              titleColor="success"
-              textAlign="right"
-            >
-              <EuiIcon type="check" color="success" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="3"
-              description="Overdue Courses"
-              titleColor="danger"
-              textAlign="right"
-            >
-              <EuiIcon type="alert" color="danger" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-      </EuiFlexGroup>
+    <Layout>
+      <ConduitPage>
+        <EuiFlexGroup>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="11"
+                description="Courses to Complete"
+                textAlign="right"
+              >
+                <EuiIcon type="empty" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="19"
+                description="Reviews Awaiting"
+                titleColor="accent"
+                textAlign="right"
+              >
+                <EuiIcon type="clock" color="accent" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="11"
+                description="Collected Cerificates"
+                titleColor="success"
+                textAlign="right"
+              >
+                <EuiIcon type="check" color="success" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="3"
+                description="Overdue Courses"
+                titleColor="danger"
+                textAlign="right"
+              >
+                <EuiIcon type="alert" color="danger" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+        </EuiFlexGroup>
 
-      <EuiSpacer />
+        <EuiSpacer />
 
-      <EuiFlexGroup gutterSize="l">
-        <EuiFlexItem grow={1}>
-          <EuiFlexGroup
-            gutterSize="l"
-            style={{ padding: "12px", height: "800px" }}
-          >
-            <EuiCard>
-              <EuiTitle>
-                <h2>Courses</h2>
-              </EuiTitle>
-              {renderCourses()}
-            </EuiCard>
-          </EuiFlexGroup>
-        </EuiFlexItem>
-
-        <EuiFlexGrid gutterSize="l" style={{ padding: "12px" }}>
-          <EuiFlexItem grow={false}>
-            <EuiCard style={{ maxHeight: 200 }}>
-              <Calendar onChange={onChange} value={value} />
-            </EuiCard>
-            <EuiSpacer />
-            <EuiFlexItem>
+        <EuiFlexGroup gutterSize="l">
+          <EuiFlexItem grow={1}>
+            <EuiFlexGroup
+              gutterSize="l"
+              style={{ padding: "12px", height: "800px" }}
+            >
               <EuiCard>
                 <EuiTitle>
-                  <h2>Notifications</h2>
+                  <h2>Courses</h2>
                 </EuiTitle>
+                {renderCourses(user.profile._id)}
               </EuiCard>
-            </EuiFlexItem>
+            </EuiFlexGroup>
           </EuiFlexItem>
-        </EuiFlexGrid>
-      </EuiFlexGroup>
-    </ConduitPage>
+
+          <EuiFlexGrid gutterSize="l" style={{ padding: "12px" }}>
+            <EuiFlexItem grow={false}>
+              <EuiCard style={{ maxHeight: 200 }}>
+                <Calendar onChange={onChange} value={value} />
+              </EuiCard>
+              <EuiSpacer />
+              <EuiFlexItem>
+                <EuiCard>
+                  <EuiTitle>
+                    <h2>Notifications</h2>
+                  </EuiTitle>
+                </EuiCard>
+              </EuiFlexItem>
+            </EuiFlexItem>
+          </EuiFlexGrid>
+        </EuiFlexGroup>
+      </ConduitPage>
+    </Layout>
   );
 };
 

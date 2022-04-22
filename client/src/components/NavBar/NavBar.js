@@ -9,20 +9,16 @@ import {
   EuiSpacer,
   EuiText,
   EuiPopover,
-  EuiButtonIcon,
-  EuiIcon,
   EuiButton,
   EuiBreadcrumbs,
 } from "@elastic/eui";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { SubHeaderStyled, LinkStyled } from "./style";
 import { ThemeProvider } from "styled-components";
 import theme from "../../styles/themes/LightTheme";
 import { useLocation } from "react-router-dom";
-
-import profileAction from "../../redux/reducers/profile/profile.action";
 
 // Themeing
 import _ from "lodash";

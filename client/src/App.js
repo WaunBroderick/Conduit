@@ -15,12 +15,12 @@ import Users from "./containers/Users/Users";
 import Marketplace from "./containers/Marketplace/Marketplace";
 import Organization from "./containers/Organization/Organization";
 import Profile from "./containers/Profile/Profile";
-import Courses from "./containers/Courses/Courses";
 
 // Themeing
 import WebFont from "webfontloader";
 import { useTheme } from "./styles/themes/useTheme";
 import { GlobalStyles } from "./styles/themes/GlobalStyles";
+import Courses from "./containers/courses/Courses";
 
 const themeDark = {
   colorPrimary: "purple",

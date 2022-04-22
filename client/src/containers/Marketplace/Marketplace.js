@@ -3,8 +3,6 @@ import { useQuery, queryClient, QueryClientProvider } from "react-query";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { Layout } from "../../layout";
-
 import { EuiEmptyPrompt } from "@elastic/eui";
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
@@ -28,18 +26,16 @@ export default function Marketplace() {
   }
 
   return (
-    <Layout>
-      <ConduitPage>
-        <EuiEmptyPrompt title={<span>Marketplace Screen</span>} />
-        <div>
-          <ul>
-            {data?.map((organization) => (
-              <li key={organization.id}>{organization.name} </li>
-            ))}
-          </ul>
-        </div>
-        <h1>{user.profile.name}</h1>
-      </ConduitPage>
-    </Layout>
+    <ConduitPage>
+      <EuiEmptyPrompt title={<span>Marketplace Screen</span>} />
+      <div>
+        <ul>
+          {data?.map((organization) => (
+            <li key={organization.id}>{organization.name} </li>
+          ))}
+        </ul>
+      </div>
+      <h1>{user.profile.name}</h1>
+    </ConduitPage>
   );
 }

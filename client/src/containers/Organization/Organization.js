@@ -14,7 +14,6 @@ import {
   EuiButton,
 } from "@elastic/eui";
 
-import { Layout } from "../../layout";
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 import GenericFormModal from "../../components/Forms/genericFormModal";
@@ -55,86 +54,84 @@ export default function Organization() {
   }
 
   return (
-    <Layout>
-      <ConduitPage>
-        {isOpen && (
-          <GenericFormModal
-            setIsOpen={setIsOpen}
-            title={GFMtitle}
-            formData={GFMform}
-            zObject={GFMzObject}
-          />
-        )}
-        <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>
-          <EuiFlexGroup
-            style={{
-              padding: "12px",
-              overflow: "auto",
-              width: "500px",
-              maxWidth: "400px",
-            }}
-          >
-            <EuiFlexItem>
-              <EuiCard
-                image="https://source.unsplash.com/400x200/?Water"
-                style={{ height: 900 }}
-              >
-                <EuiTitle>
-                  <h1>Organization Name</h1>
-                </EuiTitle>
-                <EuiText>Heres some org info</EuiText>
-              </EuiCard>
-            </EuiFlexItem>
-          </EuiFlexGroup>
-          <EuiSpacer />
+    <ConduitPage>
+      {isOpen && (
+        <GenericFormModal
+          setIsOpen={setIsOpen}
+          title={GFMtitle}
+          formData={GFMform}
+          zObject={GFMzObject}
+        />
+      )}
+      <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>
+        <EuiFlexGroup
+          style={{
+            padding: "12px",
+            overflow: "auto",
+            width: "500px",
+            maxWidth: "400px",
+          }}
+        >
+          <EuiFlexItem>
+            <EuiCard
+              image="https://source.unsplash.com/400x200/?Water"
+              style={{ height: 900 }}
+            >
+              <EuiTitle>
+                <h1>Organization Name</h1>
+              </EuiTitle>
+              <EuiText>Heres some org info</EuiText>
+            </EuiCard>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+        <EuiSpacer />
 
-          <div style={{ maxWidth: "80%" }}>
-            <div style={{ display: "flex" }}>
-              <EuiFlexItem style={{ float: "left", display: "inline-block" }}>
-                <EuiTitle>
-                  <h2>Departments</h2>
-                </EuiTitle>
+        <div style={{ maxWidth: "80%" }}>
+          <div style={{ display: "flex" }}>
+            <EuiFlexItem style={{ float: "left", display: "inline-block" }}>
+              <EuiTitle>
+                <h2>Departments</h2>
+              </EuiTitle>
 
-                <EuiButton
-                  iconSide="right"
-                  fill
-                  size="s"
-                  onClick={createDepartment}
-                  iconType="plus"
-                  style={{
-                    maxWidth: "300px",
-                    float: "right",
-                    display: "inline-block",
-                    padding: 20,
-                  }}
-                >
-                  Create Department
-                </EuiButton>
-              </EuiFlexItem>
-            </div>
-            <div style={{ overflowY: "hidden" }}>
-              <EuiFlexGroup
-                gutterSize="l"
+              <EuiButton
+                iconSide="right"
+                fill
+                size="s"
+                onClick={createDepartment}
+                iconType="plus"
                 style={{
-                  padding: "12px",
+                  maxWidth: "300px",
+                  float: "right",
+                  display: "inline-block",
+                  padding: 20,
                 }}
               >
-                {data?.map((department) => (
-                  <EuiFlexItem grow={1} style={{ minWidth: "300px" }}>
-                    <EuiPanel>
-                      <EuiStat
-                        title="11"
-                        description={department.name}
-                        textAlign="right"
-                      ></EuiStat>
-                    </EuiPanel>
-                  </EuiFlexItem>
-                ))}
-              </EuiFlexGroup>
-            </div>
+                Create Department
+              </EuiButton>
+            </EuiFlexItem>
           </div>
-        </EuiFlexGroup>
-      </ConduitPage>
-    </Layout>
+          <div style={{ overflowY: "hidden" }}>
+            <EuiFlexGroup
+              gutterSize="l"
+              style={{
+                padding: "12px",
+              }}
+            >
+              {data?.map((department) => (
+                <EuiFlexItem grow={1} style={{ minWidth: "300px" }}>
+                  <EuiPanel>
+                    <EuiStat
+                      title="11"
+                      description={department.name}
+                      textAlign="right"
+                    ></EuiStat>
+                  </EuiPanel>
+                </EuiFlexItem>
+              ))}
+            </EuiFlexGroup>
+          </div>
+        </div>
+      </EuiFlexGroup>
+    </ConduitPage>
   );
 }

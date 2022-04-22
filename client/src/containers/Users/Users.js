@@ -9,7 +9,6 @@ import UserTable from "../../components/UserTable/UserTable";
 import Lottie from "lottie-react";
 import loadingLargeAnimation from "../../assets/animations/loadingLarge.json";
 
-import { Layout } from "../../layout";
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 
@@ -32,21 +31,19 @@ const Users = () => {
   };
 
   return (
-    <Layout>
-      <ConduitPage>
-        {users ? (
-          <EuiFlexGroup alignItems="center" gutterSize="s">
-            <EuiFlexItem>
-              <UserTable users={users} departments={departments} />
-            </EuiFlexItem>
-          </EuiFlexGroup>
-        ) : (
-          <div>
-            <Lottie animationData={loadingLargeAnimation} />
-          </div>
-        )}
-      </ConduitPage>
-    </Layout>
+    <ConduitPage>
+      {users ? (
+        <EuiFlexGroup alignItems="center" gutterSize="s">
+          <EuiFlexItem>
+            <UserTable users={users} departments={departments} />
+          </EuiFlexItem>
+        </EuiFlexGroup>
+      ) : (
+        <div>
+          <Lottie animationData={loadingLargeAnimation} />
+        </div>
+      )}
+    </ConduitPage>
   );
 };
 

@@ -10,8 +10,6 @@ import {
 } from "@elastic/eui";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 
-import { Layout } from "../../layout";
-
 import {
   ConduitPage,
   AddItemButton,
@@ -19,26 +17,24 @@ import {
 
 export default function Courses(props) {
   return (
-    <Layout>
-      <ConduitPage>
-        <EuiFlexGroup>
-          <EuiFlexItem grow={false}>
-            <EuiSpacer />
-            <EuiCard>
-              <EuiFlexItem grow={false}>
-                <AddItemButton
-                  className="ConduitAddButtton"
-                  display="base"
-                  iconType="plus"
-                  iconSize="l"
-                  size="m"
-                  aria-label="plus"
-                />
-              </EuiFlexItem>
-            </EuiCard>
-          </EuiFlexItem>
-        </EuiFlexGroup>
-      </ConduitPage>
-    </Layout>
+    <ConduitPage>
+      <EuiFlexGroup>
+        <EuiFlexItem grow={false}>
+          <EuiSpacer />
+          <EuiCard>
+            <EuiFlexItem grow={false}>
+              <AddItemButton
+                className="ConduitAddButtton"
+                display="base"
+                iconType="plus"
+                iconSize="l"
+                size="m"
+                aria-label="plus"
+              />
+            </EuiFlexItem>
+          </EuiCard>
+        </EuiFlexItem>
+      </EuiFlexGroup>
+    </ConduitPage>
   );
 }

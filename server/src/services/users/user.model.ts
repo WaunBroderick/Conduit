@@ -26,6 +26,9 @@ export class User {
   departments: [];
 
   @Prop({ required: false })
+  isAdmin: boolean;
+
+  @Prop({ required: false })
   userRoles: [mongoose.Types.ObjectId];
 
   @Prop({ required: true })

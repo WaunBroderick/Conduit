@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DepartmentsSchema } from './schemas/departments.schema';
 import { OrganizationsModule } from '../organizations/organizations.module';
-
+import { AbilityModule } from '../../permissions/ability.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -13,6 +13,7 @@ import { OrganizationsModule } from '../organizations/organizations.module';
       { name: 'Department', schema: DepartmentsSchema },
     ]),
     OrganizationsModule,
+    AbilityModule,
   ],
   controllers: [DepartmentsController],
   providers: [DepartmentsService],

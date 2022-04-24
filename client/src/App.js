@@ -22,6 +22,20 @@ import { useTheme } from "./styles/themes/useTheme";
 import { GlobalStyles } from "./styles/themes/GlobalStyles";
 import Courses from "./containers/courses/Courses";
 
+// Feature Flagging
+import { GrowthBook, GrowthBookProvider } from "@growthbook/growthbook-react";
+
+// Create a GrowthBook instance
+const growthbook = new GrowthBook({
+  // Callback when a user is put into an A/B experiment
+  trackingCallback: (experiment, result) => {
+    console.log("Experiment Viewed", {
+      experimentId: experiment.key,
+      variationId: result.variationId,
+    });
+  },
+});
+
 const themeDark = {
   colorPrimary: "purple",
 };
@@ -69,17 +83,19 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={selectedTheme}>
-        <GlobalStyles />
-        <Router>
-          <Switch>
-            <Route exact path="/" render={() => <Redirect to="/signin" />} />
-            <Route path="/(signin)" component={LoginContainer} />
-            <Route path="/(register)" component={LoginContainer} />
-            <ProtectedRoute component={AppContainer} />
-          </Switch>
-        </Router>
-      </ThemeProvider>
+      <GrowthBookProvider growthbook={growthbook}>
+        <ThemeProvider theme={selectedTheme}>
+          <GlobalStyles />
+          <Router>
+            <Switch>
+              <Route exact path="/" render={() => <Redirect to="/signin" />} />
+              <Route path="/(signin)" component={LoginContainer} />
+              <Route path="/(register)" component={LoginContainer} />
+              <ProtectedRoute component={AppContainer} />
+            </Switch>
+          </Router>
+        </ThemeProvider>
+      </GrowthBookProvider>
     </>
   );
 }

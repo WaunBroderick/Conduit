@@ -10,6 +10,7 @@ export const UserStub = (): User => {
     password: 'password',
     organization: new mongoose.Types.ObjectId('61d0b0114c2996028cdfdf6b'),
     departments: [],
+    isAdmin: true,
     userRoles: [new mongoose.Types.ObjectId('61d0b0114c2996028cdfdf6b')],
     online: true,
   };

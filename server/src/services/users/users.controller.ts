@@ -18,11 +18,15 @@ import { UsersService } from './users.service';
 import { ApiTags } from '@nestjs/swagger';
 import { AssignUserDepartmentDto } from './dto/assign-user-department';
 import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
+import { AbilityFactory } from '../../permissions/ability.factory';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private abilityFactory: AbilityFactory,
+  ) {}
 
   //@UseGuards(JwtAuthGuard)
   @Get()

@@ -2,39 +2,53 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
+//GraphQL Migration
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AppController } from './app.controller';
 import { AuthModule } from './services/auth/auth.module';
 import { AppService } from './app.service';
-import { UsersModule } from './services/users/users.module';
 import { OrganizationsController } from './services/organizations/organizations.controller';
-import { OrganizationsModule } from './services/organizations/organizations.module';
-import { DepartmentsModule } from './services/departments/departments.module';
 import { AssignmentModule } from './services/assignment/assignment.module';
-import { RolesModule } from './services/roles/roles.module';
 import { TodosModule } from './services/todos/todos.module';
-import { CoursesModule } from './services/courses/courses.module';
+import { ApiTooManyRequestsResponse } from '@nestjs/swagger';
+import { join } from 'path';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { AuthService } from './services/auth/auth.service';
+import { AssignmentsModule } from './assignments/assignments.module';
+import { OrganizationsModule } from './organizations/organizations.module';
+import { CoursesModule } from './courses/courses.module';
+import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
+import { DepartmentsModule } from './departments/departments.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
     MongooseModule.forRoot(
       // For STAGING MongoDB server
       //`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
       // For local development
       `mongodb://localhost:27017/conduit-STAGING`,
     ),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      cors: {
+        origin: 'http://localhost:5000',
+        credentials: true,
+      },
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
+    AuthModule,
     UsersModule,
     OrganizationsModule,
-    DepartmentsModule,
-    AuthModule,
-    AssignmentModule,
-    RolesModule,
-    TodosModule,
+    AssignmentsModule,
     CoursesModule,
+    RolesModule,
+    DepartmentsModule,
   ],
-  controllers: [AppController, OrganizationsController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -116,7 +116,7 @@ export const Home = () => {
               <EuiTitle>
                 <h2>Courses</h2>
               </EuiTitle>
-              {renderCourses(user.profile._id)}
+              {}
             </EuiCard>
           </EuiFlexGroup>
         </EuiFlexItem>

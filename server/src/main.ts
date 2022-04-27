@@ -6,7 +6,8 @@ import { HttpExceptionFilter } from './services/shared/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    cors: { credentials: true, origin: 'http://localhost:3000' },
+    //change to 3000 if broken
+    cors: { credentials: true, origin: 'http://localhost:5000' },
   });
 
   // Cookie utilization

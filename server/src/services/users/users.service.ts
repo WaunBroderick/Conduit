@@ -1,70 +1,46 @@
-import {
-  Injectable,
-  ConflictException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { JwtService } from '@nestjs/jwt';
-import { User } from './user.model';
+import { CreateUserInput } from './dto/create-user.input';
+import { UpdateUserInput } from './dto/update-user.input';
+import { User, UserDocument } from './users.schema';
 import { Model } from 'mongoose';
-import { IUser } from './interfaces/user.interface';
-import { AssignUserDepartmentDto } from './dto/assign-user-department';
-import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
-
-var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
+import {
+  Organization,
+  OrganizationDocument,
+} from '../organizations/organizations.schema';
 
 @Injectable()
 export class UsersService {
+  users: Partial<User>[];
   constructor(
-    @InjectModel('User')
-    private userModel: Model<User>,
+    @InjectModel(User.name)
+    private userModel: Model<UserDocument>,
   ) {}
-
-  public async findAll(paginationQuery: PaginationQueryDto): Promise<User[]> {
-    const { limit, offset } = paginationQuery;
-
-    return await this.userModel.find().skip(offset).limit(limit).exec();
+  async create(user: CreateUserInput) {
+    return this.userModel.create(user);
   }
 
-  public async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById({ _id: id }).exec();
-
-    if (!user) {
-      throw new NotFoundException(`User #${id} not found`);
-    }
-    return user;
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().lean();
   }
 
-  public async findByOrg(orgId: string): Promise<IUser[]> {
-    const query = { organization: mongoose.Types.ObjectId(orgId) };
-
-    if (!query) {
-      throw new NotFoundException(
-        `No users belonging to organization #${orgId} were found`,
-      );
-    }
-    return await this.userModel
-      .find(query)
-      .select('name')
-      .select('email')
-      .select('organization')
-      .select('online')
-      .exec();
+  async findByOrganizationId(organizationId) {
+    return this.userModel.find({ organization: organizationId });
   }
 
-  public async updateUserDepartments(
-    userId: string,
-    assignUserDepartmentDto: AssignUserDepartmentDto,
-  ): Promise<IUser> {
-    const existingUser = await this.userModel.findByIdAndUpdate(
-      userId,
-      assignUserDepartmentDto,
-    );
+  async findByUserId(userId) {
+    return this.userModel.find({ id: userId });
+  }
 
-    if (!existingUser) {
-      throw new NotFoundException(`Organization #${userId} not found`);
-    }
-    return existingUser;
+  findOne(id: number) {
+    return `This action returns a #${id} user`;
+  }
+
+  update(id: number, updateUserInput: UpdateUserInput) {
+    return `This action updates a #${id} user`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} user`;
   }
 }

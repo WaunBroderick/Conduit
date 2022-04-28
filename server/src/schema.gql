@@ -6,25 +6,32 @@ type Assignment {
   name: String!
 }
 
-type Organization {
-  name: String!
-  address: String
-  logo: String
-  country: String
-}
-
-type Course {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 type User {
+  id: MongoId!
   firstName: String!
   lastName: String!
   email: String!
   password: String!
   isAdmin: Boolean
   online: Boolean
+  organization: Organization
+}
+
+"""Mongo ObjectId scalar type"""
+scalar MongoId
+
+type Organization {
+  id: MongoId!
+  name: String!
+  address: String
+  logo: String
+  country: String
+  users: [User!]
+}
+
+type Course {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 type Role {
@@ -33,8 +40,11 @@ type Role {
 }
 
 type Department {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: MongoId!
+  name: String!
+  subSections: String
+  organization: Organization
+  admins: [User!]
 }
 
 type Query {
@@ -66,7 +76,7 @@ type Mutation {
   createRole(createRoleInput: CreateRoleInput!): Role!
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
   removeRole(id: Int!): Role!
-  createDepartment(createDepartmentInput: CreateDepartmentInput!): Department!
+  createDepartment(input: CreateDepartmentInput!): Department!
   updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
   removeDepartment(id: Int!): Department!
 }
@@ -78,6 +88,7 @@ input CreateUserInput {
   password: String!
   isAdmin: Boolean
   online: Boolean
+  organization: String
 }
 
 input UpdateUserInput {
@@ -87,6 +98,7 @@ input UpdateUserInput {
   password: String
   isAdmin: Boolean
   online: Boolean
+  organization: String
   id: Int!
 }
 
@@ -124,12 +136,14 @@ input UpdateRoleInput {
 }
 
 input CreateDepartmentInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  organization: String
+  admins: String
 }
 
 input UpdateDepartmentInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  organization: String
+  admins: String
   id: Int!
 }

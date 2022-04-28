@@ -1,19 +1,25 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { OrganizationsService } from './organizations.service';
+import { OrganizationsResolver } from './organizations.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
-import { OrganizationSchema } from './organization.model';
-import { OrganizationsController } from './organizations.controller';
+import { OrganizationSchema, Organization } from './organizations.schema';
+import { UsersService } from 'src/services/users/users.service';
+import { User, UserSchema } from 'src/services/users/users.schema';
+import MongoIdScalar from 'common/scalars/mongo-id.scalar';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
     MongooseModule.forFeature([
-      { name: 'Organization', schema: OrganizationSchema },
+      { name: Organization.name, schema: OrganizationSchema },
+      { name: User.name, schema: UserSchema },
     ]),
   ],
-  providers: [OrganizationsService],
+  providers: [
+    OrganizationsResolver,
+    OrganizationsService,
+    MongoIdScalar,
+    UsersService,
+  ],
   exports: [OrganizationsService],
-  controllers: [OrganizationsController],
 })
 export class OrganizationsModule {}

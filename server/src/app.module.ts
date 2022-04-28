@@ -8,21 +8,16 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
-import { AuthModule } from './services/auth/auth.module';
 import { AppService } from './app.service';
-import { OrganizationsController } from './services/organizations/organizations.controller';
-import { AssignmentModule } from './services/assignment/assignment.module';
-import { TodosModule } from './services/todos/todos.module';
 import { ApiTooManyRequestsResponse } from '@nestjs/swagger';
 import { join } from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import { AuthService } from './services/auth/auth.service';
-import { AssignmentsModule } from './assignments/assignments.module';
-import { OrganizationsModule } from './organizations/organizations.module';
-import { CoursesModule } from './courses/courses.module';
-import { UsersModule } from './users/users.module';
-import { RolesModule } from './roles/roles.module';
-import { DepartmentsModule } from './departments/departments.module';
+import { AssignmentsModule } from './services/assignments/assignments.module';
+import { OrganizationsModule } from './services/organizations/organizations.module';
+import { CoursesModule } from './services/courses/courses.module';
+import { UsersModule } from './services/users/users.module';
+import { RolesModule } from './services/roles/roles.module';
+import { DepartmentsModule } from './services/departments/departments.module';
 
 @Module({
   imports: [
@@ -40,7 +35,6 @@ import { DepartmentsModule } from './departments/departments.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
-    AuthModule,
     UsersModule,
     OrganizationsModule,
     AssignmentsModule,

@@ -1,0 +1,14 @@
+query Users {
+  users {
+    firstName
+    lastName
+    email
+    online
+    organization {
+      name
+      address
+      logo
+      country
+    }
+  }
+}

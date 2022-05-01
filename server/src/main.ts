@@ -2,16 +2,17 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
-import { HttpExceptionFilter } from './services/shared/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    cors: { credentials: true, origin: 'http://localhost:3000' },
+    cors: {
+      origin: 'http://localhost:3000',
+      credentials: true,
+      allowedHeaders: 'Content-Type, Authorization',
+    },
   });
 
-  // Cookie utilization
   app.use(cookieParser());
-  // Cross-origin resource sharing
   app.enableCors();
 
   const config = new DocumentBuilder()

@@ -1,70 +1,79 @@
 import {
+  BadRequestException,
   Injectable,
-  ConflictException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { JwtService } from '@nestjs/jwt';
-import { User } from './user.model';
+import { CreateUserInput } from './dto/create-user.input';
+import { UpdateUserInput } from './dto/update-user.input';
+import { User, UserDocument } from './users.schema';
 import { Model } from 'mongoose';
-import { IUser } from './interfaces/user.interface';
-import { AssignUserDepartmentDto } from './dto/assign-user-department';
-import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
+import { LoginUserInput } from './dto/login-user.input';
+import { AuthService } from '../auth/auth.service';
+import {
+  Organization,
+  OrganizationDocument,
+} from '../organizations/organizations.schema';
+import { identity } from 'rxjs';
 
-var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 @Injectable()
 export class UsersService {
+  users: Partial<User>[];
   constructor(
-    @InjectModel('User')
+    @InjectModel(User.name)
     private userModel: Model<User>,
+    private authService: AuthService,
   ) {}
-
-  public async findAll(paginationQuery: PaginationQueryDto): Promise<User[]> {
-    const { limit, offset } = paginationQuery;
-
-    return await this.userModel.find().skip(offset).limit(limit).exec();
+  async create(user: CreateUserInput) {
+    const saltOrRounds = 10;
+    const password = user.password;
+    user.password = await bcrypt.hash(password, saltOrRounds);
+    return this.userModel.create(user);
   }
 
-  public async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById({ _id: id }).exec();
-
+  async loginUser(loginUserInput: LoginUserInput) {
+    const user = await this.authService.validateUser(
+      loginUserInput.email,
+      loginUserInput.password,
+    );
     if (!user) {
-      throw new NotFoundException(`User #${id} not found`);
+      throw new BadRequestException(`Email or password are invalid`);
+    } else {
+      return this.authService.generateUserCredentials(user);
+    }
+  }
+
+  async findAll(): Promise<User[]> {
+    return this.userModel.find().lean();
+  }
+
+  async findByOrganizationId(organizationId) {
+    return this.userModel.find({ organization: organizationId });
+  }
+
+  async findByUserId(userId) {
+    return this.userModel.find({ id: userId });
+  }
+
+  async findByEMail(userEmail) {
+    return this.userModel.find({ email: userEmail });
+  }
+
+  async findOneByEmail(email: string) {
+    const user = await this.userModel.findOne({ email: email }).exec();
+    if (!user) {
+      throw new NotFoundException(`User ${email} not found`);
     }
     return user;
   }
 
-  public async findByOrg(orgId: string): Promise<IUser[]> {
-    const query = { organization: mongoose.Types.ObjectId(orgId) };
-
-    if (!query) {
-      throw new NotFoundException(
-        `No users belonging to organization #${orgId} were found`,
-      );
+  async findOne(id: string) {
+    const user = await this.userModel.findOne({ id: id }).exec();
+    if (!user) {
+      throw new NotFoundException(`User ${id} not found`);
     }
-    return await this.userModel
-      .find(query)
-      .select('name')
-      .select('email')
-      .select('organization')
-      .select('online')
-      .exec();
-  }
-
-  public async updateUserDepartments(
-    userId: string,
-    assignUserDepartmentDto: AssignUserDepartmentDto,
-  ): Promise<IUser> {
-    const existingUser = await this.userModel.findByIdAndUpdate(
-      userId,
-      assignUserDepartmentDto,
-    );
-
-    if (!existingUser) {
-      throw new NotFoundException(`Organization #${userId} not found`);
-    }
-    return existingUser;
+    return user;
   }
 }

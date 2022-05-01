@@ -12,9 +12,6 @@ import loadingLargeAnimation from "../../assets/animations/loadingLarge.json";
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 
-// Feature Flagging
-import { useFeature } from "@growthbook/growthbook-react";
-
 const Users = () => {
   const dispatch = useDispatch();
   const { isLoading, users, errorMessage } = useSelector(
@@ -32,9 +29,6 @@ const Users = () => {
   const handleClick = () => {
     console.log(users);
   };
-
-  // Boolean on/off flags
-  const newTable = useFeature("new-table").on;
 
   return (
     <ConduitPage>

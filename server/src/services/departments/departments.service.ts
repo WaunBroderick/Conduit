@@ -1,49 +1,36 @@
-import { Injectable, ConflictException } from '@nestjs/common';
-import { CreateDepartmentDto } from './dto/create-department.dto';
-import { UpdateDepartmentDto } from './dto/update-department.dto';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Department, DepartmentDocument } from './departments.schema';
+import { CreateDepartmentInput } from './dto/create-department.input';
+import { UpdateDepartmentInput } from './dto/update-department.input';
 import { Model } from 'mongoose';
-import { Department } from './interfaces/department.interface';
-import { PaginationQueryDto } from '../shared/dto/pagination-query.dto';
+import { OrganizationDocument } from '../organizations/organizations.schema';
 
 @Injectable()
 export class DepartmentsService {
+  deparments: Partial<Department>[];
   constructor(
-    @InjectModel('Department') private departmentModel: Model<Department>,
+    @InjectModel(Department.name)
+    private departmentModel: Model<DepartmentDocument>,
   ) {}
 
-  async create(createDepartmentDto: CreateDepartmentDto): Promise<void> {
-    const { name, organization, subSection, admins } = createDepartmentDto;
-    const Department = new this.departmentModel({
-      name,
-      organization,
-      subSection,
-      admins,
-    });
-
-    try {
-      await Department.save();
-    } catch (error) {
-      if (error.code === 11000) {
-        throw new ConflictException('Department already exists');
-      }
-      throw error;
-    }
+  async create(department: CreateDepartmentInput) {
+    return this.departmentModel.create(department);
   }
 
-  public async findAll(
-    paginationQuery: PaginationQueryDto,
-  ): Promise<Department[]> {
-    const { limit, offset } = paginationQuery;
-
-    return await this.departmentModel.find().skip(offset).limit(limit).exec();
+  async findAll(): Promise<Department[]> {
+    return this.departmentModel.find().lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} of a department`;
+  async findOne(id: number) {
+    return this.departmentModel.findById(id).lean();
   }
 
-  update(id: number, updateDepartmentDto: UpdateDepartmentDto) {
+  async findById(id) {
+    return this.departmentModel.findById(id).lean();
+  }
+
+  update(id: number, updateDepartmentInput: UpdateDepartmentInput) {
     return `This action updates a #${id} department`;
   }
 

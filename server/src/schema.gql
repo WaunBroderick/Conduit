@@ -1,0 +1,150 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Assignment {
+  name: String!
+}
+
+type User {
+  id: MongoId!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  isAdmin: Boolean
+  online: Boolean
+  organization: Organization
+}
+
+"""Mongo ObjectId scalar type"""
+scalar MongoId
+
+type Organization {
+  id: MongoId!
+  name: String!
+  address: String
+  logo: String
+  country: String
+  users: [User!]
+}
+
+type LoggedUserOutput {
+  """Generated access_token of the user"""
+  access_token: String!
+}
+
+type Course {
+  id: MongoId!
+  name: String!
+}
+
+type Role {
+  id: MongoId!
+  name: String!
+}
+
+type Department {
+  id: MongoId!
+  name: String!
+  subSections: String
+  organization: Organization
+  admins: [User!]
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  organizations: [Organization!]!
+  organization(id: Int!): Organization!
+  assignments: [Assignment!]!
+  assignment(id: Int!): Assignment!
+  courses: [Course!]!
+  course(id: Int!): Course!
+  roles: [Role!]!
+  role(id: Int!): Role!
+  departments: [Department!]!
+  department(id: Int!): Department!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+  loginUser(loginUserInput: LoginUserInput!): LoggedUserOutput!
+  createOrganization(input: CreateOrganizationInput!): Organization!
+  removeOrganization(id: Int!): Organization!
+  createAssignment(input: CreateAssignmentInput!): Assignment!
+  removeAssignment(id: Int!): Assignment!
+  createCourse(createCourseInput: CreateCourseInput!): Course!
+  updateCourse(updateCourseInput: UpdateCourseInput!): Course!
+  removeCourse(id: Int!): Course!
+  createRole(createRoleInput: CreateRoleInput!): Role!
+  updateRole(updateRoleInput: UpdateRoleInput!): Role!
+  removeRole(id: Int!): Role!
+  createDepartment(input: CreateDepartmentInput!): Department!
+  updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
+  removeDepartment(id: Int!): Department!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  isAdmin: Boolean
+  online: Boolean
+  organization: String
+}
+
+input LoginUserInput {
+  """email of the user"""
+  email: String!
+
+  """password of the user"""
+  password: String!
+}
+
+input CreateOrganizationInput {
+  name: String!
+  address: String
+  logo: String
+  country: String
+}
+
+input CreateAssignmentInput {
+  name: String!
+}
+
+input CreateCourseInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCourseInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateRoleInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateDepartmentInput {
+  name: String!
+  organization: String
+  admins: String
+}
+
+input UpdateDepartmentInput {
+  name: String
+  organization: String
+  admins: String
+  id: Int!
+}

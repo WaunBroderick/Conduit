@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Load all of state storage
 import { useSelector, useDispatch } from "react-redux";
@@ -26,6 +26,9 @@ import "@elastic/eui/dist/eui_theme_light.css";
 
 import { axiosInstanceNoJWT } from "../../services/api-interceptor";
 
+import { useQuery, gql } from "@apollo/client";
+import { LOAD_USERS } from "../../graphql/authentiation";
+
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,6 +40,12 @@ export default function SignIn() {
   const { isLoading, profile, errorMessage } = useSelector(
     (state) => state.profile
   );
+
+  const { error, loading, data } = useQuery(LOAD_USERS);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const submit = async (e) => {
     e.preventDefault();

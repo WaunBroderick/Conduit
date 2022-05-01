@@ -1,22 +1,33 @@
-import { Module } from '@nestjs/common';
-import { DepartmentsService } from './departments.service';
-import { DepartmentsController } from './departments.controller';
-import { ConfigModule } from '@nestjs/config';
+import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DepartmentsSchema } from './schemas/departments.schema';
-import { OrganizationsModule } from '../organizations/organizations.module';
-import { AbilityModule } from '../../permissions/ability.module';
+import {
+  Organization,
+  OrganizationSchema,
+} from '../organizations/organizations.schema';
+import { User, UserSchema } from '../users/users.schema';
+import { DepartmentsService } from './departments.service';
+import { DepartmentsResolver } from './departments.resolver';
+import { Department, DepartmentSchema } from './departments.schema';
+import { UsersService } from '../users/users.service';
+import { OrganizationsService } from '../organizations/organizations.service';
+import MongoIdScalar from 'common/scalars/mongo-id.scalar';
+import { AuthModule } from '../auth/auth.module';
+
 @Module({
   imports: [
-    ConfigModule.forRoot(),
     MongooseModule.forFeature([
-      { name: 'Department', schema: DepartmentsSchema },
+      { name: Department.name, schema: DepartmentSchema },
+      { name: Organization.name, schema: OrganizationSchema },
+      { name: User.name, schema: UserSchema },
     ]),
-    OrganizationsModule,
-    AbilityModule,
+    forwardRef(() => AuthModule),
   ],
-  controllers: [DepartmentsController],
-  providers: [DepartmentsService],
-  exports: [DepartmentsService],
+  providers: [
+    DepartmentsResolver,
+    DepartmentsService,
+    UsersService,
+    OrganizationsService,
+    MongoIdScalar,
+  ],
 })
 export class DepartmentsModule {}

@@ -25,16 +25,16 @@ import Courses from "./containers/courses/Courses";
 // Feature Flagging
 import { GrowthBook, GrowthBookProvider } from "@growthbook/growthbook-react";
 
-// Create a GrowthBook instance
-const growthbook = new GrowthBook({
-  // Callback when a user is put into an A/B experiment
-  trackingCallback: (experiment, result) => {
-    console.log("Experiment Viewed", {
-      experimentId: experiment.key,
-      variationId: result.variationId,
-    });
-  },
-});
+// Graphql
+import { gql } from "apollo-boost";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+  from,
+} from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 
 const themeDark = {
   colorPrimary: "purple",
@@ -81,9 +81,27 @@ function App() {
     });
   });
 
+  const errorLink = onError(({ graphqlErrors, networkError }) => {
+    if (graphqlErrors) {
+      graphqlErrors.map(({ message, location, path }) => {
+        alert(`Graphql err ${message}`);
+      });
+    }
+  });
+
+  const link = from([
+    errorLink,
+    new HttpLink({ uri: "http://localhost:5000/graphql" }),
+  ]);
+
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: link,
+  });
+
   return (
     <>
-      <GrowthBookProvider growthbook={growthbook}>
+      <ApolloProvider client={client}>
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles />
           <Router>
@@ -95,7 +113,7 @@ function App() {
             </Switch>
           </Router>
         </ThemeProvider>
-      </GrowthBookProvider>
+      </ApolloProvider>
     </>
   );
 }

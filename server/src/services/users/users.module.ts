@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -14,6 +14,7 @@ import {
 import { OrganizationsService } from 'src/services/organizations/organizations.service';
 import { OrganizationsModule } from '../organizations/organizations.module';
 import MongoIdScalar from 'common/scalars/mongo-id.scalar';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import MongoIdScalar from 'common/scalars/mongo-id.scalar';
       { name: User.name, schema: UserSchema },
       { name: Organization.name, schema: OrganizationSchema },
     ]),
-    OrganizationsModule,
+    forwardRef(() => OrganizationsModule),
+    forwardRef(() => AuthModule),
   ],
   providers: [UsersResolver, UsersService, MongoIdScalar, OrganizationsService],
   exports: [UsersService],

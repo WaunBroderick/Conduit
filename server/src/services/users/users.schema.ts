@@ -73,4 +73,7 @@ export class CreateUserInput {
 export class FindUserInput {
   @Field()
   _id: string;
+
+  @Field()
+  password: string;
 }

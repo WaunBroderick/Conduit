@@ -5,13 +5,14 @@ import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    //change to 3000 if broken
-    cors: { credentials: true, origin: 'http://localhost:5000' },
+    cors: {
+      origin: 'http://localhost:3000',
+      credentials: true,
+      allowedHeaders: 'Content-Type, Authorization',
+    },
   });
 
-  // Cookie utilization
   app.use(cookieParser());
-  // Cross-origin resource sharing
   app.enableCors();
 
   const config = new DocumentBuilder()

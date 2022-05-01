@@ -13,6 +13,8 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Organization } from '../organizations/organizations.schema';
 import { OrganizationsService } from '../organizations/organizations.service';
+import { LoginUserInput } from './dto/login-user.input';
+import { LoggedUserOutput } from './dto/logged-user.output';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -22,28 +24,22 @@ export class UsersResolver {
   ) {}
 
   @Mutation(() => User)
-  createUser(@Args('input') user: CreateUserInput) {
+  async createUser(@Args('input') user: CreateUserInput) {
     return this.usersService.create(user);
   }
 
+  @Mutation(() => LoggedUserOutput)
+  loginUser(@Args('loginUserInput') loginUserInput: LoginUserInput) {
+    return this.usersService.loginUser(loginUserInput);
+  }
   @Query(() => [User], { name: 'users' })
-  findAll() {
+  async findAll() {
     return this.usersService.findAll();
   }
 
   @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  async findOne(@Args('id', { type: () => Int }) id: string) {
     return this.usersService.findOne(id);
-  }
-
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.usersService.update(updateUserInput.id, updateUserInput);
-  }
-
-  @Mutation(() => User)
-  removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.usersService.remove(id);
   }
 
   @ResolveField(() => Organization)

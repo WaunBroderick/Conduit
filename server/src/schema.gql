@@ -29,14 +29,19 @@ type Organization {
   users: [User!]
 }
 
+type LoggedUserOutput {
+  """Generated access_token of the user"""
+  access_token: String!
+}
+
 type Course {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: MongoId!
+  name: String!
 }
 
 type Role {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: MongoId!
+  name: String!
 }
 
 type Department {
@@ -64,8 +69,7 @@ type Query {
 
 type Mutation {
   createUser(input: CreateUserInput!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
-  removeUser(id: Int!): User!
+  loginUser(loginUserInput: LoginUserInput!): LoggedUserOutput!
   createOrganization(input: CreateOrganizationInput!): Organization!
   removeOrganization(id: Int!): Organization!
   createAssignment(input: CreateAssignmentInput!): Assignment!
@@ -91,15 +95,12 @@ input CreateUserInput {
   organization: String
 }
 
-input UpdateUserInput {
-  firstName: String
-  lastName: String
-  email: String
-  password: String
-  isAdmin: Boolean
-  online: Boolean
-  organization: String
-  id: Int!
+input LoginUserInput {
+  """email of the user"""
+  email: String!
+
+  """password of the user"""
+  password: String!
 }
 
 input CreateOrganizationInput {

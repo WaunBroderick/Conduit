@@ -18,9 +18,13 @@ import { CoursesModule } from './services/courses/courses.module';
 import { UsersModule } from './services/users/users.module';
 import { RolesModule } from './services/roles/roles.module';
 import { DepartmentsModule } from './services/departments/departments.module';
+import { AuthModule } from './services/auth/auth.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MongooseModule.forRoot(
       // For STAGING MongoDB server
       //`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
@@ -29,7 +33,7 @@ import { DepartmentsModule } from './services/departments/departments.module';
     ),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       cors: {
-        origin: 'http://localhost:5000',
+        origin: 'http://localhost:3000',
         credentials: true,
       },
       driver: ApolloDriver,
@@ -41,6 +45,7 @@ import { DepartmentsModule } from './services/departments/departments.module';
     CoursesModule,
     RolesModule,
     DepartmentsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

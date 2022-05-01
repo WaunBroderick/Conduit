@@ -26,8 +26,8 @@ import "@elastic/eui/dist/eui_theme_light.css";
 
 import { axiosInstanceNoJWT } from "../../services/api-interceptor";
 
-import { useQuery, gql } from "@apollo/client";
-import { LOAD_USERS } from "../../graphql/authentiation";
+import { useQuery, useMutation, gql } from "@apollo/client";
+import { LOAD_USERS, LOGIN_USER } from "../../graphql/authentiation";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -41,42 +41,37 @@ export default function SignIn() {
     (state) => state.profile
   );
 
-  const { error, loading, data } = useQuery(LOAD_USERS);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const [validateUser, { data, error }] = useMutation(LOGIN_USER);
 
   const submit = async (e) => {
     e.preventDefault();
 
-    const verifyUser = axiosInstanceNoJWT
-      .post(
-        "http://localhost:5000/auth/signin",
-        {
-          username: email,
+    const verifyUser = validateUser({
+      variables: {
+        loginCredentials: {
+          email: email,
           password: password,
         },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      },
+    })
       .then((response) => {
-        setJWT(response.data.accessToken);
+        setJWT(response.data.access_token);
         console.log(response.data);
-        setCookie("authCookie", response.data.accessToken, { path: "/" });
+        setCookie("authCookie", response.data.access_token, { path: "/" });
         //loadProfileinformation
-        dispatch(loadProfileAsync(response.data.accessToken));
+        dispatch(loadProfileAsync(response.data.access_token));
         //loadEmployeesInformation
-        dispatch(loadUsersAsync(response.data.accessToken));
+        dispatch(loadUsersAsync(response.data.access_token));
         //loadDepartmentsInformation
-        dispatch(loadDepartmentsAsync(response.data.accessToken));
+        dispatch(loadDepartmentsAsync(response.data.access_token));
         setRedirect(true);
       })
       .then((data) => {})
       .catch((error) => {});
   };
 
+  console.log("HELLLO");
+  console.log(email);
   if (redirect) {
     return <Redirect to="/home" />;
   }
@@ -98,7 +93,7 @@ export default function SignIn() {
             }}
             onClick={() => {}}
           >
-            <EuiForm onSubmit={(e) => submit(e)}>
+            <EuiForm onSubmit={(e) => validateUser(e)}>
               <EuiFormRow label="Email Address">
                 <EuiFieldText
                   name="Email"

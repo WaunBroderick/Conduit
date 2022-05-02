@@ -1,12 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateAssignmentInput } from './dto/update-assignment.input';
-import {
-  Assignment,
-  AssignmentDocument,
-  CreateAssignmentInput,
-} from './assignments.schema';
+import { Assignment, AssignmentDocument } from './assignments.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { CreateAssignmentInput } from './dto/create-assignment.input';
 
 @Injectable()
 export class AssignmentsService {
@@ -23,8 +20,12 @@ export class AssignmentsService {
     return this.assignmentModel.find().lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} assignment`;
+  async findById(id: string) {
+    return this.assignmentModel.findById(id).lean();
+  }
+
+  async findByUserId(userId) {
+    return this.assignmentModel.find({ user: userId });
   }
 
   update(id: number, updateAssignmentInput: UpdateAssignmentInput) {

@@ -15,6 +15,12 @@ import { OrganizationsService } from 'src/services/organizations/organizations.s
 import { OrganizationsModule } from '../organizations/organizations.module';
 import MongoIdScalar from 'src/common/scalars/mongo-id.scalar';
 import { AuthModule } from '../auth/auth.module';
+import {
+  Assignment,
+  AssignmentSchema,
+} from '../assignments/assignments.schema';
+import { AssignmentsService } from '../assignments/assignments.service';
+import { AssignmentsModule } from '../assignments/assignments.module';
 
 @Module({
   imports: [
@@ -22,11 +28,19 @@ import { AuthModule } from '../auth/auth.module';
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
       { name: Organization.name, schema: OrganizationSchema },
+      { name: Assignment.name, schema: AssignmentSchema },
     ]),
     forwardRef(() => OrganizationsModule),
+    forwardRef(() => AssignmentsModule),
     forwardRef(() => AuthModule),
   ],
-  providers: [UsersResolver, UsersService, MongoIdScalar, OrganizationsService],
+  providers: [
+    UsersResolver,
+    UsersService,
+    MongoIdScalar,
+    OrganizationsService,
+    AssignmentsService,
+  ],
   exports: [UsersService],
 })
 export class UsersModule {}

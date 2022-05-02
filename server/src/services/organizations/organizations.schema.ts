@@ -40,8 +40,6 @@ export class Organization {
 
 export const OrganizationSchema = SchemaFactory.createForClass(Organization);
 
-//OrganizationSchema.index({ author: 1 });
-
 @InputType()
 export class CreateOrganizationInput {
   @Field()

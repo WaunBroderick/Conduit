@@ -14,7 +14,6 @@ import {
   Organization,
   OrganizationDocument,
 } from '../organizations/organizations.schema';
-import { identity } from 'rxjs';
 
 var bcrypt = require('bcryptjs');
 
@@ -26,6 +25,7 @@ export class UsersService {
     private userModel: Model<User>,
     private authService: AuthService,
   ) {}
+
   async create(user: CreateUserInput) {
     const saltOrRounds = 10;
     const password = user.password;
@@ -51,6 +51,10 @@ export class UsersService {
 
   async findByOrganizationId(organizationId) {
     return this.userModel.find({ organization: organizationId });
+  }
+
+  async findByAssignmentId(assignmentId) {
+    return this.userModel.find({ assignment: assignmentId });
   }
 
   async findByUserId(userId) {

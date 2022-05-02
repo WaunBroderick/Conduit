@@ -6,31 +6,16 @@ import {
   closeInMongodConnection,
   rootMongooseTestModule,
 } from '../../../common/helpers/mongoose.helper';
-import { CreateOrganizationInput } from '../dto/create-organization.input';
 import * as Chance from 'chance';
-import mongoose from 'mongoose';
-import { UpdateOrganizationInput } from '../dto/update-organization.input';
-import { UpdateUserInput } from '../../users/dto/update-user.input';
 
-const ORGANIZATION_TOLE = 'Organization';
+import {
+  createOrganizationInput,
+  updateOrganizationInput,
+} from './organization.stub';
+
+const ORGANIZATION_ROLE = 'Organization';
 const chance = new Chance();
 let organizationId = '';
-
-const createOrganizationInput: CreateOrganizationInput = {
-  id: organizationId,
-  name: chance.company(),
-  address: chance.address(),
-  country: chance.country(),
-  logo: chance.animal(),
-};
-
-const updateOrganizationInput: UpdateOrganizationInput = {
-  id: organizationId,
-  name: chance.company(),
-  address: chance.address(),
-  country: chance.country(),
-  logo: chance.animal(),
-};
 
 describe('OrganizationsService', () => {
   let service: OrganizationsService;

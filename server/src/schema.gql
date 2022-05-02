@@ -2,10 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Assignment {
-  name: String!
-}
-
 type User {
   id: MongoId!
   firstName: String!
@@ -15,6 +11,8 @@ type User {
   isAdmin: Boolean
   online: Boolean
   organization: Organization
+  assignment: [Assignment!]
+  assignments: Organization!
 }
 
 """Mongo ObjectId scalar type"""
@@ -27,6 +25,13 @@ type Organization {
   logo: String
   country: String
   users: [User!]
+}
+
+type Assignment {
+  id: MongoId
+  name: String!
+  organization: Organization
+  user: User
 }
 
 type LoggedUserOutput {
@@ -93,6 +98,7 @@ input CreateUserInput {
   isAdmin: Boolean
   online: Boolean
   organization: String
+  assignments: String
 }
 
 input LoginUserInput {
@@ -112,7 +118,10 @@ input CreateOrganizationInput {
 }
 
 input CreateAssignmentInput {
+  id: String
   name: String!
+  organization: String
+  user: String
 }
 
 input CreateCourseInput {

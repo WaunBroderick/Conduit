@@ -33,8 +33,8 @@ export class OrganizationsResolver {
   }
 
   @Query(() => Organization, { name: 'organization' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.organizationsService.findOne(id);
+  findById(@Args('id', { type: () => Int }) id: number) {
+    return this.organizationsService.findById(id);
   }
 
   @Mutation(() => Organization)

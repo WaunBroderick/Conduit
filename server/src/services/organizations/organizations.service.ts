@@ -24,9 +24,9 @@ export class OrganizationsService {
     return this.organizationModel.find().lean();
   }
 
-  async findOne(id: number) {
-    return this.organizationModel.findById(id).lean();
-  }
+  //async findOne(id: number) {
+  //  return this.organizationModel.findById(id).lean();
+  // }
 
   async findById(id) {
     return this.organizationModel.findById(id).lean();

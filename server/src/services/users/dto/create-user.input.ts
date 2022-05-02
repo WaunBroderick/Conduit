@@ -24,4 +24,7 @@ export class CreateUserInput {
 
   @Field({ nullable: true })
   organization: string;
+
+  @Field({ nullable: true })
+  assignments: string;
 }

@@ -15,12 +15,14 @@ import { Organization } from '../organizations/organizations.schema';
 import { OrganizationsService } from '../organizations/organizations.service';
 import { LoginUserInput } from './dto/login-user.input';
 import { LoggedUserOutput } from './dto/logged-user.output';
+import { AssignmentsService } from '../assignments/assignments.service';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(
     private readonly usersService: UsersService,
     private organizationService: OrganizationsService,
+    private assignmentService: AssignmentsService,
   ) {}
 
   @Mutation(() => User)
@@ -29,7 +31,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => LoggedUserOutput)
-  loginUser(@Args('loginUserInput') loginUserInput: LoginUserInput) {
+  async loginUser(@Args('loginUserInput') loginUserInput: LoginUserInput) {
     return this.usersService.loginUser(loginUserInput);
   }
   @Query(() => [User], { name: 'users' })
@@ -44,6 +46,11 @@ export class UsersResolver {
 
   @ResolveField(() => Organization)
   async organization(@Parent() user: User) {
+    return this.organizationService.findById(user.organization);
+  }
+
+  @ResolveField(() => Organization)
+  async assignments(@Parent() user: User) {
     return this.organizationService.findById(user.organization);
   }
 }

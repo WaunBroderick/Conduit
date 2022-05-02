@@ -5,6 +5,7 @@ import { Organization } from 'src/services/organizations/organizations.schema';
 
 import * as mongoose from 'mongoose';
 import MongoId from 'src/common/scalars/mongo-id.scalar';
+import { Assignment } from '../assignments/assignments.schema';
 
 export type UserDocument = User & mongoose.Document;
 
@@ -41,39 +42,12 @@ export class User {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Organization' })
   @Field(() => Organization, { nullable: true })
   organization: Organization | string;
+
+  @Prop({
+    type: { type: mongoose.Schema.Types.ObjectId, ref: 'Assignments' },
+  })
+  @Field(() => [Assignment], { nullable: true })
+  assignment?: Assignment[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-
-@InputType()
-export class CreateUserInput {
-  @Field()
-  name: string;
-
-  @Field()
-  lastName: string;
-
-  @Field()
-  email: string;
-
-  @Field({ nullable: true })
-  organization: string;
-
-  @Field()
-  password: string;
-
-  @Field({ nullable: true })
-  isAdmin: boolean;
-
-  @Field({ nullable: true })
-  online: boolean;
-}
-
-@InputType()
-export class FindUserInput {
-  @Field()
-  _id: string;
-
-  @Field()
-  password: string;
-}

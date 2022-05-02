@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { OrganizationSchema, Organization } from './organizations.schema';
 import { UsersService } from 'src/services/users/users.service';
 import { User, UserSchema } from 'src/services/users/users.schema';
-import MongoIdScalar from 'common/scalars/mongo-id.scalar';
+import MongoIdScalar from 'src/common/scalars/mongo-id.scalar';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({

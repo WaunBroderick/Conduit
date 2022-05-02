@@ -4,7 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Organization } from 'src/services/organizations/organizations.schema';
 
 import * as mongoose from 'mongoose';
-import MongoId from 'common/scalars/mongo-id.scalar';
+import MongoId from 'src/common/scalars/mongo-id.scalar';
 
 export type UserDocument = User & mongoose.Document;
 

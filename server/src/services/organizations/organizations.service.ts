@@ -5,6 +5,9 @@ import { UpdateOrganizationInput } from './dto/update-organization.input';
 import { Organization, OrganizationDocument } from './organizations.schema';
 import { Model } from 'mongoose';
 
+import * as Chance from 'chance';
+const chance = new Chance();
+
 @Injectable()
 export class OrganizationsService {
   organizations: Partial<Organization>[];
@@ -29,11 +32,18 @@ export class OrganizationsService {
     return this.organizationModel.findById(id).lean();
   }
 
-  update(id: number, updateOrganizationInput: UpdateOrganizationInput) {
-    return `This action updates a #${id} organization`;
+  async update(
+    id: string,
+    updateOrganizationInput: UpdateOrganizationInput,
+  ): Promise<Organization> {
+    return await this.organizationModel.findByIdAndUpdate(
+      id,
+      updateOrganizationInput,
+      { new: true },
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} organization`;
+  async remove(id: string): Promise<Organization> {
+    return await this.organizationModel.findByIdAndRemove(id);
   }
 }

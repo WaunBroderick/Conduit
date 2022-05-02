@@ -10,7 +10,7 @@ import { DepartmentsResolver } from './departments.resolver';
 import { Department, DepartmentSchema } from './departments.schema';
 import { UsersService } from '../users/users.service';
 import { OrganizationsService } from '../organizations/organizations.service';
-import MongoIdScalar from 'common/scalars/mongo-id.scalar';
+import MongoIdScalar from 'src/common/scalars/mongo-id.scalar';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({

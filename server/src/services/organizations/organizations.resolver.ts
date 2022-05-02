@@ -38,7 +38,7 @@ export class OrganizationsResolver {
   }
 
   @Mutation(() => Organization)
-  removeOrganization(@Args('id', { type: () => Int }) id: number) {
+  removeOrganization(@Args('id', { type: () => String }) id: string) {
     return this.organizationsService.remove(id);
   }
 

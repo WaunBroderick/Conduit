@@ -4,7 +4,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../users/users.schema';
 
 import * as mongoose from 'mongoose';
-import MongoId from 'common/scalars/mongo-id.scalar';
+import MongoId from 'src/common/scalars/mongo-id.scalar';
 
 export type OrganizationDocument = Organization & mongoose.Document;
 
@@ -35,6 +35,7 @@ export class Organization {
   })
   @Field(() => [User], { nullable: true })
   users?: User[];
+  static id: string;
 }
 
 export const OrganizationSchema = SchemaFactory.createForClass(Organization);

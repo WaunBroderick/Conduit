@@ -2,6 +2,9 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateOrganizationInput {
+  @Field({ nullable: true })
+  id: string;
+
   @Field()
   name: string;
 

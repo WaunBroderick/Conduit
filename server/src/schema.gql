@@ -71,7 +71,7 @@ type Mutation {
   createUser(input: CreateUserInput!): User!
   loginUser(loginUserInput: LoginUserInput!): LoggedUserOutput!
   createOrganization(input: CreateOrganizationInput!): Organization!
-  removeOrganization(id: Int!): Organization!
+  removeOrganization(id: String!): Organization!
   createAssignment(input: CreateAssignmentInput!): Assignment!
   removeAssignment(id: Int!): Assignment!
   createCourse(createCourseInput: CreateCourseInput!): Course!
@@ -104,6 +104,7 @@ input LoginUserInput {
 }
 
 input CreateOrganizationInput {
+  id: String
   name: String!
   address: String
   logo: String

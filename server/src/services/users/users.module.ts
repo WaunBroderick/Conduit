@@ -13,7 +13,7 @@ import {
 } from 'src/services/organizations/organizations.schema';
 import { OrganizationsService } from 'src/services/organizations/organizations.service';
 import { OrganizationsModule } from '../organizations/organizations.module';
-import MongoIdScalar from 'common/scalars/mongo-id.scalar';
+import MongoIdScalar from 'src/common/scalars/mongo-id.scalar';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({

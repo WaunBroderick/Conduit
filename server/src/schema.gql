@@ -11,8 +11,8 @@ type User {
   isAdmin: Boolean
   online: Boolean
   organization: Organization
-  assignment: [Assignment!]
-  assignments: Organization!
+  assignments: [Assignment!]
+  users: User!
 }
 
 """Mongo ObjectId scalar type"""
@@ -27,21 +27,23 @@ type Organization {
   users: [User!]
 }
 
+type Course {
+  id: MongoId!
+  name: String!
+  assignments: [Assignment!]!
+}
+
 type Assignment {
   id: MongoId
   name: String!
   organization: Organization
+  course: Course
   user: User
 }
 
 type LoggedUserOutput {
   """Generated access_token of the user"""
   access_token: String!
-}
-
-type Course {
-  id: MongoId!
-  name: String!
 }
 
 type Role {
@@ -79,7 +81,7 @@ type Mutation {
   removeOrganization(id: String!): Organization!
   createAssignment(input: CreateAssignmentInput!): Assignment!
   removeAssignment(id: Int!): Assignment!
-  createCourse(createCourseInput: CreateCourseInput!): Course!
+  createCourse(input: CreateCourseInput!): Course!
   updateCourse(updateCourseInput: UpdateCourseInput!): Course!
   removeCourse(id: Int!): Course!
   createRole(createRoleInput: CreateRoleInput!): Role!
@@ -121,18 +123,18 @@ input CreateAssignmentInput {
   id: String
   name: String!
   organization: String
+  course: String
   user: String
 }
 
 input CreateCourseInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: String
+  name: String!
 }
 
 input UpdateCourseInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  id: String!
+  name: String
 }
 
 input CreateRoleInput {

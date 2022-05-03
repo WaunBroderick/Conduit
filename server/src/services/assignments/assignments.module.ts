@@ -11,6 +11,8 @@ import {
 } from '../organizations/organizations.schema';
 import { AuthModule } from '../auth/auth.module';
 import { OrganizationsService } from '../organizations/organizations.service';
+import { Course, CourseSchema } from '../courses/courses.schema';
+import { CoursesService } from '../courses/courses.service';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { OrganizationsService } from '../organizations/organizations.service';
       { name: Assignment.name, schema: AssignmentSchema },
       { name: User.name, schema: UserSchema },
       { name: Organization.name, schema: OrganizationSchema },
+      { name: Course.name, schema: CourseSchema },
     ]),
     forwardRef(() => AuthModule),
   ],
@@ -26,6 +29,7 @@ import { OrganizationsService } from '../organizations/organizations.service';
     AssignmentsService,
     UsersService,
     OrganizationsService,
+    CoursesService,
   ],
   exports: [AssignmentsService],
 })

@@ -9,10 +9,8 @@ export class CoursesResolver {
   constructor(private readonly coursesService: CoursesService) {}
 
   @Mutation(() => Course)
-  createCourse(
-    @Args('createCourseInput') createCourseInput: CreateCourseInput,
-  ) {
-    return this.coursesService.create(createCourseInput);
+  async createCourse(@Args('input') course: CreateCourseInput) {
+    return this.coursesService.createCourse(course);
   }
 
   @Query(() => [Course], { name: 'courses' })
@@ -21,8 +19,8 @@ export class CoursesResolver {
   }
 
   @Query(() => Course, { name: 'course' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.coursesService.findOne(id);
+  findOne(@Args('id', { type: () => Int }) id: string) {
+    return this.coursesService.findById(id);
   }
 
   @Mutation(() => Course)
@@ -33,7 +31,7 @@ export class CoursesResolver {
   }
 
   @Mutation(() => Course)
-  removeCourse(@Args('id', { type: () => Int }) id: number) {
+  removeCourse(@Args('id', { type: () => Int }) id: string) {
     return this.coursesService.remove(id);
   }
 }

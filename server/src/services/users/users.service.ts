@@ -22,7 +22,7 @@ export class UsersService {
   users: Partial<User>[];
   constructor(
     @InjectModel(User.name)
-    private userModel: Model<User>,
+    private userModel: Model<UserDocument>,
     private authService: AuthService,
   ) {}
 
@@ -49,6 +49,10 @@ export class UsersService {
     return this.userModel.find().lean();
   }
 
+  async findById(id) {
+    return this.userModel.findById(id).lean();
+  }
+
   async findByOrganizationId(organizationId) {
     return this.userModel.find({ organization: organizationId });
   }
@@ -65,7 +69,7 @@ export class UsersService {
     return this.userModel.find({ email: userEmail });
   }
 
-  async findOneByEmail(email: string) {
+  async findByEmail(email: string) {
     const user = await this.userModel.findOne({ email: email }).exec();
     if (!user) {
       throw new NotFoundException(`User ${email} not found`);

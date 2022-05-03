@@ -35,19 +35,11 @@ export class Organization {
   })
   @Field(() => [User], { nullable: true })
   users?: User[];
+
   static id: string;
 }
 
 export const OrganizationSchema = SchemaFactory.createForClass(Organization);
-
-@InputType()
-export class CreateOrganizationInput {
-  @Field()
-  name: string;
-
-  @Field({ nullable: true })
-  address: string;
-}
 
 @InputType()
 export class FindOrganizationInput {

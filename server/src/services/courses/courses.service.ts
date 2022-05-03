@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Course, CourseDocument } from './courses.schema';
 import { CreateCourseInput } from './dto/create-course.input';
 import { UpdateCourseInput } from './dto/update-course.input';
 
 @Injectable()
 export class CoursesService {
-  create(createCourseInput: CreateCourseInput) {
-    return 'This action adds a new course';
+  constructor(
+    @InjectModel(Course.name)
+    private courseModel: Model<CourseDocument>,
+  ) {}
+
+  async createCourse(course: CreateCourseInput) {
+    return this.courseModel.create(course);
   }
 
-  findAll() {
-    return `This action returns all courses`;
+  async findAll(): Promise<Course[]> {
+    return this.courseModel.find().lean();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
+  async findById(id) {
+    return this.courseModel.findById(id).lean();
   }
 
-  update(id: number, updateCourseInput: UpdateCourseInput) {
+  update(id: string, updateCourseInput: UpdateCourseInput) {
     return `This action updates a #${id} course`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} course`;
   }
 }

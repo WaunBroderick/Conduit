@@ -12,6 +12,7 @@ import { Organization } from './organizations.schema';
 import { CreateOrganizationInput } from './dto/create-organization.input';
 import { UpdateOrganizationInput } from './dto/update-organization.input';
 import { UsersService } from '../users/users.service';
+import { User } from '../users/users.schema';
 
 @Resolver(() => Organization)
 export class OrganizationsResolver {
@@ -42,8 +43,8 @@ export class OrganizationsResolver {
     return this.organizationsService.remove(id);
   }
 
-  @ResolveField()
+  @ResolveField(() => User)
   async users(@Parent() parent: Organization) {
-    return this.usersService.findByOrganizationId(parent.id);
+    return this.usersService.findByUserId(parent.users);
   }
 }

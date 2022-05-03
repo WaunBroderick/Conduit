@@ -44,10 +44,10 @@ export class User {
   organization: Organization | string;
 
   @Prop({
-    type: { type: mongoose.Schema.Types.ObjectId, ref: 'Assignments' },
+    type: { type: mongoose.Schema.Types.ObjectId, ref: 'Assignment' },
   })
   @Field(() => [Assignment], { nullable: true })
-  assignment?: Assignment[];
+  assignments: Assignment[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -15,6 +15,8 @@ import { Organization } from '../organizations/organizations.schema';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/users.schema';
 import { OrganizationsService } from '../organizations/organizations.service';
+import { Course } from '../courses/courses.schema';
+import { CoursesService } from '../courses/courses.service';
 
 @Resolver(() => Assignment)
 export class AssignmentsResolver {
@@ -22,6 +24,7 @@ export class AssignmentsResolver {
     private readonly assignmentsService: AssignmentsService,
     private usersService: UsersService,
     private organizationService: OrganizationsService,
+    private courseService: CoursesService,
   ) {}
 
   @Mutation(() => Assignment)
@@ -49,13 +52,13 @@ export class AssignmentsResolver {
     return this.organizationService.findById(parent.organization);
   }
 
-  @ResolveField(() => [User])
-  async user(@Parent() parent: Assignment) {
-    return this.usersService.findByUserId(parent.user);
+  @ResolveField(() => Course)
+  async course(@Parent() parent: Assignment) {
+    return this.courseService.findById(parent.course);
   }
 
-  //@ResolveField()
-  //async users(@Parent() parent: Organization) {
-  //  return this.usersService.findByAssignmentId(parent.id);
-  //}
+  @ResolveField(() => User)
+  async user(@Parent() parent: Assignment) {
+    return this.usersService.findById(parent.user);
+  }
 }

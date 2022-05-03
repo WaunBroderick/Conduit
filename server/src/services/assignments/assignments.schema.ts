@@ -5,6 +5,7 @@ import { User } from '../users/users.schema';
 
 import * as mongoose from 'mongoose';
 import MongoId from 'src/common/scalars/mongo-id.scalar';
+import { Course } from '../courses/courses.schema';
 
 export type AssignmentDocument = Assignment & mongoose.Document;
 
@@ -21,6 +22,10 @@ export class Assignment {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Organization' })
   @Field(() => Organization, { nullable: true })
   organization: Organization | string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Course' })
+  @Field(() => Course, { nullable: true })
+  course: Course | string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   @Field(() => User, { nullable: true })

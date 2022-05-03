@@ -16,6 +16,7 @@ import { OrganizationsService } from '../organizations/organizations.service';
 import { LoginUserInput } from './dto/login-user.input';
 import { LoggedUserOutput } from './dto/logged-user.output';
 import { AssignmentsService } from '../assignments/assignments.service';
+import { Assignment } from '../assignments/assignments.schema';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -49,8 +50,13 @@ export class UsersResolver {
     return this.organizationService.findById(user.organization);
   }
 
-  @ResolveField(() => Organization)
-  async assignments(@Parent() user: User) {
-    return this.organizationService.findById(user.organization);
+  @ResolveField(() => User)
+  async users(@Parent() parent: Organization) {
+    return this.usersService.findByOrganizationId(parent.id);
+  }
+
+  @ResolveField(() => Assignment)
+  async assignments(@Parent() parent: User) {
+    return this.assignmentService.findByUserId(parent.assignments);
   }
 }

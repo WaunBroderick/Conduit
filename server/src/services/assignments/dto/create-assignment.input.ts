@@ -12,5 +12,8 @@ export class CreateAssignmentInput {
   organization: string;
 
   @Field({ nullable: true })
+  course: string;
+
+  @Field({ nullable: true })
   user: string;
 }

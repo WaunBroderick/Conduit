@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="4.017">
+  <testsuite name="AppController" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:51" time="1.419" tests="1">
+    <testcase classname="AppController root should return &quot;Hello World!&quot;" name="AppController root should return &quot;Hello World!&quot;" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="OrganizationsService" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:53" time="1.38" tests="8">
+    <testcase classname="OrganizationsService should be defined" name="OrganizationsService should be defined" time="0.001">
+    </testcase>
+    <testcase classname="OrganizationsService Should create an Organization with createOrganizationInput" name="OrganizationsService Should create an Organization with createOrganizationInput" time="0.028">
+    </testcase>
+    <testcase classname="OrganizationsService Should get a list of all organizations" name="OrganizationsService Should get a list of all organizations" time="0.012">
+    </testcase>
+    <testcase classname="OrganizationsService Should get the organization by its own organizationId" name="OrganizationsService Should get the organization by its own organizationId" time="0.004">
+    </testcase>
+    <testcase classname="OrganizationsService Should update some Organization Properties" name="OrganizationsService Should update some Organization Properties" time="0.006">
+    </testcase>
+    <testcase classname="OrganizationsService Should delete the mock testing organization" name="OrganizationsService Should delete the mock testing organization" time="0.003">
+    </testcase>
+    <testcase classname="OrganizationsService Should recieve NotFound error for getting the deleted organization" name="OrganizationsService Should recieve NotFound error for getting the deleted organization" time="0.008">
+    </testcase>
+    <testcase classname="OrganizationsService should not be able to update an non existing organization" name="OrganizationsService should not be able to update an non existing organization" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.114" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.036" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.035" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.035" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.036" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.04" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.038" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.037" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.037" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.036" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.033" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.034" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-05-04T13:05:54" time="0.034" tests="0">
+    <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
+    </testcase>
+  </testsuite>
+</testsuites>

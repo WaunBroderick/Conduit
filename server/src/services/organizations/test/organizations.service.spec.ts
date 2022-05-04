@@ -12,6 +12,7 @@ import {
   createOrganizationInput,
   updateOrganizationInput,
 } from './organization.stub';
+import mongoose from 'mongoose';
 
 const ORGANIZATION_ROLE = 'Organization';
 const chance = new Chance();
@@ -39,10 +40,8 @@ describe('OrganizationsService', () => {
   });
 
   afterAll(async () => {
-    if (module) {
-      await module.close();
-      await closeInMongodConnection();
-    }
+    await module.close();
+    await mongoose.connection.close();
   });
 
   it('should be defined', () => {

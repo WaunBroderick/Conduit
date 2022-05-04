@@ -32,7 +32,7 @@ jobs:
           command: mkdir /root/project/reports && mkdir /root/project/reports/junit
       - run:
           name: Run tests with JUnit as reporter
-          command: cd server && jest auth.controller organizations.controller --ci --runInBand --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit" --passWithNoTests --detectOpenHandles
+          command: cd server && jest --ci --runInBand --force-exit --reporters=default --reporters=jest-junit  --testResultsProcessor="jest-junit" --passWithNoTests --detectOpenHandles
           environment:
             JEST_JUNIT_OUTPUT_DIR: /root/project/server/reports
       - store_test_results:

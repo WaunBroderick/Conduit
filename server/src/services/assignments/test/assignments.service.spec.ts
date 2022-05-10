@@ -47,7 +47,7 @@ describe('AssignmentsService', () => {
     expect(service).toBeDefined();
   });
 
-  it('Should create an Assignment with createAssignmentInput', async () => {
+  /*it('Should create an Assignment with createAssignmentInput', async () => {
     const assignment = await service.createAssignment(
       MockCreateAssignmentInput,
     );
@@ -60,7 +60,7 @@ describe('AssignmentsService', () => {
     expect(assignment.user).toBeDefined();
 
     assignmentId = assignment.id;
-  });
+  });*/
 });
 
 describe('Logger', () => {

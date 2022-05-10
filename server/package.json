@@ -45,7 +45,7 @@
     "class-validator": "^0.13.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
+    "dotenv": "16.0.1",
     "faker": "^5.5.3",
     "graphql": "^16.4.0",
     "jest-junit": "13.1.0",

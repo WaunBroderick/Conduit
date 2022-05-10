@@ -21,6 +21,8 @@ import {
 } from '../assignments/assignments.schema';
 import { AssignmentsService } from '../assignments/assignments.service';
 import { AssignmentsModule } from '../assignments/assignments.module';
+import { Course, CourseSchema } from '../courses/courses.schema';
+import { CoursesService } from '../courses/courses.service';
 
 @Module({
   imports: [
@@ -29,6 +31,7 @@ import { AssignmentsModule } from '../assignments/assignments.module';
       { name: User.name, schema: UserSchema },
       { name: Organization.name, schema: OrganizationSchema },
       { name: Assignment.name, schema: AssignmentSchema },
+      { name: Course.name, schema: CourseSchema },
     ]),
     forwardRef(() => OrganizationsModule),
     forwardRef(() => AssignmentsModule),
@@ -40,6 +43,7 @@ import { AssignmentsModule } from '../assignments/assignments.module';
     MongoIdScalar,
     OrganizationsService,
     AssignmentsService,
+    CoursesService,
   ],
   exports: [UsersService],
 })

@@ -38,10 +38,14 @@ export class AssignmentsResolver {
   }
 
   @Query(() => Assignment, { name: 'assignment' })
-  async findById(@Args('id', { type: () => Int }) id: string) {
+  async findById(@Args('id', { type: () => String }) id: string) {
     return this.assignmentsService.findById(id);
   }
 
+  @Query(() => [Assignment], { name: 'assignmentByUserId' })
+  async findByUserId(@Args('id', { type: () => String }) id: string) {
+    return this.assignmentsService.findByUserId(id);
+  }
   @Mutation(() => Assignment)
   async removeAssignment(@Args('id', { type: () => Int }) id: number) {
     return this.assignmentsService.remove(id);

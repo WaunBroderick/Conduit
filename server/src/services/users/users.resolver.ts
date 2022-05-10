@@ -17,13 +17,16 @@ import { LoginUserInput } from './dto/login-user.input';
 import { LoggedUserOutput } from './dto/logged-user.output';
 import { AssignmentsService } from '../assignments/assignments.service';
 import { Assignment } from '../assignments/assignments.schema';
+import { CoursesService } from '../courses/courses.service';
+import { Course } from '../courses/courses.schema';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(
-    private readonly usersService: UsersService,
+    private usersService: UsersService,
     private organizationService: OrganizationsService,
     private assignmentService: AssignmentsService,
+    private courseService: CoursesService,
   ) {}
 
   @Mutation(() => User)

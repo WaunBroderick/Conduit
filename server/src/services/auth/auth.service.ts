@@ -29,7 +29,7 @@ export class AuthService {
       email: user.email,
       firstName: user.firstName,
       lastName: user.lastName,
-      sub: user.id,
+      sub: user._id,
     };
     return {
       access_token: this.jwtTokenServive.sign(payload),

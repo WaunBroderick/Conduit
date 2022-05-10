@@ -5,7 +5,7 @@ export class CreateAssignmentInput {
   @Field(() => String, { nullable: true })
   id: string;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
   @Field({ nullable: true })

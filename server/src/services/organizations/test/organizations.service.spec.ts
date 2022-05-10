@@ -9,8 +9,8 @@ import {
 import * as Chance from 'chance';
 
 import {
-  createOrganizationInput,
-  updateOrganizationInput,
+  MockCreateOrganizationInput,
+  MockUpdateOrganizationInput,
 } from './organization.stub';
 import mongoose from 'mongoose';
 
@@ -42,14 +42,15 @@ describe('OrganizationsService', () => {
   afterAll(async () => {
     await module.close();
     await mongoose.connection.close();
+    await closeInMongodConnection();
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  it('Should create an Organization with createOrganizationInput', async () => {
-    const organization = await service.create(createOrganizationInput);
+  it('Should create an Organization with MockCreateOrganizationInput', async () => {
+    const organization = await service.create(MockCreateOrganizationInput);
     expect(organization.id).toBeDefined();
     expect(organization.id).toBeDefined();
     expect(organization.name).toBeDefined();
@@ -64,10 +65,10 @@ describe('OrganizationsService', () => {
     expect(organizations).toBeDefined();
     expect(Array.isArray(organizations)).toBe(true);
     expect(organizations.length).toBe(1);
-    expect(organizations[0].name).toBe(createOrganizationInput.name);
-    expect(organizations[0].address).toBe(createOrganizationInput.address);
-    expect(organizations[0].country).toBe(createOrganizationInput.country);
-    expect(organizations[0].logo).toBe(createOrganizationInput.logo);
+    expect(organizations[0].name).toBe(MockCreateOrganizationInput.name);
+    expect(organizations[0].address).toBe(MockCreateOrganizationInput.address);
+    expect(organizations[0].country).toBe(MockCreateOrganizationInput.country);
+    expect(organizations[0].logo).toBe(MockCreateOrganizationInput.logo);
   });
 
   it('Should get the organization by its own organizationId', async () => {
@@ -75,23 +76,27 @@ describe('OrganizationsService', () => {
     expect(JSON.stringify(organization._id)).toBe(
       JSON.stringify(organizationId),
     );
-    expect(organization.name).toBe(createOrganizationInput.name);
-    expect(organization.address).toBe(createOrganizationInput.address);
-    expect(organization.country).toBe(createOrganizationInput.country);
-    expect(organization.logo).toBe(createOrganizationInput.logo);
+    expect(organization.name).toBe(MockCreateOrganizationInput.name);
+    expect(organization.address).toBe(MockCreateOrganizationInput.address);
+    expect(organization.country).toBe(MockCreateOrganizationInput.country);
+    expect(organization.logo).toBe(MockCreateOrganizationInput.logo);
   });
 
   it('Should update some Organization Properties', async () => {
-    updateOrganizationInput.id = organizationId;
+    MockUpdateOrganizationInput.id = organizationId;
     const updatedOrganization = await service.update(
-      updateOrganizationInput.id,
-      updateOrganizationInput,
+      MockUpdateOrganizationInput.id,
+      MockUpdateOrganizationInput,
     );
     expect(updatedOrganization.id).toBe(organizationId);
-    expect(updatedOrganization.name).toBe(updateOrganizationInput.name);
-    expect(updatedOrganization.country).toBe(updateOrganizationInput.country);
-    expect(updatedOrganization.address).toBe(updateOrganizationInput.address);
-    expect(updatedOrganization.logo).toBe(updateOrganizationInput.logo);
+    expect(updatedOrganization.name).toBe(MockUpdateOrganizationInput.name);
+    expect(updatedOrganization.country).toBe(
+      MockUpdateOrganizationInput.country,
+    );
+    expect(updatedOrganization.address).toBe(
+      MockUpdateOrganizationInput.address,
+    );
+    expect(updatedOrganization.logo).toBe(MockUpdateOrganizationInput.logo);
   });
 
   it('Should delete the mock testing organization', async () => {
@@ -110,9 +115,12 @@ describe('OrganizationsService', () => {
   });
 
   it('should not be able to update an non existing organization', async () => {
-    updateOrganizationInput.id = organizationId;
+    MockUpdateOrganizationInput.id = organizationId;
     try {
-      await service.update(updateOrganizationInput.id, updateOrganizationInput);
+      await service.update(
+        MockUpdateOrganizationInput.id,
+        MockUpdateOrganizationInput,
+      );
     } catch (err) {
       expect(err).toBeDefined();
       expect(err.response).toBeDefined();

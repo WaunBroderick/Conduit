@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateAssignmentInput } from './dto/update-assignment.input';
 import { Assignment, AssignmentDocument } from './assignments.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateAssignmentInput } from './dto/create-assignment.input';
+
+var mongoose = require('mongoose');
 
 @Injectable()
 export class AssignmentsService {
@@ -25,7 +27,13 @@ export class AssignmentsService {
   }
 
   async findByUserId(userId) {
-    return this.assignmentModel.find({ user: userId });
+    const assignments = await this.assignmentModel
+      .find({ user: userId })
+      .exec();
+    if (!assignments) {
+      throw new NotFoundException(`User ${userId} not found`);
+    }
+    return assignments;
   }
 
   update(id: number, updateAssignmentInput: UpdateAssignmentInput) {

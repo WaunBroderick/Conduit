@@ -13,7 +13,7 @@ export type UserDocument = User & mongoose.Document;
 @ObjectType()
 export class User {
   @Field(() => MongoId)
-  id: string;
+  _id: string;
 
   @Prop()
   @Field()

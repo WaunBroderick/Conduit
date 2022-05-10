@@ -6,7 +6,7 @@ const ORGANIZATION_TOLE = 'Organization';
 const chance = new Chance();
 let organizationId = '';
 
-export const createOrganizationInput: CreateOrganizationInput = {
+export const MockCreateOrganizationInput: CreateOrganizationInput = {
   id: organizationId,
   name: chance.company(),
   address: chance.address(),
@@ -14,7 +14,7 @@ export const createOrganizationInput: CreateOrganizationInput = {
   logo: chance.animal(),
 };
 
-export const updateOrganizationInput: UpdateOrganizationInput = {
+export const MockUpdateOrganizationInput: UpdateOrganizationInput = {
   id: organizationId,
   name: chance.company(),
   address: chance.address(),

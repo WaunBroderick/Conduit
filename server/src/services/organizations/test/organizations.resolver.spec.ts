@@ -7,7 +7,7 @@ import { CreateOrganizationInput } from '../dto/create-organization.input';
 import * as Chance from 'chance';
 import mongoose from 'mongoose';
 import { AuthService } from '../../auth/auth.service';
-import { createUserInput } from 'src/services/users/test/user.mock';
+import { MockCreateUserInput } from 'src/services/users/test/user.mock';
 
 const ORGANIZATION_TOLE = 'Organization';
 const chance = new Chance();

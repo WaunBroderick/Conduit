@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type User {
-  id: MongoId!
+  _id: MongoId!
   firstName: String!
   lastName: String!
   email: String!
@@ -34,8 +34,8 @@ type Course {
 }
 
 type Assignment {
-  id: MongoId
-  name: String!
+  _id: MongoId
+  name: String
   organization: Organization
   course: Course
   user: User
@@ -65,7 +65,8 @@ type Query {
   organizations: [Organization!]!
   organization(id: Int!): Organization!
   assignments: [Assignment!]!
-  assignment(id: Int!): Assignment!
+  assignment(id: String!): Assignment!
+  assignmentByUserId(id: String!): [Assignment!]!
   courses: [Course!]!
   course(id: Int!): Course!
   roles: [Role!]!
@@ -93,6 +94,7 @@ type Mutation {
 }
 
 input CreateUserInput {
+  id: String
   firstName: String!
   lastName: String!
   email: String!
@@ -121,7 +123,7 @@ input CreateOrganizationInput {
 
 input CreateAssignmentInput {
   id: String
-  name: String!
+  name: String
   organization: String
   course: String
   user: String

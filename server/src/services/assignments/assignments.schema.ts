@@ -13,10 +13,10 @@ export type AssignmentDocument = Assignment & mongoose.Document;
 @ObjectType()
 export class Assignment {
   @Field(() => MongoId, { nullable: true })
-  id: string;
+  _id: string;
 
   @Prop()
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Organization' })

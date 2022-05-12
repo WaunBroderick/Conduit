@@ -39,9 +39,6 @@ export default function NavBar(props) {
   //Breadcrumbs
   const location = useLocation();
 
-  console.log("FRIGGGGG");
-  console.log(location.pathname);
-
   const nameHighlighting = (name) => {
     if (location.pathname == name) {
       return (
@@ -63,10 +60,8 @@ export default function NavBar(props) {
   ];
 
   const themeSwitcher = (selectedTheme) => {
-    console.log(selectedTheme);
     setMode(selectedTheme);
     //props.setter(selectedTheme);
-    console.log("should be changed");
   };
 
   const HeaderUserMenu = () => {
@@ -84,7 +79,6 @@ export default function NavBar(props) {
     };
 
     const logOut = () => {
-      console.log("youre logged out");
       removeCookie("auth-cookie", { path: "/" });
       window.location.href = "/signin";
       Redirect(true);
@@ -179,7 +173,6 @@ export default function NavBar(props) {
                 <LinkStyled to="/Marketplace">
                   {nameHighlighting("/Marketplace")}
                 </LinkStyled>,
-                <themeToggle />,
               ],
               borders: "none",
             },
@@ -192,13 +185,11 @@ export default function NavBar(props) {
                     if (DarkMode === false) {
                       setToggleThemeOn((isOn) => !isOn);
                       setDarkMode((prevDarkMode) => !prevDarkMode);
-                      console.log("THAT");
                       themeSwitcher(themeData.light);
                       window.location.reload();
                     } else {
                       setToggleThemeOn((isOn) => !isOn);
                       setDarkMode((prevDarkMode) => !prevDarkMode);
-                      console.log("THIS");
                       themeSwitcher(themeData.seaWave);
                       window.location.reload();
                     }

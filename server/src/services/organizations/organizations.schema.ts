@@ -12,7 +12,7 @@ export type OrganizationDocument = Organization & mongoose.Document;
 @ObjectType()
 export class Organization {
   @Field(() => MongoId)
-  id: string;
+  _id: string;
 
   @Prop()
   @Field()

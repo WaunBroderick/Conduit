@@ -33,6 +33,7 @@ export class AuthService {
     };
     return {
       access_token: this.jwtTokenServive.sign(payload),
+      user: user,
     };
   }
 }

@@ -112,27 +112,18 @@ export const Home = () => {
             gutterSize="l"
             style={{ padding: "12px", height: "800px" }}
           >
-            <EuiCard>
-              <EuiTitle>
-                <h2>Courses</h2>
-              </EuiTitle>
-              {}
-            </EuiCard>
+            <EuiCard title="Courses">{}</EuiCard>
           </EuiFlexGroup>
         </EuiFlexItem>
 
         <EuiFlexGrid gutterSize="l" style={{ padding: "12px" }}>
           <EuiFlexItem grow={false}>
-            <EuiCard style={{ maxHeight: 200 }}>
+            <EuiCard style={{ maxHeight: 200 }} title="calendar">
               <Calendar onChange={onChange} value={value} />
             </EuiCard>
             <EuiSpacer />
             <EuiFlexItem>
-              <EuiCard>
-                <EuiTitle>
-                  <h2>Notifications</h2>
-                </EuiTitle>
-              </EuiCard>
+              <EuiCard title="Notifications">{}</EuiCard>
             </EuiFlexItem>
           </EuiFlexItem>
         </EuiFlexGrid>

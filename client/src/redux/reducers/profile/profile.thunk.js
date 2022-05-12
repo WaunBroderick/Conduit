@@ -1,11 +1,18 @@
-import ProfileService from "./profile.service";
 import ProfileAction from "./profile.action";
 
-export const loadProfileAsync = (JWT) => (dispatch) => {
+export const loadProfileAsync = (data) => (dispatch) => {
   dispatch(ProfileAction.profileLoadStart());
-  ProfileService.getProfile(JWT)
+  dispatch(ProfileAction.profileLoadSuccess(data));
+};
+
+export const loadDepartmentsAsync = (JWT) => (dispatch) => {
+  dispatch(departmentsAction.departmentsLoadStart());
+  departmentsService
+    .getAllDepartments(JWT)
     .then((response) =>
-      dispatch(ProfileAction.profileLoadSuccess(response.data))
+      dispatch(departmentsAction.departmentsLoadSuccess(response.data))
     )
-    .catch((error) => dispatch(ProfileAction.profileLoadError(error.message)));
+    .catch((error) =>
+      dispatch(departmentsAction.departmentsLoadError(error.message))
+    );
 };

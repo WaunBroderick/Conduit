@@ -26,7 +26,7 @@ export class AssignmentsService {
     return this.assignmentModel.findById(id).lean();
   }
 
-  async findByUserId(userId) {
+  async findByUserId2(userId) {
     const assignments = await this.assignmentModel
       .find({ user: userId })
       .exec();
@@ -34,6 +34,10 @@ export class AssignmentsService {
       throw new NotFoundException(`User ${userId} not found`);
     }
     return assignments;
+  }
+
+  async findByUserId(userId) {
+    return this.assignmentModel.find({ user: { _id: userId } }).lean();
   }
 
   update(id: number, updateAssignmentInput: UpdateAssignmentInput) {

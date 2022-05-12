@@ -19,7 +19,7 @@ type User {
 scalar MongoId
 
 type Organization {
-  id: MongoId!
+  _id: MongoId!
   name: String!
   address: String
   logo: String
@@ -44,6 +44,9 @@ type Assignment {
 type LoggedUserOutput {
   """Generated access_token of the user"""
   access_token: String!
+
+  """The returned User information"""
+  user: User!
 }
 
 type Role {
@@ -61,7 +64,7 @@ type Department {
 
 type Query {
   users: [User!]!
-  user(id: Int!): User!
+  user(id: String!): User!
   organizations: [Organization!]!
   organization(id: Int!): Organization!
   assignments: [Assignment!]!

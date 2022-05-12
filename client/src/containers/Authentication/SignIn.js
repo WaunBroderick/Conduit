@@ -26,8 +26,8 @@ import "@elastic/eui/dist/eui_theme_light.css";
 
 import { axiosInstanceNoJWT } from "../../services/api-interceptor";
 
-import { useQuery, useMutation, gql } from "@apollo/client";
-import { LOAD_USERS, LOGIN_USER } from "../../graphql/authentiation";
+import { useQuery, useMutation } from "@apollo/client";
+import { LOAD_USER, LOAD_USERS, LOGIN_USER } from "../../graphql/authentiation";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -42,6 +42,9 @@ export default function SignIn() {
   );
 
   const [validateUser, { data, error }] = useMutation(LOGIN_USER);
+  const { loading, err, dat } = useQuery(LOAD_USER, {
+    variables: {},
+  });
 
   const submit = async (e) => {
     e.preventDefault();
@@ -56,22 +59,15 @@ export default function SignIn() {
     })
       .then((response) => {
         setJWT(response.data.access_token);
-        console.log(response.data);
         setCookie("authCookie", response.data.access_token, { path: "/" });
         //loadProfileinformation
-        dispatch(loadProfileAsync(response.data.access_token));
-        //loadEmployeesInformation
-        dispatch(loadUsersAsync(response.data.access_token));
-        //loadDepartmentsInformation
-        dispatch(loadDepartmentsAsync(response.data.access_token));
+        dispatch(loadProfileAsync(response.data.loginUser.user));
         setRedirect(true);
       })
       .then((data) => {})
       .catch((error) => {});
   };
 
-  console.log("HELLLO");
-  console.log(email);
   if (redirect) {
     return <Redirect to="/home" />;
   }

@@ -6,8 +6,6 @@ import { useCookies } from "react-cookie";
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [cookies, setCookie] = useCookies("auth-cookie");
-  console.log(cookies);
-  console.log(Object.keys(cookies).length);
   return (
     <Route
       {...rest}

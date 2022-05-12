@@ -44,7 +44,7 @@ export class UsersResolver {
   }
 
   @Query(() => User, { name: 'user' })
-  async findOne(@Args('id', { type: () => Int }) id: string) {
+  async findOne(@Args('id', { type: () => String }) id: string) {
     return this.usersService.findOne(id);
   }
 
@@ -55,11 +55,11 @@ export class UsersResolver {
 
   @ResolveField(() => User)
   async users(@Parent() parent: Organization) {
-    return this.usersService.findByOrganizationId(parent.id);
+    return this.usersService.findByOrganizationId(parent._id);
   }
 
   @ResolveField(() => Assignment)
-  async assignments(@Parent() parent: User) {
-    return this.assignmentService.findByUserId(parent.assignments);
+  async assignments(@Parent() parent: Assignment) {
+    return this.assignmentService.findByUserId(parent._id);
   }
 }

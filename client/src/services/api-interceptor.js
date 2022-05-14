@@ -103,3 +103,80 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
+export const ToastSuccess = (response) => {
+  if (response === 200) {
+    return response;
+  }
+  if (response === 201) {
+    toast.success(`Resource Created`, {
+      position: "top-center",
+      autoClose: true,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+    });
+  }
+  return response;
+};
+export const ToastError = (error) => {
+  if (error.graphQLErrors[0].extensions.code == 500) {
+    toast.error(`${error.graphQLErrors[0].extensions.code}`, {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+    });
+  }
+  if (error.graphQLErrors[0].extensions.code == 401) {
+    toast.error("Unauthorized", {
+      position: "top-center",
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+    });
+  }
+
+  if (error.graphQLErrors[0].extensions.code == 404) {
+    toast.error("Route not Found", {
+      position: "top-center",
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+    });
+  }
+
+  if (error.graphQLErrors[0].extensions.code == 423) {
+    toast.error("Resource Not Accessible", {
+      position: "top-center",
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+    });
+  }
+
+  if (error.graphQLErrors[0].extensions.code === 409) {
+    toast.error("Resource Conflict, please rename your request", {
+      position: "top-center",
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+    });
+  }
+
+  //return Promise.reject(error);
+  return error;
+};

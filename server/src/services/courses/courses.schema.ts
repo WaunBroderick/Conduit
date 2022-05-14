@@ -11,7 +11,7 @@ export type CourseDocument = Course & mongoose.Document;
 @ObjectType()
 export class Course {
   @Field(() => MongoId)
-  id: string;
+  _id: string;
 
   @Prop()
   @Field()

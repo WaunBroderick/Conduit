@@ -8,6 +8,23 @@ export const LOGIN_USER = gql`
         _id
         firstName
         lastName
+        email
+        online
+        organization {
+          _id
+          name
+          address
+          logo
+          country
+        }
+        assignments {
+          _id
+          name
+          course {
+            _id
+            name
+          }
+        }
       }
     }
   }

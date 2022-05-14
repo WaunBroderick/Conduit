@@ -84,7 +84,8 @@ function App() {
   const errorLink = onError(({ graphqlErrors, networkError }) => {
     if (graphqlErrors) {
       graphqlErrors.map(({ message, location, path }) => {
-        alert(`Graphql err ${message}`);
+        //alert(`Graphql err ${message}`);
+        console.log("HELLLLLLLO");
       });
     }
   });

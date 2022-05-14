@@ -28,7 +28,7 @@ type Organization {
 }
 
 type Course {
-  id: MongoId!
+  _id: MongoId!
   name: String!
   assignments: [Assignment!]!
 }

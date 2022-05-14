@@ -29,6 +29,8 @@ import { axiosInstanceNoJWT } from "../../services/api-interceptor";
 import { useQuery, useMutation } from "@apollo/client";
 import { LOAD_USER, LOAD_USERS, LOGIN_USER } from "../../graphql/authentiation";
 
+import { ToastError, ToastSuccess } from "../../services/api-interceptor";
+
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,8 +43,12 @@ export default function SignIn() {
     (state) => state.profile
   );
 
-  const [validateUser, { data, error }] = useMutation(LOGIN_USER);
-  const { loading, err, dat } = useQuery(LOAD_USER, {
+  const [validateUser, { data, loading, error }] = useMutation(LOGIN_USER, {
+    onError: (error) => {
+      ToastError(error);
+    },
+  });
+  const { err, dat } = useQuery(LOAD_USER, {
     variables: {},
   });
 
@@ -65,7 +71,11 @@ export default function SignIn() {
         setRedirect(true);
       })
       .then((data) => {})
-      .catch((error) => {});
+      .catch((error) => {
+        //console.log(JSON.stringify(error, null, 2));
+        //console.log(error.graphQLErrors[0].extensions.code);
+        //ToastError(error);
+      });
   };
 
   if (redirect) {

@@ -9,6 +9,7 @@ import {
   EuiStat,
   EuiIcon,
   EuiFlexGrid,
+  EuiProgress,
 } from "@elastic/eui";
 
 import theme from "../../styles/themes/LightTheme";
@@ -27,27 +28,30 @@ export const Home = () => {
   const dispatch = useDispatch();
 
   const renderCourses = (id) => {
-    const { isLoading, isError, data, error } = useQuery(
-      ["assignments", id],
-      () => assignmentApi.getUserAssignments(id),
-      {
-        refetchOnWindowFocus: false,
-        refetchOnmount: false,
-        refetchOnReconnect: false,
-        retry: false,
-        staleTime: 999999999,
-      }
-    );
+    const assignments = user.profile.assignments;
     return (
       <div>
-        <h1>{id}</h1>
-        <div>
-          <ul>
-            {data?.map((assignment) => (
-              <li key={assignment._id}>{assignment.courseId} </li>
-            ))}
-          </ul>
-        </div>
+        {assignments?.map((assignment) => (
+          <div key={assignment._id}>
+            <div className="titleRow">
+              <EuiTitle>
+                <h1>{assignment.course.name}</h1>
+              </EuiTitle>
+              <div>
+                <EuiProgress
+                  max={100}
+                  size="m"
+                  value={50}
+                  color="mediumslateblue"
+                  valueText={true}
+                />
+              </div>
+            </div>
+            <div>
+              <h3>{assignment.name}</h3>
+            </div>
+          </div>
+        ))}
       </div>
     );
   };
@@ -110,9 +114,11 @@ export const Home = () => {
         <EuiFlexItem grow={1}>
           <EuiFlexGroup
             gutterSize="l"
-            style={{ padding: "12px", height: "800px" }}
+            style={{ padding: "12px", height: "800px", alignContent: "left" }}
           >
-            <EuiCard title="Courses">{}</EuiCard>
+            <EuiCard title="Courses" textAlign="left">
+              {renderCourses()}
+            </EuiCard>
           </EuiFlexGroup>
         </EuiFlexItem>
 

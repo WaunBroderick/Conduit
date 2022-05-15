@@ -44,7 +44,7 @@ export class AssignmentsService {
     return `This action updates a #${id} assignment`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} assignment`;
+  async remove(id: string): Promise<Assignment> {
+    return await this.assignmentModel.findByIdAndRemove(id);
   }
 }

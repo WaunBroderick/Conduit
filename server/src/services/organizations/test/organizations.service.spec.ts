@@ -88,7 +88,9 @@ describe('OrganizationsService', () => {
       MockUpdateOrganizationInput.id,
       MockUpdateOrganizationInput,
     );
-    expect(updatedOrganization.id).toBe(organizationId);
+    expect(JSON.stringify(updatedOrganization._id)).toEqual(
+      JSON.stringify(organizationId),
+    );
     expect(updatedOrganization.name).toBe(MockUpdateOrganizationInput.name);
     expect(updatedOrganization.country).toBe(
       MockUpdateOrganizationInput.country,

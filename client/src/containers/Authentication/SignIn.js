@@ -71,11 +71,7 @@ export default function SignIn() {
         setRedirect(true);
       })
       .then((data) => {})
-      .catch((error) => {
-        //console.log(JSON.stringify(error, null, 2));
-        //console.log(error.graphQLErrors[0].extensions.code);
-        //ToastError(error);
-      });
+      .catch((error) => {});
   };
 
   if (redirect) {

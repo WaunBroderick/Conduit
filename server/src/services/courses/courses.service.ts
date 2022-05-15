@@ -28,7 +28,7 @@ export class CoursesService {
     return `This action updates a #${id} course`;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} course`;
+  async remove(id: string): Promise<Course> {
+    return await this.courseModel.findByIdAndRemove(id);
   }
 }

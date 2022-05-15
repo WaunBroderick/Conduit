@@ -32,9 +32,11 @@ import { AuthModule } from './services/auth/auth.module';
     ),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       cors: {
-        origin: 'http://localhost:3000',
+        origin: '*',
         credentials: true,
       },
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),

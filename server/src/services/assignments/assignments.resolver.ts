@@ -47,7 +47,7 @@ export class AssignmentsResolver {
     return this.assignmentsService.findByUserId(id);
   }
   @Mutation(() => Assignment)
-  async removeAssignment(@Args('id', { type: () => Int }) id: number) {
+  async removeAssignment(@Args('id', { type: () => String }) id: string) {
     return this.assignmentsService.remove(id);
   }
 

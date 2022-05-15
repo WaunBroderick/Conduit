@@ -17,9 +17,6 @@ import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 import Calendar from "react-calendar";
 
-import * as departmentApi from "../../services/departmentsApi";
-import * as assignmentApi from "../../services/assignmentsAPI";
-import { useQueries, useQuery } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
 
 export const Home = () => {
@@ -55,6 +52,8 @@ export const Home = () => {
       </div>
     );
   };
+
+  const renderNotifications = () => {};
 
   return (
     <ConduitPage>

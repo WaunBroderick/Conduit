@@ -34,7 +34,7 @@ export class DepartmentsService {
     return `This action updates a #${id} department`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} department`;
+  async remove(id: string): Promise<Department> {
+    return await this.departmentModel.findByIdAndRemove(id);
   }
 }

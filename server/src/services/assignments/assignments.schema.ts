@@ -1,4 +1,4 @@
-import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Organization } from '../organizations/organizations.schema';
 import { User } from '../users/users.schema';
@@ -18,6 +18,10 @@ export class Assignment {
   @Prop()
   @Field({ nullable: true })
   name: string;
+
+  @Prop()
+  @Field({ nullable: true })
+  completion: number;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Organization' })
   @Field(() => Organization, { nullable: true })

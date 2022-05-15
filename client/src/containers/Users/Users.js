@@ -39,9 +39,11 @@ const Users = () => {
           </EuiFlexItem>
         </EuiFlexGroup>
       ) : (
-        <div>
-          <Lottie animationData={loadingLargeAnimation} />
-        </div>
+        <EuiFlexGroup alignItems="center" gutterSize="s">
+          <EuiFlexItem>
+            <UserTable users={users} departments={departments} />
+          </EuiFlexItem>
+        </EuiFlexGroup>
       )}
     </ConduitPage>
   );

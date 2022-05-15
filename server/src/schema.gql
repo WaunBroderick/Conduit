@@ -36,6 +36,7 @@ type Course {
 type Assignment {
   _id: MongoId
   name: String
+  completion: Float
   organization: Organization
   course: Course
   user: User
@@ -84,7 +85,7 @@ type Mutation {
   createOrganization(input: CreateOrganizationInput!): Organization!
   removeOrganization(id: String!): Organization!
   createAssignment(input: CreateAssignmentInput!): Assignment!
-  removeAssignment(id: Int!): Assignment!
+  removeAssignment(id: String!): Assignment!
   createCourse(input: CreateCourseInput!): Course!
   updateCourse(updateCourseInput: UpdateCourseInput!): Course!
   removeCourse(id: Int!): Course!
@@ -93,7 +94,7 @@ type Mutation {
   removeRole(id: Int!): Role!
   createDepartment(input: CreateDepartmentInput!): Department!
   updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
-  removeDepartment(id: Int!): Department!
+  removeDepartment(id: String!): Department!
 }
 
 input CreateUserInput {
@@ -127,6 +128,7 @@ input CreateOrganizationInput {
 input CreateAssignmentInput {
   id: String
   name: String
+  completion: Float = 0
   organization: String
   course: String
   user: String

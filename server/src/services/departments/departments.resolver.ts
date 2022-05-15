@@ -50,7 +50,7 @@ export class DepartmentsResolver {
   }
 
   @Mutation(() => Department)
-  removeDepartment(@Args('id', { type: () => Int }) id: number) {
+  removeDepartment(@Args('id', { type: () => String }) id: string) {
     return this.departmentsService.remove(id);
   }
 

@@ -13,7 +13,7 @@ export type DepartmentDocument = Department & mongoose.Document;
 @ObjectType()
 export class Department {
   @Field(() => MongoId)
-  id: string;
+  _id: string;
 
   @Prop()
   @Field()
@@ -35,18 +35,6 @@ export class Department {
 }
 
 export const DepartmentSchema = SchemaFactory.createForClass(Department);
-
-@InputType()
-export class CreateDepartmentInput {
-  @Field()
-  name: string;
-
-  @Field({ nullable: true })
-  organization: string;
-
-  @Field({ nullable: true })
-  admins: string;
-}
 
 @InputType()
 export class FindDepartmentInput {

@@ -5,6 +5,7 @@ import { User } from '../users/users.schema';
 
 import * as mongoose from 'mongoose';
 import MongoId from 'src/common/scalars/mongo-id.scalar';
+import { Department } from '../departments/departments.schema';
 
 export type OrganizationDocument = Organization & mongoose.Document;
 
@@ -34,7 +35,13 @@ export class Organization {
     type: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   })
   @Field(() => [User], { nullable: true })
-  users?: User[];
+  users: User[];
+
+  @Prop({
+    type: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  })
+  @Field(() => [Department], { nullable: true })
+  departments: Department[];
 
   static id: string;
 }

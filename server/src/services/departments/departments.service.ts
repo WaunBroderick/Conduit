@@ -30,6 +30,10 @@ export class DepartmentsService {
     return this.departmentModel.findById(id).lean();
   }
 
+  async findByOrganizationId(id) {
+    return this.departmentModel.find({ organization: id }).lean();
+  }
+
   update(id: number, updateDepartmentInput: UpdateDepartmentInput) {
     return `This action updates a #${id} department`;
   }

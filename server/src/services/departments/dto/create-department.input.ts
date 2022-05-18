@@ -5,7 +5,7 @@ export class CreateDepartmentInput {
   @Field()
   name: string;
 
-  @Field({ nullable: true })
+  @Field()
   organization: string;
 
   @Field({ nullable: true })

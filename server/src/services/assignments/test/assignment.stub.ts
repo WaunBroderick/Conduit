@@ -11,10 +11,10 @@ const chance = new Chance();
 let assignmentId = '';
 
 export const MockCreateAssignmentInput: CreateAssignmentInput = {
-  id: assignmentId,
+  _id: assignmentId,
   name: chance.company(),
   completion: 20,
   organization: JSON.stringify(MockCreateOrganizationInput.id),
   course: MockCreateCourseInput.id,
-  user: MockCreateUserInput.id,
+  user: MockCreateUserInput._id,
 };

@@ -13,12 +13,15 @@ import { CreateOrganizationInput } from './dto/create-organization.input';
 import { UpdateOrganizationInput } from './dto/update-organization.input';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/users.schema';
+import { DepartmentsService } from '../departments/departments.service';
+import { Department } from '../departments/departments.schema';
 
 @Resolver(() => Organization)
 export class OrganizationsResolver {
   constructor(
     private readonly organizationsService: OrganizationsService,
     private usersService: UsersService,
+    private departmentsService: DepartmentsService,
   ) {}
 
   @Mutation(() => Organization)
@@ -44,7 +47,12 @@ export class OrganizationsResolver {
   }
 
   @ResolveField(() => User)
-  async users(@Parent() parent: Organization) {
-    return this.usersService.findByUserId(parent.users);
+  async users(@Parent() parent: User) {
+    return this.usersService.findByUserId(parent._id);
+  }
+
+  @ResolveField(() => Department)
+  async departments(@Parent() parent: Department) {
+    return this.departmentsService.findByOrganizationId(parent.organization);
   }
 }

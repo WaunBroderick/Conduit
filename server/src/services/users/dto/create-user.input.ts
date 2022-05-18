@@ -5,7 +5,7 @@ import { Organization } from 'src/services/organizations/organizations.schema';
 @InputType()
 export class CreateUserInput {
   @Field({ nullable: true })
-  id: string;
+  _id: string;
 
   @Field()
   firstName: string;

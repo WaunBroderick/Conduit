@@ -8,7 +8,7 @@ let userId = '';
 let organizationId = '';
 
 export const MockCreateUserInput: CreateUserInput = {
-  id: userId,
+  _id: userId,
   firstName: chance.first(),
   lastName: chance.last(),
   email: chance.email(),

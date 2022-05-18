@@ -18,6 +18,14 @@ type User {
 """Mongo ObjectId scalar type"""
 scalar MongoId
 
+type Department {
+  _id: MongoId!
+  name: String!
+  subSections: String
+  organization: Organization
+  admins: [User!]
+}
+
 type Organization {
   _id: MongoId!
   name: String!
@@ -25,6 +33,7 @@ type Organization {
   logo: String
   country: String
   users: [User!]
+  departments: [Department!]
 }
 
 type Course {
@@ -55,14 +64,6 @@ type Role {
   name: String!
 }
 
-type Department {
-  id: MongoId!
-  name: String!
-  subSections: String
-  organization: Organization
-  admins: [User!]
-}
-
 type Query {
   users: [User!]!
   user(id: String!): User!
@@ -71,12 +72,12 @@ type Query {
   assignments: [Assignment!]!
   assignment(id: String!): Assignment!
   assignmentByUserId(id: String!): [Assignment!]!
+  departments: [Department!]!
+  department(id: Int!): Department!
   courses: [Course!]!
   course(id: Int!): Course!
   roles: [Role!]!
   role(id: Int!): Role!
-  departments: [Department!]!
-  department(id: Int!): Department!
 }
 
 type Mutation {
@@ -86,19 +87,19 @@ type Mutation {
   removeOrganization(id: String!): Organization!
   createAssignment(input: CreateAssignmentInput!): Assignment!
   removeAssignment(id: String!): Assignment!
+  createDepartment(input: CreateDepartmentInput!): Department!
+  updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
+  removeDepartment(id: String!): Department!
   createCourse(input: CreateCourseInput!): Course!
   updateCourse(updateCourseInput: UpdateCourseInput!): Course!
   removeCourse(id: Int!): Course!
   createRole(createRoleInput: CreateRoleInput!): Role!
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
   removeRole(id: Int!): Role!
-  createDepartment(input: CreateDepartmentInput!): Department!
-  updateDepartment(updateDepartmentInput: UpdateDepartmentInput!): Department!
-  removeDepartment(id: String!): Department!
 }
 
 input CreateUserInput {
-  id: String
+  _id: String
   firstName: String!
   lastName: String!
   email: String!
@@ -126,12 +127,25 @@ input CreateOrganizationInput {
 }
 
 input CreateAssignmentInput {
-  id: String
+  _id: String
   name: String
   completion: Float = 0
   organization: String
   course: String
   user: String
+}
+
+input CreateDepartmentInput {
+  name: String!
+  organization: String!
+  admins: String
+}
+
+input UpdateDepartmentInput {
+  name: String
+  organization: String
+  admins: String
+  id: Int!
 }
 
 input CreateCourseInput {
@@ -152,18 +166,5 @@ input CreateRoleInput {
 input UpdateRoleInput {
   """Example field (placeholder)"""
   exampleField: Int
-  id: Int!
-}
-
-input CreateDepartmentInput {
-  name: String!
-  organization: String
-  admins: String
-}
-
-input UpdateDepartmentInput {
-  name: String
-  organization: String
-  admins: String
   id: Int!
 }

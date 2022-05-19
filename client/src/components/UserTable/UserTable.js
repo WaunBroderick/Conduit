@@ -12,10 +12,8 @@ import {
 
 import useModal from "../shared/useModal";
 import Modal from "../UserDetails/UserDetails";
-import { useQuery, useMutation } from "@apollo/client";
-import { LOAD_USERS } from "../../graphql/authentiation";
 
-const UserTable = ({ users = [], departments = [] }) => {
+const UserTable = ({ users = [{}], departments = [{}] }) => {
   const { toggle, visible } = useModal();
   const [items, setItems] = useState(users);
   const [userDetails, setuserDetails] = useState({ name: "" });
@@ -24,16 +22,7 @@ const UserTable = ({ users = [], departments = [] }) => {
   const [, setSelectedItems] = useState([]);
   const [selectedOptionId, setSelectedOptionId] = useState(undefined);
 
-  const { data, error } = useQuery(LOAD_USERS, {
-    variables: {},
-  });
-  console.log(data);
-  console.log(error);
-  console.log("hellloooooooooooo");
-  console.log("hellloooooooooooo");
-
   const deleteUser = (user) => {
-    console.log(user);
     setSelectedItems([]);
   };
 
@@ -68,8 +57,13 @@ const UserTable = ({ users = [], departments = [] }) => {
 
   const columns = [
     {
-      field: "name",
-      name: "Full Name",
+      field: "firstName",
+      name: "First Name",
+      sortable: true,
+    },
+    {
+      field: "lastName",
+      name: "Last Name",
       sortable: true,
     },
     {

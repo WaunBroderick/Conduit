@@ -68,7 +68,7 @@ type Query {
   users: [User!]!
   user(id: String!): User!
   organizations: [Organization!]!
-  organization(id: Int!): Organization!
+  organization(id: String!): Organization!
   assignments: [Assignment!]!
   assignment(id: String!): Assignment!
   assignmentByUserId(id: String!): [Assignment!]!

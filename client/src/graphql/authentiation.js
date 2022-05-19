@@ -13,9 +13,10 @@ export const LOGIN_USER = gql`
         organization {
           _id
           name
-          address
-          logo
-          country
+          departments {
+            _id
+            name
+          }
         }
         assignments {
           _id

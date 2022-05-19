@@ -9,22 +9,21 @@ import UserTable from "../../components/UserTable/UserTable";
 import Lottie from "lottie-react";
 import loadingLargeAnimation from "../../assets/animations/loadingLarge.json";
 
+import { useQuery } from "@apollo/client";
+import { LOAD_USERS } from "../../graphql/authentiation";
+
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 
 const Users = () => {
-  const dispatch = useDispatch();
-  const { isLoading, users, errorMessage } = useSelector(
-    (state) => state.users
-  );
   const [cookies, setCookie] = useCookies();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.profile.profile);
 
-  const { departments } = useSelector((state) => state.departments);
-
-  useEffect(() => {
-    dispatch(loadUsersAsync(Object.values(cookies)));
-    dispatch(loadDepartmentsAsync(Object.values(cookies)));
-  }, []);
+  const users = user;
+  const departments = user.organization.departments;
+  console.log(users);
 
   const handleClick = () => {
     console.log(users);

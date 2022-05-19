@@ -4,11 +4,9 @@ import {
   EuiFlexGroup,
   EuiFlexItem,
   EuiSpacer,
-  EuiFlexGrid,
   EuiCard,
   EuiPanel,
   EuiStat,
-  EuiIcon,
   EuiTitle,
   EuiText,
   EuiButton,
@@ -19,16 +17,17 @@ import { ConduitPage } from "../../styles/themes/GlobalComponents";
 import GenericFormModal from "../../components/Forms/genericFormModal";
 import * as z from "zod";
 
-import * as departmentApi from "../../services/departmentsApi";
-import { useQuery } from "react-query";
 import { useCookies } from "react-cookie";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-console.log("hello world");
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Organization() {
-  const { data } = useQuery("departments", departmentApi.getDepartments);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.profile.profile);
+
+  const departments = user.organization.departments;
+  console.log(user.organization.name);
+
   //Generic form modal
   const [isOpen, setIsOpen] = useState(false);
   const [cookies] = useCookies(["atuhCookie"]);
@@ -78,7 +77,7 @@ export default function Organization() {
               style={{ height: 900 }}
             >
               <EuiTitle>
-                <h1>Organization Name</h1>
+                <h1>{user.organization.name}</h1>
               </EuiTitle>
               <EuiText>Heres some org info</EuiText>
             </EuiCard>
@@ -86,7 +85,7 @@ export default function Organization() {
         </EuiFlexGroup>
         <EuiSpacer />
 
-        <div style={{ maxWidth: "80%" }}>
+        <div style={{ maxWidth: "80%", minWidth: "80%" }}>
           <div style={{ display: "flex" }}>
             <EuiFlexItem style={{ float: "left", display: "inline-block" }}>
               <EuiTitle>
@@ -117,7 +116,7 @@ export default function Organization() {
                 padding: "12px",
               }}
             >
-              {data?.map((department) => (
+              {departments?.map((department) => (
                 <EuiFlexItem grow={1} style={{ minWidth: "300px" }}>
                   <EuiPanel>
                     <EuiStat

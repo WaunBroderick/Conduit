@@ -30,6 +30,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { LOAD_USER, LOAD_USERS, LOGIN_USER } from "../../graphql/authentiation";
 
 import { ToastError, ToastSuccess } from "../../services/api-interceptor";
+import { LOAD_ORGANIZATION } from "../../graphql/organization";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -66,7 +67,8 @@ export default function SignIn() {
       .then((response) => {
         setJWT(response.data.access_token);
         setCookie("authCookie", response.data.access_token, { path: "/" });
-        //loadProfileinformation
+        console.log("HELLLLLO");
+        console.log(response.data.loginUser.user);
         dispatch(loadProfileAsync(response.data.loginUser.user));
         setRedirect(true);
       })

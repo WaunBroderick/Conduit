@@ -37,7 +37,7 @@ export class OrganizationsResolver {
   }
 
   @Query(() => Organization, { name: 'organization' })
-  findById(@Args('id', { type: () => Int }) id: number) {
+  findById(@Args('id', { type: () => String }) id: string) {
     return this.organizationsService.findById(id);
   }
 

@@ -17,13 +17,16 @@ import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 import Calendar from "react-calendar";
 
+import { useQuery } from "@apollo/client";
+import { LOAD_USERS } from "../../graphql/authentiation";
+
 import { useSelector, useDispatch } from "react-redux";
 
 export const Home = () => {
   const [value, onChange] = useState(new Date());
   const user = useSelector((state) => state.profile);
+  console.log(user);
   const dispatch = useDispatch();
-
   const renderCourses = (id) => {
     const assignments = user.profile.assignments;
     return (

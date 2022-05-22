@@ -13,7 +13,7 @@ import {
   EuiBreadcrumbs,
 } from "@elastic/eui";
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { SubHeaderStyled, LinkStyled } from "./style";
 import { ThemeProvider } from "styled-components";
@@ -87,7 +87,7 @@ export default function NavBar(props) {
     };
 
     if (redirect) {
-      return <Redirect to="/signin" />;
+      return <Navigate to="/signin" />;
     }
 
     const button = (

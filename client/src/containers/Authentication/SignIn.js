@@ -19,7 +19,7 @@ import {
   EuiFlexGroup,
   EuiFlexItem,
 } from "@elastic/eui";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import StyledSection from "./style";
 import "@elastic/eui/dist/eui_theme_light.css";
@@ -77,7 +77,7 @@ export default function SignIn() {
   };
 
   if (redirect) {
-    return <Redirect to="/home" />;
+    return <Navigate to="/home" />;
   }
 
   const createCookie = () => {};

@@ -1,10 +1,10 @@
 import "./App.css";
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import { Redirect } from "react-router-dom";
-import { ProtectedRoute } from "./utils/protected.route";
+import { Navigate } from "react-router-dom";
+import { PrivateRoute, ProtectedRoute } from "./utils/protected.route";
 import NavBar from "./components/NavBar/NavBar";
 
 // Temp
@@ -46,21 +46,25 @@ const themeLight = {
 
 const LoginContainer = () => (
   <div style={{ height: "100vh" }}>
-    <Route exact path="/" component={SignIn} />
-    <Route path="/register" component={Register} />
-    <Route path="/signin" component={SignIn} />
+    <Routes>
+      <Route path="/" element={<SignIn />} />
+      <Route path="/signin" element={<Register />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
   </div>
 );
 
 const AppContainer = () => (
   <div style={{ height: "100vh" }}>
     <NavBar />
-    <Route exact path="/home" component={Home} />
-    <Route exact path="/users" component={Users} />
-    <Route exact path="/courses" component={Courses} />
-    <Route exact path="/organization" component={Organization} />
-    <Route exact path="/marketplace" component={Marketplace} />
-    <Route exact path="/profile" component={Profile} />
+    <Routes>
+      <Route path="/home" element={<Home />} />
+      <Route path="/users" element={<Users />} />
+      <Route path="/courses" element={<Courses />} />
+      <Route path="/organization" element={<Organization />} />
+      <Route path="/marketplace" element={<Marketplace />} />
+      <Route path="/profile" element={<Profile />} />
+    </Routes>
   </div>
 );
 
@@ -106,12 +110,19 @@ function App() {
         <ThemeProvider theme={selectedTheme}>
           <GlobalStyles />
           <Router>
-            <Switch>
-              <Route exact path="/" render={() => <Redirect to="/signin" />} />
-              <Route path="/(signin)" component={LoginContainer} />
-              <Route path="/(register)" component={LoginContainer} />
-              <ProtectedRoute component={AppContainer} />
-            </Switch>
+            <Routes>
+              <Route exact path="/" render={() => <Navigate to="/signin" />} />
+              <Route path="/signin" element={<LoginContainer />} />
+              <Route path="/register" element={<Register />} />
+              <Route exact path="/" element={<PrivateRoute />}>
+                <Route path="/home" element={<Home />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/organization" element={<Organization />} />
+                <Route path="/marketplace" element={<Marketplace />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+            </Routes>
           </Router>
         </ThemeProvider>
       </ApolloProvider>

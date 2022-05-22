@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 // Elastic UI Imports
 import {
@@ -69,7 +69,7 @@ export default function Register() {
   };
 
   if (redirect) {
-    return <Redirect to="home" />;
+    return <Navigate to="home" />;
   }
 
   return (

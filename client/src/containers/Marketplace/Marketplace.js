@@ -1,10 +1,11 @@
 import React from "react";
-import { useQuery, queryClient, QueryClientProvider } from "react-query";
 
 import { useSelector, useDispatch } from "react-redux";
 
 import { EuiEmptyPrompt } from "@elastic/eui";
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
+
+import NavBar from "../../components/NavBar/NavBar";
 
 export default function Marketplace() {
   //Set user Profile
@@ -12,6 +13,7 @@ export default function Marketplace() {
 
   return (
     <ConduitPage>
+      <NavBar />
       <EuiEmptyPrompt title={<span>Marketplace Screen</span>} />
       <div>
         <ul></ul>

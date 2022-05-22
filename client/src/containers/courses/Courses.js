@@ -6,9 +6,13 @@ import {
   AddItemButton,
 } from "../../styles/themes/GlobalComponents";
 
+import NavBar from "../../components/NavBar/NavBar";
+
 export default function Courses() {
   return (
     <ConduitPage>
+      <NavBar />
+
       <EuiFlexGroup>
         <EuiFlexItem grow={false}>
           <EuiSpacer />

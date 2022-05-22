@@ -21,6 +21,8 @@ import { useCookies } from "react-cookie";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import NavBar from "../../components/NavBar/NavBar";
+
 export default function Organization() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.profile);
@@ -54,6 +56,7 @@ export default function Organization() {
 
   return (
     <ConduitPage>
+      <NavBar />
       {isOpen && (
         <GenericFormModal
           setIsOpen={setIsOpen}

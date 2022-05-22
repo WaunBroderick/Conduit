@@ -16,6 +16,8 @@ import { ConduitPage } from "../../styles/themes/GlobalComponents";
 import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 
+import NavBar from "../../components/NavBar/NavBar";
+
 const Users = () => {
   const [cookies, setCookie] = useCookies();
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const Users = () => {
 
   return (
     <ConduitPage>
+      <NavBar />
       {users ? (
         <EuiFlexGroup alignItems="center" gutterSize="s">
           <EuiFlexItem>

@@ -21,10 +21,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 
-import { useMutation } from "react-query";
-
-//Apis
-
 const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
   const schema = z.object(zObject);
 

@@ -16,13 +16,7 @@ import { setToLS } from "./utils/storage";
 
 import { PersistGate } from "redux-persist/integration/react";
 
-// ReactQuery Experiement
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-
 const { store, persistor } = configureStore();
-
-const queryClient = new QueryClient();
 
 // Set Application Theme
 const Index = () => {
@@ -43,16 +37,13 @@ ReactDOM.render(
       draggable
       pauseOnHover
     />
-    <QueryClientProvider client={queryClient}>
-      <CookiesProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <Index />
-            <ReactQueryDevtools />
-          </PersistGate>
-        </Provider>
-      </CookiesProvider>
-    </QueryClientProvider>
+    <CookiesProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Index />
+        </PersistGate>
+      </Provider>
+    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

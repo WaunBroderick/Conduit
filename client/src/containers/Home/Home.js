@@ -31,6 +31,8 @@ import { LOAD_USER_ASSIGNMENTS } from "../../graphql/user";
 import { loadAssignmentsAsync } from "../../redux/reducers/assignments/assignments.thunk";
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 
+import NavBar from "../../components/NavBar/NavBar";
+
 export const Home = () => {
   const [value, onChange] = useState(new Date());
   const user = useSelector((state) => state.profile);
@@ -95,6 +97,8 @@ export const Home = () => {
 
   return (
     <ConduitPage>
+      <NavBar />
+
       <EuiFlexGroup>
         <EuiFlexItem grow={1}>
           <EuiPanel>

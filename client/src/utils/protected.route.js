@@ -1,8 +1,14 @@
 import React, { Component } from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Navigate, Route, Outlet, Routes } from "react-router-dom";
 import auth from "./auth";
 import { useSelector, useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
+
+export const PrivateRoute = () => {
+  const [cookies, setCookie] = useCookies("auth-cookie");
+
+  return cookies ? <Outlet /> : <Navigate to="/singin" />;
+};
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
   const [cookies, setCookie] = useCookies("auth-cookie");
@@ -14,7 +20,7 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
           return <Component {...props} />;
         } else {
           return (
-            <Redirect
+            <Navigate
               to={{
                 pathname: "/",
                 state: {

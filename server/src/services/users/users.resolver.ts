@@ -43,6 +43,11 @@ export class UsersResolver {
     return this.usersService.findAll();
   }
 
+  @Query(() => [User], { name: 'usersByOrg' })
+  async findUsersByOrg(@Args('id', { type: () => String }) id: string) {
+    return this.usersService.findByOrganizationId(id);
+  }
+
   @Query(() => User, { name: 'user' })
   async findOne(@Args('id', { type: () => String }) id: string) {
     return this.usersService.findOne(id);

@@ -24,7 +24,6 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 
 //Apis
-import * as api from "../../services/departmentsApi";
 
 const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
   const schema = z.object(zObject);
@@ -39,7 +38,6 @@ const GenericFormModal = ({ setIsOpen, zObject, title, formData }) => {
   });
 
   //ReactQuery
-  const { isLoading, mutate, isSuccess } = useMutation(api.createDepartment);
 
   const organization = "61ac2c65dbccc6e0226de8db";
 

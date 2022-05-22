@@ -6,6 +6,7 @@ import { Organization } from 'src/services/organizations/organizations.schema';
 import * as mongoose from 'mongoose';
 import MongoId from 'src/common/scalars/mongo-id.scalar';
 import { Assignment } from '../assignments/assignments.schema';
+import { Department } from '../departments/departments.schema';
 
 export type UserDocument = User & mongoose.Document;
 
@@ -48,6 +49,12 @@ export class User {
   })
   @Field(() => [Assignment], { nullable: true })
   assignments: Assignment[];
+
+  @Prop({
+    type: { type: mongoose.Schema.Types.ObjectId, ref: 'Departments' },
+  })
+  @Field(() => [Department], { nullable: true })
+  departments: Department[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -12,6 +12,9 @@ export class CreateAssignmentInput {
   completion: number;
 
   @Field({ nullable: true })
+  dueDate: Date;
+
+  @Field({ nullable: true })
   organization: string;
 
   @Field({ nullable: true })

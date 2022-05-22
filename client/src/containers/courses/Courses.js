@@ -14,14 +14,7 @@ export default function Courses() {
           <EuiSpacer />
           <EuiCard>
             <EuiFlexItem grow={false}>
-              <AddItemButton
-                className="ConduitAddButtton"
-                display="base"
-                iconType="plus"
-                iconSize="l"
-                size="m"
-                aria-label="plus"
-              />
+              <h1>Courses</h1>
             </EuiFlexItem>
           </EuiCard>
         </EuiFlexItem>

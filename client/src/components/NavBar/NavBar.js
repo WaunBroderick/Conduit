@@ -24,6 +24,7 @@ import { useLocation } from "react-router-dom";
 import _ from "lodash";
 import { useTheme } from "../../styles/themes/useTheme";
 import { getFromLS } from "../../utils/storage";
+import conduitLogo from "../../assets/img/logo/s-03.png";
 
 export default function NavBar(props) {
   const [cookies, setCookie, removeCookie] = useCookies("auth-cookie");
@@ -160,7 +161,6 @@ export default function NavBar(props) {
                     <p style={{ fontSize: "20px" }}>Conduit</p>
                   </Link>
                 </EuiHeaderLogo>,
-
                 <LinkStyled to="/Users">
                   {nameHighlighting("/Users")}
                 </LinkStyled>,

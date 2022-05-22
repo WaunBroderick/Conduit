@@ -21,6 +21,8 @@ export const LOGIN_USER = gql`
         assignments {
           _id
           name
+          dueDate
+          completion
           course {
             _id
             name

@@ -23,6 +23,10 @@ export class Assignment {
   @Field({ nullable: true })
   completion: number;
 
+  @Prop()
+  @Field({ nullable: true })
+  dueDate: Date;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Organization' })
   @Field(() => Organization, { nullable: true })
   organization: Organization | string;

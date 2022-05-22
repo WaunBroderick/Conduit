@@ -2,6 +2,17 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Department {
+  _id: MongoId!
+  name: String!
+  subSections: String
+  organization: Organization
+  admins: [User!]
+}
+
+"""Mongo ObjectId scalar type"""
+scalar MongoId
+
 type User {
   _id: MongoId!
   firstName: String!
@@ -12,18 +23,8 @@ type User {
   online: Boolean
   organization: Organization
   assignments: [Assignment!]
+  departments: [Department!]
   users: User!
-}
-
-"""Mongo ObjectId scalar type"""
-scalar MongoId
-
-type Department {
-  _id: MongoId!
-  name: String!
-  subSections: String
-  organization: Organization
-  admins: [User!]
 }
 
 type Organization {
@@ -46,10 +47,16 @@ type Assignment {
   _id: MongoId
   name: String
   completion: Float
+  dueDate: DateTime
   organization: Organization
   course: Course
   user: User
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type LoggedUserOutput {
   """Generated access_token of the user"""
@@ -66,6 +73,7 @@ type Role {
 
 type Query {
   users: [User!]!
+  usersByOrg(id: String!): [User!]!
   user(id: String!): User!
   organizations: [Organization!]!
   organization(id: String!): Organization!
@@ -130,6 +138,7 @@ input CreateAssignmentInput {
   _id: String
   name: String
   completion: Float = 0
+  dueDate: DateTime
   organization: String
   course: String
   user: String

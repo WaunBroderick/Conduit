@@ -37,24 +37,28 @@ const seedUsers = async () => {
   const usersCollection = db.collection('users');
 
   // OrganizationIds
-  const organizationId = mongoose.Types.ObjectId('61ac2c65dbccc6e0226de8db');
+  const organizationId = mongoose.Types.ObjectId('6269cd8878ce539f1226e436');
 
   // Create Users Seed
   let users = [
     {
-      name: 'Waun Broderick',
-      email: 'waunbroderick@gmail.com',
+      firstName: 'Waun',
+      lastName: 'Broderick',
+      email: 'waunbroderick@gmailll.com',
       organization: organizationId,
+      online: false,
       password: '$2a$10$oYVVKBUec46Ww5Rl3Vl/G.y4SiNd76YLH8wRmxkasMvddDdxDTOcS',
     },
   ];
-  for (let i = 0; i < 100; i += 1) {
+  for (let i = 0; i < 50; i += 1) {
     const name = faker.name.firstName() + ' ' + faker.name.lastName();
     let newUser = {
-      name,
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
       email: faker.internet.email(name),
       organization: organizationId,
       password: 'password123',
+      online: false,
       departments: [
         DepartmentArray[Math.floor(Math.random() * DepartmentArray.length)],
       ],

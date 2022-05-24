@@ -6,7 +6,7 @@ export class UpdateOrganizationInput extends PartialType(
   CreateOrganizationInput,
 ) {
   @Field({ nullable: true })
-  id: string;
+  _id: string;
 
   @Field()
   name: string;

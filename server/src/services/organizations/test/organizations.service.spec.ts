@@ -14,8 +14,6 @@ import {
 } from './organization.stub';
 import mongoose from 'mongoose';
 
-const ORGANIZATION_ROLE = 'Organization';
-const chance = new Chance();
 let organizationId = '';
 
 describe('OrganizationsService', () => {
@@ -51,13 +49,11 @@ describe('OrganizationsService', () => {
 
   it('Should create an Organization with MockCreateOrganizationInput', async () => {
     const organization = await service.create(MockCreateOrganizationInput);
-    expect(organization.id).toBeDefined();
-    expect(organization.id).toBeDefined();
+    expect(organization._id).toBeDefined();
     expect(organization.name).toBeDefined();
     expect(organization.logo).toBeDefined();
     expect(organization.country).toBeDefined();
     organizationId = organization.id;
-    console.log(organizationId);
   });
 
   it('Should get a list of all organizations', async () => {
@@ -83,9 +79,9 @@ describe('OrganizationsService', () => {
   });
 
   it('Should update some Organization Properties', async () => {
-    MockUpdateOrganizationInput.id = organizationId;
+    MockUpdateOrganizationInput._id = organizationId;
     const updatedOrganization = await service.update(
-      MockUpdateOrganizationInput.id,
+      MockUpdateOrganizationInput._id,
       MockUpdateOrganizationInput,
     );
     expect(JSON.stringify(updatedOrganization._id)).toEqual(
@@ -117,10 +113,10 @@ describe('OrganizationsService', () => {
   });
 
   it('should not be able to update an non existing organization', async () => {
-    MockUpdateOrganizationInput.id = organizationId;
+    MockUpdateOrganizationInput._id = organizationId;
     try {
       await service.update(
-        MockUpdateOrganizationInput.id,
+        MockUpdateOrganizationInput._id,
         MockUpdateOrganizationInput,
       );
     } catch (err) {

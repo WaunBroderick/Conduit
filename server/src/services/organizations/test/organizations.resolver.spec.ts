@@ -14,14 +14,14 @@ const chance = new Chance();
 let organizationId = '';
 
 const createOrganizationInput: CreateOrganizationInput = {
-  id: organizationId,
+  _id: organizationId,
   name: chance.company(),
   address: chance.address(),
   country: chance.country(),
   logo: chance.animal(),
 };
 
-const mOrganizationId = new mongoose.Types.ObjectId();
+const OrganizationId = new mongoose.Types.ObjectId();
 
 describe('Logger', () => {
   test.todo('Some test to be written in the future');

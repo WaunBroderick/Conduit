@@ -15,7 +15,7 @@ export const MockCreateAssignmentInput: CreateAssignmentInput = {
   name: chance.company(),
   completion: 20,
   dueDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-  organization: JSON.stringify(MockCreateOrganizationInput.id),
+  organization: JSON.stringify(MockCreateOrganizationInput._id),
   course: MockCreateCourseInput.id,
   user: MockCreateUserInput._id,
 };

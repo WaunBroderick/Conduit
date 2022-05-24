@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { CommandModule } from 'nestjs-command';
 
 //GraphQL Migration
 import { GraphQLModule } from '@nestjs/graphql';
@@ -18,6 +19,7 @@ import { UsersModule } from './services/users/users.module';
 import { RolesModule } from './services/roles/roles.module';
 import { DepartmentsModule } from './services/departments/departments.module';
 import { AuthModule } from './services/auth/auth.module';
+import { SeedsModule } from './services/shared/seeds.module';
 
 @Module({
   imports: [
@@ -47,6 +49,8 @@ import { AuthModule } from './services/auth/auth.module';
     RolesModule,
     DepartmentsModule,
     AuthModule,
+    SeedsModule,
+    CommandModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -127,7 +127,7 @@ input LoginUserInput {
 }
 
 input CreateOrganizationInput {
-  id: String
+  _id: String
   name: String!
   address: String
   logo: String
@@ -145,12 +145,14 @@ input CreateAssignmentInput {
 }
 
 input CreateDepartmentInput {
+  _id: String
   name: String!
   organization: String!
   admins: String
 }
 
 input UpdateDepartmentInput {
+  _id: String
   name: String
   organization: String
   admins: String

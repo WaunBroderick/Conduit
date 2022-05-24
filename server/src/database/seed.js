@@ -1,17 +1,23 @@
 /* mySeedScript.js */
 // run with: sudo npx run seed.js
 // require the necessary libraries
-const faker = require('faker');
-const MongoClient = require('mongodb').MongoClient;
-const mongoose = require('mongoose');
-require('dotenv').config({ path: '../../.env' });
 
-console.log(process.env.MONGO_ATLAS_USER);
+require('dotenv').config({
+  path: __dirname + `/./../../.env.${process.env.NODE_ENV}`,
+});
+
+const Chance = require('chance');
+const express = require('express');
+const mongoose = require('mongoose');
+
+console.log(
+  `mongodb://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/${process.env.MONGO_ATLAS_DB}`,
+);
 
 const seedUsers = async () => {
   // Connection URL
-  const client = await MongoClient.connect(
-    `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@${process.env.MONGO_ATLAS_DB_ADDRESS}/`,
+  const client = await mongoose.connect(
+    'mongodb://localhost:27017/conduit-STAGING',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

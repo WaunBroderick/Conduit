@@ -111,7 +111,7 @@ function App() {
           <GlobalStyles />
           <Router>
             <Routes>
-              <Route exact path="/" render={() => <Navigate to="/signin" />} />
+              <Route path="/" element={<LoginContainer />} />
               <Route path="/signin" element={<LoginContainer />} />
               <Route path="/register" element={<Register />} />
               <Route exact path="/" element={<PrivateRoute />}>

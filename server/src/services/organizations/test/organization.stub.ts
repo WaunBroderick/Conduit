@@ -7,7 +7,7 @@ const chance = new Chance();
 let organizationId = '';
 
 export const MockCreateOrganizationInput: CreateOrganizationInput = {
-  id: organizationId,
+  _id: organizationId,
   name: chance.company(),
   address: chance.address(),
   country: chance.country(),

@@ -15,6 +15,6 @@ export const MockCreateUserInput: CreateUserInput = {
   password: chance.color(),
   online: true,
   isAdmin: true,
-  organization: MockCreateOrganizationInput.id,
+  organization: MockCreateOrganizationInput._id,
   assignments: 'sure',
 };

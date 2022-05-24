@@ -19,7 +19,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "seed": "export NODE_ENV=development && cd ./src/database && npx run seed.js"
   },
   "dependencies": {
     "@casl/ability": "^5.4.3",
@@ -52,7 +53,7 @@
     "js-yaml": "^4.1.0",
     "mongodb": "^4.5.0",
     "mongoose": "6.3.0",
-    "nestjs-command": "3.1.1",
+    "nestjs-command": "^3.1.1",
     "nyc": "^15.1.0",
     "passport": "0.5.2",
     "passport-jwt": "^4.0.0",
@@ -60,7 +61,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "7.5.5",
     "swagger-ui-express": "^4.1.6",
-    "yargs": "17.4.1"
+    "yargs": "^17.4.1"
   },
   "devDependencies": {
     "@nestjs/schematics": "8.0.10",
@@ -74,7 +75,7 @@
     "@types/passport-jwt": "^3.0.6",
     "@types/passport-local": "^1.0.34",
     "@types/supertest": "2.0.12",
-    "@types/yargs": "17.0.10",
+    "@types/yargs": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "5.19.0",
     "@typescript-eslint/parser": "5.19.0",
     "chance": "^1.1.8",

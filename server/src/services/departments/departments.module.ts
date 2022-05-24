@@ -29,5 +29,6 @@ import { AuthModule } from '../auth/auth.module';
     OrganizationsService,
     MongoIdScalar,
   ],
+  exports: [DepartmentsService],
 })
 export class DepartmentsModule {}

@@ -1,11 +1,8 @@
-import usersService from "./users.service";
-import usersAction from "./users.action";
+import UsersService from "./users.service";
+import UsersAction from "./users.action";
 import { useDispatch } from "react-redux";
 
-export const loadUsersAsync = (JWT) => (dispatch) => {
-  dispatch(usersAction.usersLoadStart());
-  usersService
-    .getAllUsers(JWT)
-    .then((response) => dispatch(usersAction.usersLoadSuccess(response.data)))
-    .catch((error) => dispatch(usersAction.usersLoadError(error.message)));
+export const loadUsersAsync = (data) => (dispatch) => {
+  dispatch(UsersAction.usersLoadStart());
+  dispatch(UsersAction.usersLoadSuccess(data));
 };

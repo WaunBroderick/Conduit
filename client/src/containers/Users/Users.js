@@ -19,6 +19,7 @@ import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 import NavBar from "../../components/NavBar/NavBar";
 
 import { LOAD_ORG_USERS } from "../../graphql/users";
+import { LOAD_ORGANIZATION_DEPARTMENTS } from "../../graphql/organization";
 
 const Users = () => {
   const [cookies, setCookie] = useCookies();
@@ -36,21 +37,21 @@ const Users = () => {
     }
   );
 
+  const [getOrgDepartments, {}] = useLazyQuery(LOAD_ORGANIZATION_DEPARTMENTS, {
+    variables: { orgId: "6269cd8878ce539f1226e436" },
+    fetchPolicy: "network-only",
+    onCompleted: (data) => {
+      dispatch(loadDepartmentsAsync(data.departmentFindByOrgId));
+    },
+  });
+
   useEffect(() => {
     getOrgUsers();
+    getOrgDepartments();
   }, []);
 
   const users = useSelector((state) => state.users.users);
-
-  const test = useSelector(
-    (state) => state.profile.profile.organization.departments
-  );
-  console.log(test);
-  console.log("YOOOOOOOO");
-
-  //const users = user;
-  const departments = user.organization.departments;
-  console.log(users);
+  const departments = useSelector((state) => state.departments.departments);
 
   const handleClick = () => {
     console.log(users);
@@ -59,18 +60,21 @@ const Users = () => {
   return (
     <ConduitPage>
       <NavBar />
-      {users ? (
+      {departments ? (
         <EuiFlexGroup alignItems="center" gutterSize="s">
           <EuiFlexItem>
             <UserTable users={users} departments={departments} />
           </EuiFlexItem>
         </EuiFlexGroup>
       ) : (
-        <EuiFlexGroup alignItems="center" gutterSize="s">
-          <EuiFlexItem>
-            <UserTable users={users} departments={departments} />
-          </EuiFlexItem>
-        </EuiFlexGroup>
+        <Lottie
+          loop={true}
+          autoPlay={true}
+          animationData={loadingLargeAnimation}
+          height={1000}
+          width={100}
+          style={{ height: "250px" }}
+        />
       )}
     </ConduitPage>
   );

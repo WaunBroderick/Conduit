@@ -20,24 +20,24 @@ export class DepartmentsSeed {
     describe: 'create a set of departments',
   })
   async create() {
-    // Create Users Seed
-    let departmentsList = [
+    const departments = [
       'Technology',
-      'Human Resources',
-      'Sales',
-      'Finance',
       'Operations',
-      'Research',
+      'Finance',
+      'HR',
+      'Sales',
+      'Marketing',
     ];
 
-    departmentsList.forEach((element) => {
-      const department = this.departmentsService.create({
+    for (const department of departments) {
+      const departmentCopy = await this.departmentsService.create({
         _id: new mongoose.Types.ObjectId(),
-        name: 'Technology',
+        name: department,
         organization: mongoose.Types.ObjectId('6269cd8878ce539f1226e436'),
         admins: '',
       });
-      console.log(department);
-    });
+
+      console.log(departmentCopy);
+    }
   }
 }

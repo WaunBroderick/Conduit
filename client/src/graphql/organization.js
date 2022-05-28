@@ -8,3 +8,12 @@ export const LOAD_ORGANIZATION = gql`
     }
   }
 `;
+
+export const LOAD_ORGANIZATION_DEPARTMENTS = gql`
+  query DepartmentFindByOrgId($orgId: String!) {
+    departmentFindByOrgId(orgId: $orgId) {
+      _id
+      name
+    }
+  }
+`;

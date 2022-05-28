@@ -39,6 +39,11 @@ export class DepartmentsResolver {
     return this.departmentsService.findOne(id);
   }
 
+  @Query(() => [Department], { name: 'departmentFindByOrgId' })
+  findByOrganizationId(@Args('orgId', { type: () => String }) orgId: string) {
+    return this.departmentsService.findByOrganizationId(orgId);
+  }
+
   @Mutation(() => Department)
   updateDepartment(
     @Args('updateDepartmentInput') updateDepartmentInput: UpdateDepartmentInput,

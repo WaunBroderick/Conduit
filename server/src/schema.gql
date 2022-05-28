@@ -82,6 +82,7 @@ type Query {
   assignmentByUserId(id: String!): [Assignment!]!
   departments: [Department!]!
   department(id: Int!): Department!
+  departmentFindByOrgId(orgId: String!): [Department!]!
   courses: [Course!]!
   course(id: Int!): Course!
   roles: [Role!]!

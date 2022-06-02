@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { Provider } from "react-redux";
@@ -16,6 +16,8 @@ import { setToLS } from "./utils/storage";
 
 import { PersistGate } from "redux-persist/integration/react";
 
+import i18n from "./config/locales/i18n";
+
 const { store, persistor } = configureStore();
 
 // Set Application Theme
@@ -26,24 +28,26 @@ const Index = () => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <ToastContainer
-      position="top-center"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-    />
-    <CookiesProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Index />
-        </PersistGate>
-      </Provider>
-    </CookiesProvider>
+    <Suspense fallback={<div>Loading ..</div>}>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <CookiesProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Index />
+          </PersistGate>
+        </Provider>
+      </CookiesProvider>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -27,8 +27,7 @@ export default function Organization() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.profile.profile);
 
-  const departments = user.organization.departments;
-  console.log(user.organization.name);
+  const departments = useSelector((state) => state.departments.departments);
 
   //Generic form modal
   const [isOpen, setIsOpen] = useState(false);

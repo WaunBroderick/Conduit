@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { Navigate } from "react-router-dom";
@@ -36,6 +36,10 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
+//translations
+import i18n from "./config/locales/i18n";
+import { useTranslation, Trans } from "react-i18next";
+
 const themeDark = {
   colorPrimary: "purple",
 };
@@ -69,6 +73,9 @@ const AppContainer = () => (
 );
 
 function App() {
+  //translation variable
+  const { t } = useTranslation();
+
   const { theme, themeLoaded, getFonts } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState(theme);
 

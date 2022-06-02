@@ -11,6 +11,7 @@ import {
   EuiPopover,
   EuiButton,
   EuiBreadcrumbs,
+  EuiSelect,
 } from "@elastic/eui";
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
@@ -26,7 +27,15 @@ import { useTheme } from "../../styles/themes/useTheme";
 import { getFromLS } from "../../utils/storage";
 import conduitLogo from "../../assets/img/logo/s-03.png";
 
+// Translations
+import { useTranslation } from "react-i18next";
+import i18n from "../../config/locales/i18n";
+import i18next from "i18next";
+
 export default function NavBar(props) {
+  const { t, i18n } = useTranslation();
+  i18next.t("en");
+
   const [cookies, setCookie, removeCookie] = useCookies("auth-cookie");
   const [redirect, setRedirect] = useState(false);
 
@@ -39,6 +48,10 @@ export default function NavBar(props) {
 
   //Breadcrumbs
   const location = useLocation();
+
+  const changeLanguage = () => {
+    i18n.changeLanguage(language);
+  };
 
   const nameHighlighting = (name) => {
     if (location.pathname == name) {
@@ -104,7 +117,6 @@ export default function NavBar(props) {
 
     return (
       <EuiPopover
-        id={headerUserPopoverId}
         button={button}
         isOpen={isOpen}
         anchorPosition="downRight"
@@ -158,7 +170,7 @@ export default function NavBar(props) {
               items: [
                 <EuiHeaderLogo key="first" iconType="logoElastic">
                   <Link to="/Home">
-                    <p style={{ fontSize: "20px" }}>Conduit</p>
+                    <p style={{ fontSize: "20px" }}>{t("Welcome to React")}</p>
                   </Link>
                 </EuiHeaderLogo>,
                 <LinkStyled to="/Users">
@@ -197,6 +209,14 @@ export default function NavBar(props) {
                 >
                   {toggleThemeOn ? "Dark Mode" : "Light Mode"}
                 </EuiButton>,
+                <EuiSelect
+                  options={[
+                    { value: "en", text: "English" },
+                    { value: "fr", text: "French" },
+                  ]}
+                  aria-label="Select Languages"
+                />,
+
                 <HeaderUserMenu />,
               ],
               borders: "none",

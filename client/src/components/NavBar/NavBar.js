@@ -170,7 +170,7 @@ export default function NavBar(props) {
               items: [
                 <EuiHeaderLogo key="first" iconType="logoElastic">
                   <Link to="/Home">
-                    <p style={{ fontSize: "20px" }}>{t("Welcome to React")}</p>
+                    <p style={{ fontSize: "20px" }}>{t("translation.title")}</p>
                   </Link>
                 </EuiHeaderLogo>,
                 <LinkStyled to="/Users">

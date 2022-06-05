@@ -20,6 +20,7 @@ import { RolesModule } from './services/roles/roles.module';
 import { DepartmentsModule } from './services/departments/departments.module';
 import { AuthModule } from './services/auth/auth.module';
 import { SeedsModule } from './services/shared/seeds.module';
+import { MultiplechoiceModule } from './services/content/multiplechoice/multiplechoice.module';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { SeedsModule } from './services/shared/seeds.module';
     AuthModule,
     SeedsModule,
     CommandModule,
+    MultiplechoiceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

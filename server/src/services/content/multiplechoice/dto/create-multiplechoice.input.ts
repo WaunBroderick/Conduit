@@ -11,6 +11,6 @@ export class CreateMultiplechoiceInput {
   @Field()
   name: string;
 
-  @Field()
-  content: string;
+  @Field(() => [String])
+  content: [string];
 }

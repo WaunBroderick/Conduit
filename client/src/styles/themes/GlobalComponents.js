@@ -54,7 +54,7 @@ const ConduitErrorMessage = styled.p`
 `;
 
 const ConduitPage = styled.div`
-  margin-left: 5em;
+  margin-left: 15em;
   margin-right: 5em;
   padding-top: 8em;
 `;

@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 import { CreateMultiplechoiceInput } from './dto/create-multiplechoice.input';
 import { UpdateMultiplechoiceInput } from './dto/update-multiplechoice.input';
+import {
+  MultipleChoice,
+  MultipleChoiceDocument,
+} from './multiplechoice.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class MultiplechoiceService {
-  create(createMultiplechoiceInput: CreateMultiplechoiceInput) {
-    return 'This action adds a new multiplechoice';
+  constructor(
+    @InjectModel(MultipleChoice.name)
+    private multipleChoiceModel: Model<MultipleChoiceDocument>,
+  ) {}
+
+  async create(multipleChoiceContent: CreateMultiplechoiceInput) {
+    return this.multipleChoiceModel.create(multipleChoiceContent);
   }
 
-  findAll() {
-    return `This action returns all multiplechoice`;
+  async findAll(): Promise<MultipleChoice[]> {
+    return this.multipleChoiceModel.find().lean();
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} multiplechoice`;
+  async findOne(id: string) {
+    return this.multipleChoiceModel.findById(id).lean();
   }
 
-  update(id: string, updateMultiplechoiceInput: UpdateMultiplechoiceInput) {
+  update(id: string, multipleChoiceContent: UpdateMultiplechoiceInput) {
     return `This action updates a #${id} multiplechoice`;
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} multiplechoice`;
+  async remove(id: string): Promise<MultipleChoice> {
+    return await this.multipleChoiceModel.findByIdAndRemove(id);
   }
 }

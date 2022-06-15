@@ -71,9 +71,16 @@ type Role {
   name: String!
 }
 
-type Multiplechoice {
-  """Example field (placeholder)"""
-  exampleField: Int!
+type RBTest {
+  name: String!
+  question: String!
+  answer: String!
+}
+
+type MultipleChoice {
+  _id: MongoId!
+  name: String!
+  content: [RBTest!]!
 }
 
 type Query {
@@ -92,7 +99,7 @@ type Query {
   course(id: Int!): Course!
   roles: [Role!]!
   role(id: Int!): Role!
-  multiplechoice(id: String!): Multiplechoice!
+  multiplechoice(id: String!): MultipleChoice!
 }
 
 type Mutation {
@@ -111,9 +118,9 @@ type Mutation {
   createRole(createRoleInput: CreateRoleInput!): Role!
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
   removeRole(id: Int!): Role!
-  createMultiplechoice(createMultiplechoiceInput: CreateMultiplechoiceInput!): Multiplechoice!
-  updateMultiplechoice(updateMultiplechoiceInput: UpdateMultiplechoiceInput!): Multiplechoice!
-  removeMultiplechoice(id: Int!): Multiplechoice!
+  createMultiplechoice(createMultiplechoiceInput: CreateMultiplechoiceInput!): MultipleChoice!
+  updateMultiplechoice(updateMultiplechoiceInput: UpdateMultiplechoiceInput!): MultipleChoice!
+  removeMultiplechoice(id: Int!): MultipleChoice!
 }
 
 input CreateUserInput {
@@ -194,12 +201,12 @@ input CreateMultiplechoiceInput {
   """The string to become the Mongo ObjectId"""
   id: String
   name: String!
-  content: String!
+  content: [String!]!
 }
 
 input UpdateMultiplechoiceInput {
   """The string to become the Mongo ObjectId"""
   id: String
   name: String!
-  content: String
+  content: [String!]
 }

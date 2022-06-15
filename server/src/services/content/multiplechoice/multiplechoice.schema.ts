@@ -3,12 +3,13 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import * as mongoose from 'mongoose';
 import MongoId from 'src/common/scalars/mongo-id.scalar';
+import { RBTest } from '../shared/rbtest.schema';
 
-export type MultipleChoiceDocument = Course & mongoose.Document;
+export type MultipleChoiceDocument = MultipleChoice & mongoose.Document;
 
 @Schema()
 @ObjectType()
-export class Course {
+export class MultipleChoice {
   @Field(() => MongoId)
   _id: string;
 
@@ -17,8 +18,9 @@ export class Course {
   name: string;
 
   @Prop()
-  @Field()
-  content: Object;
+  @Field(() => [RBTest])
+  content: RBTest[];
 }
 
-export const CourseSchema = SchemaFactory.createForClass(Course);
+export const MultipleChoiceSchema =
+  SchemaFactory.createForClass(MultipleChoice);

@@ -18,4 +18,14 @@ const LinkStyled = styled(Link)`
   }
 `;
 
-export { SubHeaderStyled, LinkStyled };
+const SideBarDiv = styled.div`
+  position: fixed;
+  height: 100%;
+  width: 200px;
+  z-index: 1;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+`;
+
+export { SubHeaderStyled, LinkStyled, SideBarDiv };

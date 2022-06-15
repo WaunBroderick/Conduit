@@ -32,6 +32,7 @@ import { loadAssignmentsAsync } from "../../redux/reducers/assignments/assignmen
 import { loadProfileAsync } from "../../redux/reducers/profile/profile.thunk";
 
 import NavBar from "../../components/NavBar/NavBar";
+import SideBar from "../../components/NavBar/SideBar";
 
 export const Home = () => {
   const [value, onChange] = useState(new Date());
@@ -96,97 +97,100 @@ export const Home = () => {
   const renderNotifications = () => {};
 
   return (
-    <ConduitPage>
-      <NavBar />
+    <>
+      <SideBar />
+      <ConduitPage>
+        <NavBar />
 
-      <EuiFlexGroup>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="11"
-              description="Courses to Complete"
-              textAlign="right"
-            >
-              <EuiIcon type="empty" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="19"
-              description="Reviews Awaiting"
-              titleColor="accent"
-              textAlign="right"
-            >
-              <EuiIcon type="clock" color="accent" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="11"
-              description="Collected Cerificates"
-              titleColor="success"
-              textAlign="right"
-            >
-              <EuiIcon type="check" color="success" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-        <EuiFlexItem grow={1}>
-          <EuiPanel>
-            <EuiStat
-              title="3"
-              description="Overdue Courses"
-              titleColor="danger"
-              textAlign="right"
-            >
-              <EuiIcon type="alert" color="danger" />
-            </EuiStat>
-          </EuiPanel>
-        </EuiFlexItem>
-      </EuiFlexGroup>
-
-      <EuiSpacer />
-
-      <EuiFlexGroup gutterSize="l">
-        <EuiFlexItem grow={1}>
-          <EuiFlexGroup
-            gutterSize="l"
-            style={{ padding: "12px", height: "800px", alignContent: "left" }}
-          >
-            <EuiCard title="Courses" textAlign="left">
-              {renderAssignments()}
-            </EuiCard>
-          </EuiFlexGroup>
-        </EuiFlexItem>
-
-        <EuiFlexGrid gutterSize="l" style={{ padding: "12px" }}>
-          <EuiFlexItem grow={false}>
-            <EuiCard style={{ maxHeight: "400px" }} title="calendar">
-              <Calendar onChange={onChange} value={value} />
-            </EuiCard>
-            <EuiSpacer />
-            <EuiFlexItem>
-              <EuiCard title="Notifications">
-                <div style={{ minHeight: "300px" }}>
-                  <Lottie
-                    loop={true}
-                    autoPlay={true}
-                    animationData={underMaintanence}
-                    height={1000}
-                    width={100}
-                    style={{ height: "250px" }}
-                  />
-                </div>
-              </EuiCard>
-            </EuiFlexItem>
+        <EuiFlexGroup>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="11"
+                description="Courses to Complete"
+                textAlign="right"
+              >
+                <EuiIcon type="empty" />
+              </EuiStat>
+            </EuiPanel>
           </EuiFlexItem>
-        </EuiFlexGrid>
-      </EuiFlexGroup>
-    </ConduitPage>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="19"
+                description="Reviews Awaiting"
+                titleColor="accent"
+                textAlign="right"
+              >
+                <EuiIcon type="clock" color="accent" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="11"
+                description="Collected Cerificates"
+                titleColor="success"
+                textAlign="right"
+              >
+                <EuiIcon type="check" color="success" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+          <EuiFlexItem grow={1}>
+            <EuiPanel>
+              <EuiStat
+                title="3"
+                description="Overdue Courses"
+                titleColor="danger"
+                textAlign="right"
+              >
+                <EuiIcon type="alert" color="danger" />
+              </EuiStat>
+            </EuiPanel>
+          </EuiFlexItem>
+        </EuiFlexGroup>
+
+        <EuiSpacer />
+
+        <EuiFlexGroup gutterSize="l">
+          <EuiFlexItem grow={1}>
+            <EuiFlexGroup
+              gutterSize="l"
+              style={{ padding: "12px", height: "800px", alignContent: "left" }}
+            >
+              <EuiCard title="Courses" textAlign="left">
+                {renderAssignments()}
+              </EuiCard>
+            </EuiFlexGroup>
+          </EuiFlexItem>
+
+          <EuiFlexGrid gutterSize="l" style={{ padding: "12px" }}>
+            <EuiFlexItem grow={false}>
+              <EuiCard style={{ maxHeight: "400px" }} title="calendar">
+                <Calendar onChange={onChange} value={value} />
+              </EuiCard>
+              <EuiSpacer />
+              <EuiFlexItem>
+                <EuiCard title="Notifications">
+                  <div style={{ minHeight: "300px" }}>
+                    <Lottie
+                      loop={true}
+                      autoPlay={true}
+                      animationData={underMaintanence}
+                      height={1000}
+                      width={100}
+                      style={{ height: "250px" }}
+                    />
+                  </div>
+                </EuiCard>
+              </EuiFlexItem>
+            </EuiFlexItem>
+          </EuiFlexGrid>
+        </EuiFlexGroup>
+      </ConduitPage>
+    </>
   );
 };
 

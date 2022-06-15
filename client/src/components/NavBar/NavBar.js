@@ -12,11 +12,12 @@ import {
   EuiButton,
   EuiBreadcrumbs,
   EuiSelect,
+  EuiButtonIcon,
 } from "@elastic/eui";
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { SubHeaderStyled, LinkStyled } from "./style";
+import { SubHeaderStyled, LinkStyled, SideBar } from "./style";
 import { ThemeProvider } from "styled-components";
 import theme from "../../styles/themes/LightTheme";
 import { useLocation } from "react-router-dom";
@@ -27,10 +28,14 @@ import { useTheme } from "../../styles/themes/useTheme";
 import { getFromLS } from "../../utils/storage";
 import conduitLogo from "../../assets/img/logo/s-03.png";
 
+// Icons
+import { AiFillCaretLeft } from "react-icons/ai";
+
 // Translations
 import { useTranslation } from "react-i18next";
 import i18n from "../../config/locales/i18n";
 import i18next from "i18next";
+import SideBar2 from "./SideBar";
 
 export default function NavBar(props) {
   const { t, i18n } = useTranslation();

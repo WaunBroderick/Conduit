@@ -1,14 +1,14 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { MultiplechoiceService } from './multiplechoice.service';
-import { Multiplechoice } from './entities/multiplechoice.entity';
 import { CreateMultiplechoiceInput } from './dto/create-multiplechoice.input';
 import { UpdateMultiplechoiceInput } from './dto/update-multiplechoice.input';
+import { MultipleChoice } from './multiplechoice.schema';
 
-@Resolver(() => Multiplechoice)
+@Resolver(() => MultipleChoice)
 export class MultiplechoiceResolver {
   constructor(private readonly multiplechoiceService: MultiplechoiceService) {}
 
-  @Mutation(() => Multiplechoice)
+  @Mutation(() => MultipleChoice)
   createMultiplechoice(
     @Args('createMultiplechoiceInput')
     createMultiplechoiceInput: CreateMultiplechoiceInput,
@@ -16,17 +16,17 @@ export class MultiplechoiceResolver {
     return this.multiplechoiceService.create(createMultiplechoiceInput);
   }
 
-  @Query(() => [Multiplechoice], { name: 'multiplechoice' })
+  @Query(() => [MultipleChoice], { name: 'multiplechoice' })
   findAll() {
     return this.multiplechoiceService.findAll();
   }
 
-  @Query(() => Multiplechoice, { name: 'multiplechoice' })
+  @Query(() => MultipleChoice, { name: 'multiplechoice' })
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.multiplechoiceService.findOne(id);
   }
 
-  @Mutation(() => Multiplechoice)
+  @Mutation(() => MultipleChoice)
   updateMultiplechoice(
     @Args('updateMultiplechoiceInput')
     updateMultiplechoiceInput: UpdateMultiplechoiceInput,
@@ -37,7 +37,7 @@ export class MultiplechoiceResolver {
     );
   }
 
-  @Mutation(() => Multiplechoice)
+  @Mutation(() => MultipleChoice)
   removeMultiplechoice(@Args('id', { type: () => Int }) id: string) {
     return this.multiplechoiceService.remove(id);
   }

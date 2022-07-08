@@ -1,4 +1,4 @@
-FROM node:14.19.1
+FROM node:14.20.0
 RUN mkdir -p /usr/src/Conduit
 
 

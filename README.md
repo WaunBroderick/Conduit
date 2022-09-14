@@ -64,6 +64,12 @@ $ docker compose build
 $ docker compose up
 ```
 
+## 5. Graphql Apollo Studio Sandbox
+
+http://localhost:5000/graphql
+
+<br/>
+
 # Contributing
 
 Notes for editing

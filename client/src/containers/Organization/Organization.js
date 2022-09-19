@@ -22,6 +22,7 @@ import { useCookies } from "react-cookie";
 import { useSelector, useDispatch } from "react-redux";
 
 import NavBar from "../../components/NavBar/NavBar";
+import SideBar from "../../components/NavBar/SideBar";
 
 export default function Organization() {
   const dispatch = useDispatch();
@@ -54,85 +55,88 @@ export default function Organization() {
   }
 
   return (
-    <ConduitPage>
-      <NavBar />
-      {isOpen && (
-        <GenericFormModal
-          setIsOpen={setIsOpen}
-          title={GFMtitle}
-          formData={GFMform}
-          zObject={GFMzObject}
-        />
-      )}
-      <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>
-        <EuiFlexGroup
-          style={{
-            padding: "12px",
-            overflow: "auto",
-            width: "500px",
-            maxWidth: "400px",
-          }}
-        >
-          <EuiFlexItem>
-            <EuiCard
-              image="https://source.unsplash.com/400x200/?Water"
-              style={{ height: 900 }}
-            >
-              <EuiTitle>
-                <h1>{user.organization.name}</h1>
-              </EuiTitle>
-              <EuiText>Heres some org info</EuiText>
-            </EuiCard>
-          </EuiFlexItem>
-        </EuiFlexGroup>
-        <EuiSpacer />
+    <>
+      <SideBar />
+      <ConduitPage>
+        <NavBar />
+        {isOpen && (
+          <GenericFormModal
+            setIsOpen={setIsOpen}
+            title={GFMtitle}
+            formData={GFMform}
+            zObject={GFMzObject}
+          />
+        )}
+        <EuiFlexGroup gutterSize="l" style={{ padding: "12px" }}>
+          <EuiFlexGroup
+            style={{
+              padding: "12px",
+              overflow: "auto",
+              width: "500px",
+              maxWidth: "400px",
+            }}
+          >
+            <EuiFlexItem>
+              <EuiCard
+                image="https://source.unsplash.com/400x200/?Water"
+                style={{ height: 900 }}
+              >
+                <EuiTitle>
+                  <h1>{user.organization.name}</h1>
+                </EuiTitle>
+                <EuiText>Heres some org info</EuiText>
+              </EuiCard>
+            </EuiFlexItem>
+          </EuiFlexGroup>
+          <EuiSpacer />
 
-        <div style={{ maxWidth: "80%", minWidth: "80%" }}>
-          <div style={{ display: "flex" }}>
-            <EuiFlexItem style={{ float: "left", display: "inline-block" }}>
-              <EuiTitle>
-                <h2>Departments</h2>
-              </EuiTitle>
+          <div style={{ maxWidth: "80%", minWidth: "80%" }}>
+            <div style={{ display: "flex" }}>
+              <EuiFlexItem style={{ float: "left", display: "inline-block" }}>
+                <EuiTitle>
+                  <h2>Departments</h2>
+                </EuiTitle>
 
-              <EuiButton
-                iconSide="right"
-                fill
-                size="s"
-                onClick={createDepartment}
-                iconType="plus"
+                <EuiButton
+                  iconSide="right"
+                  fill
+                  size="s"
+                  onClick={createDepartment}
+                  iconType="plus"
+                  style={{
+                    maxWidth: "300px",
+                    float: "right",
+                    display: "inline-block",
+                    padding: 20,
+                  }}
+                >
+                  Create Department
+                </EuiButton>
+              </EuiFlexItem>
+            </div>
+            <div style={{ overflowY: "hidden" }}>
+              <EuiFlexGroup
+                gutterSize="l"
                 style={{
-                  maxWidth: "300px",
-                  float: "right",
-                  display: "inline-block",
-                  padding: 20,
+                  padding: "12px",
                 }}
               >
-                Create Department
-              </EuiButton>
-            </EuiFlexItem>
+                {departments?.map((department) => (
+                  <EuiFlexItem grow={1} style={{ minWidth: "300px" }}>
+                    <EuiPanel>
+                      <EuiStat
+                        title="11"
+                        description={department.name}
+                        textAlign="right"
+                      ></EuiStat>
+                    </EuiPanel>
+                  </EuiFlexItem>
+                ))}
+              </EuiFlexGroup>
+            </div>
           </div>
-          <div style={{ overflowY: "hidden" }}>
-            <EuiFlexGroup
-              gutterSize="l"
-              style={{
-                padding: "12px",
-              }}
-            >
-              {departments?.map((department) => (
-                <EuiFlexItem grow={1} style={{ minWidth: "300px" }}>
-                  <EuiPanel>
-                    <EuiStat
-                      title="11"
-                      description={department.name}
-                      textAlign="right"
-                    ></EuiStat>
-                  </EuiPanel>
-                </EuiFlexItem>
-              ))}
-            </EuiFlexGroup>
-          </div>
-        </div>
-      </EuiFlexGroup>
-    </ConduitPage>
+        </EuiFlexGroup>
+      </ConduitPage>
+    </>
   );
 }

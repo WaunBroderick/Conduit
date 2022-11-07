@@ -15,6 +15,7 @@ import Users from "./containers/Users/Users";
 import Marketplace from "./containers/Marketplace/Marketplace";
 import Organization from "./containers/Organization/Organization";
 import Profile from "./containers/Profile/Profile";
+import Testing from "./containers/Testing/Testing";
 
 // Themeing
 import WebFont from "webfontloader";
@@ -58,20 +59,6 @@ const LoginContainer = () => (
   </div>
 );
 
-const AppContainer = () => (
-  <div style={{ height: "100vh" }}>
-    <NavBar />
-    <Routes>
-      <Route path="/home" element={<Home />} />
-      <Route path="/users" element={<Users />} />
-      <Route path="/courses" element={<Courses />} />
-      <Route path="/organization" element={<Organization />} />
-      <Route path="/marketplace" element={<Marketplace />} />
-      <Route path="/profile" element={<Profile />} />
-    </Routes>
-  </div>
-);
-
 function App() {
   //translation variable
   const { t } = useTranslation();
@@ -96,7 +83,6 @@ function App() {
     if (graphqlErrors) {
       graphqlErrors.map(({ message, location, path }) => {
         //alert(`Graphql err ${message}`);
-        console.log("HELLLLLLLO");
       });
     }
   });
@@ -128,6 +114,7 @@ function App() {
                 <Route path="/organization" element={<Organization />} />
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/testing" element={<Testing />} />
               </Route>
             </Routes>
           </Router>

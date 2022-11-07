@@ -109,6 +109,14 @@ export default function SideBar() {
       icon: <FcShop />,
       items: [createItem("Browse Courses"), createItem("Submit A Course")],
     }),
+    createItem("Testing", {
+      onClick: useCallback(
+        () => navigate("/Testing", { reaplce: true }),
+        [navigate]
+      ),
+      icon: <FcShop />,
+      items: [],
+    }),
   ];
 
   return (

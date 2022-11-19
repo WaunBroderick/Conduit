@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="10" failures="0" errors="0" time="12.495">
-  <testsuite name="OrganizationsService" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:34:56" time="8.757" tests="8">
+<testsuites name="jest tests" tests="10" failures="0" errors="0" time="8.944">
+  <testsuite name="OrganizationsService" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:29" time="5.323" tests="8">
     <testcase classname="OrganizationsService should be defined" name="OrganizationsService should be defined" time="0.001">
     </testcase>
-    <testcase classname="OrganizationsService Should create an Organization with MockCreateOrganizationInput" name="OrganizationsService Should create an Organization with MockCreateOrganizationInput" time="0.034">
+    <testcase classname="OrganizationsService Should create an Organization with MockCreateOrganizationInput" name="OrganizationsService Should create an Organization with MockCreateOrganizationInput" time="0.033">
     </testcase>
     <testcase classname="OrganizationsService Should get a list of all organizations" name="OrganizationsService Should get a list of all organizations" time="0.014">
     </testcase>
     <testcase classname="OrganizationsService Should get the organization by its own organizationId" name="OrganizationsService Should get the organization by its own organizationId" time="0.005">
     </testcase>
-    <testcase classname="OrganizationsService Should update some Organization Properties" name="OrganizationsService Should update some Organization Properties" time="0.009">
+    <testcase classname="OrganizationsService Should update some Organization Properties" name="OrganizationsService Should update some Organization Properties" time="0.011">
     </testcase>
-    <testcase classname="OrganizationsService Should delete the mock testing organization" name="OrganizationsService Should delete the mock testing organization" time="0.004">
+    <testcase classname="OrganizationsService Should delete the mock testing organization" name="OrganizationsService Should delete the mock testing organization" time="0.005">
     </testcase>
-    <testcase classname="OrganizationsService Should recieve NotFound error for getting the deleted organization" name="OrganizationsService Should recieve NotFound error for getting the deleted organization" time="0.004">
+    <testcase classname="OrganizationsService Should recieve NotFound error for getting the deleted organization" name="OrganizationsService Should recieve NotFound error for getting the deleted organization" time="0.002">
     </testcase>
-    <testcase classname="OrganizationsService should not be able to update an non existing organization" name="OrganizationsService should not be able to update an non existing organization" time="0.002">
+    <testcase classname="OrganizationsService should not be able to update an non existing organization" name="OrganizationsService should not be able to update an non existing organization" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="AssignmentsService" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:05" time="0.561" tests="1">
+  <testsuite name="AssignmentsService" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:35" time="0.554" tests="1">
     <testcase classname="AssignmentsService should be defined" name="AssignmentsService should be defined" time="0.001">
     </testcase>
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:05" time="0.147" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:35" time="0.143" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="AppController" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.175" tests="1">
+  <testsuite name="AppController" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.171" tests="1">
     <testcase classname="AppController root should return &quot;Hello World!&quot;" name="AppController root should return &quot;Hello World!&quot;" time="0.008">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.078" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.049" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.071" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.043" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.066" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.043" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.047" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.044" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.045" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.046" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.044" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.046" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.044" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.044" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.045" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.045" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.045" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.045" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:06" time="0.046" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.043" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:07" time="0.042" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.042" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:07" time="0.043" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.078" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T04:35:07" time="0.043" tests="0">
+  <testsuite name="Logger" errors="0" failures="0" skipped="0" timestamp="2022-11-19T15:29:36" time="0.135" tests="0">
     <testcase classname="Logger Some test to be written in the future" name="Logger Some test to be written in the future" time="0">
     </testcase>
   </testsuite>

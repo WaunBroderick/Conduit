@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/node:16.17.1
+      - image: cimg/node:12.16
         user: root
     parallelism: 5
     steps:
@@ -23,10 +23,10 @@ jobs:
             - .server/node_modules
       - run:
           name: Install Jest-cli globally
-          command: npm install -g jest-cli@27
+          command: npm install -g jest-cli
       - run:
           name: Install JUnit coverage reporter
-          command: npm add --dev jest-junit@27
+          command: npm add --dev jest-junit
       - run:
           name: Create artifact directory
           command: mkdir /root/project/reports && mkdir /root/project/reports/junit

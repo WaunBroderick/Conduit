@@ -23,7 +23,6 @@
     "seed": "export NODE_ENV=development && cd ./src/database && npx run seed.js"
   },
   "dependencies": {
-    "@casl/ability": "^5.4.3",
     "@nestjs/apollo": "^10.0.9",
     "@nestjs/cli": "8.2.5",
     "@nestjs/common": "8.4.4",
@@ -42,7 +41,6 @@
     "alasql": "^1.7.3",
     "apollo-server-express": "^3.6.7",
     "bcryptjs": "^2.4.3",
-    "casl": "^1.1.0",
     "class-transformer": "0.5.1",
     "class-validator": "^0.13.2",
     "cookie-parser": "^1.4.6",

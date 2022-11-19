@@ -4,7 +4,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/node:13.16
+      - image: cimg/node:14.20.0
         user: root
     parallelism: 5
     steps:

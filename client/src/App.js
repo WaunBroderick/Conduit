@@ -15,6 +15,7 @@ import Users from "./containers/Users/Users";
 import Marketplace from "./containers/Marketplace/Marketplace";
 import Organization from "./containers/Organization/Organization";
 import Profile from "./containers/Profile/Profile";
+import Testing from "./containers/Testing/Testing";
 
 // Themeing
 import WebFont from "webfontloader";
@@ -128,6 +129,7 @@ function App() {
                 <Route path="/organization" element={<Organization />} />
                 <Route path="/marketplace" element={<Marketplace />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/testing" element={<Testing />} />
               </Route>
             </Routes>
           </Router>

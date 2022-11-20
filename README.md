@@ -70,6 +70,11 @@ http://localhost:5000/graphql
 
 <br/>
 
+## 5. Product Management and Design
+
+[Product Requirements Document](https://www.figma.com/file/7SvP3J7bpqmGaObmY2t8m7/Conduit-Product-Requirements-Document?node-id=0%3A1)
+
+<br/>
 # Contributing
 
 Notes for editing

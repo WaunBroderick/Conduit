@@ -83,7 +83,6 @@ function App() {
     if (graphqlErrors) {
       graphqlErrors.map(({ message, location, path }) => {
         //alert(`Graphql err ${message}`);
-        console.log("HELLLLLLLO");
       });
     }
   });

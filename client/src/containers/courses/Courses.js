@@ -7,26 +7,22 @@ import {
 } from "../../styles/themes/GlobalComponents";
 
 import NavBar from "../../components/NavBar/NavBar";
-import SideBar from "../../components/NavBar/SideBar";
 
 export default function Courses() {
   return (
-    <>
-      <SideBar />
-      <ConduitPage>
-        <NavBar />
+    <ConduitPage>
+      <NavBar />
 
-        <EuiFlexGroup>
-          <EuiFlexItem grow={false}>
-            <EuiSpacer />
-            <EuiCard>
-              <EuiFlexItem grow={false}>
-                <h1>Courses</h1>
-              </EuiFlexItem>
-            </EuiCard>
-          </EuiFlexItem>
-        </EuiFlexGroup>
-      </ConduitPage>
-    </>
+      <EuiFlexGroup>
+        <EuiFlexItem grow={false}>
+          <EuiSpacer />
+          <EuiCard>
+            <EuiFlexItem grow={false}>
+              <h1>Courses</h1>
+            </EuiFlexItem>
+          </EuiCard>
+        </EuiFlexItem>
+      </EuiFlexGroup>
+    </ConduitPage>
   );
 }

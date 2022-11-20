@@ -3,15 +3,13 @@ import React, { Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { EuiFlexGroup, EuiFlexItem } from "@elastic/eui";
+
 import { ConduitPage } from "../../styles/themes/GlobalComponents";
 
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/NavBar/SideBar";
-import RenderConformationForm from "../../components/Modules/ConformationForm/RenderConformationForm";
 
-export default function Testing() {
-  //Set user Profile
-  const user = useSelector((state) => state.profile);
+import RenderConformationForm from "../../components/Modules/ConformationForm/RenderConformationForm";
 
   const sampleTest = {
     type: "confirmatonForm",
@@ -55,6 +53,7 @@ export default function Testing() {
       <SideBar />
       <ConduitPage>
         <NavBar />
+
         <EuiFlexGroup justifyContent="spaceAround">
           <EuiFlexItem grow={false}>
             <RenderConformationForm content={sampleTest} />

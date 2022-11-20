@@ -189,6 +189,9 @@ export default function NavBar(props) {
                 <LinkStyled to="/Marketplace">
                   {nameHighlighting("/Marketplace")}
                 </LinkStyled>,
+                <LinkStyled to="/Testing">
+                  {nameHighlighting("/Testing")}
+                </LinkStyled>,
               ],
               borders: "none",
             },

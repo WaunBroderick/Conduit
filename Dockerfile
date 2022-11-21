@@ -13,7 +13,7 @@ RUN npm i -g @nestjs/cli@8.2.5
 
 RUN cd ./client && npm ci  && npm run build && cd ..
 
-RUN cd ./server && rm -rf ./node_modules/ && rm package-lock.json  && npm ci  && nest build && cd ..
+RUN cd ./server && rm -rf ./node_modules/  && npm ci  && nest build && cd ..
 
 RUN mkdir -p /usr/Conduit/app/server/
 

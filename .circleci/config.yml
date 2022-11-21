@@ -12,8 +12,6 @@ jobs:
       - run:
           name: Update NPM
           command: "sudo npm install -g npm"
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "package.json" }}
       - run:
           name: Install server Dependencies
           command: cd server && npm install

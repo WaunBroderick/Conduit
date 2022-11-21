@@ -9,11 +9,11 @@ WORKDIR /usr/src/Conduit
 COPY . .
 
 # Install nestjs cli to run build
-RUN npm i -g @nestjs/cli@8.2.5
+RUN npm i -g @nestjs/cli
 
 RUN cd ./client && npm ci  && npm run build && cd ..
 
-RUN cd ./server && rm -rf ./node_modules/  && npm ci  && nest build && cd ..
+RUN cd ./server && npm ci  && nest build && cd ..
 
 RUN mkdir -p /usr/Conduit/app/server/
 

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { EuiIcon, EuiSideNav, slugify } from "@elastic/eui";
 import { SideBarDiv } from "./style";
+import { Link, useNavigate } from "react-router-dom";
 
 // Icons
 import {
@@ -11,6 +12,11 @@ import {
 } from "react-icons/fc";
 
 export default function SideBar() {
+  const navigate = useNavigate();
+  const testClick = useCallback(
+    () => navigate("/Courses", { reaplce: true }),
+    [navigate]
+  );
   const [isSideNavOpenOnMobile, setIsSideNavOpenOnMobile] = useState(false);
   const [selectedItemName, setSelectedItem] = useState("Time stuff");
 
@@ -35,7 +41,10 @@ export default function SideBar() {
 
   const sideNav = [
     createItem("Users", {
-      onClick: undefined,
+      onClick: useCallback(
+        () => navigate("/Users", { reaplce: true }),
+        [navigate]
+      ),
       icon: <FcBusinessman />,
       items: [
         createItem("Data sources"),
@@ -48,7 +57,10 @@ export default function SideBar() {
       ],
     }),
     createItem("Courses", {
-      onClick: undefined,
+      onClick: useCallback(
+        () => navigate("/Courses", { reaplce: true }),
+        [navigate]
+      ),
       icon: <FcGraduationCap />,
       items: [
         createItem("Advanced settings", {
@@ -58,6 +70,9 @@ export default function SideBar() {
               items: [
                 createItem("Time stuff", {
                   icon: <EuiIcon type="clock" />,
+                  onClick: () => {
+                    console.log("YYAAAAAAAAAY");
+                  },
                 }),
                 createItem("Lion stuff", {
                   icon: <EuiIcon type="stats" />,
@@ -68,19 +83,47 @@ export default function SideBar() {
           ],
         }),
         createItem("Index Patterns"),
-        createItem("Saved Objects"),
+        createItem("Saved Objects", {
+          onClick: useCallback(
+            () => navigate("/Courses", { reaplce: true }),
+            [navigate]
+          ),
+        }),
+
         createItem("Reporting"),
       ],
     }),
     createItem("Organization", {
-      onClick: undefined,
+      onClick: useCallback(
+        () => navigate("/Organization", { reaplce: true }),
+        [navigate]
+      ),
       icon: <FcOrganization />,
-      items: [createItem("Pipeline viewer")],
+      items: [createItem("Settings")],
     }),
     createItem("Marketplace", {
-      onClick: undefined,
+      onClick: useCallback(
+        () => navigate("/Marketplace", { reaplce: true }),
+        [navigate]
+      ),
       icon: <FcShop />,
-      items: [createItem("Pipeline viewer")],
+      items: [createItem("Browse Courses"), createItem("Submit A Course")],
+    }),
+    createItem("Testing", {
+      onClick: useCallback(
+        () => navigate("/Testing", { reaplce: true }),
+        [navigate]
+      ),
+      icon: <FcShop />,
+      items: [],
+    }),
+    createItem("Testing", {
+      onClick: useCallback(
+        () => navigate("/Testing", { reaplce: true }),
+        [navigate]
+      ),
+      icon: <FcShop />,
+      items: [],
     }),
   ];
 

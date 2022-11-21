@@ -33,7 +33,7 @@ import { MultiplechoiceModule } from './services/content/multiplechoice/multiple
       // For local development
       `mongodb://localhost:27017/conduit-STAGING`,
     ),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
+    /*GraphQLModule.forRoot<ApolloDriverConfig>({
       cors: {
         origin: '*',
         credentials: true,
@@ -42,7 +42,7 @@ import { MultiplechoiceModule } from './services/content/multiplechoice/multiple
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-    }),
+    }),*/
     UsersModule,
     OrganizationsModule,
     AssignmentsModule,

@@ -13,7 +13,7 @@ RUN npm i -g @nestjs/cli
 
 RUN cd ./client && npm ci  && npm run build && cd ..
 
-RUN cd ./server && npm ci  && nest build && cd ..
+RUN cd ./server && rm -rf ./node_modules/ && rm package-lock.json  && npm ci  && nest build && cd ..
 
 RUN mkdir -p /usr/Conduit/app/server/
 
@@ -25,7 +25,7 @@ RUN npm run prebuild
 
 RUN npm run build
 
-EXPOSE 5000
+EXPOSE 5000 
 
 EXPOSE 3000
 

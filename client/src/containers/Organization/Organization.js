@@ -82,7 +82,9 @@ export default function Organization() {
                 style={{ height: 900 }}
               >
                 <EuiTitle>
-                  <h1>orgname placeholder</h1>
+
+                  <h1>orgname Placeholder</h1>
+
                 </EuiTitle>
                 <EuiText>Heres some org info</EuiText>
               </EuiCard>

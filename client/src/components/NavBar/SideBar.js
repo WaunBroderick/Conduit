@@ -107,7 +107,23 @@ export default function SideBar() {
         [navigate]
       ),
       icon: <FcShop />,
-      items: [createItem("Pipeline viewer")],
+      items: [createItem("Browse Courses"), createItem("Submit A Course")],
+    }),
+    createItem("Testing", {
+      onClick: useCallback(
+        () => navigate("/Testing", { reaplce: true }),
+        [navigate]
+      ),
+      icon: <FcShop />,
+      items: [],
+    }),
+    createItem("Testing", {
+      onClick: useCallback(
+        () => navigate("/Testing", { reaplce: true }),
+        [navigate]
+      ),
+      icon: <FcShop />,
+      items: [],
     }),
   ];
 

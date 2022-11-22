@@ -1,10 +1,26 @@
 {
   "name": "server",
-  "version": "1.0.0",
-  "description": "Server Dependencies",
-  "main": ".eslintrc.js",
-  "directories": {
-    "test": "test"
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "set NODE_ENV=dev && nest start --watch",
+    "gen-typings": "ts-node ./src/generate-typings.ts",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "seed": "export NODE_ENV=development && cd ./src/database && npx run seed.js"
   },
   "dependencies": {
     "@nestjs/apollo": "10.0.9",
@@ -98,24 +114,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "set NODE_ENV=dev && nest start --watch",
-    "gen-typings": "ts-node ./src/generate-typings.ts",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed": "export NODE_ENV=development && cd ./src/database && npx run seed.js"
-  },
-  "author": "Waun Broderick",
-  "license": "ISC"
+  }
 }

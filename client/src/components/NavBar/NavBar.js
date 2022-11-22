@@ -35,6 +35,7 @@ import { AiFillCaretLeft } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 import i18n from "../../config/locales/i18n";
 import i18next from "i18next";
+import SideBar2 from "./SideBar";
 
 export default function NavBar(props) {
   const { t, i18n } = useTranslation();
@@ -188,6 +189,9 @@ export default function NavBar(props) {
                 </LinkStyled>,
                 <LinkStyled to="/Marketplace">
                   {nameHighlighting("/Marketplace")}
+                </LinkStyled>,
+                <LinkStyled to="/Testing">
+                  {nameHighlighting("/Testing")}
                 </LinkStyled>,
               ],
               borders: "none",

@@ -10,7 +10,7 @@
     "@growthbook/growthbook-react": "^0.8.1",
     "@hookform/resolvers": "^2.8.8",
     "@reduxjs/toolkit": "1.8.1",
-    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "apollo": "^2.33.10",

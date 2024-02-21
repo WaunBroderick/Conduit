@@ -15,7 +15,7 @@
     "@testing-library/user-event": "^12.8.3",
     "apollo": "^2.33.10",
     "apollo-boost": "^0.4.9",
-    "axios": "0.26.1",
+    "axios": "0.28.0",
     "graphql-tag": "^2.12.6",
     "i18next": "^21.8.5",
     "i18next-browser-languagedetector": "^6.1.4",

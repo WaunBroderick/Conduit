@@ -7,7 +7,7 @@
     "@apollo/react-hooks": "^4.0.0",
     "@elastic/datemath": "^5.0.3",
     "@elastic/eui": "^41.2.0",
-    "@growthbook/growthbook-react": "^0.8.1",
+    "@growthbook/growthbook-react": "^0.26.0",
     "@hookform/resolvers": "^2.8.8",
     "@reduxjs/toolkit": "1.8.1",
     "@testing-library/jest-dom": "5.16.4",

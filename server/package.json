@@ -30,7 +30,7 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
-    "faker": "6.6.6",
+    "@faker-js/faker": "5.5.3",
     "graphql": "^16.4.0",
     "jest-junit": "13.1.0",
     "js-yaml": "^4.1.0",
